@@ -33,6 +33,8 @@ enum Toast {
                 width: width,
                 height: height
             )
+            parent.addSubview(label)
+
             UIView.animate(
                 withDuration: 1.0,
                 delay: 3.0,

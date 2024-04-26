@@ -36,7 +36,8 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
             FixedLiabilities_total: 0,
             Liability_total: 0,
             CapitalStock_total: 0,
-            OtherCapitalSurpluses_total: 0,
+            OtherCapitalSurpluses_total: 0, 
+            Capital_total: 0,
             Equity_total: 0
         )
         let profitAndLossStatement = DataBaseProfitAndLossStatement(

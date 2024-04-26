@@ -182,16 +182,18 @@ class PLModel: PLModelInput {
     
     // 初期化　中区分、大区分　ごとに計算
     func initializeBenefits() -> PLData {
-        // データベースに書き込み　//4:収益 3:費用
-        setTotalRank0(big5: 4, rank0: 6) // 営業収益9     売上
-        setTotalRank0(big5: 3, rank0: 7) // 営業費用5     売上原価
-        setTotalRank0(big5: 3, rank0: 8) // 営業費用5     販売費及び一般管理費
-        setTotalRank0(big5: 3, rank0: 11) // 税等8        法人税等 税金
+        // データベースに書き込み　// 4:収益 3:費用
+        setTotalRank0(rank0: 6) // 営業収益9     売上
+        setTotalRank0(rank0: 7) // 営業費用5     売上原価
+        setTotalRank0(rank0: 8) // 営業費用5     販売費及び一般管理費
+        // setTotalRank0(rank0: 9) // 営業外損益　TODO: なぜいままでなかった？
+        // setTotalRank0(rank0: 10) // 特別損益　TODO: なぜいままでなかった？
+        setTotalRank0(rank0: 11) // 税等8        法人税等 税金
         
-        setTotalRank1(big5: 4, rank1: 15) // 営業外収益10 営業外損益    営業外収益
-        setTotalRank1(big5: 3, rank1: 16) // 営業外費用6  営業外損益    営業外費用
-        setTotalRank1(big5: 4, rank1: 17) // 特別利益11   特別損益    特別利益
-        setTotalRank1(big5: 3, rank1: 18) // 特別損失7    特別損益    特別損失
+        setTotalRank1(big5: 4, rank1: 15) // 営業外収益10 営業外損益
+        setTotalRank1(big5: 3, rank1: 16) // 営業外費用6  営業外損益
+        setTotalRank1(big5: 4, rank1: 17) // 特別利益11   特別損益
+        setTotalRank1(big5: 3, rank1: 18) // 特別損失7    特別損益
         
         // 利益を計算する関数を呼び出す todo
         setBenefitTotal()
@@ -286,7 +288,7 @@ class PLModel: PLModelInput {
         )
     }
     // 計算　階層0 大区分
-    private func setTotalRank0(big5: Int, rank0: Int) {
+    private func setTotalRank0(rank0: Int) {
         var totalAmountOfRank0: Int64 = 0            // 累計額
         // 設定画面の勘定科目一覧にある勘定を取得する
         let objects = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInRank0(rank0: rank0)
@@ -294,26 +296,26 @@ class PLModel: PLModelInput {
         for i in 0..<objects.count {
             let totalAmount = getTotalAmount(account: objects[i].category)
             let totalDebitOrCredit = getTotalDebitOrCredit(bigCategory: rank0, midCategory: Int(objects[i].Rank1) ?? 999, account: objects[i].category)
-            if totalDebitOrCredit == "-"{
+            if totalDebitOrCredit == "-" {
                 totalAmountOfRank0 -= totalAmount
             } else {
                 totalAmountOfRank0 += totalAmount
             }
         }
         // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        if let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement {
+        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        if let profitAndLossStatement = dataBaseAccountingBooks.dataBaseFinancialStatements?.profitAndLossStatement {
             do {
                 try DataBaseManager.realm.write {
                     switch rank0 {
                     case 6: // 営業収益9     売上
-                        objectss.NetSales = totalAmountOfRank0
+                        profitAndLossStatement.NetSales = totalAmountOfRank0
                     case 7: // 営業費用5     売上原価
-                        objectss.CostOfGoodsSold = totalAmountOfRank0
+                        profitAndLossStatement.CostOfGoodsSold = totalAmountOfRank0
                     case 8: // 営業費用5     販売費及び一般管理費
-                        objectss.SellingGeneralAndAdministrativeExpenses = totalAmountOfRank0
+                        profitAndLossStatement.SellingGeneralAndAdministrativeExpenses = totalAmountOfRank0
                     case 11: // 税等8 法人税等 税金
-                        objectss.IncomeTaxes = totalAmountOfRank0
+                        profitAndLossStatement.IncomeTaxes = totalAmountOfRank0
                     default:
                         print()
                     }
@@ -325,14 +327,18 @@ class PLModel: PLModelInput {
     }
     // 計算　階層1 中区分
     private func setTotalRank1(big5: Int, rank1: Int) {
-        var totalAmountOfRank1: Int64 = 0            // 累計額
+        var totalAmountOfRank1: Int64 = 0
         // 設定画面の勘定科目一覧にある勘定を取得する
-        let objects = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInRank1(rank1: rank1)
+        let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInRank1(rank1: rank1)
         // オブジェクトを作成 勘定
-        for i in 0..<objects.count {
-            let totalAmount = getTotalAmount(account: objects[i].category)
-            if let rank0 = objects[i].Rank0 as? String {
-                let totalDebitOrCredit = getTotalDebitOrCredit(bigCategory: Int(rank0) ?? 0, midCategory: rank1, account: objects[i].category)
+        for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
+            let totalAmount = getTotalAmount(account: dataBaseSettingsTaxonomyAccounts[i].category)
+            if let rank0 = Int(dataBaseSettingsTaxonomyAccounts[i].Rank0) {
+                let totalDebitOrCredit = getTotalDebitOrCredit(
+                    bigCategory: rank0,
+                    midCategory: rank1,
+                    account: dataBaseSettingsTaxonomyAccounts[i].category
+                )
                 if totalDebitOrCredit == "-" {
                     totalAmountOfRank1 -= totalAmount
                 } else {
@@ -341,20 +347,19 @@ class PLModel: PLModelInput {
             }
         }
         // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        
-        if let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement {
+        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        if let profitAndLossStatement = dataBaseAccountingBooks.dataBaseFinancialStatements?.profitAndLossStatement {
             do {
                 try DataBaseManager.realm.write {
                     switch rank1 {
-                    case 15: // 営業外収益10  営業外損益    営業外収益
-                        objectss.NonOperatingIncome = totalAmountOfRank1
-                    case 16: // 営業外費用6  営業外損益    営業外費用
-                        objectss.NonOperatingExpenses = totalAmountOfRank1
-                    case 17: // 特別利益11   特別損益    特別利益
-                        objectss.ExtraordinaryIncome = totalAmountOfRank1
-                    case 18: // 特別損失7    特別損益    特別損失
-                        objectss.ExtraordinaryLosses = totalAmountOfRank1
+                    case 15: // 営業外収益10  営業外損益
+                        profitAndLossStatement.NonOperatingIncome = totalAmountOfRank1
+                    case 16: // 営業外費用6  営業外損益
+                        profitAndLossStatement.NonOperatingExpenses = totalAmountOfRank1
+                    case 17: // 特別利益11   特別損益
+                        profitAndLossStatement.ExtraordinaryIncome = totalAmountOfRank1
+                    case 18: // 特別損失7    特別損益
+                        profitAndLossStatement.ExtraordinaryLosses = totalAmountOfRank1
                     default:
                         print()
                     }
@@ -370,20 +375,20 @@ class PLModel: PLModelInput {
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         // 利益5種類　売上総利益、営業利益、経常利益、税金等調整前当期純利益、当期純利益
         for i in 0..<5 {
-            if let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement {
+            if let profitAndLossStatement = object.dataBaseFinancialStatements?.profitAndLossStatement {
                 do {
                     try DataBaseManager.realm.write {
                         switch i {
                         case 0: // 売上総利益
-                            objectss.GrossProfitOrLoss = objectss.NetSales - objectss.CostOfGoodsSold
+                            profitAndLossStatement.GrossProfitOrLoss = profitAndLossStatement.NetSales - profitAndLossStatement.CostOfGoodsSold
                         case 1: // 営業利益
-                            objectss.OtherCapitalSurpluses_total = objectss.GrossProfitOrLoss - objectss.SellingGeneralAndAdministrativeExpenses
+                            profitAndLossStatement.OtherCapitalSurpluses_total = profitAndLossStatement.GrossProfitOrLoss - profitAndLossStatement.SellingGeneralAndAdministrativeExpenses
                         case 2: // 経常利益
-                            objectss.OrdinaryIncomeOrLoss = objectss.OtherCapitalSurpluses_total + objectss.NonOperatingIncome - objectss.NonOperatingExpenses
+                            profitAndLossStatement.OrdinaryIncomeOrLoss = profitAndLossStatement.OtherCapitalSurpluses_total + profitAndLossStatement.NonOperatingIncome - profitAndLossStatement.NonOperatingExpenses
                         case 3: // 税引前当期純利益（損失）
-                            objectss.IncomeOrLossBeforeIncomeTaxes = objectss.OrdinaryIncomeOrLoss + objectss.ExtraordinaryIncome - objectss.ExtraordinaryLosses
+                            profitAndLossStatement.IncomeOrLossBeforeIncomeTaxes = profitAndLossStatement.OrdinaryIncomeOrLoss + profitAndLossStatement.ExtraordinaryIncome - profitAndLossStatement.ExtraordinaryLosses
                         case 4: // 当期純利益（損失）
-                            objectss.NetIncomeOrLoss = objectss.IncomeOrLossBeforeIncomeTaxes - objectss.IncomeTaxes
+                            profitAndLossStatement.NetIncomeOrLoss = profitAndLossStatement.IncomeOrLossBeforeIncomeTaxes - profitAndLossStatement.IncomeTaxes
                         default:
                             print()
                         }

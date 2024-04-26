@@ -14,3 +14,7 @@ import RealmSwift
 class DataBaseCapitalTransferJournalEntry: DataBaseJournalEntry {
 
 }
+// 月次資本振替仕訳
+class DataBaseMonthlyCapitalTransferJournalEntry: DataBaseJournalEntry {
+    
+}

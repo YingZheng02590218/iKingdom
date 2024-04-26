@@ -404,7 +404,7 @@ class JournalEntryViewController: UIViewController {
             smallWrittingTextFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             smallWrittingTextFieldView.neumorphicLayer?.depthType = .concave
         }
-        //        inputButton.setTitle("入力", for: .normal)
+        // inputButton.setTitle("入 力", for: .normal)
         inputButton.setTitleColor(.accentColor, for: .normal)
         inputButton.neumorphicLayer?.cornerRadius = 15
         inputButton.setTitleColor(.accentColor, for: .selected)

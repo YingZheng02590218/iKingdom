@@ -237,6 +237,10 @@
 		F9482EB7282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */; };
 		F9482EB9282FDD91008B82E1 /* CategoryListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */; };
 		F9482EBA282FDD91008B82E1 /* CategoryListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */; };
+		F94BE08E2BD7C063002CFE4D /* MonthlyProfitAndLossStatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94BE08D2BD7C063002CFE4D /* MonthlyProfitAndLossStatementViewController.swift */; };
+		F94BE08F2BD7C063002CFE4D /* MonthlyProfitAndLossStatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94BE08D2BD7C063002CFE4D /* MonthlyProfitAndLossStatementViewController.swift */; };
+		F94BE0922BD7C085002CFE4D /* MonthlyProfitAndLossStatementViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94BE0912BD7C085002CFE4D /* MonthlyProfitAndLossStatementViewController.storyboard */; };
+		F94BE0932BD7C085002CFE4D /* MonthlyProfitAndLossStatementViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94BE0912BD7C085002CFE4D /* MonthlyProfitAndLossStatementViewController.storyboard */; };
 		F94DE33427DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DE33327DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift */; };
 		F94DE33527DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DE33327DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift */; };
 		F94DE33727DC9C020022F739 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F94DE33627DC9C020022F739 /* MessageUI.framework */; };
@@ -532,11 +536,19 @@
 		F9E42A48298D1DFE00360DA4 /* Realm.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A43298D1DFE00360DA4 /* Realm.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F9E42A49298D1DFE00360DA4 /* EMTNeumorphicView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; };
 		F9E42A4A298D1DFE00360DA4 /* EMTNeumorphicView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F9E501AC2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E501AB2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift */; };
+		F9E501AD2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E501AB2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift */; };
+		F9E501AF2BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9E501AE2BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard */; };
+		F9E501B02BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9E501AE2BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard */; };
+		F9E501B22BA4145500CC0DFB /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E501B12BA4145500CC0DFB /* Cells.swift */; };
+		F9E501B32BA4145500CC0DFB /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E501B12BA4145500CC0DFB /* Cells.swift */; };
 		F9E53C24247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */; };
 		F9E620FC2565281600C2C3B3 /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E620FB2565281600C2C3B3 /* AnnotationViewController.swift */; };
 		F9E620FE25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */; };
 		F9EAE99E299F14BD00B3F7A9 /* UserNotificationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EAE99D299F14BD00B3F7A9 /* UserNotificationUtility.swift */; };
 		F9EAE99F299F14BD00B3F7A9 /* UserNotificationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EAE99D299F14BD00B3F7A9 /* UserNotificationUtility.swift */; };
+		F9EC65E12BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EC65E02BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift */; };
+		F9EC65E22BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EC65E02BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift */; };
 		F9EC668F27B90BC60003FBB6 /* DataBaseSettingsOperating.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91878C4258141AA00D2E793 /* DataBaseSettingsOperating.swift */; };
 		F9EC669027B90BC60003FBB6 /* DataBaseTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */; };
 		F9EC669127B90BC60003FBB6 /* JournalsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BDCBB927A96A8E00BD8770 /* JournalsPresenter.swift */; };
@@ -742,6 +754,8 @@
 		F9F4607924D06F6C008FE62B /* CompanyNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4607824D06F6C008FE62B /* CompanyNameTableViewCell.swift */; };
 		F9F4607B24D1A61A008FE62B /* DataBaseManagerSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606824C82F74008FE62B /* DataBaseManagerSettingsTaxonomy.swift */; };
 		F9F4608124D1ED15008FE62B /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4608024D1ED15008FE62B /* PickerTextField.swift */; };
+		F9F6A7122BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F6A7112BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift */; };
+		F9F6A7132BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F6A7112BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift */; };
 		F9F7993225A870B80037EC50 /* SettingUpgradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F7993125A870B80037EC50 /* SettingUpgradeTableViewCell.swift */; };
 		F9F934E12484C40400BF7AA7 /* DataBaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934E02484C40400BF7AA7 /* DataBaseAccount.swift */; };
 		F9F934E32484D53100BF7AA7 /* DataBaseJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934E22484D53100BF7AA7 /* DataBaseJournals.swift */; };
@@ -990,6 +1004,8 @@
 		F9482EAC282F9E20008B82E1 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListPresenter.swift; sourceTree = "<group>"; };
 		F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListModel.swift; sourceTree = "<group>"; };
+		F94BE08D2BD7C063002CFE4D /* MonthlyProfitAndLossStatementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyProfitAndLossStatementViewController.swift; sourceTree = "<group>"; };
+		F94BE0912BD7C085002CFE4D /* MonthlyProfitAndLossStatementViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MonthlyProfitAndLossStatementViewController.storyboard; sourceTree = "<group>"; };
 		F94DE33327DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerSettingJournals.swift; sourceTree = "<group>"; };
 		F94DE33627DC9C020022F739 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F94E79EA259DF8C7004726F7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -1215,10 +1231,14 @@
 		F9E42A42298D1DFD00360DA4 /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Carthage/Build/RealmSwift.xcframework; sourceTree = "<group>"; };
 		F9E42A43298D1DFE00360DA4 /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
 		F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = EMTNeumorphicView.xcframework; path = Carthage/Build/EMTNeumorphicView.xcframework; sourceTree = "<group>"; };
+		F9E501AB2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTrendsBalanceSheetViewController.swift; sourceTree = "<group>"; };
+		F9E501AE2BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MonthlyTrendsBalanceSheetViewController.storyboard; sourceTree = "<group>"; };
+		F9E501B12BA4145500CC0DFB /* Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerGeneralLedgerAccountBalance.swift; sourceTree = "<group>"; };
 		F9E620FB2565281600C2C3B3 /* AnnotationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
 		F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerJournalEntry.swift; sourceTree = "<group>"; };
 		F9EAE99D299F14BD00B3F7A9 /* UserNotificationUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationUtility.swift; sourceTree = "<group>"; };
+		F9EC65E02BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerMonthlyBSnPL.swift; sourceTree = "<group>"; };
 		F9EC674527B90BC60003FBB6 /* PaciolistSTG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaciolistSTG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9EC674A27B912430003FBB6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
@@ -1257,6 +1277,7 @@
 		F9F4607624D04F8F008FE62B /* SettingsInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInformationTableViewController.swift; sourceTree = "<group>"; };
 		F9F4607824D06F6C008FE62B /* CompanyNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyNameTableViewCell.swift; sourceTree = "<group>"; };
 		F9F4608024D1ED15008FE62B /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
+		F9F6A7112BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerMonthlyPLAccount.swift; sourceTree = "<group>"; };
 		F9F7993125A870B80037EC50 /* SettingUpgradeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingUpgradeTableViewCell.swift; sourceTree = "<group>"; };
 		F9F934E02484C40400BF7AA7 /* DataBaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseAccount.swift; sourceTree = "<group>"; };
 		F9F934E22484D53100BF7AA7 /* DataBaseJournals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseJournals.swift; sourceTree = "<group>"; };
@@ -1555,7 +1576,6 @@
 				F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */,
 				F971BB44295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift */,
 				F963E2D0296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift */,
-				F99430392A6FA6C3002F9D21 /* DataBaseManagerMonthlyTransferEntry.swift */,
 				F9517260295F1209007DD20C /* DataBaseManagerJournals.swift */,
 				F9F934E62484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift */,
 				F951725D295F060B007DD20C /* DataBaseManagerAccount.swift */,
@@ -1571,6 +1591,7 @@
 				F91878C72581462600D2E793 /* DataBaseManagerSettingsOperating.swift */,
 				F9CF960A2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift */,
 				F9593DBD2A62BA9500A1D0B3 /* DataBaseManagerSettingsOperatingJournalEntryGroup.swift */,
+				F94BE0942BD94260002CFE4D /* Monthly */,
 			);
 			path = DataBaseManager;
 			sourceTree = "<group>";
@@ -1608,6 +1629,25 @@
 				F9593DB32A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift */,
 			);
 			path = DataBaseModel;
+			sourceTree = "<group>";
+		};
+		F94BE0902BD7C070002CFE4D /* ProfitAndLossStatement */ = {
+			isa = PBXGroup;
+			children = (
+				F94BE08D2BD7C063002CFE4D /* MonthlyProfitAndLossStatementViewController.swift */,
+				F94BE0912BD7C085002CFE4D /* MonthlyProfitAndLossStatementViewController.storyboard */,
+			);
+			path = ProfitAndLossStatement;
+			sourceTree = "<group>";
+		};
+		F94BE0942BD94260002CFE4D /* Monthly */ = {
+			isa = PBXGroup;
+			children = (
+				F99430392A6FA6C3002F9D21 /* DataBaseManagerMonthlyTransferEntry.swift */,
+				F9F6A7112BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift */,
+				F9EC65E02BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift */,
+			);
+			path = Monthly;
 			sourceTree = "<group>";
 		};
 		F94EDD86237AEB3A0074D812 = {
@@ -2025,6 +2065,8 @@
 				F9D5D54B247E409400EA35C7 /* GenearlLedgerAccount */,
 				F9D224C724893F41006C6CD9 /* SubsidiaryLedger */,
 				F955B605248FE5F2005E2C6D /* FinancialStatement */,
+				F94BE0902BD7C070002CFE4D /* ProfitAndLossStatement */,
+				F9F9ECFC2BAEA6A3004B6A68 /* MonthlyBalanceSheet */,
 				F955B60E2490FCD6005E2C6D /* BS */,
 				F955B6082490E305005E2C6D /* PL */,
 				F955B60F2490FD1D005E2C6D /* CF */,
@@ -2335,6 +2377,16 @@
 			path = GeneralLedger/GeneralLedger;
 			sourceTree = "<group>";
 		};
+		F9F9ECFC2BAEA6A3004B6A68 /* MonthlyBalanceSheet */ = {
+			isa = PBXGroup;
+			children = (
+				F9E501AB2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift */,
+				F9E501AE2BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard */,
+				F9E501B12BA4145500CC0DFB /* Cells.swift */,
+			);
+			path = MonthlyBalanceSheet;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2557,6 +2609,7 @@
 				F90A235F2B6BBBFF009E35C0 /* BasicInfo6.png in Resources */,
 				F907D0AB2A976E4F00A701C3 /* Set_Up_Account3.html in Resources */,
 				F99BAEC2261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard in Resources */,
+				F94BE0922BD7C085002CFE4D /* MonthlyProfitAndLossStatementViewController.storyboard in Resources */,
 				F9BDCBB827A9603D00BD8770 /* JournalsViewController.storyboard in Resources */,
 				F90A23DD2B6D0F93009E35C0 /* OpeningJournalEntry2.png in Resources */,
 				F90A23712B6BC31B009E35C0 /* AccountItem3.png in Resources */,
@@ -2564,6 +2617,7 @@
 				F9963CEF26208DF50099D51C /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F90A239D2B6BD1AB009E35C0 /* AccountItem14.png in Resources */,
 				F90A235B2B6BBAFD009E35C0 /* BasicInfo4.png in Resources */,
+				F9E501AF2BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard in Resources */,
 				F99BE7AC261DD61C004611E4 /* SettingsTableViewController.storyboard in Resources */,
 				F9D15FB6296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
 				F940E4B22A8E22CC008AEAFC /* explain_backup.html in Resources */,
@@ -2720,6 +2774,7 @@
 				F90A23602B6BBBFF009E35C0 /* BasicInfo6.png in Resources */,
 				F907D0AC2A976E4F00A701C3 /* Set_Up_Account3.html in Resources */,
 				F9EC671C27B90BC60003FBB6 /* GeneralLedgerAccountViewController.storyboard in Resources */,
+				F94BE0932BD7C085002CFE4D /* MonthlyProfitAndLossStatementViewController.storyboard in Resources */,
 				F9EC671D27B90BC60003FBB6 /* JournalsViewController.storyboard in Resources */,
 				F90A23DE2B6D0F93009E35C0 /* OpeningJournalEntry2.png in Resources */,
 				F90A23722B6BC31B009E35C0 /* AccountItem3.png in Resources */,
@@ -2727,6 +2782,7 @@
 				F9EC671E27B90BC60003FBB6 /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F90A239E2B6BD1AB009E35C0 /* AccountItem14.png in Resources */,
 				F90A235C2B6BBAFD009E35C0 /* BasicInfo4.png in Resources */,
+				F9E501B02BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard in Resources */,
 				F9EC671F27B90BC60003FBB6 /* SettingsTableViewController.storyboard in Resources */,
 				F9D15FB7296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
 				F940E4B32A8E22CC008AEAFC /* explain_backup.html in Resources */,
@@ -3053,6 +3109,7 @@
 				F9354DBB2498DDF4007DB098 /* DataBaseWorkSheet.swift in Sources */,
 				F910F1BF298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */,
 				F971BB45295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */,
+				F9F6A7122BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift in Sources */,
 				F9BDCBB627A9602D00BD8770 /* JournalsViewController.swift in Sources */,
 				F906C4EE263B1B65006C6233 /* ListCollectionViewCell.swift in Sources */,
 				F91878C82581462600D2E793 /* DataBaseManagerSettingsOperating.swift in Sources */,
@@ -3070,10 +3127,12 @@
 				F9ED93772983ABFE00B255EF /* BackupManager.swift in Sources */,
 				F9D5D54F247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */,
+				F9E501AC2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift in Sources */,
 				F93D789F2A1236BF00C75BA9 /* JournalEntryPresenter.swift in Sources */,
 				F9A3C82B26552033001218F1 /* CategoryListCarouselAndPageViewController.swift in Sources */,
 				F98163082999E1B70027B4C8 /* SettingsUpgradeViewController.swift in Sources */,
 				F9354DC02498F730007DB098 /* DataBaseProfitAndLossStatement.swift in Sources */,
+				F94BE08E2BD7C063002CFE4D /* MonthlyProfitAndLossStatementViewController.swift in Sources */,
 				F9D08D9325444EA500CE3CB2 /* SettingAccountDetailTableViewCell.swift in Sources */,
 				F9ECC3812A5EE04400C3576A /* CountAnimateLabel.swift in Sources */,
 				F963E2CE296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */,
@@ -3169,6 +3228,7 @@
 				F9D34FB7248A324A00F8B403 /* SettingsPeriodYearViewController.swift in Sources */,
 				F99B65BF24B7A38F006BD3DD /* WSTableViewCell.swift in Sources */,
 				F93A262F29571FF3002B7EB9 /* SettingsCategoryTableViewController.swift in Sources */,
+				F9E501B22BA4145500CC0DFB /* Cells.swift in Sources */,
 				F9482EB9282FDD91008B82E1 /* CategoryListModel.swift in Sources */,
 				F99EDE0D246C00B100334FF4 /* DataBaseManagerJournalEntry.swift in Sources */,
 				F9D08D9125444E8800CE3CB2 /* SettingsCategoryDetailTableViewController.swift in Sources */,
@@ -3179,6 +3239,7 @@
 				F9EFE2A92B7A4D1200A652EB /* AccountTableViewHeaderFooterView.swift in Sources */,
 				F9BEED12256704A800678391 /* AnnotationViewControllerSettingsCategory.swift in Sources */,
 				F9A69B6D258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift in Sources */,
+				F9EC65E12BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift in Sources */,
 				F9F3A01C27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */,
 				F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F98D8A5327A55F27009560AA /* WSPresenter.swift in Sources */,
@@ -3299,6 +3360,7 @@
 				F9EE7D3929BB221F0045EDB7 /* EditableType.swift in Sources */,
 				F910F1C0298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */,
 				F971BB46295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */,
+				F9F6A7132BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift in Sources */,
 				F9EC66BE27B90BC60003FBB6 /* JournalsViewController.swift in Sources */,
 				F9EC66BF27B90BC60003FBB6 /* ListCollectionViewCell.swift in Sources */,
 				F9EC66C027B90BC60003FBB6 /* DataBaseManagerSettingsOperating.swift in Sources */,
@@ -3316,10 +3378,12 @@
 				F9ED93782983ABFE00B255EF /* BackupManager.swift in Sources */,
 				F9EC66C727B90BC60003FBB6 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9EC66C827B90BC60003FBB6 /* CollectionReusableView.swift in Sources */,
+				F9E501AD2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift in Sources */,
 				F9EC66C927B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.swift in Sources */,
 				F93D78A02A1236BF00C75BA9 /* JournalEntryPresenter.swift in Sources */,
 				F9EC66CA27B90BC60003FBB6 /* DataBaseProfitAndLossStatement.swift in Sources */,
 				F98163092999E1B70027B4C8 /* SettingsUpgradeViewController.swift in Sources */,
+				F94BE08F2BD7C063002CFE4D /* MonthlyProfitAndLossStatementViewController.swift in Sources */,
 				F9EC66CC27B90BC60003FBB6 /* SettingAccountDetailTableViewCell.swift in Sources */,
 				F963E2CF296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */,
 				F94DE33527DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */,
@@ -3415,6 +3479,7 @@
 				F9EC66FB27B90BC60003FBB6 /* SettingsPeriodYearViewController.swift in Sources */,
 				F9EC66FC27B90BC60003FBB6 /* WSTableViewCell.swift in Sources */,
 				F93A263029571FF3002B7EB9 /* SettingsCategoryTableViewController.swift in Sources */,
+				F9E501B32BA4145500CC0DFB /* Cells.swift in Sources */,
 				F9482EBA282FDD91008B82E1 /* CategoryListModel.swift in Sources */,
 				F9EC66FD27B90BC60003FBB6 /* DataBaseManagerJournalEntry.swift in Sources */,
 				F9EC66FE27B90BC60003FBB6 /* SettingsCategoryDetailTableViewController.swift in Sources */,
@@ -3425,6 +3490,7 @@
 				F9EFE2AA2B7A4D1200A652EB /* AccountTableViewHeaderFooterView.swift in Sources */,
 				F9EC670327B90BC60003FBB6 /* AnnotationViewControllerSettingsCategory.swift in Sources */,
 				F9EC670427B90BC60003FBB6 /* SettingsPeriodTableViewCell.swift in Sources */,
+				F9EC65E22BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift in Sources */,
 				F9F3A01D27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */,
 				F9EC670527B90BC60003FBB6 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F9EC670627B90BC60003FBB6 /* WSPresenter.swift in Sources */,
@@ -3676,7 +3742,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.12.0;
+				MARKETING_VERSION = 5.0.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3714,7 +3780,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.12.0;
+				MARKETING_VERSION = 5.0.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3887,7 +3953,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.12.0;
+				MARKETING_VERSION = 5.0.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3927,7 +3993,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.12.0;
+				MARKETING_VERSION = 5.0.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
