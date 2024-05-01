@@ -141,7 +141,7 @@ extension SplashViewController: SplashPresenterOutput {
             }
         }
     }
-
+    
     // パーセンテージを非表示させる
     func hidePersentage() {
         DispatchQueue.main.async {
@@ -164,21 +164,86 @@ extension SplashViewController: SplashPresenterOutput {
     }
     
     // MARK: - レビュー催促機能
-
+    
     // レビュー催促機能
     func showRequestReview() {
         // レビューリクエスト画面は、３６５日で最大３回までしか表示されないルールがあるようです。
         let key = "startUpCount"
         let count = UserDefaults.standard.integer(forKey: key)
-        if count == 10 { // 起動が5回目にレビューを催促する
-            if #available(iOS 10.3, *) {
-                SKStoreReviewController.requestReview()
-            }
-        }
-        if count < 11 {
+        if count < 10 {
             // 永遠にインクリメントするのを防ぐ
             UserDefaults.standard.set(UserDefaults.standard.integer(forKey: key) + 1, forKey: key)
             UserDefaults.standard.synchronize()
+            
+            RequestReviewManager.needShowReviewDialog = false
+        } else {
+            // レビューを催促する 起動が10回目以降
+            RequestReviewManager.needShowReviewDialog = true
+        }
+        // レビュー促進ダイアログ
+        RequestReviewManager.shared.showReviewDialogIfNeeded()
+    }
+}
+
+class RequestReviewManager {
+    
+    public static let shared = RequestReviewManager()
+    
+    private init() {
+    }
+
+    static var needShowReviewDialog: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: Constant.NEED_SHOW_REVIEW_DIALOG)
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: Constant.NEED_SHOW_REVIEW_DIALOG)
         }
     }
+    
+    static var showReviewDialogDate: Date? {
+        get {
+            guard let dateString = UserDefaults.standard.string(forKey: Constant.SHOW_REVIEW_DIALOG_DATE),
+                  let date = Date.iso8601Date(from: dateString) else { return nil }
+            return date
+        }
+        set {
+            if let date = newValue {
+                let dateString = Date.iso8601String(date: date)
+                UserDefaults.standard.set(dateString, forKey: Constant.SHOW_REVIEW_DIALOG_DATE)
+            } else {
+                UserDefaults.standard.set(nil, forKey: Constant.SHOW_REVIEW_DIALOG_DATE)
+            }
+        }
+    }
+    
+    // レビュー促進ダイアログ
+    func showReviewDialogIfNeeded() {
+        // 表示フラグが倒れていたら何もしない
+        if !RequestReviewManager.needShowReviewDialog { return }
+        // 表示フラグ立っていて、なおかつ、前回の表示した日から122日を経過してなければ何もしない
+        if let reviewDate = RequestReviewManager.showReviewDialogDate {
+            print(RequestReviewManager.showReviewDialogDate)
+            let last = Calendar.current.startOfDay(for: reviewDate)
+            let now = Calendar.current.startOfDay(for: Date())
+            // 前回表示時から条件未達なので何もしない
+            if Calendar.current.dateComponents([.day], from: last, to: now).day ?? 0 < 122 {
+                return
+            }
+        }
+        
+        RequestReviewManager.showReviewDialogDate = Date()
+        print(RequestReviewManager.showReviewDialogDate)
+        DispatchQueue.main.async {
+            if #available(iOS 14.0, *) {
+                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                    SKStoreReviewController.requestReview(in: scene)
+                }
+            } else {
+                // Fallback on earlier versions
+                SKStoreReviewController.requestReview()
+            }
+        }
+    }
+    
 }
