@@ -1634,13 +1634,13 @@
 			path = DataBaseModel;
 			sourceTree = "<group>";
 		};
-		F94BE0902BD7C070002CFE4D /* ProfitAndLossStatement */ = {
+		F94BE0902BD7C070002CFE4D /* MonthlyProfitAndLossStatement */ = {
 			isa = PBXGroup;
 			children = (
 				F94BE08D2BD7C063002CFE4D /* MonthlyProfitAndLossStatementViewController.swift */,
 				F94BE0912BD7C085002CFE4D /* MonthlyProfitAndLossStatementViewController.storyboard */,
 			);
-			path = ProfitAndLossStatement;
+			path = MonthlyProfitAndLossStatement;
 			sourceTree = "<group>";
 		};
 		F94BE0942BD94260002CFE4D /* Monthly */ = {
@@ -1709,6 +1709,14 @@
 			children = (
 				F955B606248FE6EF005E2C6D /* FinancialStatementTableViewController.swift */,
 				F99BE775261DCB22004611E4 /* FinancialStatementTableViewController.storyboard */,
+				F9F9ECFC2BAEA6A3004B6A68 /* MonthlyBalanceSheet */,
+				F94BE0902BD7C070002CFE4D /* MonthlyProfitAndLossStatement */,
+				F955B60E2490FCD6005E2C6D /* BS */,
+				F955B6082490E305005E2C6D /* PL */,
+				F955B60F2490FD1D005E2C6D /* CF */,
+				F955B61324910003005E2C6D /* WS */,
+				F955B6122490FF9A005E2C6D /* TB */,
+				F9706847252AC631003307F8 /* PLAccount */,
 			);
 			path = FinancialStatement;
 			sourceTree = "<group>";
@@ -2065,17 +2073,8 @@
 				F99EDE0F246C012E00334FF4 /* JournalEntry */,
 				F99EDE0E246C00F500334FF4 /* Journals */,
 				F9F934F02485CDB900BF7AA7 /* GeneralLedger */,
-				F9D5D54B247E409400EA35C7 /* GenearlLedgerAccount */,
 				F9D224C724893F41006C6CD9 /* SubsidiaryLedger */,
 				F955B605248FE5F2005E2C6D /* FinancialStatement */,
-				F94BE0902BD7C070002CFE4D /* ProfitAndLossStatement */,
-				F9F9ECFC2BAEA6A3004B6A68 /* MonthlyBalanceSheet */,
-				F955B60E2490FCD6005E2C6D /* BS */,
-				F955B6082490E305005E2C6D /* PL */,
-				F955B60F2490FD1D005E2C6D /* CF */,
-				F955B61324910003005E2C6D /* WS */,
-				F955B6122490FF9A005E2C6D /* TB */,
-				F9706847252AC631003307F8 /* PLAccount */,
 				F929C0252478365E0034FAAF /* Settings */,
 				F95F597F2650266300EFE522 /* UIParts */,
 			);
@@ -2376,6 +2375,7 @@
 				F9BF067C24289DC700C59031 /* GeneralLedgerTableViewController.swift */,
 				F99BAEB9261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard */,
 				F9D5D54E247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift */,
+				F9D5D54B247E409400EA35C7 /* GenearlLedgerAccount */,
 			);
 			name = GeneralLedger;
 			path = GeneralLedger/GeneralLedger;

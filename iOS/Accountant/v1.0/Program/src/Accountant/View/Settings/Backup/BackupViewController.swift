@@ -547,6 +547,8 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
+        // 月次推移表を更新する　true: リロードする
+        Constant.needToReload = true
     }
 }
 
