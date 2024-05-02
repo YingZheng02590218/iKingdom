@@ -142,6 +142,8 @@ class OpeningBalanceViewController: UIViewController {
                     DispatchQueue.global(qos: .background).async {
                         self.presenter.refreshTable()
                     }
+                    // 月次推移表を更新する　true: リロードする
+                    Constant.needToReload = true
                 } else {
                     // 再度編集中へ戻す
                     self.setEditing(true, animated: true)
