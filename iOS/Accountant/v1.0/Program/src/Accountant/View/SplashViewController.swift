@@ -6,7 +6,6 @@
 //  Copyright © 2022 Hisashi Ishihara. All rights reserved.
 //
 
-import StoreKit
 import UIKit
 
 class SplashViewController: UIViewController {
@@ -168,82 +167,27 @@ extension SplashViewController: SplashPresenterOutput {
     // レビュー催促機能
     func showRequestReview() {
         // レビューリクエスト画面は、３６５日で最大３回までしか表示されないルールがあるようです。
-        let key = "startUpCount"
-        let count = UserDefaults.standard.integer(forKey: key)
-        if count < 10 {
-            // 永遠にインクリメントするのを防ぐ
-            UserDefaults.standard.set(UserDefaults.standard.integer(forKey: key) + 1, forKey: key)
-            UserDefaults.standard.synchronize()
-            
-            RequestReviewManager.needShowReviewDialog = false
-        } else {
-            // レビューを催促する 起動が10回目以降
-            RequestReviewManager.needShowReviewDialog = true
-        }
-        // レビュー促進ダイアログ
-        RequestReviewManager.shared.showReviewDialogIfNeeded()
-    }
-}
-
-class RequestReviewManager {
-    
-    public static let shared = RequestReviewManager()
-    
-    private init() {
-    }
-
-    static var needShowReviewDialog: Bool {
-        get {
-            UserDefaults.standard.bool(forKey: Constant.NEED_SHOW_REVIEW_DIALOG)
-        }
-        set {
-            UserDefaults.standard.setValue(newValue, forKey: Constant.NEED_SHOW_REVIEW_DIALOG)
-        }
-    }
-    
-    static var showReviewDialogDate: Date? {
-        get {
-            guard let dateString = UserDefaults.standard.string(forKey: Constant.SHOW_REVIEW_DIALOG_DATE),
-                  let date = Date.iso8601Date(from: dateString) else { return nil }
-            return date
-        }
-        set {
-            if let date = newValue {
-                let dateString = Date.iso8601String(date: date)
-                UserDefaults.standard.set(dateString, forKey: Constant.SHOW_REVIEW_DIALOG_DATE)
-            } else {
-                UserDefaults.standard.set(nil, forKey: Constant.SHOW_REVIEW_DIALOG_DATE)
-            }
-        }
-    }
-    
-    // レビュー促進ダイアログ
-    func showReviewDialogIfNeeded() {
+        // アプリ起動回数をインクリメントする
+        RequestReviewManager.shared.incrementProcessCompletedCount()
         // 表示フラグが倒れていたら何もしない
-        if !RequestReviewManager.needShowReviewDialog { return }
-        // 表示フラグ立っていて、なおかつ、前回の表示した日から122日を経過してなければ何もしない
-        if let reviewDate = RequestReviewManager.showReviewDialogDate {
-            print(RequestReviewManager.showReviewDialogDate)
-            let last = Calendar.current.startOfDay(for: reviewDate)
-            let now = Calendar.current.startOfDay(for: Date())
-            // 前回表示時から条件未達なので何もしない
-            if Calendar.current.dateComponents([.day], from: last, to: now).day ?? 0 < 122 {
-                return
-            }
-        }
-        
-        RequestReviewManager.showReviewDialogDate = Date()
-        print(RequestReviewManager.showReviewDialogDate)
-        DispatchQueue.main.async {
-            if #available(iOS 14.0, *) {
+        if RequestReviewManager.shared.canRequestReview {
+            // レビュー促進ダイアログ
+            DispatchQueue.main.async {
                 if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                    SKStoreReviewController.requestReview(in: scene)
+                    RequestReviewManager.shared.requestReview(in: scene) {
+                        // TODO: ユーザーが操作していないことを判断する材料は何かを考える
+                        /*
+                         例えば、クロージャで[weak self]をキャプチャして、
+                         `return self?.navigationController?.topViewController == self`
+                         と確認する場合は「画面移動をしていないということは、ユーザーが操作をしていない」と判断するということになる。
+                         
+                         UITextViewが表示されている画面など、インタラクティブ性が高い場合はこの条件だけでは不十分であるが
+                         単純な画面の場合はこれくらいで大丈夫。この判定はプロジェクトの要件によって様々になる。
+                         */
+                        return true
+                    }
                 }
-            } else {
-                // Fallback on earlier versions
-                SKStoreReviewController.requestReview()
             }
         }
     }
-    
 }
