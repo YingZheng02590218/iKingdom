@@ -2406,6 +2406,7 @@
 				F9439D44298D27F500FCBA41 /* Embed Frameworks */,
 				F9DC870829932E1D00919E5F /* Embed Foundation Extensions */,
 				F91878C9258300DB00D2E793 /* Run Script */,
+				AA9C4BE8D1E879BFF0AE79FB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2465,6 +2466,7 @@
 				F9E42A4B298D1DFF00360DA4 /* Embed Frameworks */,
 				F9DC872F2994895100919E5F /* Embed Foundation Extensions */,
 				F9EC674027B90BC60003FBB6 /* Run Script */,
+				3C89A21F994F7CB832FE2273 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2892,6 +2894,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3C89A21F994F7CB832FE2273 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PaciolistSTG/Pods-PaciolistSTG-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PaciolistSTG/Pods-PaciolistSTG-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PaciolistSTG/Pods-PaciolistSTG-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		490895BAAAAEFC6AC2D95DDF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2929,6 +2948,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA9C4BE8D1E879BFF0AE79FB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Paciolist/Pods-Paciolist-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Paciolist/Pods-Paciolist-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Paciolist/Pods-Paciolist-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F91878C9258300DB00D2E793 /* Run Script */ = {
