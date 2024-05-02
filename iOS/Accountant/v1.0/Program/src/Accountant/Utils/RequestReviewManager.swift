@@ -67,8 +67,8 @@ class RequestReviewManager {
     var canRequestReview: Bool {
         print("Process completed  : \(processCompletedCount >= thresholdCountForReviewRequest) \(processCompletedCount) / \(thresholdCountForReviewRequest) time(s) ")
         print("Current app version: \(lastVersionPromptedForReview != currentAppVersion) \(lastVersionPromptedForReview ?? "nil") -> \(currentAppVersion ?? "nil")")
-        // 表示フラグ立っていて、なおかつ、前回のダイアログを表示した日から122日を経過してるかを判定
-        return processCompletedCount >= thresholdCountForReviewRequest && lastVersionPromptedForReview != currentAppVersion && judgeDateOver122Days()
+        // 前回のダイアログを表示した日から122日を経過してる。なおかつ、最後にダイアログを表示した時のアプリバージョンより新しく、なおかつ、表示フラグ立っていてるかを判定
+        return judgeDateOver122Days() && processCompletedCount >= thresholdCountForReviewRequest && lastVersionPromptedForReview != currentAppVersion
     }
     
     // アプリ起動回数をインクリメントする
@@ -81,8 +81,7 @@ class RequestReviewManager {
     // 前回のダイアログを表示した日から122日を経過してるか
     func judgeDateOver122Days() -> Bool {
         guard let reviewDate = showReviewDialogDate else {
-            showReviewDialogDate = Date()
-            return false
+            return true
         }
         let last = Calendar.current.startOfDay(for: reviewDate)
         let now = Calendar.current.startOfDay(for: Date())
