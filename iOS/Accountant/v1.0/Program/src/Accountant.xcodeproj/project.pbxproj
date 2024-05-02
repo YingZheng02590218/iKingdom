@@ -320,6 +320,8 @@
 		F971BB45295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F971BB44295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift */; };
 		F971BB46295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F971BB44295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift */; };
 		F97422E0253F091500FBA052 /* AccountDetailPickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97422DA253F091500FBA052 /* AccountDetailPickerTextField.swift */; };
+		F97453EF2BE3AAE000D9C958 /* RequestReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97453EE2BE3AAE000D9C958 /* RequestReviewManager.swift */; };
+		F97453F02BE3AAE000D9C958 /* RequestReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97453EE2BE3AAE000D9C958 /* RequestReviewManager.swift */; };
 		F976798D24A8904B007A0D73 /* PLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F976798C24A8904B007A0D73 /* PLModel.swift */; };
 		F9789A342475C49B00B62CAF /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9789A332475C49B00B62CAF /* SettingsTableViewController.swift */; };
 		F97AC19D25A976000077B667 /* UpgradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97AC19C25A976000077B667 /* UpgradeManager.swift */; };
@@ -1060,6 +1062,7 @@
 		F97422D8253F091500FBA052 /* SettingAccountDetailTaxonomyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAccountDetailTaxonomyTableViewCell.swift; sourceTree = "<group>"; };
 		F97422D9253F091500FBA052 /* SettingAccountDetailAccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAccountDetailAccountTableViewCell.swift; sourceTree = "<group>"; };
 		F97422DA253F091500FBA052 /* AccountDetailPickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailPickerTextField.swift; sourceTree = "<group>"; };
+		F97453EE2BE3AAE000D9C958 /* RequestReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReviewManager.swift; sourceTree = "<group>"; };
 		F976798C24A8904B007A0D73 /* PLModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PLModel.swift; sourceTree = "<group>"; };
 		F9789A332475C49B00B62CAF /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		F9789A352475CA8000B62CAF /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -2162,6 +2165,7 @@
 			isa = PBXGroup;
 			children = (
 				F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */,
+				F97453EE2BE3AAE000D9C958 /* RequestReviewManager.swift */,
 				F98289B72978E0E800F8F1B8 /* AppVersion.swift */,
 				F9DC875929953B1D00919E5F /* AppGroups.swift */,
 				F9860FB8285AB805008D0714 /* Network.swift */,
@@ -3199,6 +3203,7 @@
 				F9354DB82498C7C8007DB098 /* DataBaseCompoundTrialBalance.swift in Sources */,
 				F9B209ED279D38EA00F7EA8D /* BSPresenter.swift in Sources */,
 				F9F934E32484D53100BF7AA7 /* DataBaseJournals.swift in Sources */,
+				F97453EF2BE3AAE000D9C958 /* RequestReviewManager.swift in Sources */,
 				F9CF960B2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift in Sources */,
 				F98D8A5127A534BD009560AA /* Printout+Utility.swift in Sources */,
 				F9B95221283CE60200138D07 /* UITraitCollection+extension.swift in Sources */,
@@ -3450,6 +3455,7 @@
 				F9EC66ED27B90BC60003FBB6 /* DataBaseCompoundTrialBalance.swift in Sources */,
 				F9EC66EE27B90BC60003FBB6 /* BSPresenter.swift in Sources */,
 				F9EC66EF27B90BC60003FBB6 /* DataBaseJournals.swift in Sources */,
+				F97453F02BE3AAE000D9C958 /* RequestReviewManager.swift in Sources */,
 				F9EC66F027B90BC60003FBB6 /* DataBaseManagerSettingsOperatingJournalEntry.swift in Sources */,
 				F9EC66F127B90BC60003FBB6 /* Printout+Utility.swift in Sources */,
 				F9B95222283CE60200138D07 /* UITraitCollection+extension.swift in Sources */,

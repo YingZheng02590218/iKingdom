@@ -66,4 +66,11 @@ enum Constant {
     
     // 月次推移表を更新する　true: リロードする
     static var needToReload = false
+    
+    // MARK: レビュー促進ダイアログ
+    
+    static let NEED_SHOW_REVIEW_DIALOG = "NEED_SHOW_REVIEW_DIALOG"
+    static let SHOW_REVIEW_DIALOG_DATE = "SHOW_REVIEW_DIALOG_DATE"
+    static let PROCESS_COMPLETED_COUNT = "PROCESS_COMPLETED_COUNT"
+    static let LAST_VERSION_PROMPETD_FOR_REVIEW = "LAST_VERSION_PROMPETD_FOR_REVIEW"
 }

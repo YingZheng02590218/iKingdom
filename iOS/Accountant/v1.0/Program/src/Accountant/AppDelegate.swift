@@ -393,6 +393,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         userDefaults.register(defaults: firstLunch)
         // ロック中
         userDefaults.set(true, forKey: firstLunchKey)
+        
+        // アプリ起動回数をインクリメントする
+        userDefaults.removeObject(forKey: "startUpCount")
     }
     
     // MARK: - アップグレード機能
