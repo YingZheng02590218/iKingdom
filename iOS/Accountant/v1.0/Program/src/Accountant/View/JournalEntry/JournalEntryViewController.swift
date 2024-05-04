@@ -1156,8 +1156,7 @@ extension JournalEntryViewController: UITableViewDelegate, UITableViewDataSource
         if let tableView = tableView {
             tableView.delegate = self
             tableView.dataSource = self
-            let cellName = "CarouselTableViewCell"
-            tableView.register(UINib(nibName: cellName, bundle: nil), forCellReuseIdentifier: cellName)
+            tableView.register(UINib(nibName: String(describing: CarouselTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: CarouselTableViewCell.self))
             tableView.separatorColor = .accentColor
         }
     }
@@ -1171,7 +1170,8 @@ extension JournalEntryViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CarouselTableViewCell", for: indexPath) as! CarouselTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CarouselTableViewCell.self), for: indexPath) as? CarouselTableViewCell else { return UITableViewCell() }
+
         cell.collectionView.delegate = self
         cell.collectionView.dataSource = self
         if indexPath.row == groupObjects.count {

@@ -15,6 +15,7 @@ class FinancialStatementTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.register(UINib(nibName: String(describing: CarouselTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: CarouselTableViewCell.self))
         tableView.separatorColor = .accentColor
         
         self.navigationItem.title = "決算書"
@@ -43,7 +44,7 @@ class FinancialStatementTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return    "月次推移表"
+            // case 0: return    "月次推移表"
             // 決算報告手続き
         case 1: return    "財務諸表"
             // 決算本手続き 帳簿の締切
@@ -63,7 +64,7 @@ class FinancialStatementTableViewController: UITableViewController {
         switch section {
         case 0:
             // 月次推移表
-            return 2
+            return 1
         case 1:
             // 貸借対照表、損益計算書、キャッシュフロー計算書
             return 2 // 3
@@ -81,6 +82,16 @@ class FinancialStatementTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            // 月次推移表
+            return 200
+        default:
+            return 43
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell = UITableViewCell()
@@ -88,19 +99,15 @@ class FinancialStatementTableViewController: UITableViewController {
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                cell = tableView.dequeueReusableCell(withIdentifier: "BS", for: indexPath)
-                cell.textLabel?.text = "月次推移表（貸借対照表）"
-                cell.textLabel?.textColor = .textColor
-                cell.textLabel?.textAlignment = NSTextAlignment.center
-                cell.detailTextLabel?.text = "β版"
-                cell.detailTextLabel?.textColor = .lightGray
-            case 1:
-                cell = tableView.dequeueReusableCell(withIdentifier: "BS", for: indexPath)
-                cell.textLabel?.text = "月次推移表（損益計算書）"
-                cell.textLabel?.textColor = .textColor
-                cell.textLabel?.textAlignment = NSTextAlignment.center
-                cell.detailTextLabel?.text = "β版"
-                cell.detailTextLabel?.textColor = .lightGray
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CarouselTableViewCell.self), for: indexPath) as? CarouselTableViewCell else {
+                    return UITableViewCell()
+                }
+                cell.collectionView.delegate = self
+                cell.collectionView.dataSource = self
+                cell.createImages()
+                cell.backgroundColor = .mainColor2
+                cell.configure(gropName: "月次推移表")
+                return cell
             default:
                 cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
                 cell.textLabel?.text = ""
@@ -167,66 +174,7 @@ class FinancialStatementTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.section == 0 {
-            switch indexPath.row {
-            case 0:
-                if let cell = tableView.cellForRow(at: indexPath) {
-                    // インジケーター
-                    cell.accessoryView = {() -> UIActivityIndicatorView in
-                        let indicatorView = UIActivityIndicatorView(frame: CGRect(origin: .zero, size: CGSize(width: 20, height: 20)))
-                        indicatorView.startAnimating()
-                        return indicatorView
-                    }()
-                    DispatchQueue.main.async {
-                        if let viewController = UIStoryboard(
-                            name: "MonthlyTrendsBalanceSheetViewController",
-                            bundle: nil
-                        ).instantiateInitialViewController() as? MonthlyTrendsBalanceSheetViewController {
-                            if let navigator = self.navigationController {
-                                // Accessory Color
-                                let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
-                                let disclosureView = UIImageView(image: disclosureImage)
-                                disclosureView.tintColor = UIColor.accentColor
-                                cell.accessoryView = disclosureView
-                                
-                                navigator.pushViewController(viewController, animated: true)
-                            } else {
-                                let navigation = UINavigationController(rootViewController: viewController)
-                                self.present(navigation, animated: true, completion: nil)
-                            }
-                        }
-                    }
-                }
-            case 1:
-                if let cell = tableView.cellForRow(at: indexPath) {
-                    // インジケーター
-                    cell.accessoryView = {() -> UIActivityIndicatorView in
-                        let indicatorView = UIActivityIndicatorView(frame: CGRect(origin: .zero, size: CGSize(width: 20, height: 20)))
-                        indicatorView.startAnimating()
-                        return indicatorView
-                    }()
-                    DispatchQueue.main.async {
-                        if let viewController = UIStoryboard(
-                            name: "MonthlyProfitAndLossStatementViewController",
-                            bundle: nil
-                        ).instantiateInitialViewController() as? MonthlyProfitAndLossStatementViewController {
-                            if let navigator = self.navigationController {
-                                // Accessory Color
-                                let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
-                                let disclosureView = UIImageView(image: disclosureImage)
-                                disclosureView.tintColor = UIColor.accentColor
-                                cell.accessoryView = disclosureView
-                                
-                                navigator.pushViewController(viewController, animated: true)
-                            } else {
-                                let navigation = UINavigationController(rootViewController: viewController)
-                                self.present(navigation, animated: true, completion: nil)
-                            }
-                        }
-                    }
-                }
-            default:
-                break
-            }
+            return
         } else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
@@ -278,6 +226,34 @@ class FinancialStatementTableViewController: UITableViewController {
             default:
                 break
             }
+        } else if indexPath.section == 3 {
+            if let cell = tableView.cellForRow(at: indexPath) {
+                // インジケーター
+                cell.accessoryView = {() -> UIActivityIndicatorView in
+                    let indicatorView = UIActivityIndicatorView(frame: CGRect(origin: .zero, size: CGSize(width: 20, height: 20)))
+                    indicatorView.startAnimating()
+                    return indicatorView
+                }()
+                DispatchQueue.main.async {
+                    if let viewController = UIStoryboard(
+                        name: String(describing: WSViewController.self),
+                        bundle: nil
+                    ).instantiateInitialViewController() as? WSViewController {
+                        if let navigator = self.navigationController {
+                            // Accessory Color
+                            let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
+                            let disclosureView = UIImageView(image: disclosureImage)
+                            disclosureView.tintColor = UIColor.accentColor
+                            cell.accessoryView = disclosureView
+                            
+                            navigator.pushViewController(viewController, animated: true)
+                        } else {
+                            let navigation = UINavigationController(rootViewController: viewController)
+                            self.present(navigation, animated: true, completion: nil)
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -313,4 +289,150 @@ class FinancialStatementTableViewController: UITableViewController {
         // セルの選択を解除
         tableView.deselectRow(at: indexPath, animated: true)
     }
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension FinancialStatementTableViewController: UICollectionViewDelegateFlowLayout {
+    // セルのサイズ(CGSize)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // 横画面で、collectionViewの高さから計算した高さがマイナスになる場合の対策
+        let height = (collectionView.bounds.size.height) - 20
+        let width = (collectionView.bounds.size.width / 2) - 20
+        return CGSize(width: width + 0.0, height: height < 0 ? 0 : height)
+    }
+    // 余白の調整（UIImageを拡大、縮小している）
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        // top:ナビゲーションバーの高さ分上に移動
+        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    }
+    
+}
+
+extension FinancialStatementTableViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        1
+    }
+    // collectionViewの要素の数を返す
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        2
+    }
+    // collectionViewのセルを返す（セルの内容を決める）
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ImageCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        if let image = UIImage(named: "1552608")?.withRenderingMode(.alwaysOriginal) {
+            cell.imageView.image = image
+            // cell.imageView.backgroundColor = .yellow
+            // cell.backgroundColor = .systemPink
+            let constraint = NSLayoutConstraint(
+                item: cell.imageView,
+                attribute: NSLayoutConstraint.Attribute.height,
+                relatedBy: NSLayoutConstraint.Relation.equal,
+                toItem: cell.imageView,
+                attribute: NSLayoutConstraint.Attribute.width,
+                multiplier: image.size.height / image.size.width,
+                constant: 0.0
+            )
+            NSLayoutConstraint.activate([constraint])
+        }
+        switch indexPath.row {
+        case 0:
+            cell.label.text = "貸借対照表"
+        case 1:
+            cell.label.text = "損益計算書"
+        default:
+            break
+        }
+        return cell
+    }
+}
+
+extension FinancialStatementTableViewController: UICollectionViewDelegate {
+    
+    /// セルの選択時に背景色を変化させる
+    /// 今度はセルが選択状態になった時に背景色が青に変化するようにしてみます。
+    /// 以下の3つのメソッドはデフォルトでtrueなので、このケースでは実装しなくても良いです。
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        print("Highlighted: \(indexPath)")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        print("Unhighlighted: \(indexPath)")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        true  // 変更
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Selected: \(indexPath)")
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        switch indexPath.row {
+        case 0:
+            if let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell {
+                // マイクロインタラクション
+                cell.animateViewSmaller()
+                // インジケーター
+                cell.spinner.startAnimating()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    if let viewController = UIStoryboard(
+                        name: "MonthlyTrendsBalanceSheetViewController",
+                        bundle: nil
+                    ).instantiateInitialViewController() as? MonthlyTrendsBalanceSheetViewController {
+                        if let navigator = self.navigationController {
+                            // インジケーター
+                            cell.spinner.stopAnimating()
+                            
+                            navigator.pushViewController(viewController, animated: true)
+                        } else {
+                            let navigation = UINavigationController(rootViewController: viewController)
+                            self.present(navigation, animated: true, completion: nil)
+                        }
+                    }
+                }
+            }
+        case 1:
+            if let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell {
+                // マイクロインタラクション
+                cell.animateViewSmaller()
+                // インジケーター
+                cell.spinner.startAnimating()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    if let viewController = UIStoryboard(
+                        name: "MonthlyProfitAndLossStatementViewController",
+                        bundle: nil
+                    ).instantiateInitialViewController() as? MonthlyProfitAndLossStatementViewController {
+                        if let navigator = self.navigationController {
+                            // インジケーター
+                            cell.spinner.stopAnimating()
+                            
+                            navigator.pushViewController(viewController, animated: true)
+                        } else {
+                            let navigation = UINavigationController(rootViewController: viewController)
+                            self.present(navigation, animated: true, completion: nil)
+                        }
+                    }
+                }
+            }
+        default:
+            break
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        print("Deselected: \(indexPath)")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        true  // 変更
+    }
+    
 }
