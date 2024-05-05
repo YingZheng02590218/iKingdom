@@ -176,7 +176,23 @@ class BackupViewController: UIViewController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
-        tableView.setEditing(editing, animated: animated)
+        // 編集中の場合
+        if editing {
+            DispatchQueue.main.async {
+                // 編集前に状態を更新する
+                self.tableView.reloadData()
+            }
+        }
+        // 削除機能 セルを左へスワイプして削除ボタンが表示された状態で編集モードに入ると、右端のチェックボックスが表示されないことがあることへの対策
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.tableView.setEditing(editing, animated: animated)
+            self.tableView.indexPathsForVisibleRows?.forEach { indexPath in
+                if let cell = self.tableView.cellForRow(at: indexPath) as? WithIconTableViewCell {
+                    // マイクロインタラクション アニメーション　セル 編集中
+                    cell.animateViewWobble(isActive: editing)
+                }
+            }
+        }
     }
     // バックアップ作成ボタン
     @IBAction func buttonTapped(_ sender: EMTNeumorphicButton) {
@@ -353,6 +369,11 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
         cell.shouldIndentWhileEditing = true
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // マイクロインタラクション アニメーション　セル 編集中
+        cell.animateViewWobble(isActive: tableView.isEditing)
     }
     // 編集機能
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
