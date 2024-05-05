@@ -248,7 +248,9 @@ extension SettingsOperatingJournalEntryViewController: UITableViewDelegate, UITa
             cell.configure(gropName: groupObjects[indexPath.row].groupName)
         }
         cell.delegate = self // CustomCollectionViewCellDelegate
-        
+        // マイクロインタラクション　TableViewCell上のUICollectionViewCell
+        cell.setEditing(isEditing, animated: true)
+
         return cell
     }
     // cellの高さ

@@ -84,4 +84,16 @@ class CustomTableViewCell: UITableViewCell {
             }
         }
     }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        // Add wobble animation to each collection view cell
+        collectionView.indexPathsForVisibleItems.forEach { indexPath in
+            if let cell = self.collectionView.cellForItem(at: indexPath) as? ListCollectionViewCell {
+                // マイクロインタラクション アニメーション　セル 編集中
+                cell.animateViewWobble(isActive: editing)
+            }
+        }
+    }
 }
