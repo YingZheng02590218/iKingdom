@@ -116,7 +116,7 @@ extension UIView {
         if isActive {
             // Create wobble animation
             let wobble = CAKeyframeAnimation(keyPath: "transform.rotation")
-            wobble.values = [0.0, -0.015, 0.0, 0.015, 0.0]
+            wobble.values = [0.0, -0.02, 0.0, 0.02, 0.0]
             wobble.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
             wobble.duration = 0.75
             wobble.isAdditive = true
