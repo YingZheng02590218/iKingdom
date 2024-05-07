@@ -123,7 +123,13 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
             self.selectedItemNumners = [] // 初期化
         }
         // 編集モードに入る前、編集後に選択していたセルをリセットする
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            // 編集前に状態を更新する
+            self.tableView.reloadData()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.tableView.setEditing(editing, animated: animated)
+        }
         navigationItem.title = "よく使う仕訳"
     }
     
@@ -249,10 +255,21 @@ extension SettingsOperatingJournalEntryViewController: UITableViewDelegate, UITa
         }
         cell.delegate = self // CustomCollectionViewCellDelegate
         // マイクロインタラクション　TableViewCell上のUICollectionViewCell
-        cell.setEditing(isEditing, animated: true)
+        cell.setEditing(tableView.isEditing, animated: true)
 
         return cell
     }
+    
+    // 編集機能
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        .none
+    }
+    
+    // インデント
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        false
+    }
+    
     // cellの高さ
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == groupObjects.count {
@@ -356,6 +373,11 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDataSourc
         collectionView.allowsMultipleSelection = self.isEditing
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        // マイクロインタラクション アニメーション　セル 編集中
+        cell.animateViewWobble(isActive: tableView.isEditing)
     }
 }
 
