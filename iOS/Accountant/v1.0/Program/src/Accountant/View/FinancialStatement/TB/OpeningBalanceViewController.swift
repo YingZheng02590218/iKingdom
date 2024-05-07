@@ -130,7 +130,9 @@ class OpeningBalanceViewController: UIViewController {
             if editing {
                 navigationItem.title = "編集中"
                 
-                tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             } else {
                 // 残高　借方　貸方
                 if presenter.debit_balance_total() == presenter.credit_balance_total() {
@@ -172,6 +174,15 @@ class OpeningBalanceViewController: UIViewController {
             self.present(alert, animated: true) { () -> Void in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     self.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.tableView.setEditing(editing, animated: animated)
+            self.tableView.indexPathsForVisibleRows?.forEach { indexPath in
+                if let cell = self.tableView.cellForRow(at: indexPath) {
+                    // マイクロインタラクション アニメーション　セル 編集中
+                    cell.animateViewWobble(isActive: editing)
                 }
             }
         }
@@ -310,6 +321,21 @@ extension OpeningBalanceViewController: UITableViewDelegate, UITableViewDataSour
             }
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // マイクロインタラクション アニメーション　セル 編集中
+        cell.animateViewWobble(isActive: tableView.isEditing)
+    }
+    
+    // 編集機能
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        .none
+    }
+    
+    // インデント
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
