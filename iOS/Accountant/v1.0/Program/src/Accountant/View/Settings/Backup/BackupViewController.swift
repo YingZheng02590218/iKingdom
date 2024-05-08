@@ -381,6 +381,10 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
     }
     // 削除機能 セルを左へスワイプ
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if let cell = tableView.cellForRow(at: indexPath) as? WithIconTableViewCell {
+            // マイクロインタラクション アニメーション　セル 編集中
+            cell.animateViewWobble(isActive: false)
+        }
         let action = UIContextualAction(style: .destructive, title: "削除") { (action, view, completionHandler) in
             // オフラインの場合iCloudへアクセスできないので、ネットワーク接続を確認する
             if Network.shared.isOnline() {

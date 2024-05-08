@@ -293,6 +293,10 @@ class CategoryListTableViewController: UITableViewController {
     //    }
     // 削除機能 セルを左へスワイプ
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if let cell = tableView.cellForRow(at: indexPath) as? CategoryListTableViewCell {
+            // マイクロインタラクション アニメーション　セル 編集中
+            cell.animateViewWobble(isActive: false)
+        }
         // 編集モードの場合
         if tableView.isEditing {
             // スタイルには、normal と　destructive がある
