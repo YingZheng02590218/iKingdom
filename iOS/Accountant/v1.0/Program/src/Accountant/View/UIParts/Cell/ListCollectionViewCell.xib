@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,6 +43,10 @@
                                                 <color key="textColor" name="TextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vl3-OZ-b0P">
+                                                <rect key="frame" x="-12" y="-9" width="240" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -155,7 +159,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" name="BaseColor"/>
+                        <color key="backgroundColor" name="MainColor2"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="BhF-dX-pXM" secondAttribute="bottom" id="13W-e3-s3X"/>
                             <constraint firstAttribute="trailing" secondItem="BhF-dX-pXM" secondAttribute="trailing" id="ZKk-nG-Aba"/>
@@ -163,18 +167,35 @@
                             <constraint firstItem="BhF-dX-pXM" firstAttribute="leading" secondItem="lfj-sH-a01" secondAttribute="leading" id="iqH-PA-gm2"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jdy-Tw-fZo">
+                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="YI5-vV-TeT"/>
+                            <constraint firstAttribute="height" constant="25" id="hIN-7j-Hqc"/>
+                        </constraints>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRound">
+                                <real key="value" value="25"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="mu5-kb-Wdz"/>
-            <color key="backgroundColor" name="BaseColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="lfj-sH-a01" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" constant="-10" id="4Mj-Ka-wMh"/>
                 <constraint firstItem="lfj-sH-a01" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" constant="-10" id="HLt-cs-uZL"/>
                 <constraint firstItem="lfj-sH-a01" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="MKX-1f-M3k"/>
+                <constraint firstItem="Jdy-Tw-fZo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="MLT-Dt-Vfv"/>
                 <constraint firstItem="lfj-sH-a01" firstAttribute="bottom" secondItem="gTV-IL-0wX" secondAttribute="bottom" constant="5" id="Uh7-Tb-K6n"/>
                 <constraint firstAttribute="trailing" secondItem="lfj-sH-a01" secondAttribute="trailing" constant="5" id="Wxi-qk-Xby"/>
                 <constraint firstItem="lfj-sH-a01" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="ceG-SR-ioh"/>
+                <constraint firstItem="Jdy-Tw-fZo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="zbq-xJ-ccM"/>
             </constraints>
             <size key="customSize" width="421" height="164"/>
             <userDefinedRuntimeAttributes>
@@ -188,17 +209,18 @@
                 <outlet property="creditamauntLabel" destination="9g8-AA-six" id="Fxb-rL-BAP"/>
                 <outlet property="debitLabel" destination="ldB-M9-50t" id="4Fa-6d-X2y"/>
                 <outlet property="debitamauntLabel" destination="3pa-R5-Qko" id="U5j-9i-e2m"/>
+                <outlet property="deleteButton" destination="Jdy-Tw-fZo" id="okr-Ml-Bf0"/>
                 <outlet property="nicknameLabel" destination="YCs-Ju-wTq" id="c2E-hb-NqH"/>
             </connections>
             <point key="canvasLocation" x="179.71014492753625" y="127.23214285714285"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <namedColor name="BaseColor">
-            <color red="0.87800002098083496" green="0.89800000190734863" blue="0.92500001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="MainColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="0.48500001430511475" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MainColor2">
+            <color red="0.96899998188018799" green="0.9649999737739563" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
