@@ -110,6 +110,23 @@ extension UIView {
             )
         }
     }
+    
+    // マイクロインタラクション アニメーション　セル 編集中
+    func animateViewWobble(isActive: Bool) {
+        if isActive {
+            // Create wobble animation
+            let wobble = CAKeyframeAnimation(keyPath: "transform.rotation")
+            wobble.values = [0.0, -0.02, 0.0, 0.02, 0.0]
+            wobble.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
+            wobble.duration = 0.75
+            wobble.isAdditive = true
+            wobble.repeatCount = Float.greatestFiniteMagnitude
+            
+            self.layer.add(wobble, forKey: "wobble")
+        } else {
+            self.layer.removeAllAnimations()
+        }
+    }
 }
 
 extension UIView {

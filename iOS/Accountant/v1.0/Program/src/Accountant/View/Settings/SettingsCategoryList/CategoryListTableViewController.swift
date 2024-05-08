@@ -134,9 +134,17 @@ class CategoryListTableViewController: UITableViewController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
-        tableView.setEditing(editing, animated: animated)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.async {
             self.tableView.reloadData()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.tableView.setEditing(editing, animated: animated)
+            self.tableView.indexPathsForVisibleRows?.forEach { indexPath in
+                if let cell = self.tableView.cellForRow(at: indexPath) as? CategoryListTableViewCell {
+                    // マイクロインタラクション アニメーション　セル 編集中
+                    cell.animateViewWobble(isActive: editing)
+                }
+            }
         }
         // 並び替え　ドラッグ&ドロップ
         tableView.allowsSelectionDuringEditing = false
@@ -269,6 +277,10 @@ class CategoryListTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // マイクロインタラクション アニメーション　セル 編集中
+        cell.animateViewWobble(isActive: tableView.isEditing)
+    }
     //    // セル選択不可
     //    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
     //        // 編集モードの場合　は押下できないのでこの処理は通らない
@@ -281,6 +293,10 @@ class CategoryListTableViewController: UITableViewController {
     //    }
     // 削除機能 セルを左へスワイプ
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if let cell = tableView.cellForRow(at: indexPath) as? CategoryListTableViewCell {
+            // マイクロインタラクション アニメーション　セル 編集中
+            cell.animateViewWobble(isActive: false)
+        }
         // 編集モードの場合
         if tableView.isEditing {
             // スタイルには、normal と　destructive がある

@@ -1250,6 +1250,7 @@ extension JournalEntryViewController: UICollectionViewDataSource {
             group: collectionView.tag // グループ　その他 collectionView.tag == 0
         )
         cell.nicknameLabel.text = objects[indexPath.row].nickname
+
         return cell
     }
 }
@@ -1265,15 +1266,6 @@ extension JournalEntryViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         print("Highlighted: \(indexPath)")
-        // データベース　よく使う仕訳
-        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
-            group: collectionView.tag // グループ　その他 collectionView.tag == 0
-        )
-        textFieldCategoryDebit.text = objects[indexPath.row].debit_category
-        textFieldAmountDebit.text = StringUtility.shared.addComma(string: objects[indexPath.row].debit_amount.description)
-        textFieldCategoryCredit.text = objects[indexPath.row].credit_category
-        textFieldAmountCredit.text = StringUtility.shared.addComma(string: objects[indexPath.row].credit_amount.description)
-        textFieldSmallWritting.text = objects[indexPath.row].smallWritting
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
@@ -1286,7 +1278,20 @@ extension JournalEntryViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected: \(indexPath)")
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        // データベース　よく使う仕訳
+        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+            group: collectionView.tag // グループ　その他 collectionView.tag == 0
+        )
+        textFieldCategoryDebit.text = objects[indexPath.row].debit_category
+        textFieldAmountDebit.text = StringUtility.shared.addComma(string: objects[indexPath.row].debit_amount.description)
+        textFieldCategoryCredit.text = objects[indexPath.row].credit_category
+        textFieldAmountCredit.text = StringUtility.shared.addComma(string: objects[indexPath.row].credit_amount.description)
+        textFieldSmallWritting.text = objects[indexPath.row].smallWritting
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

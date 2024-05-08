@@ -123,7 +123,13 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
             self.selectedItemNumners = [] // 初期化
         }
         // 編集モードに入る前、編集後に選択していたセルをリセットする
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            // 編集前に状態を更新する
+            self.tableView.reloadData()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.tableView.setEditing(editing, animated: animated)
+        }
         navigationItem.title = "よく使う仕訳"
     }
     
@@ -213,6 +219,40 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
         }
         completion() //　ここでコールバックする（呼び出し元に処理を戻す）
     }
+    
+    // 削除機能 アラートのポップアップを表示
+    private func showPopover() {
+        guard let primaryKey = primaryKey else {
+            return
+        }
+        // データベース　よく使う仕訳を追加
+        guard let dataBaseSettingsOperatingJournalEntry = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+            number: primaryKey
+        ).first else {
+            return
+        }
+        let alert = UIAlertController(
+            title: "削除",
+            message: "「\(dataBaseSettingsOperatingJournalEntry.nickname)」\n\nよく使う仕訳を削除しますか？",
+            preferredStyle: .alert
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .destructive,
+                handler: { [self] (action: UIAlertAction!) in
+                    print("OK アクションをタップした時の処理")
+                    // データベース　よく使う仕訳を削除
+                    if DataBaseManagerSettingsOperatingJournalEntry.shared.deleteJournalEntry(number: primaryKey) {
+                        self.viewReload = true
+                        self.viewWillAppear(true)
+                    }
+                }
+            )
+        )
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
@@ -248,9 +288,22 @@ extension SettingsOperatingJournalEntryViewController: UITableViewDelegate, UITa
             cell.configure(gropName: groupObjects[indexPath.row].groupName)
         }
         cell.delegate = self // CustomCollectionViewCellDelegate
-        
+        // マイクロインタラクション　TableViewCell上のUICollectionViewCell
+        cell.setEditing(tableView.isEditing, animated: true)
+
         return cell
     }
+    
+    // 編集機能
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        .none
+    }
+    
+    // インデント
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        false
+    }
+    
     // cellの高さ
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == groupObjects.count {
@@ -352,8 +405,16 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDataSourc
         // 編集モードの場合
         // CollectionViewで複数選択できるように設定する
         collectionView.allowsMultipleSelection = self.isEditing
-        
+        // 削除ボタンを表示させる
+        cell.isEditing = self.isEditing
+        cell.delegate = self
+
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        // マイクロインタラクション アニメーション　セル 編集中
+        cell.animateViewWobble(isActive: tableView.isEditing)
     }
 }
 
@@ -379,6 +440,10 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected: \(indexPath)")
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // タップしたセルを中央へスクロールさせる
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         // 編集中の場合
@@ -428,9 +493,9 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate 
         }
     }
     
-    //    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
-    //        return true  // 変更
-    //    }
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        return true  // 変更
+    }
 }
 
 extension SettingsOperatingJournalEntryViewController: CustomCollectionViewCellDelegate {
@@ -440,6 +505,28 @@ extension SettingsOperatingJournalEntryViewController: CustomCollectionViewCellD
             primaryKey = number
             // 画面遷移
             presentToDetail()
+        }
+    }
+}
+
+extension SettingsOperatingJournalEntryViewController: DeleteDataCollectionProtocol {
+    
+    func deleteData(number: Int) {
+        // セルに表示させているよく使う仕訳の連番を保持する
+        primaryKey = number
+        // 確認のポップアップを表示する
+        self.showPopover()
+        
+        // DataSourceを更新
+        // 選択を解除されたよく使う仕訳の連番を除去する
+        self.selectedItemNumners.removeAll(where: { $0 == number })
+        print("didDeselectItemAt selectedItemNumners", self.selectedItemNumners)
+        editWithSlectionButton.isEnabled = !selectedItemNumners.isEmpty ? true : false // まとめて編集ボタン
+        // title設定
+        navigationItem.title = !selectedItemNumners.isEmpty ? "\(selectedItemNumners.count)件選択" : "よく使う仕訳"
+        // リロード
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
 }

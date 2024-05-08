@@ -835,6 +835,10 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
+        if indexPath.section == 0 || indexPath.section == 1 {
+            // マイクロインタラクション アニメーション　セル 編集中
+            cell.animateViewWobble(isActive: tableView.isEditing)
+        }
     }
     // 下へスクロールする
     func scrollToBottom() {
@@ -1018,6 +1022,14 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         // 削除機能 セルを左へスワイプして削除ボタンが表示された状態で編集モードに入ると、右端のチェックボックスが表示されないことがあることへの対策
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.tableView.setEditing(editing, animated: animated)
+            self.tableView.indexPathsForVisibleRows?.forEach { indexPath in
+                if let cell = self.tableView.cellForRow(at: indexPath) as? JournalsTableViewCell {
+                    if indexPath.section == 0 || indexPath.section == 1 {
+                        // マイクロインタラクション アニメーション　セル 編集中
+                        cell.animateViewWobble(isActive: editing)
+                    }
+                }
+            }
         }
         navigationItem.title = "仕訳帳"
     }
