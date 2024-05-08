@@ -182,6 +182,15 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </button>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Fma-tj-7Wh">
+                        <rect key="frame" x="389" y="75.5" width="25" height="24"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="AccentBlue"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Fma-tj-7Wh" secondAttribute="height" multiplier="25:25" id="aeU-Mz-feA"/>
+                            <constraint firstAttribute="width" constant="25" id="moh-KS-Z4a"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="mu5-kb-Wdz"/>
@@ -194,8 +203,10 @@
                 <constraint firstItem="Jdy-Tw-fZo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="MLT-Dt-Vfv"/>
                 <constraint firstItem="lfj-sH-a01" firstAttribute="bottom" secondItem="gTV-IL-0wX" secondAttribute="bottom" constant="5" id="Uh7-Tb-K6n"/>
                 <constraint firstAttribute="trailing" secondItem="lfj-sH-a01" secondAttribute="trailing" constant="5" id="Wxi-qk-Xby"/>
+                <constraint firstAttribute="bottom" secondItem="Fma-tj-7Wh" secondAttribute="bottom" id="a3v-XY-SfT"/>
                 <constraint firstItem="lfj-sH-a01" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="ceG-SR-ioh"/>
                 <constraint firstItem="Jdy-Tw-fZo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="zbq-xJ-ccM"/>
+                <constraint firstAttribute="trailing" secondItem="Fma-tj-7Wh" secondAttribute="trailing" id="zex-qg-Ip6"/>
             </constraints>
             <size key="customSize" width="421" height="164"/>
             <userDefinedRuntimeAttributes>
@@ -205,6 +216,7 @@
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="backgroundViewForNeumorphism" destination="lfj-sH-a01" id="AqH-aS-7hj"/>
+                <outlet property="checkmarkImageView" destination="Fma-tj-7Wh" id="T6n-RR-jUO"/>
                 <outlet property="creditLabel" destination="Bfa-gt-A71" id="rvI-MZ-gJo"/>
                 <outlet property="creditamauntLabel" destination="9g8-AA-six" id="Fxb-rL-BAP"/>
                 <outlet property="debitLabel" destination="ldB-M9-50t" id="4Fa-6d-X2y"/>
@@ -216,6 +228,10 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
+        <namedColor name="AccentBlue">
+            <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="MainColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="0.48500001430511475" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

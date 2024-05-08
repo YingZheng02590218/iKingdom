@@ -22,6 +22,7 @@ class ListCollectionViewCell: UICollectionViewCell {
     @IBOutlet var creditamauntLabel: UILabel!
     @IBOutlet var backgroundViewForNeumorphism: EMTNeumorphicView!
     @IBOutlet var deleteButton: UIButton!
+    @IBOutlet var checkmarkImageView: UIImageView!
     
     var isEditing = false {
         didSet {
@@ -62,6 +63,9 @@ class ListCollectionViewCell: UICollectionViewCell {
     private func onUpdateSelection() {
         // セルの枠線の太さを変える
         backgroundViewForNeumorphism.neumorphicLayer?.borderWidth = self.isSelected ? 1 : 0
+        // チェックマーク
+        checkmarkImageView.isHidden = !(isEditing && isSelected)
+
         if let number = number {
             // タップ時の選択状態とよく使う仕訳自身の連番を返す
             switchValueChangedCompletion?(isSelected, number)
@@ -70,7 +74,6 @@ class ListCollectionViewCell: UICollectionViewCell {
     
     // ビューのデザインを指定する
     private func createViewDesign() {
-        backgroundViewForNeumorphism.neumorphicLayer?.borderColor = UIColor.gray.cgColor
         // セルを角丸にする
         self.contentView.layer.cornerRadius = 10
         
@@ -80,6 +83,7 @@ class ListCollectionViewCell: UICollectionViewCell {
         backgroundViewForNeumorphism.neumorphicLayer?.edged = Constant.edged
         backgroundViewForNeumorphism.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         backgroundViewForNeumorphism.neumorphicLayer?.elementBackgroundColor = isHighlighted ? UIColor.gray.cgColor : UIColor.mainColor2.cgColor
+        backgroundViewForNeumorphism.neumorphicLayer?.borderColor = UIColor.gray.cgColor
         // 削除ボタン
         let config = UIImage.SymbolConfiguration(pointSize: 25)
         deleteButton.setImage(UIImage(systemName: "minus.circle.fill", withConfiguration: config), for: .normal)
@@ -88,6 +92,13 @@ class ListCollectionViewCell: UICollectionViewCell {
         deleteButton.layer.masksToBounds = true
         deleteButton.layer.cornerRadius = 12.5
         deleteButton.addTarget(self, action: #selector(deleteButtonAction), for: .touchUpInside)
+        // チェックマーク
+        checkmarkImageView.image = UIImage(systemName: "checkmark.circle.fill") ?? UIImage()
+        checkmarkImageView.tintColor = .accentBlue
+        checkmarkImageView.backgroundColor = .white
+        checkmarkImageView.layer.masksToBounds = true
+        checkmarkImageView.layer.cornerRadius = 12.5
+        checkmarkImageView.isHidden = !(isEditing && isSelected)
     }
     
     @objc private func deleteButtonAction() {
