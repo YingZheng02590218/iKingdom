@@ -24,6 +24,16 @@ class OpeningBalanceViewController: UIViewController {
     /// 開始残高　下部
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var backgroundView: EMTNeumorphicView!
+    // フィードバック
+    private let feedbackGeneratorNotification: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UINotificationFeedbackGenerator()
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     // グラデーションレイヤー　書類系画面
     let gradientLayer = CAGradientLayer()
     
@@ -150,8 +160,9 @@ class OpeningBalanceViewController: UIViewController {
                     // 再度編集中へ戻す
                     self.setEditing(true, animated: true)
                     // フィードバック
-                    let generator = UINotificationFeedbackGenerator()
-                    generator.notificationOccurred(.error)
+                    if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                        generator.notificationOccurred(.error)
+                    }
                     let alert = UIAlertController(title: "貸借の合計が不一致", message: "再度、入力してください", preferredStyle: .alert)
                     self.present(alert, animated: true) { () -> Void in
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -177,8 +188,9 @@ class OpeningBalanceViewController: UIViewController {
                 self.setEditing(false, animated: true)
             }
             // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
+            if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                generator.notificationOccurred(.error)
+            }
             let alert = UIAlertController(title: "開いている帳簿の年度", message: "開始残高を入力する際は、最も古い年度の帳簿を開いてください。", preferredStyle: .alert)
             self.present(alert, animated: true) { () -> Void in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
