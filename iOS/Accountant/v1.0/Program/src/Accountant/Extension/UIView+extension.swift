@@ -113,7 +113,7 @@ extension UIView {
     // マイクロインタラクション アニメーション　セル
     func animateViewSmaller() {
         UIView.animate(
-            withDuration: 0.3,
+            withDuration: 0.1,
             delay: 0,
             options: .curveEaseIn,
             animations: {

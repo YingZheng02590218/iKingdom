@@ -17,23 +17,12 @@ class ImageCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        commonInit()
     }
     
-    private func commonInit() {
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        spinner.color = .white
-        contentView.addSubview(spinner)
-        
-        spinner.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        spinner.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-    }
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -42,11 +31,21 @@ class ImageCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        commonInit()
+    }
+    
+    private func commonInit() {
         // セルに影をつける
-        self.imageView.clipsToBounds = false
-        self.imageView.layer.shadowColor = UIColor.gray.cgColor // 影の色
-        self.imageView.layer.shadowOffset = CGSize(width: 0.5, height: 1.5) // 影の位置
-        self.imageView.layer.shadowOpacity = 1.0 // 影の透明度
-        self.imageView.layer.shadowRadius = 4.0 // 影の広がり
+        imageView.clipsToBounds = false
+        imageView.layer.shadowColor = UIColor.gray.cgColor // 影の色
+        imageView.layer.shadowOffset = CGSize(width: 0.5, height: 1.5) // 影の位置
+        imageView.layer.shadowOpacity = 1.0 // 影の透明度
+        imageView.layer.shadowRadius = 4.0 // 影の広がり
+        
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.color = .white
+        contentView.addSubview(spinner)
+        spinner.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
     }
 }
