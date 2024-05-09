@@ -160,6 +160,15 @@ class OpeningBalanceViewController: UIViewController {
                     }
                 }
             }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.tableView.setEditing(editing, animated: animated)
+                self.tableView.indexPathsForVisibleRows?.forEach { indexPath in
+                    if let cell = self.tableView.cellForRow(at: indexPath) {
+                        // マイクロインタラクション アニメーション　セル 編集中
+                        cell.animateViewWobble(isActive: editing)
+                    }
+                }
+            }
         } else {
             // 開いている帳簿の年度と一番古い帳簿の年度が同じではない場合
             // 編集中の場合
@@ -174,15 +183,6 @@ class OpeningBalanceViewController: UIViewController {
             self.present(alert, animated: true) { () -> Void in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     self.dismiss(animated: true, completion: nil)
-                }
-            }
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.tableView.setEditing(editing, animated: animated)
-            self.tableView.indexPathsForVisibleRows?.forEach { indexPath in
-                if let cell = self.tableView.cellForRow(at: indexPath) {
-                    // マイクロインタラクション アニメーション　セル 編集中
-                    cell.animateViewWobble(isActive: editing)
                 }
             }
         }
