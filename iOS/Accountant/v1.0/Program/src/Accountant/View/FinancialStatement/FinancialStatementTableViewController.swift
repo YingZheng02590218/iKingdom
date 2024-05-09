@@ -12,6 +12,17 @@ import UIKit
 // 決算書クラス
 class FinancialStatementTableViewController: UITableViewController {
     
+    // フィードバック
+    let feedbackGeneratorLight: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -372,6 +383,10 @@ extension FinancialStatementTableViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected: \(indexPath)")
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorLight as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         switch indexPath.row {
         case 0:
