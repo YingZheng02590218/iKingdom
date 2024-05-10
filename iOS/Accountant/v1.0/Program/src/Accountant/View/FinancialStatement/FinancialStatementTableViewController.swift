@@ -55,9 +55,9 @@ class FinancialStatementTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-            // case 0: return    "月次推移表"
             // 決算報告手続き
-            // case 1: return    "財務諸表"
+            // case 0: return    "財務諸表"
+            // case 1: return    "月次推移表"
             // 決算本手続き 帳簿の締切
         case 2: return    "決算振替仕訳"
         case 3: return    "決算整理仕訳"
@@ -74,10 +74,10 @@ class FinancialStatementTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            // 月次推移表
+            // 財務諸表
             return 1
         case 1:
-            // 財務諸表
+            // 月次推移表
             return 1
         case 2:
             // 損益勘定
@@ -96,11 +96,11 @@ class FinancialStatementTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            // 月次推移表
-            return 270
-        case 1:
             // 財務諸表
             return 270
+        case 1:
+            // 月次推移表
+            return 240
         default:
             return 43
         }
@@ -119,8 +119,8 @@ class FinancialStatementTableViewController: UITableViewController {
                 cell.collectionView.delegate = self
                 cell.collectionView.dataSource = self
                 cell.createImages()
-                cell.backgroundColor = .mainColor2
-                cell.configure(gropName: "月次推移表")
+                cell.backgroundColor = .clear
+                cell.configure(gropName: "財務諸表")
                 cell.collectionView.tag = 0
                 return cell
             default:
@@ -139,7 +139,7 @@ class FinancialStatementTableViewController: UITableViewController {
                 cell.collectionView.dataSource = self
                 cell.createImages()
                 cell.backgroundColor = .mainColor2
-                cell.configure(gropName: "財務諸表")
+                cell.configure(gropName: "月次推移表")
                 cell.collectionView.tag = 1
                 return cell
             default:
@@ -290,7 +290,8 @@ extension FinancialStatementTableViewController: UICollectionViewDataSource {
             switch indexPath.row {
             case 0:
                 cell.label.text = "貸借対照表"
-                if let image = UIImage(named: "IMG_7459")?.withRenderingMode(.alwaysOriginal) {
+                cell.label.textColor = .textColor
+                if let image = UIImage(named: "Yearly")?.withRenderingMode(.alwaysOriginal) {
                     cell.imageView.image = image
                     // cell.imageView.backgroundColor = .yellow
                     // cell.backgroundColor = .systemPink
@@ -307,7 +308,8 @@ extension FinancialStatementTableViewController: UICollectionViewDataSource {
                 }
             case 1:
                 cell.label.text = "損益計算書"
-                if let image = UIImage(named: "1552608")?.withRenderingMode(.alwaysOriginal) {
+                cell.label.textColor = .textColor
+                if let image = UIImage(named: "Yearly")?.withRenderingMode(.alwaysOriginal) {
                     cell.imageView.image = image
                     // cell.imageView.backgroundColor = .yellow
                     // cell.backgroundColor = .systemPink
@@ -330,7 +332,8 @@ extension FinancialStatementTableViewController: UICollectionViewDataSource {
             switch indexPath.row {
             case 0:
                 cell.label.text = "貸借対照表"
-                if let image = UIImage(named: "IMG_7461")?.withRenderingMode(.alwaysOriginal) {
+                cell.label.textColor = .black
+                if let image = UIImage(named: "Monthly")?.withRenderingMode(.alwaysOriginal) {
                     cell.imageView.image = image
                     // cell.imageView.backgroundColor = .yellow
                     // cell.backgroundColor = .systemPink
@@ -345,9 +348,11 @@ extension FinancialStatementTableViewController: UICollectionViewDataSource {
                     )
                     NSLayoutConstraint.activate([constraint])
                 }
+                cell.spinner.color = .gray
             case 1:
                 cell.label.text = "損益計算書"
-                if let image = UIImage(named: "IMG_7455")?.withRenderingMode(.alwaysOriginal) {
+                cell.label.textColor = .black
+                if let image = UIImage(named: "Monthly")?.withRenderingMode(.alwaysOriginal) {
                     cell.imageView.image = image
                     // cell.imageView.backgroundColor = .yellow
                     // cell.backgroundColor = .systemPink
@@ -362,7 +367,7 @@ extension FinancialStatementTableViewController: UICollectionViewDataSource {
                     )
                     NSLayoutConstraint.activate([constraint])
                 }
-                
+                cell.spinner.color = .gray
             default:
                 break
             }
@@ -403,59 +408,6 @@ extension FinancialStatementTableViewController: UICollectionViewDelegate {
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         switch collectionView.tag {
         case 0:
-            switch indexPath.row {
-            case 0:
-                if let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell {
-                    // マイクロインタラクション
-                    cell.animateViewSmaller()
-                    // インジケーター
-                    cell.spinner.startAnimating()
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        if let viewController = UIStoryboard(
-                            name: "MonthlyTrendsBalanceSheetViewController",
-                            bundle: nil
-                        ).instantiateInitialViewController() as? MonthlyTrendsBalanceSheetViewController {
-                            if let navigator = self.navigationController {
-                                // インジケーター
-                                cell.spinner.stopAnimating()
-                                
-                                navigator.pushViewController(viewController, animated: true)
-                            } else {
-                                let navigation = UINavigationController(rootViewController: viewController)
-                                self.present(navigation, animated: true, completion: nil)
-                            }
-                        }
-                    }
-                }
-            case 1:
-                if let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell {
-                    // マイクロインタラクション
-                    cell.animateViewSmaller()
-                    // インジケーター
-                    cell.spinner.startAnimating()
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        if let viewController = UIStoryboard(
-                            name: "MonthlyProfitAndLossStatementViewController",
-                            bundle: nil
-                        ).instantiateInitialViewController() as? MonthlyProfitAndLossStatementViewController {
-                            if let navigator = self.navigationController {
-                                // インジケーター
-                                cell.spinner.stopAnimating()
-                                
-                                navigator.pushViewController(viewController, animated: true)
-                            } else {
-                                let navigation = UINavigationController(rootViewController: viewController)
-                                self.present(navigation, animated: true, completion: nil)
-                            }
-                        }
-                    }
-                }
-            default:
-                break
-            }
-        case 1:
             switch indexPath.row {
             case 0:
                 if let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell {
@@ -530,6 +482,59 @@ extension FinancialStatementTableViewController: UICollectionViewDelegate {
                                     let navigation = UINavigationController(rootViewController: viewController)
                                     self.present(navigation, animated: true, completion: nil)
                                 }
+                            }
+                        }
+                    }
+                }
+            default:
+                break
+            }
+        case 1:
+            switch indexPath.row {
+            case 0:
+                if let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell {
+                    // マイクロインタラクション
+                    cell.animateViewSmaller()
+                    // インジケーター
+                    cell.spinner.startAnimating()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        if let viewController = UIStoryboard(
+                            name: "MonthlyTrendsBalanceSheetViewController",
+                            bundle: nil
+                        ).instantiateInitialViewController() as? MonthlyTrendsBalanceSheetViewController {
+                            if let navigator = self.navigationController {
+                                // インジケーター
+                                cell.spinner.stopAnimating()
+                                
+                                navigator.pushViewController(viewController, animated: true)
+                            } else {
+                                let navigation = UINavigationController(rootViewController: viewController)
+                                self.present(navigation, animated: true, completion: nil)
+                            }
+                        }
+                    }
+                }
+            case 1:
+                if let cell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell {
+                    // マイクロインタラクション
+                    cell.animateViewSmaller()
+                    // インジケーター
+                    cell.spinner.startAnimating()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        if let viewController = UIStoryboard(
+                            name: "MonthlyProfitAndLossStatementViewController",
+                            bundle: nil
+                        ).instantiateInitialViewController() as? MonthlyProfitAndLossStatementViewController {
+                            if let navigator = self.navigationController {
+                                // インジケーター
+                                cell.spinner.stopAnimating()
+                                
+                                navigator.pushViewController(viewController, animated: true)
+                            } else {
+                                let navigation = UINavigationController(rootViewController: viewController)
+                                self.present(navigation, animated: true, completion: nil)
                             }
                         }
                     }

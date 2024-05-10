@@ -43,7 +43,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
         imageView.layer.shadowRadius = 4.0 // 影の広がり
         
         spinner.translatesAutoresizingMaskIntoConstraints = false
-        spinner.color = .white
+        // spinner.color = .white
         contentView.addSubview(spinner)
         spinner.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
         spinner.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
