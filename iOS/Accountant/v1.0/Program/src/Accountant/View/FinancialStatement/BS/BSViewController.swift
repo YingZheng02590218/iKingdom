@@ -1152,7 +1152,7 @@ extension BSViewController: BSPresenterOutput {
         printoutButton.tintColor = .accentColor
         // ナビゲーションに定義したボタンを置く
         self.navigationItem.rightBarButtonItem = printoutButton
-        self.navigationItem.title = "貸借対照表"
+        self.navigationItem.title = "財務諸表"
     }
     
     func setupViewForViewWillAppear() {

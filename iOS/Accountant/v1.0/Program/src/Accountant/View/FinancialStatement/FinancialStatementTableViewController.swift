@@ -290,7 +290,7 @@ extension FinancialStatementTableViewController: UICollectionViewDataSource {
             switch indexPath.row {
             case 0:
                 cell.label.text = "貸借対照表"
-                cell.label.textColor = .textColor
+                cell.label.textColor = .accentColor
                 if let image = UIImage(named: "Yearly")?.withRenderingMode(.alwaysOriginal) {
                     cell.imageView.image = image
                     // cell.imageView.backgroundColor = .yellow
@@ -308,7 +308,7 @@ extension FinancialStatementTableViewController: UICollectionViewDataSource {
                 }
             case 1:
                 cell.label.text = "損益計算書"
-                cell.label.textColor = .textColor
+                cell.label.textColor = .accentColor
                 if let image = UIImage(named: "Yearly")?.withRenderingMode(.alwaysOriginal) {
                     cell.imageView.image = image
                     // cell.imageView.backgroundColor = .yellow
@@ -331,7 +331,7 @@ extension FinancialStatementTableViewController: UICollectionViewDataSource {
         case 1:
             switch indexPath.row {
             case 0:
-                cell.label.text = "貸借対照表"
+                cell.label.text = "月次貸借推移表"
                 cell.label.textColor = .black
                 if let image = UIImage(named: "Monthly")?.withRenderingMode(.alwaysOriginal) {
                     cell.imageView.image = image
@@ -350,7 +350,7 @@ extension FinancialStatementTableViewController: UICollectionViewDataSource {
                 }
                 cell.spinner.color = .gray
             case 1:
-                cell.label.text = "損益計算書"
+                cell.label.text = "月次損益推移表"
                 cell.label.textColor = .black
                 if let image = UIImage(named: "Monthly")?.withRenderingMode(.alwaysOriginal) {
                     cell.imageView.image = image
