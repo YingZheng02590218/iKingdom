@@ -121,6 +121,7 @@ class FinancialStatementTableViewController: UITableViewController {
                 cell.createImages()
                 cell.backgroundColor = .clear
                 cell.configure(gropName: "財務諸表")
+                cell.betaLabel.isHidden = true
                 cell.collectionView.tag = 0
                 return cell
             default:
@@ -140,6 +141,7 @@ class FinancialStatementTableViewController: UITableViewController {
                 cell.createImages()
                 cell.backgroundColor = .mainColor2
                 cell.configure(gropName: "月次推移表")
+                cell.betaLabel.isHidden = false
                 cell.collectionView.tag = 1
                 return cell
             default:

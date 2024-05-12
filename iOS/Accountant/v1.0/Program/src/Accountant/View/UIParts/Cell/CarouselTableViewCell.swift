@@ -11,6 +11,7 @@ import UIKit
 class CarouselTableViewCell: UITableViewCell {
 
     @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet var betaLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
     
     override func awakeFromNib() {
