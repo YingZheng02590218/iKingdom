@@ -145,7 +145,7 @@ class SettingsOperatingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "仕訳帳と諸勘定に決算振替仕訳を表示するかどうかを設定することができます。"
+            return "勘定に決算振替仕訳を表示するかどうかを設定することができます。"
         default:
             return ""
         }
