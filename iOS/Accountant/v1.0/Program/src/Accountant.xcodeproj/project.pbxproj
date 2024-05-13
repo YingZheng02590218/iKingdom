@@ -166,6 +166,8 @@
 		F91878C82581462600D2E793 /* DataBaseManagerSettingsOperating.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91878C72581462600D2E793 /* DataBaseManagerSettingsOperating.swift */; };
 		F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */; };
 		F919603224AC53890084A18B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919603124AC53890084A18B /* File.swift */; };
+		F91C2B7E2BF212C200ABBFD6 /* LucaPacioliRough.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */; };
+		F91C2B7F2BF212C300ABBFD6 /* LucaPacioliRough.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */; };
 		F91F6E2D248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91F6E2C248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift */; };
 		F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */; };
 		F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F922771B261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard */; };
@@ -968,6 +970,7 @@
 		F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F919603124AC53890084A18B /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		F919603324AC679E0084A18B /* File2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File2.swift; sourceTree = "<group>"; };
+		F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LucaPacioliRough.ttf; sourceTree = "<group>"; };
 		F91F6E2C248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerAccountingBooksShelf.swift; sourceTree = "<group>"; };
 		F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategoryListTableViewController.storyboard; sourceTree = "<group>"; };
 		F922771B261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard; sourceTree = "<group>"; };
@@ -1546,6 +1549,15 @@
 			path = PrintOut;
 			sourceTree = "<group>";
 		};
+		F91C2B7C2BF211F300ABBFD6 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */,
+				F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		F929C009247708470034FAAF /* MasterData */ = {
 			isa = PBXGroup;
 			children = (
@@ -1560,8 +1572,8 @@
 				F9789A332475C49B00B62CAF /* SettingsTableViewController.swift */,
 				F99BE7AB261DD61C004611E4 /* SettingsTableViewController.storyboard */,
 				F9789A352475CA8000B62CAF /* SettingsTableViewCell.swift */,
-				F9ED936D2982838700B255EF /* Backup */,
 				F9F7992E25A864300037EC50 /* SettingsUpgrade */,
+				F9ED936D2982838700B255EF /* Backup */,
 				F9F4607524CF64BA008FE62B /* SettingsInformation */,
 				F9F934EA2485544B00BF7AA7 /* SettingPeriod */,
 				F98CD96124DCA92F001CBF94 /* SettingsCategoryMain */,
@@ -2061,7 +2073,7 @@
 				F94EDDA2237AEB3B0074D812 /* Info.plist */,
 				F97C278F263AB39D00DFC3B0 /* InfoPlist.strings */,
 				F9EC674727B911FD0003FBB6 /* GoogleService-Info */,
-				F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */,
+				F91C2B7C2BF211F300ABBFD6 /* Font */,
 				F95D44FF25ADE5F00044493A /* Configuration.storekit */,
 				F94E79EA259DF8C7004726F7 /* Settings.bundle */,
 			);
@@ -2650,6 +2662,7 @@
 				F90A23612B6BBBFF009E35C0 /* BasicInfo5.png in Resources */,
 				F9ED936B2982837E00B255EF /* BackupViewController.storyboard in Resources */,
 				F90A23DF2B6D0F93009E35C0 /* OpeningJournalEntry3.png in Resources */,
+				F91C2B7E2BF212C200ABBFD6 /* LucaPacioliRough.ttf in Resources */,
 				F906C4EF263B1B65006C6233 /* ListCollectionViewCell.xib in Resources */,
 				F90A23642B6BBC58009E35C0 /* BasicInfo7.png in Resources */,
 				F99BAEBA261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard in Resources */,
@@ -2816,6 +2829,7 @@
 				F90A23622B6BBBFF009E35C0 /* BasicInfo5.png in Resources */,
 				F9ED936C2982837E00B255EF /* BackupViewController.storyboard in Resources */,
 				F90A23E02B6D0F93009E35C0 /* OpeningJournalEntry3.png in Resources */,
+				F91C2B7F2BF212C300ABBFD6 /* LucaPacioliRough.ttf in Resources */,
 				F9EC672327B90BC60003FBB6 /* ListCollectionViewCell.xib in Resources */,
 				F90A23652B6BBC58009E35C0 /* BasicInfo7.png in Resources */,
 				F9EC672427B90BC60003FBB6 /* GeneralLedgerTableViewController.storyboard in Resources */,
