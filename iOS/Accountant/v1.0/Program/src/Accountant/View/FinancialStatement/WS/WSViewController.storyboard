@@ -14,7 +14,7 @@
         <!--精算表-->
         <scene sceneID="IGL-Qx-Ozr">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="a9q-bv-lX8" customClass="WSViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WSViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a9q-bv-lX8" customClass="WSViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lfl-Db-LzH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -466,6 +466,10 @@
 		F9C2BC29277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */; };
 		F9C2BEBA250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */; };
 		F9C2BEBD250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */; };
+		F9C3B1422BE644CA006B6FDA /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C3B1402BE644CA006B6FDA /* ImageCollectionViewCell.swift */; };
+		F9C3B1432BE644CA006B6FDA /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C3B1402BE644CA006B6FDA /* ImageCollectionViewCell.swift */; };
+		F9C3B1442BE644CA006B6FDA /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9C3B1412BE644CA006B6FDA /* ImageCollectionViewCell.xib */; };
+		F9C3B1452BE644CA006B6FDA /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9C3B1412BE644CA006B6FDA /* ImageCollectionViewCell.xib */; };
 		F9C6C73F29A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C6C73D29A3A5D700BA8F83 /* PopUpViewController.storyboard */; };
 		F9C6C74029A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C6C73D29A3A5D700BA8F83 /* PopUpViewController.storyboard */; };
 		F9C6C74129A3A5D700BA8F83 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6C73E29A3A5D700BA8F83 /* PopUpViewController.swift */; };
@@ -1179,6 +1183,8 @@
 		F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ClassicCalculatorViewController.storyboard; sourceTree = "<group>"; };
 		F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTaxonomyAccountByTaxonomyListTableViewController.swift; sourceTree = "<group>"; };
 		F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTaxonomyListTableViewController.swift; sourceTree = "<group>"; };
+		F9C3B1402BE644CA006B6FDA /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		F9C3B1412BE644CA006B6FDA /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		F9C6C73D29A3A5D700BA8F83 /* PopUpViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PopUpViewController.storyboard; sourceTree = "<group>"; };
 		F9C6C73E29A3A5D700BA8F83 /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		F9C7371F265E7D7E00A9F287 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
@@ -1975,6 +1981,8 @@
 			children = (
 				F9A3A6472631ABD0006E0FA0 /* WithIconTableViewCell.swift */,
 				F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */,
+				F9C3B1402BE644CA006B6FDA /* ImageCollectionViewCell.swift */,
+				F9C3B1412BE644CA006B6FDA /* ImageCollectionViewCell.xib */,
 				F9AD5F3626399C00003EC6EF /* CarouselCollectionViewCell.swift */,
 				F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */,
 				F99D3AF52A63FDAD00E19110 /* CustomTableViewCell.swift */,
@@ -2612,6 +2620,7 @@
 				F907D0BD2A99E0FD00A701C3 /* Journal_Entry_Delete.html in Resources */,
 				F90A237C2B6BC7FB009E35C0 /* AccountItem4.png in Resources */,
 				F90A23AC2B6CFDD0009E35C0 /* JournalEntry2.png in Resources */,
+				F9C3B1442BE644CA006B6FDA /* ImageCollectionViewCell.xib in Resources */,
 				F90A235F2B6BBBFF009E35C0 /* BasicInfo6.png in Resources */,
 				F907D0AB2A976E4F00A701C3 /* Set_Up_Account3.html in Resources */,
 				F99BAEC2261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard in Resources */,
@@ -2777,6 +2786,7 @@
 				F907D0BE2A99E0FD00A701C3 /* Journal_Entry_Delete.html in Resources */,
 				F90A237D2B6BC7FB009E35C0 /* AccountItem4.png in Resources */,
 				F90A23AD2B6CFDD0009E35C0 /* JournalEntry2.png in Resources */,
+				F9C3B1452BE644CA006B6FDA /* ImageCollectionViewCell.xib in Resources */,
 				F90A23602B6BBBFF009E35C0 /* BasicInfo6.png in Resources */,
 				F907D0AC2A976E4F00A701C3 /* Set_Up_Account3.html in Resources */,
 				F9EC671C27B90BC60003FBB6 /* GeneralLedgerAccountViewController.storyboard in Resources */,
@@ -3165,6 +3175,7 @@
 				F9D224CC24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift in Sources */,
 				F906C4E3263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift in Sources */,
 				F9ED93772983ABFE00B255EF /* BackupManager.swift in Sources */,
+				F9C3B1422BE644CA006B6FDA /* ImageCollectionViewCell.swift in Sources */,
 				F9D5D54F247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */,
 				F9E501AC2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift in Sources */,
@@ -3417,6 +3428,7 @@
 				F9EC66C527B90BC60003FBB6 /* DataBaseSubsidiaryLedger.swift in Sources */,
 				F9EC66C627B90BC60003FBB6 /* SettingsOperatingJournalEntryViewController.swift in Sources */,
 				F9ED93782983ABFE00B255EF /* BackupManager.swift in Sources */,
+				F9C3B1432BE644CA006B6FDA /* ImageCollectionViewCell.swift in Sources */,
 				F9EC66C727B90BC60003FBB6 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9EC66C827B90BC60003FBB6 /* CollectionReusableView.swift in Sources */,
 				F9E501AD2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift in Sources */,

@@ -52,6 +52,16 @@ class SettingsTableViewController: UIViewController {
             return nil
         }
     }()
+    // フィードバック
+    private let feedbackGeneratorNotification: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UINotificationFeedbackGenerator()
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,8 +152,9 @@ class SettingsTableViewController: UIViewController {
             }
         } else {
             // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
+            if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                generator.notificationOccurred(.error)
+            }
             // 認証使用可能時の処理
             DispatchQueue.main.async {
                 // スイッチを元に戻す
@@ -187,8 +198,9 @@ class SettingsTableViewController: UIViewController {
                 } else {
                     // OSの設定　がOFFの場合
                     // フィードバック
-                    let generator = UINotificationFeedbackGenerator()
-                    generator.notificationOccurred(.error)
+                    if #available(iOS 10.0, *), let generator = self.feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                        generator.notificationOccurred(.error)
+                    }
                     // 認証使用可能時の処理
                     DispatchQueue.main.async {
                         // スイッチを元に戻す

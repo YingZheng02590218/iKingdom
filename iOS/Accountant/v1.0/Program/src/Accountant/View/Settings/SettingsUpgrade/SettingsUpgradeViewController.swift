@@ -57,6 +57,16 @@ class SettingsUpgradeViewController: UIViewController {
             return nil
         }
     }()
+    // フィードバック
+    private let feedbackGeneratorNotification: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UINotificationFeedbackGenerator()
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     // インジゲーター
     var activityIndicatorView = UIActivityIndicatorView()
     let backView = UIView()
@@ -285,11 +295,12 @@ class SettingsUpgradeViewController: UIViewController {
                     // インジケーターを終了
                     self.finishActivityIndicatorView()
                     // フィードバック
-                    let generator = UINotificationFeedbackGenerator()
-                    if isSuccess {
-                        generator.notificationOccurred(.success)
-                    } else {
-                        generator.notificationOccurred(.error)
+                    if #available(iOS 10.0, *), let generator = self.feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                        if isSuccess {
+                            generator.notificationOccurred(.success)
+                        } else {
+                            generator.notificationOccurred(.error)
+                        }
                     }
                     let alert = UIAlertController(title: "復元", message: "\(isSuccess ? "成功しました" : "失敗しました")", preferredStyle: .alert)
                     self.present(alert, animated: true) { () -> Void in

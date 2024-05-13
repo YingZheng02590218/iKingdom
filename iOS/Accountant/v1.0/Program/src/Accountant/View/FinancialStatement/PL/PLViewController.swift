@@ -735,7 +735,7 @@ extension PLViewController: PLPresenterOutput {
         // ナビゲーションに定義したボタンを置く
         self.navigationItem.rightBarButtonItem = printoutButton
         self.navigationController?.navigationBar.tintColor = .accentColor
-        self.navigationItem.title = "損益計算書"
+        self.navigationItem.title = "財務諸表"
     }
     
     func setupViewForViewWillAppear() {

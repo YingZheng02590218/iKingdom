@@ -29,6 +29,16 @@ class BackupViewController: UIViewController {
             return nil
         }
     }()
+    // フィードバック
+    private let feedbackGeneratorNotification: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UINotificationFeedbackGenerator()
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     // コンテナ　ファイル
     //    private let containerManager = ContainerManager()
     var backupFiles: [(String, NSNumber?, Bool)] = []
@@ -229,8 +239,9 @@ class BackupViewController: UIViewController {
             )
         } else {
             // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
+            if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                generator.notificationOccurred(.error)
+            }
             // オフラインダイアログ
             self.showOfflineDialog()
         }
@@ -392,8 +403,9 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
                 self.showPopover(indexPath: indexPath)
             } else {
                 // フィードバック
-                let generator = UINotificationFeedbackGenerator()
-                generator.notificationOccurred(.error)
+                if #available(iOS 10.0, *), let generator = self.feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                    generator.notificationOccurred(.error)
+                }
                 // オフラインダイアログ
                 self.showOfflineDialog()
             }
@@ -449,8 +461,9 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
                 self.showPopoverRestore(indexPath: indexPath)
             } else {
                 // フィードバック
-                let generator = UINotificationFeedbackGenerator()
-                generator.notificationOccurred(.error)
+                if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                    generator.notificationOccurred(.error)
+                }
                 // オフラインダイアログ
                 showOfflineDialog()
             }

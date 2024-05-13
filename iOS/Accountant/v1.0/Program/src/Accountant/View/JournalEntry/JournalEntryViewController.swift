@@ -75,6 +75,16 @@ class JournalEntryViewController: UIViewController {
             return nil
         }
     }()
+    // フィードバック
+    private let feedbackGeneratorNotification: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UINotificationFeedbackGenerator()
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     private var timer: Timer? // Timerを保持する変数
     
     // 仕訳タイプ(仕訳 or 決算整理仕訳 or 編集)
@@ -1022,8 +1032,9 @@ class JournalEntryViewController: UIViewController {
     // エラーダイアログ
     func showErrorMessage(completion: @escaping () -> Void) {
         // フィードバック
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.error)
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+            generator.notificationOccurred(.error)
+        }
         let alert = UIAlertController(title: "エラー", message: errorMessage, preferredStyle: .alert)
         self.present(alert, animated: true) { () -> Void in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -1156,8 +1167,7 @@ extension JournalEntryViewController: UITableViewDelegate, UITableViewDataSource
         if let tableView = tableView {
             tableView.delegate = self
             tableView.dataSource = self
-            let cellName = "CarouselTableViewCell"
-            tableView.register(UINib(nibName: cellName, bundle: nil), forCellReuseIdentifier: cellName)
+            tableView.register(UINib(nibName: String(describing: CarouselTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: CarouselTableViewCell.self))
             tableView.separatorColor = .accentColor
         }
     }
@@ -1171,7 +1181,8 @@ extension JournalEntryViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CarouselTableViewCell", for: indexPath) as! CarouselTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CarouselTableViewCell.self), for: indexPath) as? CarouselTableViewCell else { return UITableViewCell() }
+
         cell.collectionView.delegate = self
         cell.collectionView.dataSource = self
         if indexPath.row == groupObjects.count {
@@ -1492,8 +1503,9 @@ extension JournalEntryViewController: UITextFieldDelegate {
                 }
                 if text.count == maxLength {
                     // フィードバック
-                    let generator = UINotificationFeedbackGenerator()
-                    generator.notificationOccurred(.error)
+                    if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                        generator.notificationOccurred(.error)
+                    }
                 }
             }
             // print("\(String(describing: sender.text))") // カンマを追加する前にシスアウトすると、カンマが上位のくらいから3桁ごとに自動的に追加される。
@@ -1691,8 +1703,9 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
     // ダイアログ　オフライン
     func showDialogForOfline() {
         // フィードバック
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.error)
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+            generator.notificationOccurred(.error)
+        }
         // ネットワークなし
         let alertController = UIAlertController(title: "インターネット未接続", message: "オフラインでは利用できません。\n\nスタンダードプランに\nアップグレードしていただくと、\nオフラインでも利用可能となります。", preferredStyle: .alert)
         
@@ -1786,8 +1799,9 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         // 入力中のキーボード　小書き不要の場合に、入力ボタンを押下された場合 フォーカスされている状態を外す
         self.textFieldSmallWritting.resignFirstResponder()
         // フィードバック
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+            generator.notificationOccurred(.success)
+        }
         let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
         self.present(alert, animated: true) { () -> Void in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -1819,8 +1833,9 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         // タブバーの仕訳タブから入力の場合
         else {
             // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.success)
+            if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                generator.notificationOccurred(.success)
+            }
             let alert = UIAlertController(title: "決算整理仕訳", message: "記帳しました", preferredStyle: .alert)
             self.present(alert, animated: true) { () -> Void in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {

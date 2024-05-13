@@ -41,6 +41,16 @@ class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
             return nil
         }
     }()
+    // フィードバック
+    private let feedbackGeneratorNotification: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UINotificationFeedbackGenerator()
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -231,8 +241,9 @@ class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
     // ダイアログ 記帳しました
     func showDialogForSucceed() {
         // フィードバック
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+            generator.notificationOccurred(.success)
+        }
         let alert = UIAlertController(title: "グループ", message: "登録しました", preferredStyle: .alert)
         self.present(alert, animated: true) { () -> Void in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -260,8 +271,9 @@ class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
     // エラーダイアログ
     func showErrorMessage(completion: @escaping () -> Void) {
         // フィードバック
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.error)
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+            generator.notificationOccurred(.error)
+        }
         let alert = UIAlertController(title: "エラー", message: errorMessage, preferredStyle: .alert)
         self.present(alert, animated: true) { () -> Void in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -383,8 +395,9 @@ extension SettingsOperatingJournalEntryGroupDetailViewController: UITextFieldDel
             }
             if text.count == maxLength {
                 // フィードバック
-                let generator = UINotificationFeedbackGenerator()
-                generator.notificationOccurred(.error)
+                if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                    generator.notificationOccurred(.error)
+                }
             }
         }
     }
