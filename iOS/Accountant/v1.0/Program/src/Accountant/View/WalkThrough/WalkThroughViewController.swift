@@ -25,7 +25,7 @@ class WalkThroughViewController: UIViewController {
         let page = EAIntroPage()
         page.title = "Paciolist"
         page.titleColor = UIColor.textColor
-        page.titleFont = UIFont(name: "Futura-Bold", size: 48.0)
+        page.titleFont = UIFont(name: "Avenir-Heavy", size: 65.0)
         page.titlePositionY = self.view.bounds.size.height / 2
         page.desc = "複式簿記の会計帳簿\n\n紙の帳簿と同じデザインを表現した\n複式簿記で記帳ができるアプリ"
         page.descColor = UIColor.lightGray
