@@ -57,8 +57,6 @@ class CsvFileMaker {
         let dataBaseManager = JournalsModel()
         let dataBaseJournalEntries = dataBaseManager.getJournalEntriesInJournals()
         let dataBaseAdjustingEntries = dataBaseManager.getJournalAdjustingEntry()
-        // 損益振替仕訳
-        let dataBaseTransferEntries = dataBaseManager.getTransferEntryInAccount()
         
         var csv = ""
         
@@ -99,58 +97,6 @@ class CsvFileMaker {
             let creditAmount = item.credit_amount
             line += String(creditAmount) + ","
             let smallWritting = item.smallWritting
-            line += "\"" + (smallWritting.replacingOccurrences(of: "\"", with: "\"\"") as String) + "\"\r\n"
-            
-            csv += line // csv = CSVとして出力する内容全体
-        }
-        // 損益振替仕訳
-        for item in dataBaseTransferEntries {
-            var line = ""
-            
-            line += "\(item.date)" + ","
-            
-            let debitCategory = item.debit_category
-            line += "\"" + (debitCategory.replacingOccurrences(of: "\"", with: "\"\"") as String) + "\","
-            // "[名前]", の[名前]に " が含まれていたら、" を "" に置換（今回は必ず含まれないが）
-            let debitAmount = item.debit_amount
-            line += String(debitAmount) + ","
-            let creditCategory = item.credit_category
-            line += "\"" + (creditCategory.replacingOccurrences(of: "\"", with: "\"\"") as String) + "\","
-            let creditAmount = item.credit_amount
-            line += String(creditAmount) + ","
-            let smallWritting = item.smallWritting
-            line += "\"" + (smallWritting.replacingOccurrences(of: "\"", with: "\"\"") as String) + "\"\r\n"
-            
-            csv += line // csv = CSVとして出力する内容全体
-        }
-        // 資本振替仕訳
-        if let dataBaseCapitalTransferJournalEntry = dataBaseManager.getCapitalTransferJournalEntryInAccount() {
-            var line = ""
-            
-            var debitCategory = ""
-            if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
-                debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
-            } else {
-                debitCategory = Constant.capitalAccountName
-            }
-            var creditCategory = ""
-            if dataBaseCapitalTransferJournalEntry.credit_category == "損益" { // 損益勘定の場合
-                creditCategory = dataBaseCapitalTransferJournalEntry.credit_category
-            } else {
-                creditCategory = Constant.capitalAccountName
-            }
-            
-            line += "\(dataBaseCapitalTransferJournalEntry.date)" + ","
-            
-            line += "\"" + (debitCategory.replacingOccurrences(of: "\"", with: "\"\"") as String) + "\","
-            // "[名前]", の[名前]に " が含まれていたら、" を "" に置換（今回は必ず含まれないが）
-            let debitAmount = dataBaseCapitalTransferJournalEntry.debit_amount
-            line += String(debitAmount) + ","
-            
-            line += "\"" + (creditCategory.replacingOccurrences(of: "\"", with: "\"\"") as String) + "\","
-            let creditAmount = dataBaseCapitalTransferJournalEntry.credit_amount
-            line += String(creditAmount) + ","
-            let smallWritting = dataBaseCapitalTransferJournalEntry.smallWritting
             line += "\"" + (smallWritting.replacingOccurrences(of: "\"", with: "\"\"") as String) + "\"\r\n"
             
             csv += line // csv = CSVとして出力する内容全体
