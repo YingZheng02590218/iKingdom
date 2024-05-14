@@ -168,6 +168,8 @@
 		F919603224AC53890084A18B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919603124AC53890084A18B /* File.swift */; };
 		F91C2B7E2BF212C200ABBFD6 /* LucaPacioliRough.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */; };
 		F91C2B7F2BF212C300ABBFD6 /* LucaPacioliRough.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */; };
+		F91C2B812BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B802BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy */; };
+		F91C2B822BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B802BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy */; };
 		F91F6E2D248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91F6E2C248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift */; };
 		F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */; };
 		F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F922771B261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard */; };
@@ -971,6 +973,7 @@
 		F919603124AC53890084A18B /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		F919603324AC679E0084A18B /* File2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File2.swift; sourceTree = "<group>"; };
 		F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LucaPacioliRough.ttf; sourceTree = "<group>"; };
+		F91C2B802BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		F91F6E2C248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerAccountingBooksShelf.swift; sourceTree = "<group>"; };
 		F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategoryListTableViewController.storyboard; sourceTree = "<group>"; };
 		F922771B261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard; sourceTree = "<group>"; };
@@ -2075,6 +2078,7 @@
 				F9EC674727B911FD0003FBB6 /* GoogleService-Info */,
 				F91C2B7C2BF211F300ABBFD6 /* Font */,
 				F95D44FF25ADE5F00044493A /* Configuration.storekit */,
+				F91C2B802BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy */,
 				F94E79EA259DF8C7004726F7 /* Settings.bundle */,
 			);
 			path = Resources;
@@ -2722,6 +2726,7 @@
 				F982898D2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */,
 				F90A23AA2B6CFDD0009E35C0 /* JournalEntry1.png in Resources */,
 				F94E79EB259DF8C7004726F7 /* Settings.bundle in Resources */,
+				F91C2B812BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy in Resources */,
 				F93733322A62C87E0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.storyboard in Resources */,
 				F963E2B02963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */,
 				F907D0BA2A98AE4300A701C3 /* Journal_Entry_Edit.html in Resources */,
@@ -2889,6 +2894,7 @@
 				F982898E2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */,
 				F90A23AB2B6CFDD0009E35C0 /* JournalEntry1.png in Resources */,
 				F9EC673B27B90BC60003FBB6 /* Settings.bundle in Resources */,
+				F91C2B822BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy in Resources */,
 				F93733332A62C87E0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.storyboard in Resources */,
 				F963E2B12963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */,
 				F907D0BB2A98AE4300A701C3 /* Journal_Entry_Edit.html in Resources */,
