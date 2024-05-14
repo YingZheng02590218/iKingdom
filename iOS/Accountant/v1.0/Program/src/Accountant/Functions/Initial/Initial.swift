@@ -322,6 +322,8 @@ class Initial {
             // フラグを倒す
             userDefaults.set(false, forKey: firstLunchKey)
             userDefaults.synchronize()
+            // 月次推移表を更新する　true: リロードする
+            Constant.needToReload = true
         }
     }
     

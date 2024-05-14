@@ -84,4 +84,22 @@ class CustomTableViewCell: UITableViewCell {
             }
         }
     }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        DispatchQueue.main.async {
+            // 編集前に状態を更新する
+            self.collectionView.reloadData()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+
+            self.collectionView.indexPathsForVisibleItems.forEach { indexPath in
+                if let cell = self.collectionView.cellForItem(at: indexPath) as? ListCollectionViewCell {
+                    // マイクロインタラクション アニメーション　セル 編集中
+                    cell.animateViewWobble(isActive: editing)
+                }
+            }
+        }
+    }
 }

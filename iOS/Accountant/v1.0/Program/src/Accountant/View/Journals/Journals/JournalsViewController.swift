@@ -367,9 +367,6 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                         self.tappedIndexPath = indexPath
                         tableView.deselectRow(at: indexPath, animated: true)
                         presenter.cellLongPressed(indexPath: indexPath)
-                    case 2:
-                        // 資本振替仕訳
-                        print("資本振替仕訳を長押し")
                     default:
                         // 空白行
                         print("空白行を長押し")
@@ -508,8 +505,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
     
     // セクションの数を設定する
     func numberOfSections(in tableView: UITableView) -> Int {
-        // 通常仕訳　決算整理仕訳 損益振替仕訳 資本振替仕訳　空白行
-        return 5
+        // 通常仕訳　決算整理仕訳 空白行
+        return 3
     }
     // セルの数を、モデル(仕訳)の数に指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -520,12 +517,6 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             // 決算整理仕訳
             return presenter.numberOfobjectsss
-        case 2:
-            // 損益振替仕訳
-            return presenter.numberOfDataBaseTransferEntries
-        case 3:
-            // 資本振替仕訳
-            return presenter.numberOfDataBaseCapitalTransferJournalEntry
         default:
             // 空白行
             return 5 // 空白行を表示するため+5行を追加
@@ -652,129 +643,6 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.setTextColor(isInPeriod: DateManager.shared.isInPeriod(date: presenter.objectsss(forRow: indexPath.row).date))
             // セルの選択を許可
             cell.selectionStyle = .default
-            
-        } else if indexPath.section == 2 {
-            // 損益振替仕訳
-            print("損益振替仕訳", indexPath)
-            /// 日付
-            let date = presenter.dataBaseTransferEntries(forRow: indexPath.row).date
-#if DEBUG
-            cell.listDateSecondLabel.text = date
-            cell.listDateSecondLabel.isHidden = false
-#else
-            cell.listDateSecondLabel.isHidden = true
-#endif
-            if let date = DateManager.shared.dateFormatter.date(from: date) {
-                // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
-                if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
-                    // 一行上のセルに表示した月とこの行の月を比較する
-                    let upperCellDate = presenter.dataBaseTransferEntries(forRow: indexPath.row - 1).date // 日付
-                    if let upperCellDate = DateManager.shared.dateFormatter.date(from: upperCellDate) {
-                        // 日付の6文字目にある月の十の位を抽出
-                        cell.listDateMonthLabel.text = "\(date.month)" == "\(upperCellDate.month)" ? "" : "\(date.month)"
-                    }
-                } else { // 先頭行は月を表示
-                    cell.listDateMonthLabel.text = "\(date.month)"
-                }
-                // 日付の9文字目にある日の十の位を抽出
-                cell.listDateLabel.text = "\(date.day)"
-                cell.listDateLabel.textAlignment = NSTextAlignment.right
-            }
-            /// 借方勘定
-            cell.listSummaryDebitLabel.text = " (\(presenter.dataBaseTransferEntries(forRow: indexPath.row).debit_category))"
-            cell.listSummaryDebitLabel.textAlignment = NSTextAlignment.left
-            /// 貸方勘定
-            cell.listSummaryCreditLabel.text = "(\(presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_category)) "
-            cell.listSummaryCreditLabel.textAlignment = NSTextAlignment.right
-            /// 小書き
-            cell.listSummaryLabel.text = "\(presenter.dataBaseTransferEntries(forRow: indexPath.row).smallWritting) "
-            cell.listSummaryLabel.textAlignment = NSTextAlignment.left
-            /// 丁数　借方
-            if presenter.dataBaseTransferEntries(forRow: indexPath.row).debit_category == "損益" { // 損益勘定の場合
-                cell.listNumberLeftLabel.text = ""
-            } else {
-                let numberOfAccountLeft = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(
-                    accountName: presenter.dataBaseTransferEntries(forRow: indexPath.row).debit_category
-                )
-                cell.listNumberLeftLabel.text = numberOfAccountLeft.description                                // 丁数　借方
-            }
-            /// 丁数　貸方
-            if presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_category == "損益" { // 損益勘定の場合
-                cell.listNumberRightLabel.text = ""
-            } else {
-                let numberOfAccountRight = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(
-                    accountName: presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_category
-                )
-                cell.listNumberRightLabel.text = numberOfAccountRight.description                                   // 丁数　貸方
-            }
-            cell.listDebitLabel.text = StringUtility.shared.addComma(string: presenter.dataBaseTransferEntries(forRow: indexPath.row).debit_amount.description) // 借方金額
-            cell.listCreditLabel.text = StringUtility.shared.addComma(string: presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_amount.description) // 貸方金額
-            
-            // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
-            cell.setTextColor(isInPeriod: DateManager.shared.isInPeriod(date: presenter.dataBaseTransferEntries(forRow: indexPath.row).date))
-            // セルの選択を許可
-            cell.selectionStyle = .default
-            
-        } else if indexPath.section == 3 {
-            // 資本振替仕訳
-            print("資本振替仕訳", indexPath)
-            if let dataBaseCapitalTransferJournalEntry = presenter.dataBaseCapitalTransferJournalEntries() {
-                /// 日付
-                let date = dataBaseCapitalTransferJournalEntry.date
-#if DEBUG
-                cell.listDateSecondLabel.text = date
-                cell.listDateSecondLabel.isHidden = false
-#else
-                cell.listDateSecondLabel.isHidden = true
-#endif
-                if let date = DateManager.shared.dateFormatter.date(from: date) {
-                    // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
-                    // 先頭行は月を表示
-                    cell.listDateMonthLabel.text = "\(date.month)"
-                    // 日付の9文字目にある日の十の位を抽出
-                    cell.listDateLabel.text = "\(date.day)"
-                    cell.listDateLabel.textAlignment = NSTextAlignment.right
-                }
-                /// 借方勘定
-                if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
-                    cell.listSummaryDebitLabel.text = " (\(dataBaseCapitalTransferJournalEntry.debit_category))"
-                } else {
-                    cell.listSummaryDebitLabel.text = " (\(Constant.capitalAccountName))"
-                }
-                cell.listSummaryDebitLabel.textAlignment = NSTextAlignment.left
-                /// 貸方勘定
-                if dataBaseCapitalTransferJournalEntry.credit_category == "損益" { // 損益勘定の場合
-                    cell.listSummaryCreditLabel.text = "(\(dataBaseCapitalTransferJournalEntry.credit_category)) "
-                } else {
-                    cell.listSummaryCreditLabel.text = " (\(Constant.capitalAccountName))"
-                }
-                cell.listSummaryCreditLabel.textAlignment = NSTextAlignment.right
-                /// 小書き
-                cell.listSummaryLabel.text = "\(dataBaseCapitalTransferJournalEntry.smallWritting) "
-                cell.listSummaryLabel.textAlignment = NSTextAlignment.left
-                /// 丁数　借方
-                if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
-                    cell.listNumberLeftLabel.text = ""
-                } else {
-                    let numberOfAccountLeft = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: Constant.capitalAccountName) // 丁数を取得
-                    cell.listNumberLeftLabel.text = numberOfAccountLeft.description
-                }
-                /// 丁数　貸方
-                if dataBaseCapitalTransferJournalEntry.credit_category == "損益" { // 損益勘定の場合
-                    cell.listNumberRightLabel.text = ""
-                } else {
-                    let numberOfAccountRight = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: Constant.capitalAccountName) // 丁数を取得
-                    cell.listNumberRightLabel.text = numberOfAccountRight.description
-                }
-                cell.listDebitLabel.text = StringUtility.shared.addComma(string: dataBaseCapitalTransferJournalEntry.debit_amount.description) // 借方金額
-                cell.listCreditLabel.text = StringUtility.shared.addComma(string: dataBaseCapitalTransferJournalEntry.credit_amount.description) // 貸方金額
-                
-                // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
-                cell.setTextColor(isInPeriod: DateManager.shared.isInPeriod(date: dataBaseCapitalTransferJournalEntry.date))
-                // セルの選択を許可
-                cell.selectionStyle = .default
-            }
-            
         } else {
             // 空白行
             print("空白行", indexPath)
@@ -834,6 +702,10 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.setHighlighted(true, animated: true)
                 }
             }
+        }
+        if indexPath.section == 0 || indexPath.section == 1 {
+            // マイクロインタラクション アニメーション　セル 編集中
+            cell.animateViewWobble(isActive: tableView.isEditing)
         }
     }
     // 下へスクロールする
@@ -935,7 +807,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             return indexPath
         default:
-            // 資本振替仕訳 空白行
+            // 空白行
             return nil
         }
     }
@@ -966,7 +838,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             let configuration = UISwipeActionsConfiguration(actions: [action, actionEdit])
             return configuration
         default:
-            // 資本振替仕訳 空白行
+            // 空白行
             let configuration = UISwipeActionsConfiguration(actions: [])
             configuration.performsFirstActionWithFullSwipe = false
             return configuration
@@ -1018,6 +890,14 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         // 削除機能 セルを左へスワイプして削除ボタンが表示された状態で編集モードに入ると、右端のチェックボックスが表示されないことがあることへの対策
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.tableView.setEditing(editing, animated: animated)
+            self.tableView.indexPathsForVisibleRows?.forEach { indexPath in
+                if let cell = self.tableView.cellForRow(at: indexPath) as? JournalsTableViewCell {
+                    if indexPath.section == 0 || indexPath.section == 1 {
+                        // マイクロインタラクション アニメーション　セル 編集中
+                        cell.animateViewWobble(isActive: editing)
+                    }
+                }
+            }
         }
         navigationItem.title = "仕訳帳"
     }
@@ -1029,7 +909,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             return true
         default:
-            // 資本振替仕訳 空白行
+            // 空白行
             return false
         }
     }

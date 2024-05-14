@@ -24,6 +24,16 @@ class OpeningBalanceViewController: UIViewController {
     /// 開始残高　下部
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var backgroundView: EMTNeumorphicView!
+    // フィードバック
+    private let feedbackGeneratorNotification: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UINotificationFeedbackGenerator()
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     // グラデーションレイヤー　書類系画面
     let gradientLayer = CAGradientLayer()
     
@@ -130,7 +140,9 @@ class OpeningBalanceViewController: UIViewController {
             if editing {
                 navigationItem.title = "編集中"
                 
-                tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             } else {
                 // 残高　借方　貸方
                 if presenter.debit_balance_total() == presenter.credit_balance_total() {
@@ -142,17 +154,29 @@ class OpeningBalanceViewController: UIViewController {
                     DispatchQueue.global(qos: .background).async {
                         self.presenter.refreshTable()
                     }
+                    // 月次推移表を更新する　true: リロードする
+                    Constant.needToReload = true
                 } else {
                     // 再度編集中へ戻す
                     self.setEditing(true, animated: true)
                     // フィードバック
-                    let generator = UINotificationFeedbackGenerator()
-                    generator.notificationOccurred(.error)
+                    if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                        generator.notificationOccurred(.error)
+                    }
                     let alert = UIAlertController(title: "貸借の合計が不一致", message: "再度、入力してください", preferredStyle: .alert)
                     self.present(alert, animated: true) { () -> Void in
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             self.dismiss(animated: true, completion: nil)
                         }
+                    }
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.tableView.setEditing(editing, animated: animated)
+                self.tableView.indexPathsForVisibleRows?.forEach { indexPath in
+                    if let cell = self.tableView.cellForRow(at: indexPath) {
+                        // マイクロインタラクション アニメーション　セル 編集中
+                        cell.animateViewWobble(isActive: editing)
                     }
                 }
             }
@@ -164,8 +188,9 @@ class OpeningBalanceViewController: UIViewController {
                 self.setEditing(false, animated: true)
             }
             // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
+            if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                generator.notificationOccurred(.error)
+            }
             let alert = UIAlertController(title: "開いている帳簿の年度", message: "開始残高を入力する際は、最も古い年度の帳簿を開いてください。", preferredStyle: .alert)
             self.present(alert, animated: true) { () -> Void in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -308,6 +333,21 @@ extension OpeningBalanceViewController: UITableViewDelegate, UITableViewDataSour
             }
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // マイクロインタラクション アニメーション　セル 編集中
+        cell.animateViewWobble(isActive: tableView.isEditing)
+    }
+    
+    // 編集機能
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        .none
+    }
+    
+    // インデント
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

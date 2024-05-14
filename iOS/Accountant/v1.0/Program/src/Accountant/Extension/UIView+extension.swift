@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIView {
-
+    
     // MARK: Utility
     
     /// 枠線の色
@@ -22,7 +22,7 @@ extension UIView {
             layer.borderColor = newValue?.cgColor
         }
     }
-
+    
     /// 枠線のWidth
     @IBInspectable var borderWidth: CGFloat {
         get {
@@ -32,7 +32,7 @@ extension UIView {
             layer.borderWidth = newValue
         }
     }
-
+    
     /// 角丸の大きさ
     @IBInspectable var cornerRound: CGFloat {
         get {
@@ -43,7 +43,7 @@ extension UIView {
             layer.masksToBounds = newValue > 0
         }
     }
-
+    
     /// 影の色
     @IBInspectable var shadowColor: UIColor? {
         get {
@@ -54,7 +54,7 @@ extension UIView {
             layer.masksToBounds = false
         }
     }
-
+    
     /// 影の透明度
     @IBInspectable var shadowAlpha: Float {
         get {
@@ -64,7 +64,7 @@ extension UIView {
             layer.shadowOpacity = newValue
         }
     }
-
+    
     /// 影のオフセット
     @IBInspectable var shadowOffset: CGSize {
         get {
@@ -74,7 +74,7 @@ extension UIView {
             layer.shadowOffset = newValue
         }
     }
-
+    
     /// 影のぼかし量
     @IBInspectable var shadowRadius: CGFloat {
         get {
@@ -87,7 +87,7 @@ extension UIView {
     
     // MARK: アニメーション
     
-    // アニメーション　ボタン
+    // マイクロインタラクション アニメーション　ボタン
     func animateView() {
         UIView.animate(
             withDuration: 0.3,
@@ -105,9 +105,48 @@ extension UIView {
                 options: .curveEaseOut,
                 animations: {
                     self.transform = .identity
-                    
                 }, completion: nil
             )
+        }
+    }
+    
+    // マイクロインタラクション アニメーション　セル
+    func animateViewSmaller() {
+        UIView.animate(
+            withDuration: 0.1,
+            delay: 0,
+            options: .curveEaseIn,
+            animations: {
+                self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+            }
+        ) { _ in
+            UIView.animate(
+                withDuration: 0.5,
+                delay: 0,
+                usingSpringWithDamping: 1.0,
+                initialSpringVelocity: 10,
+                options: .curveEaseOut,
+                animations: {
+                    self.transform = .identity
+                }, completion: nil
+            )
+        }
+    }
+    
+    // マイクロインタラクション アニメーション　セル 編集中
+    func animateViewWobble(isActive: Bool) {
+        if isActive {
+            // Create wobble animation
+            let wobble = CAKeyframeAnimation(keyPath: "transform.rotation")
+            wobble.values = [0.0, -0.02, 0.0, 0.02, 0.0]
+            wobble.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
+            wobble.duration = 0.75
+            wobble.isAdditive = true
+            wobble.repeatCount = Float.greatestFiniteMagnitude
+            
+            self.layer.add(wobble, forKey: "wobble")
+        } else {
+            self.layer.removeAllAnimations()
         }
     }
 }

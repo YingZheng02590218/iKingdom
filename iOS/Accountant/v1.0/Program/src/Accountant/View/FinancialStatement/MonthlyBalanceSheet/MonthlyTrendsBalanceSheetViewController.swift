@@ -1,8 +1,8 @@
 //
-//  MonthlyProfitAndLossStatementViewController.swift
+//  MonthlyTrendsBalanceSheetViewController.swift
 //  Accountant
 //
-//  Created by Hisashi Ishihara on 2024/04/23.
+//  Created by Hisashi Ishihara on 2024/03/15.
 //  Copyright © 2024 Hisashi Ishihara. All rights reserved.
 //
 
@@ -10,9 +10,9 @@ import EMTNeumorphicView
 import SpreadsheetView
 import UIKit
 
-// 月次損益計算書
-class MonthlyProfitAndLossStatementViewController: UIViewController {
-    
+// 月次貸借対照表
+class MonthlyTrendsBalanceSheetViewController: UIViewController {
+
     /// 貸借対照表　上部
     @IBOutlet var companyNameLabel: UILabel!
     @IBOutlet var closingDateLabel: UILabel!
@@ -32,20 +32,26 @@ class MonthlyProfitAndLossStatementViewController: UIViewController {
     let dates = DateManager.shared.getTheDayOfEndingOfMonth()
     // 大区分ごとに設定勘定科目を取得する
     // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（仕訳、総勘定元帳、貸借対照表、損益計算書、精算表、試算表 で使用している）
-    var objects0 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 6, rank1: nil)
+    var objects0 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 0)
+    var objects1 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 1)
+    var objects2 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 2)
     
-    var objects1 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 7, rank1: 13)
-    var objects2 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 7, rank1: 14)
+    var objects3 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 3)
+    var objects4 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 4)
+    var objects5 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 5)
     
-    var objects3 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 8, rank1: nil)
+    var objects6 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 2, rank1: 6)
     
-    var objects4 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 9, rank1: 15)
-    var objects5 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 9, rank1: 16)
-
-    var objects6 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 10, rank1: 17)
-    var objects7 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 10, rank1: 18)
+    var objects7 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 3, rank1: 7)
+    var objects8 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 3, rank1: 8)
     
-    var objects8 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 11, rank1: nil)
+    var objects9 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 4, rank1: 9)
+    
+    var objects10 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 10) // 株主資本
+    var objects11 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 11) // 評価・換算差額等
+    var objects12 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 12) // 新株予約権
+    var objects13 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 19) // 非支配株主持分
+    
     // ヘッダーの行数
     let headerRowCount = 2
     
@@ -77,31 +83,38 @@ class MonthlyProfitAndLossStatementViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        titleLabel.text = "損益計算書"
+        titleLabel.text = "貸借対照表"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 21)
         
         // 月次推移表を更新する　true: リロードする 仕訳入力時にフラグを立てる。フラグが立っていれば下記の処理を実行する
         if Constant.needToReload {
             // 月次貸借対照表と月次損益計算書の、五大区分の合計額と、大区分の合計額と当期純利益の額を再計算する
-            DataBaseManagerMonthlyBSnPL.shared.setupAmountForBsAndPL(isBs: false)
+            DataBaseManagerMonthlyBSnPL.shared.setupAmountForBsAndPL(isBs: true)
             
             // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（仕訳、総勘定元帳、貸借対照表、損益計算書、精算表、試算表 で使用している）
-            objects0 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 6, rank1: nil)
+            objects0 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 0)
+            objects1 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 1)
+            objects2 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 2)
             
-            objects1 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 7, rank1: 13)
-            objects2 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 7, rank1: 14)
+            objects3 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 3)
+            objects4 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 4)
+            objects5 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 5)
             
-            objects3 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 8, rank1: nil)
+            objects6 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 2, rank1: 6)
             
-            objects4 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 9, rank1: 15)
-            objects5 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 9, rank1: 16)
+            objects7 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 3, rank1: 7)
+            objects8 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 3, rank1: 8)
             
-            objects6 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 10, rank1: 17)
-            objects7 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 10, rank1: 18)
+            objects9 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 4, rank1: 9)
             
-            objects8 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 11, rank1: nil)
+            objects10 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 10) // 株主資本
+            objects11 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 11) // 評価・換算差額等
+            objects12 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 12) // 新株予約権
+            objects13 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 19) // 非支配株主持分
             // 月次推移表を更新する　true: リロードする
             Constant.needToReload = false
+            
+            spreadsheetView.reloadData()
         }
     }
     
@@ -149,7 +162,7 @@ class MonthlyProfitAndLossStatementViewController: UIViewController {
     }
     
     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-    private func getBalanceAmount(rank0: Int, rank1: Int?, left: Int64, right: Int64) -> String {
+    private func getBalanceAmount(rank0: Int, rank1: Int, left: Int64, right: Int64) -> String {
         var result: Int64 = 0
         var debitOrCredit: String = "" // 借又貸
         var positiveOrNegative: String = "" // 借又貸
@@ -220,7 +233,7 @@ class MonthlyProfitAndLossStatementViewController: UIViewController {
     }
 }
 
-extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource {
+extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
     
     // MARK: DataSource
     // 列
@@ -231,27 +244,28 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
     func numberOfRows(in spreadsheetView: SpreadsheetView) -> Int {
         return headerRowCount
         + objects0.count
-        + 1 // 売上高
         + objects1.count
         + objects2.count
-        + 1 // 売上原価
-        + 1 // 売上総利益
+        + 1
         + objects3.count
-        + 1 // 販売費及び一般管理費
-        + 1 // 営業利益
         + objects4.count
-        + 1 // 営業外収益
         + objects5.count
-        + 1 // 営業外費用
-        + 1 // 経常利益
+        + 1
         + objects6.count
-        + 1 // 特別利益
+        + 1
+        + 1
         + objects7.count
-        + 1 // 特別損失
-        + 1 // 税引前当期純利益
         + objects8.count
-        + 1 // 法人税、住民税及び事業税
-        + 1 // 当期純利益
+        + 1
+        + objects9.count
+        + 1
+        + 1
+        + objects10.count
+        + objects11.count
+        + objects12.count
+        + objects13.count
+        + 1
+        + 1
     }
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, widthForColumn column: Int) -> CGFloat {
@@ -284,33 +298,28 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
         // 行
         // 勘定科目0
         let objects0Count = objects0.count + headerRowCount
-        let pl0Count = objects0Count + 1 // 売上高
-        
-        let objects1Count = objects1.count + pl0Count
+        let objects1Count = objects1.count + objects0Count
         let objects2Count = objects2.count + objects1Count
-        let pl2Count = objects2Count + 1 // 売上原価
-        let big2Count = pl2Count + 1 // 売上総利益
-
-        let objects3Count = objects3.count + big2Count
-        let pl3Count = objects3Count + 1 // 販売費及び一般管理費
-        let big3Count = pl3Count + 1 // 営業利益
-        
-        let objects4Count = objects4.count + big3Count
-        let pl4Count = objects4Count + 1 // 営業外収益
-        let objects5Count = objects5.count + pl4Count
-        let pl5Count = objects5Count + 1 // 営業外費用
-        let big5Count = pl5Count + 1 // 経常利益
-        
-        let objects6Count = objects6.count + big5Count
-        let pl6Count = objects6Count + 1 // 特別利益
-        let objects7Count = objects7.count + pl6Count
-        let pl7Count = objects7Count + 1 // 特別損失
-        let big7Count = pl7Count + 1 // 税引前当期純利益
-        
-        let objects8Count = objects8.count + big7Count
-        let pl8Count = objects8Count + 1 // 法人税、住民税及び事業税
-        let big8Count = pl8Count + 1 // 当期純利益
-        
+        let bs2Count = objects2Count + 1
+        let objects3Count = objects3.count + bs2Count
+        let objects4Count = objects4.count + objects3Count
+        let objects5Count = objects5.count + objects4Count
+        let bs5Count = objects5Count + 1
+        let objects6Count = objects6.count + bs5Count
+        let bs6Count = objects6Count + 1
+        let big6Count = bs6Count + 1
+        let objects7Count = objects7.count + big6Count
+        let objects8Count = objects8.count + objects7Count
+        let bs8Count = objects8Count + 1
+        let objects9Count = objects9.count + bs8Count
+        let bs9Count = objects9Count + 1
+        let big9Count = bs9Count + 1
+        let objects10Count = objects10.count + big9Count
+        let objects11Count = objects11.count + objects10Count
+        let objects12Count = objects12.count + objects11Count
+        let objects13Count = objects13.count + objects12Count
+        let bs13Count = objects13Count + 1
+        let big13Count = bs13Count + 1
         // ＜虹の色＞ 7色 ＝ 赤・橙・黄・緑・青・藍・紫
         
         if case (0, 0) = (indexPath.column, indexPath.row) {
@@ -347,22 +356,11 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 cell.borders.bottom = .none
                 return cell
             }
-            
-        } else if case (0, objects0Count..<pl0Count) = (indexPath.column, indexPath.row) {
-            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
-                cell.label.text = ProfitAndLossStatement.Block.sales.getTotalAmount() // 売上高
-                cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 2, color: .lightGray)
-                return cell
-            }
-            
-        } else if case (0, pl0Count..<objects1Count) = (indexPath.column, indexPath.row) {
+        } else if case (0, objects0Count..<objects1Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目1
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
-                cell.label.text = objects1[indexPath.row - pl0Count].category
+                cell.label.text = objects1[indexPath.row - objects0Count].category
                 //            cell.backgroundColor = .red.withAlphaComponent(0.1)
                 cell.backgroundColor = .clear
                 cell.borders.top = .none
@@ -381,9 +379,10 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 return cell
             }
             
-        } else if case (0, objects2Count..<pl2Count) = (indexPath.column, indexPath.row) {
+        } else if case (0, objects2Count..<bs2Count) = (indexPath.column, indexPath.row) {
+            // 流動資産　合計
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
-                cell.label.text = ProfitAndLossStatement.Block.costOfGoodsSold.getTotalAmount() // 売上原価
+                cell.label.text = "流動資産　合計"
                 cell.label.textAlignment = .right
                 cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
@@ -391,77 +390,33 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 return cell
             }
             
-        } else if case (0, pl2Count..<big2Count) = (indexPath.column, indexPath.row) {
-            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
-                cell.label.textAlignment = .right
-                cell.label.text = ProfitAndLossStatement.Benefits.grossProfitOrLoss.rawValue // 売上総利益
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 3, color: .lightGray)
-                return cell
-            }
-            
-
-        } else if case (0, big2Count..<objects3Count) = (indexPath.column, indexPath.row) {
+        } else if case (0, bs2Count..<objects3Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目3
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
-                cell.label.text = objects3[indexPath.row - big2Count].category
+                cell.label.text = objects3[indexPath.row - bs2Count].category
                 //            cell.backgroundColor = .orange.withAlphaComponent(0.1)
                 cell.backgroundColor = .clear
                 cell.borders.top = .none
                 cell.borders.bottom = .none
                 return cell
             }
-            
-        } else if case (0, objects3Count..<pl3Count) = (indexPath.column, indexPath.row) {
-            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
-                cell.label.text = ProfitAndLossStatement.Block.sellingGeneralAndAdministrativeExpenses.getTotalAmount() // 販売費及び一般管理費
-                cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 2, color: .lightGray)
-                return cell
-            }
-            
-        } else if case (0, pl3Count..<big3Count) = (indexPath.column, indexPath.row) {
-            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
-                cell.label.textAlignment = .right
-                cell.label.text = ProfitAndLossStatement.Benefits.otherCapitalSurplusesTotal.rawValue // 営業利益
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 3, color: .lightGray)
-                return cell
-            }
-            
-
-        } else if case (0, big3Count..<objects4Count) = (indexPath.column, indexPath.row) {
+        } else if case (0, objects3Count..<objects4Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目4
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
-                cell.label.text = objects4[indexPath.row - big3Count].category
+                cell.label.text = objects4[indexPath.row - objects3Count].category
                 //            cell.backgroundColor = .orange.withAlphaComponent(0.1)
                 cell.backgroundColor = .clear
                 cell.borders.top = .none
                 cell.borders.bottom = .none
                 return cell
             }
-            
-        } else if case (0, objects4Count..<pl4Count) = (indexPath.column, indexPath.row) {
-            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
-                cell.label.text = ProfitAndLossStatement.Block.nonOperatingIncome.getTotalAmount() // 営業外収益
-                cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 2, color: .lightGray)
-                return cell
-            }
-            
-        } else if case (0, pl4Count..<objects5Count) = (indexPath.column, indexPath.row) {
+        } else if case (0, objects4Count..<objects5Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目5
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
-                cell.label.text = objects5[indexPath.row - pl4Count].category
+                cell.label.text = objects5[indexPath.row - objects4Count].category
                 //            cell.backgroundColor = .orange.withAlphaComponent(0.1)
                 cell.backgroundColor = .clear
                 cell.borders.top = .none
@@ -469,9 +424,10 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 return cell
             }
             
-        } else if case (0, objects5Count..<pl5Count) = (indexPath.column, indexPath.row) {
+        } else if case (0, objects5Count..<bs5Count) = (indexPath.column, indexPath.row) {
+            // 固定資産　合計
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
-                cell.label.text = ProfitAndLossStatement.Block.nonOperatingExpenses.getTotalAmount() // 営業外費用
+                cell.label.text = "固定資産　合計"
                 cell.label.textAlignment = .right
                 cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
@@ -479,22 +435,11 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 return cell
             }
             
-        } else if case (0, pl5Count..<big5Count) = (indexPath.column, indexPath.row) {
-            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
-                cell.label.textAlignment = .right
-                cell.label.text = ProfitAndLossStatement.Benefits.ordinaryIncomeOrLoss.rawValue // 経常利益
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 3, color: .lightGray)
-                return cell
-            }
-            
-            
-        } else if case (0, big5Count..<objects6Count) = (indexPath.column, indexPath.row) {
+        } else if case (0, bs5Count..<objects6Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目6
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
-                cell.label.text = objects6[indexPath.row - big5Count].category
+                cell.label.text = objects6[indexPath.row - bs5Count].category
                 //            cell.backgroundColor = .yellow.withAlphaComponent(0.1)
                 cell.backgroundColor = .clear
                 cell.borders.top = .none
@@ -502,54 +447,44 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 return cell
             }
             
-        } else if case (0, objects6Count..<pl6Count) = (indexPath.column, indexPath.row) {
+        } else if case (0, objects6Count..<bs6Count) = (indexPath.column, indexPath.row) {
+            // 繰越資産　合計
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
-                cell.label.text = ProfitAndLossStatement.Block.extraordinaryProfits.getTotalAmount() // 特別利益
                 cell.label.textAlignment = .right
+                cell.label.text = "繰越資産　合計"
                 cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 return cell
             }
-
-        } else if case (0, pl6Count..<objects7Count) = (indexPath.column, indexPath.row) {
+            
+        } else if case (0, bs6Count..<big6Count) = (indexPath.column, indexPath.row) {
+            // 資産　合計
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
+                cell.label.textAlignment = .right
+                cell.label.text = "資産　合計"
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 3, color: .lightGray)
+                return cell
+            }
+            
+        } else if case (0, big6Count..<objects7Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目7
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
-                cell.label.text = objects7[indexPath.row - pl6Count].category
+                cell.label.text = objects7[indexPath.row - big6Count].category
                 //            cell.backgroundColor = .green.withAlphaComponent(0.1)
                 cell.backgroundColor = .clear
                 cell.borders.top = .none
                 cell.borders.bottom = .none
                 return cell
             }
-            
-        } else if case (0, objects7Count..<pl7Count) = (indexPath.column, indexPath.row) {
-            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
-                cell.label.text = ProfitAndLossStatement.Block.extraordinaryLoss.getTotalAmount() // 特別損失
-                cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 2, color: .lightGray)
-                return cell
-            }
-            
-        } else if case (0, pl7Count..<big7Count) = (indexPath.column, indexPath.row) {
-            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
-                cell.label.textAlignment = .right
-                cell.label.text = ProfitAndLossStatement.Benefits.incomeOrLossBeforeIncomeTaxes.rawValue // 税引前当期純利益
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 3, color: .lightGray)
-                return cell
-            }
-            
-            
-        } else if case (0, big7Count..<objects8Count) = (indexPath.column, indexPath.row) {
+        } else if case (0, objects7Count..<objects8Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目8
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
-                cell.label.text = objects8[indexPath.row - big7Count].category
+                cell.label.text = objects8[indexPath.row - objects7Count].category
                 //            cell.backgroundColor = .green.withAlphaComponent(0.1)
                 cell.backgroundColor = .clear
                 cell.borders.top = .none
@@ -557,9 +492,10 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 return cell
             }
             
-        } else if case (0, objects8Count..<pl8Count) = (indexPath.column, indexPath.row) {
+        } else if case (0, objects8Count..<bs8Count) = (indexPath.column, indexPath.row) {
+            // 流動負債　合計
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
-                cell.label.text = ProfitAndLossStatement.Block.incomeTaxes.getTotalAmount() // 法人税、住民税及び事業税
+                cell.label.text = "流動負債　合計"
                 cell.label.textAlignment = .right
                 cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
@@ -567,15 +503,107 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 return cell
             }
             
-        } else if case (0, pl8Count..<big8Count) = (indexPath.column, indexPath.row) {
+        } else if case (0, bs8Count..<objects9Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目9
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects9[indexPath.row - bs8Count].category
+                //            cell.backgroundColor = .cyan.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
+            
+        } else if case (0, objects9Count..<bs9Count) = (indexPath.column, indexPath.row) {
+            // 固定負債　合計
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
+                cell.label.text = "固定負債　合計"
+                cell.label.textAlignment = .right
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                return cell
+            }
+            
+        } else if case (0, bs9Count..<big9Count) = (indexPath.column, indexPath.row) {
+            // 負債　合計
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.textAlignment = .right
-                cell.label.text = ProfitAndLossStatement.Benefits.netIncomeOrLoss.rawValue // 当期純利益
+                cell.label.text = "負債　合計"
                 cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 return cell
             }
+            
+        } else if case (0, big9Count..<objects10Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目10
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects10[indexPath.row - big9Count].category
+                //            cell.backgroundColor = .blue.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
+        } else if case (0, objects10Count..<objects11Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目11
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects11[indexPath.row - objects10Count].category
+                //            cell.backgroundColor = .blue.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
+        } else if case (0, objects11Count..<objects12Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目12
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects12[indexPath.row - objects11Count].category
+                //            cell.backgroundColor = .blue.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
+        } else if case (0, objects12Count..<objects13Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目13
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects13[indexPath.row - objects12Count].category
+                //            cell.backgroundColor = .blue.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
+            
+        } else if case (0, objects13Count..<bs13Count) = (indexPath.column, indexPath.row) {
+            // 資本　合計
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
+                cell.label.text = "資本　合計"
+                cell.label.textAlignment = .right
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                return cell
+            }
+            
+        } else if case (0, bs13Count..<big13Count) = (indexPath.column, indexPath.row) {
+            // 純資産　合計
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
+                cell.label.textAlignment = .right
+                cell.label.text = "純資産　合計"
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 3, color: .lightGray)
+                return cell
+            }
+            
             
             
         } else if case (1...(dates.count + 1), 0) = (indexPath.column, indexPath.row) {
@@ -612,7 +640,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 6, rank1: nil, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(rank0: 0, rank1: 0, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -627,49 +655,21 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
-            
-        } else if case (1...(dates.count + 1), objects0Count..<pl0Count) = (indexPath.column, indexPath.row) {
-            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
-                var text = ""
-                // 取得 月次損益計算書　今年度で日付の前方一致
-                if let dataBaseMonthlyProfitAndLossStatement = DataBaseManagerMonthlyBSnPL.shared.getMonthlyProfitAndLossStatement(
-                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-                ) {
-                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyProfitAndLossStatement.NetSales)
-                }
-                if !text.isEmpty {
-                    cell.label.text = text
-                    cell.label.textColor = text.contains("△") ? .red : .textColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                    cell.borders.top = .none
-                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
-                } else {
-                    cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                    cell.borders.top = .none
-                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
-                }
-                // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
-                return cell
-            }
-            
-        } else if case (1...(dates.count + 1), pl0Count..<(objects1Count)) = (indexPath.column, indexPath.row) {
+        } else if case (1...(dates.count + 1), objects0Count..<(objects1Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目1
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
                 var text = ""
                 // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
                 if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                    account: objects1[indexPath.row - pl0Count].category,
+                    account: objects1[indexPath.row - objects0Count].category,
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 7, rank1: 13, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(rank0: 0, rank1: 1, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -684,7 +684,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
         } else if case (1...(dates.count + 1), objects1Count..<(objects2Count)) = (indexPath.column, indexPath.row) {
@@ -698,7 +698,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 7, rank1: 14, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(rank0: 0, rank1: 2, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -713,19 +713,20 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
-        } else if case (1...(dates.count + 1), objects2Count..<pl2Count) = (indexPath.column, indexPath.row) {
+        } else if case (1...(dates.count + 1), objects2Count..<bs2Count) = (indexPath.column, indexPath.row) {
+            // 流動資産　合計
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
                 var text = ""
-                // 取得 月次損益計算書　今年度で日付の前方一致
-                if let dataBaseMonthlyProfitAndLossStatement = DataBaseManagerMonthlyBSnPL.shared.getMonthlyProfitAndLossStatement(
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyProfitAndLossStatement.CostOfGoodsSold)
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.CurrentAssets_total)
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -740,50 +741,22 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
                 // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
-        } else if case (1...(dates.count + 1), pl2Count..<big2Count) = (indexPath.column, indexPath.row) {
-            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
-                var text = ""
-                // 取得 月次損益計算書　今年度で日付の前方一致
-                if let dataBaseMonthlyProfitAndLossStatement = DataBaseManagerMonthlyBSnPL.shared.getMonthlyProfitAndLossStatement(
-                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-                ) {
-                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyProfitAndLossStatement.GrossProfitOrLoss)
-                }
-                if !text.isEmpty {
-                    cell.label.text = text
-                    cell.label.textColor = text.contains("△") ? .red : .textColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                    cell.borders.top = .none
-                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
-                } else {
-                    cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                    cell.borders.top = .none
-                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
-                }
-                // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
-                return cell
-            }
-            
-            
-        } else if case (1...(dates.count + 1), big2Count..<(objects3Count)) = (indexPath.column, indexPath.row) {
+        } else if case (1...(dates.count + 1), bs2Count..<(objects3Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目3
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
                 var text = ""
                 // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
                 if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                    account: objects3[indexPath.row - big2Count].category,
+                    account: objects3[indexPath.row - bs2Count].category,
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 8, rank1: nil, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(rank0: 1, rank1: 3, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -798,77 +771,21 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
-            
-        } else if case (1...(dates.count + 1), objects3Count..<pl3Count) = (indexPath.column, indexPath.row) {
-            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
-                var text = ""
-                // 取得 月次損益計算書　今年度で日付の前方一致
-                if let dataBaseMonthlyProfitAndLossStatement = DataBaseManagerMonthlyBSnPL.shared.getMonthlyProfitAndLossStatement(
-                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-                ) {
-                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyProfitAndLossStatement.SellingGeneralAndAdministrativeExpenses)
-                }
-                if !text.isEmpty {
-                    cell.label.text = text
-                    cell.label.textColor = text.contains("△") ? .red : .textColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                    cell.borders.top = .none
-                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
-                } else {
-                    cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                    cell.borders.top = .none
-                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
-                }
-                // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
-                return cell
-            }
-            
-        } else if case (1...(dates.count + 1), pl3Count..<big3Count) = (indexPath.column, indexPath.row) {
-            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
-                var text = ""
-                // 取得 月次損益計算書　今年度で日付の前方一致
-                if let dataBaseMonthlyProfitAndLossStatement = DataBaseManagerMonthlyBSnPL.shared.getMonthlyProfitAndLossStatement(
-                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-                ) {
-                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyProfitAndLossStatement.OtherCapitalSurpluses_total)
-                }
-                if !text.isEmpty {
-                    cell.label.text = text
-                    cell.label.textColor = text.contains("△") ? .red : .textColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                    cell.borders.top = .none
-                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
-                } else {
-                    cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                    cell.borders.top = .none
-                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
-                }
-                // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
-                return cell
-            }
-            
-            
-        } else if case (1...(dates.count + 1), big3Count..<(objects4Count)) = (indexPath.column, indexPath.row) {
+        } else if case (1...(dates.count + 1), objects3Count..<(objects4Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目4
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
                 var text = ""
                 // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
                 if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                    account: objects4[indexPath.row - big3Count].category,
+                    account: objects4[indexPath.row - objects3Count].category,
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 9, rank1: 15, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(rank0: 1, rank1: 4, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -883,49 +800,21 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
-            
-        } else if case (1...(dates.count + 1), objects4Count..<pl4Count) = (indexPath.column, indexPath.row) {
-            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
-                var text = ""
-                // 取得 月次損益計算書　今年度で日付の前方一致
-                if let dataBaseMonthlyProfitAndLossStatement = DataBaseManagerMonthlyBSnPL.shared.getMonthlyProfitAndLossStatement(
-                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-                ) {
-                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyProfitAndLossStatement.NonOperatingIncome)
-                }
-                if !text.isEmpty {
-                    cell.label.text = text
-                    cell.label.textColor = text.contains("△") ? .red : .textColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                    cell.borders.top = .none
-                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
-                } else {
-                    cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                    cell.borders.top = .none
-                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
-                }
-                // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
-                return cell
-            }
-            
-        } else if case (1...(dates.count + 1), pl4Count..<(objects5Count)) = (indexPath.column, indexPath.row) {
+        } else if case (1...(dates.count + 1), objects4Count..<(objects5Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目5
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
                 var text = ""
                 // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
                 if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                    account: objects5[indexPath.row - pl4Count].category,
+                    account: objects5[indexPath.row - objects4Count].category,
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 9, rank1: 16, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(rank0: 1, rank1: 5, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -940,19 +829,20 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
-        } else if case (1...(dates.count + 1), objects5Count..<pl5Count) = (indexPath.column, indexPath.row) {
+        } else if case (1...(dates.count + 1), objects5Count..<bs5Count) = (indexPath.column, indexPath.row) {
+            // 固定資産　合計
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
                 var text = ""
                 // 取得 月次貸借対照表　今年度で日付の前方一致
-                if let dataBaseMonthlyProfitAndLossStatement = DataBaseManagerMonthlyBSnPL.shared.getMonthlyProfitAndLossStatement(
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyProfitAndLossStatement.NonOperatingExpenses)
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.FixedAssets_total)
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -967,50 +857,22 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
                 // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
-        } else if case (1...(dates.count + 1), pl5Count..<big5Count) = (indexPath.column, indexPath.row) {
-            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
-                var text = ""
-                // 取得 月次損益計算書　今年度で日付の前方一致
-                if let dataBaseMonthlyProfitAndLossStatement = DataBaseManagerMonthlyBSnPL.shared.getMonthlyProfitAndLossStatement(
-                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-                ) {
-                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyProfitAndLossStatement.OrdinaryIncomeOrLoss)
-                }
-                if !text.isEmpty {
-                    cell.label.text = text
-                    cell.label.textColor = text.contains("△") ? .red : .textColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                    cell.borders.top = .none
-                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
-                } else {
-                    cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                    cell.borders.top = .none
-                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
-                }
-                // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
-                return cell
-            }
-            
-            
-        } else if case (1...(dates.count + 1), big5Count..<objects6Count) = (indexPath.column, indexPath.row) {
+        } else if case (1...(dates.count + 1), bs5Count..<objects6Count) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目6
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
                 var text = ""
                 // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
                 if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                    account: objects6[indexPath.row - big5Count].category,
+                    account: objects6[indexPath.row - bs5Count].category,
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 10, rank1: 17, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(rank0: 2, rank1: 6, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -1025,19 +887,20 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
-        } else if case (1...(dates.count + 1), objects6Count..<pl6Count) = (indexPath.column, indexPath.row) {
+        } else if case (1...(dates.count + 1), objects6Count..<bs6Count) = (indexPath.column, indexPath.row) {
+            // 繰越資産　合計
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
                 var text = ""
-                // 取得 月次損益計算書　今年度で日付の前方一致
-                if let dataBaseMonthlyProfitAndLossStatement = DataBaseManagerMonthlyBSnPL.shared.getMonthlyProfitAndLossStatement(
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyProfitAndLossStatement.ExtraordinaryIncome)
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.DeferredAssets_total)
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -1052,22 +915,50 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
                 // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
-        } else if case (1...(dates.count + 1), pl6Count..<(objects7Count)) = (indexPath.column, indexPath.row) {
+        } else if case (1...(dates.count + 1), bs6Count..<big6Count) = (indexPath.column, indexPath.row) {
+            // 資産　合計
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.Asset_total)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
+                }
+                // アップグレード機能　スタンダードプラン
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
+            }
+            
+        } else if case (1...(dates.count + 1), big6Count..<(objects7Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目7
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
                 var text = ""
                 // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
                 if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                    account: objects7[indexPath.row - pl6Count].category,
+                    account: objects7[indexPath.row - big6Count].category,
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 10, rank1: 18, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(rank0: 3, rank1: 7, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -1082,77 +973,21 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
-            
-        } else if case (1...(dates.count + 1), objects7Count..<pl7Count) = (indexPath.column, indexPath.row) {
-            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
-                var text = ""
-                // 取得 月次損益計算書　今年度で日付の前方一致
-                if let dataBaseMonthlyProfitAndLossStatement = DataBaseManagerMonthlyBSnPL.shared.getMonthlyProfitAndLossStatement(
-                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-                ) {
-                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyProfitAndLossStatement.ExtraordinaryLosses)
-                }
-                if !text.isEmpty {
-                    cell.label.text = text
-                    cell.label.textColor = text.contains("△") ? .red : .textColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                    cell.borders.top = .none
-                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
-                } else {
-                    cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                    cell.borders.top = .none
-                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
-                }
-                // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
-                return cell
-            }
-            
-        } else if case (1...(dates.count + 1), pl7Count..<big7Count) = (indexPath.column, indexPath.row) {
-            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
-                var text = ""
-                // 取得 月次損益計算書　今年度で日付の前方一致
-                if let dataBaseMonthlyProfitAndLossStatement = DataBaseManagerMonthlyBSnPL.shared.getMonthlyProfitAndLossStatement(
-                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-                ) {
-                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyProfitAndLossStatement.IncomeOrLossBeforeIncomeTaxes)
-                }
-                if !text.isEmpty {
-                    cell.label.text = text
-                    cell.label.textColor = text.contains("△") ? .red : .textColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                    cell.borders.top = .none
-                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
-                } else {
-                    cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                    cell.borders.top = .none
-                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
-                }
-                // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
-                return cell
-            }
-            
-
-        } else if case (1...(dates.count + 1), big7Count..<(objects8Count)) = (indexPath.column, indexPath.row) {
+        } else if case (1...(dates.count + 1), objects7Count..<(objects8Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目8
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
                 var text = ""
                 // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
                 if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                    account: objects8[indexPath.row - big7Count].category,
+                    account: objects8[indexPath.row - objects7Count].category,
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 11, rank1: nil, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(rank0: 3, rank1: 8, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -1167,19 +1002,20 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
-        } else if case (1...(dates.count + 1), objects8Count..<pl8Count) = (indexPath.column, indexPath.row) {
+        } else if case (1...(dates.count + 1), objects8Count..<bs8Count) = (indexPath.column, indexPath.row) {
+            // 流動負債　合計
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
                 var text = ""
-                // 取得 月次損益計算書　今年度で日付の前方一致
-                if let dataBaseMonthlyProfitAndLossStatement = DataBaseManagerMonthlyBSnPL.shared.getMonthlyProfitAndLossStatement(
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyProfitAndLossStatement.IncomeTaxes)
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.CurrentLiabilities_total)
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -1194,19 +1030,78 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
                 // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
-                                    
-        } else if case (1...(dates.count + 1), pl8Count..<big8Count) = (indexPath.column, indexPath.row) {
+            
+        } else if case (1...(dates.count + 1), bs8Count..<(objects9Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目9
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
                 var text = ""
-                // 取得 月次損益計算書　今年度で日付の前方一致
-                if let dataBaseMonthlyProfitAndLossStatement = DataBaseManagerMonthlyBSnPL.shared.getMonthlyProfitAndLossStatement(
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects9[indexPath.row - bs8Count].category,
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyProfitAndLossStatement.NetIncomeOrLoss)
+                    text = getBalanceAmount(rank0: 4, rank1: 9, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
+            }
+            
+        } else if case (1...(dates.count + 1), objects9Count..<bs9Count) = (indexPath.column, indexPath.row) {
+            // 固定負債　合計
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.FixedLiabilities_total)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                }
+                // アップグレード機能　スタンダードプラン
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
+            }
+            
+        } else if case (1...(dates.count + 1), bs9Count..<big9Count) = (indexPath.column, indexPath.row) {
+            // 負債　合計
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.Liability_total)
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -1221,17 +1116,190 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 }
                 // アップグレード機能　スタンダードプラン
-                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
+            
+        } else if case (1...(dates.count + 1), big9Count..<(objects10Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目10
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects10[indexPath.row - big9Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 5, rank1: 10, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
+            }
+        } else if case (1...(dates.count + 1), objects10Count..<(objects11Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目11
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects11[indexPath.row - objects10Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 5, rank1: 11, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
+            }
+        } else if case (1...(dates.count + 1), objects11Count..<(objects12Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目12
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects12[indexPath.row - objects11Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 5, rank1: 12, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
+            }
+        } else if case (1...(dates.count + 1), objects12Count..<objects13Count) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目13
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects13[indexPath.row - objects12Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 5, rank1: 19, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
+            }
+            
+        } else if case (1...(dates.count + 1), objects13Count..<bs13Count) = (indexPath.column, indexPath.row) {
+            // 資本　合計
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.Capital_total)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                }
+                // アップグレード機能　スタンダードプラン
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
+            }
+            
+        } else if case (1...(dates.count + 1), bs13Count..<big13Count) = (indexPath.column, indexPath.row) {
+            // 純資産　合計
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.Equity_total)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
+                }
+                // アップグレード機能　スタンダードプラン
+//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
+            }
+            
         }
-        
         return nil
     }
     
 }
 
-extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDelegate {
+extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDelegate {
     
     /// Delegate
     
@@ -1271,4 +1339,3 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDelegate {
         }
     }
 }
-

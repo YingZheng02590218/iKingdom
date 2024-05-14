@@ -58,4 +58,16 @@ extension Date {
         dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: format, options: 0, locale: Locale(identifier: "en_US_POSIX"))
         return dateFormatter.date(from: dateString)
     }
+
+    public static func iso8601String(date: Date, timeZone: TimeZone = .current) -> String {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.timeZone = timeZone
+        return dateFormatter.string(from: date)
+    }
+    
+    public static func iso8601Date(from dateString: String, timeZone: TimeZone = .current) -> Date? {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.timeZone = timeZone
+        return dateFormatter.date(from: dateString)
+    }
 }

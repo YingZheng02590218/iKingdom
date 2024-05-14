@@ -49,6 +49,11 @@
 #  end
 
   post_install do |installer|
+    # cocoapodsが生成する *frameworks.sh の source="$(readlink "${source}")" を source="$(readlink -f "${source}")" に置換する処理です。
+    command = <<~EOS
+      find . -name *frameworks.sh | tr \\n \\0 | xargs -0 sed -i -e 's/source="$(readlink "${source}")"/source="$(readlink -f "${source}")"/'
+    EOS
+    system(command)
     installer.pods_project.build_configurations.each do |config|
       config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
     end

@@ -15,6 +15,16 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
     @IBOutlet private var nicknameTextField: UITextField!
     @IBOutlet private var nicknameCounterLabel: UILabel!
     @IBOutlet private var nicknameView: EMTNeumorphicView!
+    // フィードバック
+    private let feedbackGeneratorNotification: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UINotificationFeedbackGenerator()
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     // 仕訳画面で入力された仕訳の内容
     var journalEntryData: JournalEntryData?
     
@@ -115,8 +125,9 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
                 }
                 if text.count == maxLength {
                     // フィードバック
-                    let generator = UINotificationFeedbackGenerator()
-                    generator.notificationOccurred(.error)
+                    if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                        generator.notificationOccurred(.error)
+                    }
                 }
             }
         }

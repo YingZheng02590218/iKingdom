@@ -59,8 +59,6 @@ class PDFMaker {
         let dataBaseManager = JournalsModel()
         let dataBaseJournalEntries = dataBaseManager.getJournalEntriesInJournals()
         let dataBaseAdjustingEntries = dataBaseManager.getJournalAdjustingEntry()
-        // 損益振替仕訳
-        let dataBaseTransferEntries = dataBaseManager.getTransferEntryInAccount()
 
         var htmlString = ""
         
@@ -166,118 +164,6 @@ class PDFMaker {
             totalDebitAmount += item.debit_amount
             totalCreditAmount += item.credit_amount
             
-            if counter >= 9 {
-                let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
-                htmlString.append(tableFooter)
-            }
-            counter += 1
-            if counter >= 10 {
-                counter = 0
-                pageNumber += 1
-            }
-        }
-        
-        // 損益振替仕訳
-        for item in dataBaseTransferEntries {
-
-            let fiscalYear = item.fiscalYear
-            if counter == 0 {
-                let tableHeader = hTMLhelper.headerstring(title: "仕訳帳", fiscalYear: fiscalYear, pageNumber: pageNumber)
-                htmlString.append(tableHeader)
-            }
-            // 日付
-            guard let date = DateManager.shared.dateFormatter.date(from: item.date) else {
-                return nil
-            }
-
-            let debitCategory = item.debit_category
-            let debitAmount = item.debit_amount
-            let creditCategory = item.credit_category
-            let creditAmount = item.credit_amount
-            let smallWritting = item.smallWritting
-            _ = item.balance_left
-            _ = item.balance_right
-            let generalLedgerAccountModel = GeneralLedgerAccountModel()
-            let numberOfAccountCredit: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(creditCategory)")// 損益勘定の場合はエラーになる
-            let numberOfAccountDebit: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(debitCategory)")// 損益勘定の場合はエラーになる
-
-            let rowString = hTMLhelper.getSingleRow(
-                month: String(date.month),
-                day: String(date.day),
-                debitCategory: debitCategory,
-                debitAmount: debitAmount,
-                creditCategory: creditCategory,
-                creditAmount: creditAmount,
-                smallWritting: smallWritting,
-                numberOfAccountCredit: numberOfAccountCredit,
-                numberOfAccountDebit: numberOfAccountDebit
-            )
-            htmlString.append(rowString)
-
-            totalDebitAmount += item.debit_amount
-            totalCreditAmount += item.credit_amount
-
-            if counter >= 9 {
-                let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
-                htmlString.append(tableFooter)
-            }
-            counter += 1
-            if counter >= 10 {
-                counter = 0
-                pageNumber += 1
-            }
-        }
-        
-        // 資本振替仕訳
-        if let dataBaseCapitalTransferJournalEntry = dataBaseManager.getCapitalTransferJournalEntryInAccount() {
-            let fiscalYear = dataBaseCapitalTransferJournalEntry.fiscalYear
-            if counter == 0 {
-                let tableHeader = hTMLhelper.headerstring(title: "仕訳帳", fiscalYear: fiscalYear, pageNumber: pageNumber)
-                htmlString.append(tableHeader)
-            }
-            // 日付
-            guard let date = DateManager.shared.dateFormatter.date(from: dataBaseCapitalTransferJournalEntry.date) else {
-                return nil
-            }
-
-            var debitCategory = ""
-            if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
-                debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
-            } else {
-                debitCategory = Constant.capitalAccountName
-            }
-            var creditCategory = ""
-            if dataBaseCapitalTransferJournalEntry.credit_category == "損益" { // 損益勘定の場合
-                creditCategory = dataBaseCapitalTransferJournalEntry.credit_category
-            } else {
-                creditCategory = Constant.capitalAccountName
-            }
-
-            let debitAmount = dataBaseCapitalTransferJournalEntry.debit_amount
-            let creditAmount = dataBaseCapitalTransferJournalEntry.credit_amount
-            let smallWritting = dataBaseCapitalTransferJournalEntry.smallWritting
-            _ = dataBaseCapitalTransferJournalEntry.balance_left
-            _ = dataBaseCapitalTransferJournalEntry.balance_right
-            let generalLedgerAccountModel = GeneralLedgerAccountModel()
-            let numberOfAccountCredit: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(creditCategory)")
-            let numberOfAccountDebit: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(debitCategory)")
-
-            let rowString = hTMLhelper.getSingleRow(
-                month: String(date.month),
-                day: String(date.day),
-                debitCategory: debitCategory,
-                debitAmount: debitAmount,
-                creditCategory: creditCategory,
-                creditAmount: creditAmount,
-                smallWritting: smallWritting,
-                numberOfAccountCredit: numberOfAccountCredit,
-                numberOfAccountDebit: numberOfAccountDebit
-            )
-            htmlString.append(rowString)
-
-            totalDebitAmount += dataBaseCapitalTransferJournalEntry.debit_amount
-            totalCreditAmount += dataBaseCapitalTransferJournalEntry.credit_amount
-
             if counter >= 9 {
                 let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
                 htmlString.append(tableFooter)

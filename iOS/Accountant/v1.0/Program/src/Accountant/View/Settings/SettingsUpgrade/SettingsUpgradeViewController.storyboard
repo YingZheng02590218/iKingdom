@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="S5c-tz-ENP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="S5c-tz-ENP">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="LucaPacioliRough.ttf">
+            <string>LucaPacioliRough</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--アップグレード-->
         <scene sceneID="AcL-bF-RoD">
@@ -433,6 +438,14 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pacioli3" translatesAutoresizingMaskIntoConstraints="NO" id="lPh-wU-1YZ">
                             <rect key="frame" x="0.0" y="40" width="240" height="120"/>
                         </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Luca Pacioli" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QCo-WJ-QU0">
+                            <rect key="frame" x="99" y="49" width="42" height="21"/>
+                            <fontDescription key="fontDescription" name="LucaPacioliRough" family="LucaPacioliRough" pointSize="35"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <size key="shadowOffset" width="1" height="2"/>
+                        </label>
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="XuT-lp-tKg"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -440,10 +453,12 @@
                         <constraint firstItem="lPh-wU-1YZ" firstAttribute="leading" secondItem="c3N-rY-hI5" secondAttribute="leading" id="43g-ix-LZl"/>
                         <constraint firstItem="c3N-rY-hI5" firstAttribute="top" secondItem="DXl-iY-WPr" secondAttribute="top" id="7VQ-3m-yaR"/>
                         <constraint firstItem="lPh-wU-1YZ" firstAttribute="trailing" secondItem="c3N-rY-hI5" secondAttribute="trailing" id="7s2-CH-tOC"/>
+                        <constraint firstItem="QCo-WJ-QU0" firstAttribute="bottom" secondItem="DXl-iY-WPr" secondAttribute="bottom" constant="-5" id="8uq-MH-DEc"/>
                         <constraint firstItem="c3N-rY-hI5" firstAttribute="height" secondItem="DXl-iY-WPr" secondAttribute="height" id="DYV-nn-afK"/>
                         <constraint firstItem="lPh-wU-1YZ" firstAttribute="height" secondItem="DXl-iY-WPr" secondAttribute="height" id="H5K-mw-BgL"/>
                         <constraint firstItem="lPh-wU-1YZ" firstAttribute="top" secondItem="c3N-rY-hI5" secondAttribute="top" constant="40" id="KhA-4D-0XZ"/>
                         <constraint firstAttribute="bottom" secondItem="c3N-rY-hI5" secondAttribute="bottom" id="XZd-wZ-2zl"/>
+                        <constraint firstItem="XuT-lp-tKg" firstAttribute="trailing" secondItem="QCo-WJ-QU0" secondAttribute="trailing" constant="10" id="p4t-V2-rta"/>
                         <constraint firstAttribute="trailing" secondItem="c3N-rY-hI5" secondAttribute="trailing" id="qxy-1Q-HJ3"/>
                         <constraint firstItem="lPh-wU-1YZ" firstAttribute="centerX" secondItem="DXl-iY-WPr" secondAttribute="centerX" id="sWM-yS-a4U"/>
                         <constraint firstItem="c3N-rY-hI5" firstAttribute="leading" secondItem="DXl-iY-WPr" secondAttribute="leading" id="vi2-Rj-gQC"/>

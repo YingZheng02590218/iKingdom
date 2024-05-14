@@ -11,6 +11,7 @@ import UIKit
 class CarouselTableViewCell: UITableViewCell {
 
     @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet var betaLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
     
     override func awakeFromNib() {
@@ -38,8 +39,11 @@ class CarouselTableViewCell: UITableViewCell {
     // setup
     func createList() {
         // xib読み込み
-        let nib = UINib(nibName: "CarouselCollectionViewCell", bundle: .main)
-        collectionView.register(nib, forCellWithReuseIdentifier: "cell")
+        collectionView.register(UINib(nibName: String(describing: CarouselCollectionViewCell.self), bundle: .main), forCellWithReuseIdentifier: "cell")
+    }
+    
+    func createImages() {
+        collectionView.register(UINib(nibName: String(describing: ImageCollectionViewCell.self), bundle: .main), forCellWithReuseIdentifier: "cell")
     }
 
     func configure(gropName: String) {

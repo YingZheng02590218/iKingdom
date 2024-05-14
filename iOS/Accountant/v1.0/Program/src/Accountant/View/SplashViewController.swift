@@ -6,7 +6,6 @@
 //  Copyright © 2022 Hisashi Ishihara. All rights reserved.
 //
 
-import StoreKit
 import UIKit
 
 class SplashViewController: UIViewController {
@@ -141,7 +140,7 @@ extension SplashViewController: SplashPresenterOutput {
             }
         }
     }
-
+    
     // パーセンテージを非表示させる
     func hidePersentage() {
         DispatchQueue.main.async {
@@ -164,21 +163,31 @@ extension SplashViewController: SplashPresenterOutput {
     }
     
     // MARK: - レビュー催促機能
-
+    
     // レビュー催促機能
     func showRequestReview() {
         // レビューリクエスト画面は、３６５日で最大３回までしか表示されないルールがあるようです。
-        let key = "startUpCount"
-        let count = UserDefaults.standard.integer(forKey: key)
-        if count == 10 { // 起動が5回目にレビューを催促する
-            if #available(iOS 10.3, *) {
-                SKStoreReviewController.requestReview()
+        // アプリ起動回数をインクリメントする
+        RequestReviewManager.shared.incrementProcessCompletedCount()
+        // 表示フラグが倒れていたら何もしない
+        if RequestReviewManager.shared.canRequestReview {
+            // レビュー促進ダイアログ
+            DispatchQueue.main.async {
+                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                    RequestReviewManager.shared.requestReview(in: scene) {
+                        // TODO: ユーザーが操作していないことを判断する材料は何かを考える
+                        /*
+                         例えば、クロージャで[weak self]をキャプチャして、
+                         `return self?.navigationController?.topViewController == self`
+                         と確認する場合は「画面移動をしていないということは、ユーザーが操作をしていない」と判断するということになる。
+                         
+                         UITextViewが表示されている画面など、インタラクティブ性が高い場合はこの条件だけでは不十分であるが
+                         単純な画面の場合はこれくらいで大丈夫。この判定はプロジェクトの要件によって様々になる。
+                         */
+                        return true
+                    }
+                }
             }
-        }
-        if count < 11 {
-            // 永遠にインクリメントするのを防ぐ
-            UserDefaults.standard.set(UserDefaults.standard.integer(forKey: key) + 1, forKey: key)
-            UserDefaults.standard.synchronize()
         }
     }
 }

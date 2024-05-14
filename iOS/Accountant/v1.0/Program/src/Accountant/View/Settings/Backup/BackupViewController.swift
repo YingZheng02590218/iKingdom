@@ -29,6 +29,16 @@ class BackupViewController: UIViewController {
             return nil
         }
     }()
+    // フィードバック
+    private let feedbackGeneratorNotification: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UINotificationFeedbackGenerator()
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     // コンテナ　ファイル
     //    private let containerManager = ContainerManager()
     var backupFiles: [(String, NSNumber?, Bool)] = []
@@ -176,7 +186,23 @@ class BackupViewController: UIViewController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
-        tableView.setEditing(editing, animated: animated)
+        // 編集中の場合
+        if editing {
+            DispatchQueue.main.async {
+                // 編集前に状態を更新する
+                self.tableView.reloadData()
+            }
+        }
+        // 削除機能 セルを左へスワイプして削除ボタンが表示された状態で編集モードに入ると、右端のチェックボックスが表示されないことがあることへの対策
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.tableView.setEditing(editing, animated: animated)
+            self.tableView.indexPathsForVisibleRows?.forEach { indexPath in
+                if let cell = self.tableView.cellForRow(at: indexPath) as? WithIconTableViewCell {
+                    // マイクロインタラクション アニメーション　セル 編集中
+                    cell.animateViewWobble(isActive: editing)
+                }
+            }
+        }
     }
     // バックアップ作成ボタン
     @IBAction func buttonTapped(_ sender: EMTNeumorphicButton) {
@@ -213,8 +239,9 @@ class BackupViewController: UIViewController {
             )
         } else {
             // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
+            if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                generator.notificationOccurred(.error)
+            }
             // オフラインダイアログ
             self.showOfflineDialog()
         }
@@ -354,12 +381,21 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // マイクロインタラクション アニメーション　セル 編集中
+        cell.animateViewWobble(isActive: tableView.isEditing)
+    }
     // 編集機能
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         .delete
     }
     // 削除機能 セルを左へスワイプ
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if let cell = tableView.cellForRow(at: indexPath) as? WithIconTableViewCell {
+            // マイクロインタラクション アニメーション　セル 編集中
+            cell.animateViewWobble(isActive: false)
+        }
         let action = UIContextualAction(style: .destructive, title: "削除") { (action, view, completionHandler) in
             // オフラインの場合iCloudへアクセスできないので、ネットワーク接続を確認する
             if Network.shared.isOnline() {
@@ -367,8 +403,9 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
                 self.showPopover(indexPath: indexPath)
             } else {
                 // フィードバック
-                let generator = UINotificationFeedbackGenerator()
-                generator.notificationOccurred(.error)
+                if #available(iOS 10.0, *), let generator = self.feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                    generator.notificationOccurred(.error)
+                }
                 // オフラインダイアログ
                 self.showOfflineDialog()
             }
@@ -424,8 +461,9 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
                 self.showPopoverRestore(indexPath: indexPath)
             } else {
                 // フィードバック
-                let generator = UINotificationFeedbackGenerator()
-                generator.notificationOccurred(.error)
+                if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                    generator.notificationOccurred(.error)
+                }
                 // オフラインダイアログ
                 showOfflineDialog()
             }
@@ -547,6 +585,8 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
+        // 月次推移表を更新する　true: リロードする
+        Constant.needToReload = true
     }
 }
 

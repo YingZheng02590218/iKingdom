@@ -166,6 +166,10 @@
 		F91878C82581462600D2E793 /* DataBaseManagerSettingsOperating.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91878C72581462600D2E793 /* DataBaseManagerSettingsOperating.swift */; };
 		F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */; };
 		F919603224AC53890084A18B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919603124AC53890084A18B /* File.swift */; };
+		F91C2B7E2BF212C200ABBFD6 /* LucaPacioliRough.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */; };
+		F91C2B7F2BF212C300ABBFD6 /* LucaPacioliRough.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */; };
+		F91C2B812BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B802BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy */; };
+		F91C2B822BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B802BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy */; };
 		F91F6E2D248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91F6E2C248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift */; };
 		F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */; };
 		F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F922771B261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard */; };
@@ -320,6 +324,8 @@
 		F971BB45295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F971BB44295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift */; };
 		F971BB46295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F971BB44295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift */; };
 		F97422E0253F091500FBA052 /* AccountDetailPickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97422DA253F091500FBA052 /* AccountDetailPickerTextField.swift */; };
+		F97453EF2BE3AAE000D9C958 /* RequestReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97453EE2BE3AAE000D9C958 /* RequestReviewManager.swift */; };
+		F97453F02BE3AAE000D9C958 /* RequestReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97453EE2BE3AAE000D9C958 /* RequestReviewManager.swift */; };
 		F976798D24A8904B007A0D73 /* PLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F976798C24A8904B007A0D73 /* PLModel.swift */; };
 		F9789A342475C49B00B62CAF /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9789A332475C49B00B62CAF /* SettingsTableViewController.swift */; };
 		F97AC19D25A976000077B667 /* UpgradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97AC19C25A976000077B667 /* UpgradeManager.swift */; };
@@ -464,6 +470,10 @@
 		F9C2BC29277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */; };
 		F9C2BEBA250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */; };
 		F9C2BEBD250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */; };
+		F9C3B1422BE644CA006B6FDA /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C3B1402BE644CA006B6FDA /* ImageCollectionViewCell.swift */; };
+		F9C3B1432BE644CA006B6FDA /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C3B1402BE644CA006B6FDA /* ImageCollectionViewCell.swift */; };
+		F9C3B1442BE644CA006B6FDA /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9C3B1412BE644CA006B6FDA /* ImageCollectionViewCell.xib */; };
+		F9C3B1452BE644CA006B6FDA /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9C3B1412BE644CA006B6FDA /* ImageCollectionViewCell.xib */; };
 		F9C6C73F29A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C6C73D29A3A5D700BA8F83 /* PopUpViewController.storyboard */; };
 		F9C6C74029A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C6C73D29A3A5D700BA8F83 /* PopUpViewController.storyboard */; };
 		F9C6C74129A3A5D700BA8F83 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6C73E29A3A5D700BA8F83 /* PopUpViewController.swift */; };
@@ -962,6 +972,8 @@
 		F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F919603124AC53890084A18B /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		F919603324AC679E0084A18B /* File2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File2.swift; sourceTree = "<group>"; };
+		F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LucaPacioliRough.ttf; sourceTree = "<group>"; };
+		F91C2B802BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		F91F6E2C248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerAccountingBooksShelf.swift; sourceTree = "<group>"; };
 		F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategoryListTableViewController.storyboard; sourceTree = "<group>"; };
 		F922771B261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard; sourceTree = "<group>"; };
@@ -1060,6 +1072,7 @@
 		F97422D8253F091500FBA052 /* SettingAccountDetailTaxonomyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAccountDetailTaxonomyTableViewCell.swift; sourceTree = "<group>"; };
 		F97422D9253F091500FBA052 /* SettingAccountDetailAccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAccountDetailAccountTableViewCell.swift; sourceTree = "<group>"; };
 		F97422DA253F091500FBA052 /* AccountDetailPickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailPickerTextField.swift; sourceTree = "<group>"; };
+		F97453EE2BE3AAE000D9C958 /* RequestReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReviewManager.swift; sourceTree = "<group>"; };
 		F976798C24A8904B007A0D73 /* PLModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PLModel.swift; sourceTree = "<group>"; };
 		F9789A332475C49B00B62CAF /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		F9789A352475CA8000B62CAF /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -1176,6 +1189,8 @@
 		F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ClassicCalculatorViewController.storyboard; sourceTree = "<group>"; };
 		F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTaxonomyAccountByTaxonomyListTableViewController.swift; sourceTree = "<group>"; };
 		F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTaxonomyListTableViewController.swift; sourceTree = "<group>"; };
+		F9C3B1402BE644CA006B6FDA /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		F9C3B1412BE644CA006B6FDA /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		F9C6C73D29A3A5D700BA8F83 /* PopUpViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PopUpViewController.storyboard; sourceTree = "<group>"; };
 		F9C6C73E29A3A5D700BA8F83 /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		F9C7371F265E7D7E00A9F287 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
@@ -1537,6 +1552,15 @@
 			path = PrintOut;
 			sourceTree = "<group>";
 		};
+		F91C2B7C2BF211F300ABBFD6 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */,
+				F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		F929C009247708470034FAAF /* MasterData */ = {
 			isa = PBXGroup;
 			children = (
@@ -1551,8 +1575,8 @@
 				F9789A332475C49B00B62CAF /* SettingsTableViewController.swift */,
 				F99BE7AB261DD61C004611E4 /* SettingsTableViewController.storyboard */,
 				F9789A352475CA8000B62CAF /* SettingsTableViewCell.swift */,
-				F9ED936D2982838700B255EF /* Backup */,
 				F9F7992E25A864300037EC50 /* SettingsUpgrade */,
+				F9ED936D2982838700B255EF /* Backup */,
 				F9F4607524CF64BA008FE62B /* SettingsInformation */,
 				F9F934EA2485544B00BF7AA7 /* SettingPeriod */,
 				F98CD96124DCA92F001CBF94 /* SettingsCategoryMain */,
@@ -1631,13 +1655,13 @@
 			path = DataBaseModel;
 			sourceTree = "<group>";
 		};
-		F94BE0902BD7C070002CFE4D /* ProfitAndLossStatement */ = {
+		F94BE0902BD7C070002CFE4D /* MonthlyProfitAndLossStatement */ = {
 			isa = PBXGroup;
 			children = (
 				F94BE08D2BD7C063002CFE4D /* MonthlyProfitAndLossStatementViewController.swift */,
 				F94BE0912BD7C085002CFE4D /* MonthlyProfitAndLossStatementViewController.storyboard */,
 			);
-			path = ProfitAndLossStatement;
+			path = MonthlyProfitAndLossStatement;
 			sourceTree = "<group>";
 		};
 		F94BE0942BD94260002CFE4D /* Monthly */ = {
@@ -1706,6 +1730,14 @@
 			children = (
 				F955B606248FE6EF005E2C6D /* FinancialStatementTableViewController.swift */,
 				F99BE775261DCB22004611E4 /* FinancialStatementTableViewController.storyboard */,
+				F9F9ECFC2BAEA6A3004B6A68 /* MonthlyBalanceSheet */,
+				F94BE0902BD7C070002CFE4D /* MonthlyProfitAndLossStatement */,
+				F955B60E2490FCD6005E2C6D /* BS */,
+				F955B6082490E305005E2C6D /* PL */,
+				F955B60F2490FD1D005E2C6D /* CF */,
+				F955B61324910003005E2C6D /* WS */,
+				F955B6122490FF9A005E2C6D /* TB */,
+				F9706847252AC631003307F8 /* PLAccount */,
 			);
 			path = FinancialStatement;
 			sourceTree = "<group>";
@@ -1964,6 +1996,8 @@
 			children = (
 				F9A3A6472631ABD0006E0FA0 /* WithIconTableViewCell.swift */,
 				F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */,
+				F9C3B1402BE644CA006B6FDA /* ImageCollectionViewCell.swift */,
+				F9C3B1412BE644CA006B6FDA /* ImageCollectionViewCell.xib */,
 				F9AD5F3626399C00003EC6EF /* CarouselCollectionViewCell.swift */,
 				F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */,
 				F99D3AF52A63FDAD00E19110 /* CustomTableViewCell.swift */,
@@ -2042,8 +2076,9 @@
 				F94EDDA2237AEB3B0074D812 /* Info.plist */,
 				F97C278F263AB39D00DFC3B0 /* InfoPlist.strings */,
 				F9EC674727B911FD0003FBB6 /* GoogleService-Info */,
-				F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */,
+				F91C2B7C2BF211F300ABBFD6 /* Font */,
 				F95D44FF25ADE5F00044493A /* Configuration.storekit */,
+				F91C2B802BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy */,
 				F94E79EA259DF8C7004726F7 /* Settings.bundle */,
 			);
 			path = Resources;
@@ -2062,17 +2097,8 @@
 				F99EDE0F246C012E00334FF4 /* JournalEntry */,
 				F99EDE0E246C00F500334FF4 /* Journals */,
 				F9F934F02485CDB900BF7AA7 /* GeneralLedger */,
-				F9D5D54B247E409400EA35C7 /* GenearlLedgerAccount */,
 				F9D224C724893F41006C6CD9 /* SubsidiaryLedger */,
 				F955B605248FE5F2005E2C6D /* FinancialStatement */,
-				F94BE0902BD7C070002CFE4D /* ProfitAndLossStatement */,
-				F9F9ECFC2BAEA6A3004B6A68 /* MonthlyBalanceSheet */,
-				F955B60E2490FCD6005E2C6D /* BS */,
-				F955B6082490E305005E2C6D /* PL */,
-				F955B60F2490FD1D005E2C6D /* CF */,
-				F955B61324910003005E2C6D /* WS */,
-				F955B6122490FF9A005E2C6D /* TB */,
-				F9706847252AC631003307F8 /* PLAccount */,
 				F929C0252478365E0034FAAF /* Settings */,
 				F95F597F2650266300EFE522 /* UIParts */,
 			);
@@ -2162,6 +2188,7 @@
 			isa = PBXGroup;
 			children = (
 				F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */,
+				F97453EE2BE3AAE000D9C958 /* RequestReviewManager.swift */,
 				F98289B72978E0E800F8F1B8 /* AppVersion.swift */,
 				F9DC875929953B1D00919E5F /* AppGroups.swift */,
 				F9860FB8285AB805008D0714 /* Network.swift */,
@@ -2372,6 +2399,7 @@
 				F9BF067C24289DC700C59031 /* GeneralLedgerTableViewController.swift */,
 				F99BAEB9261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard */,
 				F9D5D54E247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift */,
+				F9D5D54B247E409400EA35C7 /* GenearlLedgerAccount */,
 			);
 			name = GeneralLedger;
 			path = GeneralLedger/GeneralLedger;
@@ -2402,6 +2430,7 @@
 				F9439D44298D27F500FCBA41 /* Embed Frameworks */,
 				F9DC870829932E1D00919E5F /* Embed Foundation Extensions */,
 				F91878C9258300DB00D2E793 /* Run Script */,
+				AA9C4BE8D1E879BFF0AE79FB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2461,6 +2490,7 @@
 				F9E42A4B298D1DFF00360DA4 /* Embed Frameworks */,
 				F9DC872F2994895100919E5F /* Embed Foundation Extensions */,
 				F9EC674027B90BC60003FBB6 /* Run Script */,
+				3C89A21F994F7CB832FE2273 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2606,6 +2636,7 @@
 				F907D0BD2A99E0FD00A701C3 /* Journal_Entry_Delete.html in Resources */,
 				F90A237C2B6BC7FB009E35C0 /* AccountItem4.png in Resources */,
 				F90A23AC2B6CFDD0009E35C0 /* JournalEntry2.png in Resources */,
+				F9C3B1442BE644CA006B6FDA /* ImageCollectionViewCell.xib in Resources */,
 				F90A235F2B6BBBFF009E35C0 /* BasicInfo6.png in Resources */,
 				F907D0AB2A976E4F00A701C3 /* Set_Up_Account3.html in Resources */,
 				F99BAEC2261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard in Resources */,
@@ -2635,6 +2666,7 @@
 				F90A23612B6BBBFF009E35C0 /* BasicInfo5.png in Resources */,
 				F9ED936B2982837E00B255EF /* BackupViewController.storyboard in Resources */,
 				F90A23DF2B6D0F93009E35C0 /* OpeningJournalEntry3.png in Resources */,
+				F91C2B7E2BF212C200ABBFD6 /* LucaPacioliRough.ttf in Resources */,
 				F906C4EF263B1B65006C6233 /* ListCollectionViewCell.xib in Resources */,
 				F90A23642B6BBC58009E35C0 /* BasicInfo7.png in Resources */,
 				F99BAEBA261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard in Resources */,
@@ -2694,6 +2726,7 @@
 				F982898D2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */,
 				F90A23AA2B6CFDD0009E35C0 /* JournalEntry1.png in Resources */,
 				F94E79EB259DF8C7004726F7 /* Settings.bundle in Resources */,
+				F91C2B812BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy in Resources */,
 				F93733322A62C87E0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.storyboard in Resources */,
 				F963E2B02963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */,
 				F907D0BA2A98AE4300A701C3 /* Journal_Entry_Edit.html in Resources */,
@@ -2771,6 +2804,7 @@
 				F907D0BE2A99E0FD00A701C3 /* Journal_Entry_Delete.html in Resources */,
 				F90A237D2B6BC7FB009E35C0 /* AccountItem4.png in Resources */,
 				F90A23AD2B6CFDD0009E35C0 /* JournalEntry2.png in Resources */,
+				F9C3B1452BE644CA006B6FDA /* ImageCollectionViewCell.xib in Resources */,
 				F90A23602B6BBBFF009E35C0 /* BasicInfo6.png in Resources */,
 				F907D0AC2A976E4F00A701C3 /* Set_Up_Account3.html in Resources */,
 				F9EC671C27B90BC60003FBB6 /* GeneralLedgerAccountViewController.storyboard in Resources */,
@@ -2800,6 +2834,7 @@
 				F90A23622B6BBBFF009E35C0 /* BasicInfo5.png in Resources */,
 				F9ED936C2982837E00B255EF /* BackupViewController.storyboard in Resources */,
 				F90A23E02B6D0F93009E35C0 /* OpeningJournalEntry3.png in Resources */,
+				F91C2B7F2BF212C300ABBFD6 /* LucaPacioliRough.ttf in Resources */,
 				F9EC672327B90BC60003FBB6 /* ListCollectionViewCell.xib in Resources */,
 				F90A23652B6BBC58009E35C0 /* BasicInfo7.png in Resources */,
 				F9EC672427B90BC60003FBB6 /* GeneralLedgerTableViewController.storyboard in Resources */,
@@ -2859,6 +2894,7 @@
 				F982898E2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */,
 				F90A23AB2B6CFDD0009E35C0 /* JournalEntry1.png in Resources */,
 				F9EC673B27B90BC60003FBB6 /* Settings.bundle in Resources */,
+				F91C2B822BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy in Resources */,
 				F93733332A62C87E0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.storyboard in Resources */,
 				F963E2B12963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */,
 				F907D0BB2A98AE4300A701C3 /* Journal_Entry_Edit.html in Resources */,
@@ -2888,6 +2924,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3C89A21F994F7CB832FE2273 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PaciolistSTG/Pods-PaciolistSTG-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PaciolistSTG/Pods-PaciolistSTG-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PaciolistSTG/Pods-PaciolistSTG-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		490895BAAAAEFC6AC2D95DDF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2925,6 +2978,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA9C4BE8D1E879BFF0AE79FB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Paciolist/Pods-Paciolist-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Paciolist/Pods-Paciolist-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Paciolist/Pods-Paciolist-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F91878C9258300DB00D2E793 /* Run Script */ = {
@@ -3125,6 +3195,7 @@
 				F9D224CC24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift in Sources */,
 				F906C4E3263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift in Sources */,
 				F9ED93772983ABFE00B255EF /* BackupManager.swift in Sources */,
+				F9C3B1422BE644CA006B6FDA /* ImageCollectionViewCell.swift in Sources */,
 				F9D5D54F247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */,
 				F9E501AC2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift in Sources */,
@@ -3199,6 +3270,7 @@
 				F9354DB82498C7C8007DB098 /* DataBaseCompoundTrialBalance.swift in Sources */,
 				F9B209ED279D38EA00F7EA8D /* BSPresenter.swift in Sources */,
 				F9F934E32484D53100BF7AA7 /* DataBaseJournals.swift in Sources */,
+				F97453EF2BE3AAE000D9C958 /* RequestReviewManager.swift in Sources */,
 				F9CF960B2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift in Sources */,
 				F98D8A5127A534BD009560AA /* Printout+Utility.swift in Sources */,
 				F9B95221283CE60200138D07 /* UITraitCollection+extension.swift in Sources */,
@@ -3376,6 +3448,7 @@
 				F9EC66C527B90BC60003FBB6 /* DataBaseSubsidiaryLedger.swift in Sources */,
 				F9EC66C627B90BC60003FBB6 /* SettingsOperatingJournalEntryViewController.swift in Sources */,
 				F9ED93782983ABFE00B255EF /* BackupManager.swift in Sources */,
+				F9C3B1432BE644CA006B6FDA /* ImageCollectionViewCell.swift in Sources */,
 				F9EC66C727B90BC60003FBB6 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9EC66C827B90BC60003FBB6 /* CollectionReusableView.swift in Sources */,
 				F9E501AD2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift in Sources */,
@@ -3450,6 +3523,7 @@
 				F9EC66ED27B90BC60003FBB6 /* DataBaseCompoundTrialBalance.swift in Sources */,
 				F9EC66EE27B90BC60003FBB6 /* BSPresenter.swift in Sources */,
 				F9EC66EF27B90BC60003FBB6 /* DataBaseJournals.swift in Sources */,
+				F97453F02BE3AAE000D9C958 /* RequestReviewManager.swift in Sources */,
 				F9EC66F027B90BC60003FBB6 /* DataBaseManagerSettingsOperatingJournalEntry.swift in Sources */,
 				F9EC66F127B90BC60003FBB6 /* Printout+Utility.swift in Sources */,
 				F9B95222283CE60200138D07 /* UITraitCollection+extension.swift in Sources */,
@@ -3725,7 +3799,7 @@
 				CODE_SIGN_ENTITLEMENTS = Paciolist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -3742,7 +3816,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.0.0;
+				MARKETING_VERSION = 5.1.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3763,7 +3837,7 @@
 				CODE_SIGN_ENTITLEMENTS = Paciolist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -3780,7 +3854,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.0.0;
+				MARKETING_VERSION = 5.1.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3934,7 +4008,7 @@
 				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				ENABLE_BITCODE = NO;
@@ -3953,7 +4027,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.0.0;
+				MARKETING_VERSION = 5.1.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3974,7 +4048,7 @@
 				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				ENABLE_BITCODE = NO;
@@ -3993,7 +4067,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.0.0;
+				MARKETING_VERSION = 5.1.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
