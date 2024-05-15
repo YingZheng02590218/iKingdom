@@ -6,6 +6,7 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
+import AudioToolbox // 効果音
 import GoogleMobileAds // マネタイズ対応
 import UIKit
 
@@ -200,6 +201,12 @@ class SettingsOperatingTableViewController: UITableViewController {
     // 有効無効　変更時のアクション
     @objc
     func hundleSwitch(sender: UISwitch) {
+        // システムサウンドを鳴らす
+        if sender.isOn {
+            AudioServicesPlaySystemSound(1_484) // UISwitch_On_Haptic.caf
+        } else {
+            AudioServicesPlaySystemSound(1_485) // UISwitch_Off_Haptic.caf
+        }
         // フィードバック
         if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
             generator.impactOccurred()

@@ -6,6 +6,7 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
+import AudioToolbox
 import GoogleMobileAds // マネタイズ対応
 import MessageUI // お問い合わせ機能
 import MXParallaxHeader
@@ -138,6 +139,12 @@ class SettingsTableViewController: UIViewController {
     // 生体認証パスコードロック　設定スイッチ 切り替え
     @objc
     func switchTriggered(sender: UISwitch) {
+        // システムサウンドを鳴らす
+        if sender.isOn {
+            AudioServicesPlaySystemSound(1_484) // UISwitch_On_Haptic.caf
+        } else {
+            AudioServicesPlaySystemSound(1_485) // UISwitch_Off_Haptic.caf
+        }
         // フィードバック
         if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
             generator.impactOccurred()
@@ -183,6 +190,12 @@ class SettingsTableViewController: UIViewController {
     // ローカル通知　設定スイッチ 切り替え
     @objc
     func localNotificationSettingSwitchTriggered(sender: UISwitch) {
+        // システムサウンドを鳴らす
+        if sender.isOn {
+            AudioServicesPlaySystemSound(1_484) // UISwitch_On_Haptic.caf
+        } else {
+            AudioServicesPlaySystemSound(1_485) // UISwitch_Off_Haptic.caf
+        }
         // フィードバック
         if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
             generator.impactOccurred()
