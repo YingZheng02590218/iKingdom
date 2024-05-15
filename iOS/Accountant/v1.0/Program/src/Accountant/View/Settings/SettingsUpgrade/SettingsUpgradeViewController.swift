@@ -107,7 +107,7 @@ class SettingsUpgradeViewController: UIViewController {
         createEMTNeumorphicView()
         // ヘッダービュー
         scrollView.parallaxHeader.view = headerView
-        scrollView.parallaxHeader.height = headerView.frame.width * 0.6
+        scrollView.parallaxHeader.height = view.frame.width * 0.6
         scrollView.parallaxHeader.mode = .bottom
         scrollView.parallaxHeader.minimumHeight = 0
         scrollView.contentSize = contentView.frame.size
