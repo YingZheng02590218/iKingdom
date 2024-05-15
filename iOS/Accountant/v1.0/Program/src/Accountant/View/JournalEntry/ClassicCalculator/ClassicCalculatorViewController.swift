@@ -6,6 +6,7 @@
 //  Copyright © 2021 Hisashi Ishihara. All rights reserved.
 //
 
+import AudioToolbox
 import EMTNeumorphicView
 import UIKit
 
@@ -310,6 +311,8 @@ class ClassicCalculatorViewController: UIViewController {
     // 数字ボタンを押下
     @objc
     func numClick(_ sender: EMTNeumorphicButton) {
+        // システムサウンドを鳴らす
+        AudioServicesPlaySystemSound(1_123) // key_press_click.caf
         // フィードバック
         if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
             generator.impactOccurred()
@@ -507,6 +510,8 @@ class ClassicCalculatorViewController: UIViewController {
     // box1 四則演算子 box2 = 計算結果
     @objc
     func clickEqual(_ sender: EMTNeumorphicButton) {
+        // システムサウンドを鳴らす
+        AudioServicesPlaySystemSound(1_156) // key_press_modifier.caf
         // フィードバック
         if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
             generator.impactOccurred()
@@ -616,6 +621,8 @@ class ClassicCalculatorViewController: UIViewController {
     
     @objc
     func clickAc(_ sender: EMTNeumorphicButton) {
+        // システムサウンドを鳴らす
+        AudioServicesPlaySystemSound(1_155) // key_press_delete.caf
         // フィードバック
         if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
             generator.impactOccurred()
