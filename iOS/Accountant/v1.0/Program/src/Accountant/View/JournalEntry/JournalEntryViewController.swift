@@ -1516,7 +1516,6 @@ extension JournalEntryViewController: UITextFieldDelegate {
 extension JournalEntryViewController: JournalEntryPresenterOutput {
     
     func setupUI() {
-        self.navigationItem.title = "仕訳"
         // largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -1582,24 +1581,28 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         textFieldCategoryDebit.updateUI()
         textFieldCategoryCredit.updateUI()
         // 仕訳タイプ判定
-        if journalEntryType == .JournalEntries { // 仕訳 仕訳帳画面からの遷移の場合
-            labelTitle.text = "仕　訳"
-            // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
-            // カルーセルをリロードする
-            reloadCarousel()
-            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-        } else if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳 精算表画面からの遷移の場合
-            labelTitle.text = "決算整理仕訳"
-            // カルーセルをリロードする
-            reloadCarousel()
-            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-        } else if journalEntryType == .JournalEntry { // 仕訳 タブバーの仕訳タブからの遷移の場合
+        if journalEntryType == .JournalEntry { // 仕訳 タブバーの仕訳タブからの遷移の場合
+            self.navigationItem.title = "仕訳"
             labelTitle.text = ""
             // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
             // カルーセルをリロードする
             reloadCarousel()
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
         } else if journalEntryType == .AdjustingAndClosingEntry {
+            self.navigationItem.title = "決算整理仕訳"
+            labelTitle.text = ""
+            // カルーセルをリロードする
+            reloadCarousel()
+            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+        } else if journalEntryType == .JournalEntries { // 仕訳 仕訳帳画面からの遷移の場合
+            self.navigationItem.title = "仕訳"
+            labelTitle.text = ""
+            // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
+            // カルーセルをリロードする
+            reloadCarousel()
+            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+        } else if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳 精算表画面からの遷移の場合
+            self.navigationItem.title = "決算整理仕訳"
             labelTitle.text = ""
             // カルーセルをリロードする
             reloadCarousel()
@@ -1609,7 +1612,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             tableView.isHidden = true
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
             // 通常仕訳
-            labelTitle.text = "仕訳編集"
+            labelTitle.text = "仕訳 編集"
             if let dataBaseJournalEntry = DataBaseManagerJournalEntry.shared.getJournalEntryWithNumber(number: primaryKey),
                // データベースに保持した日付をUIのピッカーに渡すために、yyyy/MM/dd形式でDate型へ変換するために使用する
                let date = DateManager.shared.dateFormatterStringToDate.date(from: dataBaseJournalEntry.date),
@@ -1627,7 +1630,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             tableView.isHidden = true
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
             // 決算整理仕訳
-            labelTitle.text = "決算整理仕訳編集"
+            labelTitle.text = "決算整理仕訳 編集"
             if let dataBaseJournalEntry = DataBaseManagerAdjustingEntry.shared.getAdjustingEntryWithNumber(number: primaryKey),
                // データベースに保持した日付をUIのピッカーに渡すために、yyyy/MM/dd形式でDate型へ変換するために使用する
                let date = DateManager.shared.dateFormatterStringToDate.date(from: dataBaseJournalEntry.date),
@@ -1641,7 +1644,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             }
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
         } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集 仕訳帳画面からの遷移の場合
-            labelTitle.text = "仕訳まとめて編集"
+            labelTitle.text = "仕訳 まとめて編集"
             // よく使う仕訳　エリア
             tableView.isHidden = true
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
@@ -1888,20 +1891,31 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
 
 // 仕訳タイプ(仕訳 or 決算整理仕訳 or 編集)
 enum JournalEntryType {
-    // 仕訳 仕訳帳画面からの遷移の場合
-    case JournalEntries
-    // 決算整理仕訳 精算表画面からの遷移の場合
-    case AdjustingAndClosingEntries
+    // MARK: タブバーの仕訳タブ
     // 仕訳 タブバーの仕訳タブからの遷移の場合
     case JournalEntry
     // 決算整理仕訳 タブバーの仕訳タブからの遷移の場合
     case AdjustingAndClosingEntry
+    
+    // MARK: 仕訳帳画面
+    // 仕訳 仕訳帳画面からの遷移の場合
+    case JournalEntries
+    
+    // MARK: 精算表画面
+    // 決算整理仕訳 精算表画面からの遷移の場合
+    case AdjustingAndClosingEntries
+    
+    // MARK: 勘定画面・仕訳帳画面
     // 仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
     case JournalEntriesFixing
     // 決算整理仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
     case AdjustingEntriesFixing
+    
+    // MARK: 仕訳帳画面
     // 仕訳一括編集 仕訳帳画面からの遷移の場合
     case JournalEntriesPackageFixing
+    
+    // MARK: 画面
     // よく使う仕訳 追加
     case SettingsJournalEntries
     // よく使う仕訳 更新

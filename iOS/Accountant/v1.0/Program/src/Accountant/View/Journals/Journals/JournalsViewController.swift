@@ -198,7 +198,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    // 仕訳画面表示ボタン
+    // 仕訳画面 表示ボタン
     @IBAction func addButtonTapped(_ sender: UIButton) {
         // フィードバック
         if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
@@ -207,7 +207,16 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         sender.animateView()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             // 別の画面に遷移 仕訳画面
-            self.performSegue(withIdentifier: "buttonTapped2", sender: nil)
+            if let viewController = UIStoryboard(
+                name: "JournalEntryViewController",
+                bundle: nil
+            ).instantiateInitialViewController() as? JournalEntryViewController {
+                viewController.journalEntryType = .JournalEntries // セルに表示した仕訳タイプを取得
+                viewController.segmentedControl.isHidden = true
+                // ナビゲーションバーを表示させる
+                let navigation = UINavigationController(rootViewController: viewController)
+                self.present(navigation, animated: true, completion: nil)
+            }
         }
     }
     
@@ -471,10 +480,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // segue.destinationの型はUIViewController
         if let controller = segue.destination as? JournalEntryViewController {
-            // 遷移先のコントローラに値を渡す
-            if segue.identifier == "buttonTapped2" {
-                controller.journalEntryType = .JournalEntries // セルに表示した仕訳タイプを取得
-            } else if segue.identifier == "longTapped" {
+            if segue.identifier == "longTapped" {
                 if let tappedIndexPath = tappedIndexPath { // nil:ロングタップではない
                     
                     controller.tappedIndexPath = tappedIndexPath // アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用

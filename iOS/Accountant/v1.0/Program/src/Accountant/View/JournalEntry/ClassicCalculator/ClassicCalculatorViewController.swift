@@ -327,7 +327,7 @@ class ClassicCalculatorViewController: UIViewController {
             })
             return
         }
-        // 仕訳帳、決算整理仕訳、仕訳編集画面からの遷移の場合
+        // 仕訳帳画面（仕訳編集、決算整理仕訳編集、仕訳まとめて編集）、勘定画面（仕訳編集、決算整理仕訳編集）、よく使う仕訳画面からの遷移の場合
         if let presentingViewController2 = presentingViewController as? JournalEntryViewController {
             // viewWillAppearを呼び出す　更新のため
             self.dismiss(animated: true, completion: { [presentingViewController2] () -> Void in
@@ -336,20 +336,23 @@ class ClassicCalculatorViewController: UIViewController {
             })
             return
         }
-        
-        // 通常の仕訳画面からの遷移の場合
+        // 仕訳帳画面（仕訳）、精算表画面（決算整理仕訳）からの遷移の場合
+        if let navigationController = presentingViewController as? UINavigationController,
+           let presentingViewController2 = navigationController.topViewController as? JournalEntryViewController {
+            // viewWillAppearを呼び出す　更新のため
+            self.dismiss(animated: true, completion: { [presentingViewController2] () -> Void in
+                // ViewController(電卓画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
+                presentingViewController2.setAmountValue(numbersOnDisplay: self.numbersOnDisplay)
+            })
+            return
+        }
+        // タブバーの仕訳タブからの遷移の場合
         // モーダルの起動元はタブコントローラ
-        guard let tabBarController = presentingViewController as? UITabBarController else {
-            print("Could not find tabbar Controller")
-            return
-        }
-        // タブで選択中のナビゲーションコントローラ
-        guard let navigationController = tabBarController.selectedViewController as? UINavigationController else {
-            print("Could not find avigation nController")
-            return
-        }
-        // ナビゲーションコントローラの最前面を取得
-        if let presentingViewController2 = navigationController.topViewController as? JournalEntryViewController {
+        if let tabBarController = presentingViewController as? UITabBarController,
+           // タブで選択中のナビゲーションコントローラ
+           let navigationController = tabBarController.selectedViewController as? UINavigationController,
+           // ナビゲーションコントローラの最前面を取得
+           let presentingViewController2 = navigationController.topViewController as? JournalEntryViewController {
             // viewWillAppearを呼び出す　更新のため
             self.dismiss(animated: true, completion: { [presentingViewController2] () -> Void in
                 // ViewController(電卓画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
