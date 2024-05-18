@@ -17,6 +17,8 @@ class JournalEntryViewController: UIViewController {
     // MARK: - var let
     
     private var interstitial: GADInterstitialAd?
+    
+    @IBOutlet var backgroundView: UIView!
     // タイトルラベル
     @IBOutlet var labelTitle: UILabel!
     // 仕訳/決算整理仕訳　切り替え
@@ -55,6 +57,12 @@ class JournalEntryViewController: UIViewController {
     var errorMessage: String?
     // テキストフィールド　勘定科目、小書きのキーボードが表示中フラグ
     var isShown = false
+    /// モーダル上部に設置されるインジケータ
+    private lazy var indicatorView: SemiModalIndicatorView = {
+        let indicator = SemiModalIndicatorView()
+        indicator.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(indicatorDidTap(_:))))
+        return indicator
+    }()
     // フィードバック
     let feedbackGeneratorMedium: Any? = {
         if #available(iOS 10.0, *) {
@@ -454,6 +462,19 @@ class JournalEntryViewController: UIViewController {
             addButton.layer.shadowOffset = CGSize(width: 1.5, height: 1.5)
             // 影の不透明度(濃さ)を指定
             addButton.layer.shadowOpacity = 1.0
+        }
+        
+        if let backgroundView = backgroundView {
+            // 中央上部に配置する
+            indicatorView.frame = CGRect(x: 0, y: 0, width: 40, height: 5)
+            backgroundView.addSubview(indicatorView)
+            indicatorView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                indicatorView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+                indicatorView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5),
+                indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
+                indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
+            ])
         }
     }
     
@@ -1133,6 +1154,12 @@ class JournalEntryViewController: UIViewController {
                 controller.journalEntryData = journalEntryData
             }
         }
+    }
+    
+    // インジケータ タップ
+    @objc
+    private func indicatorDidTap(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
