@@ -30,13 +30,19 @@ class GroupChoiceViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        createPicker()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // ドラムロールの初期位置
         pickerView.selectRow(0, inComponent: 0, animated: true)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // viewDidLayoutSubviews()に書くと何度も呼ばれて、落ちる?
+        createPicker()
     }
     // ピッカー作成
     func createPicker() {
