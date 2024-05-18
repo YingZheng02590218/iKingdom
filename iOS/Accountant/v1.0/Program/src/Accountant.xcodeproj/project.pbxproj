@@ -262,6 +262,8 @@
 		F955B6112490FD3E005E2C6D /* CFTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B6102490FD3E005E2C6D /* CFTableViewController.swift */; };
 		F9578BDD2858CA13001C5D74 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9578BDC2858CA13001C5D74 /* Network.framework */; };
 		F9578BDE2858CA1B001C5D74 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9578BDC2858CA13001C5D74 /* Network.framework */; };
+		F958A3732BF5EEF800C357CC /* SemiModalIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F958A3722BF5EEF800C357CC /* SemiModalIndicatorView.swift */; };
+		F958A3742BF5EEF800C357CC /* SemiModalIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F958A3722BF5EEF800C357CC /* SemiModalIndicatorView.swift */; };
 		F9593DB42A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9593DB32A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift */; };
 		F9593DB52A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9593DB32A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift */; };
 		F9593DB72A62B61C00A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9593DB62A62B61C00A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.swift */; };
@@ -1032,6 +1034,7 @@
 		F955B606248FE6EF005E2C6D /* FinancialStatementTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FinancialStatementTableViewController.swift; path = Accountant/View/FinancialStatement/FinancialStatementTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		F955B6102490FD3E005E2C6D /* CFTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFTableViewController.swift; sourceTree = "<group>"; };
 		F9578BDC2858CA13001C5D74 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = System/Library/Frameworks/Network.framework; sourceTree = SDKROOT; };
+		F958A3722BF5EEF800C357CC /* SemiModalIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiModalIndicatorView.swift; sourceTree = "<group>"; };
 		F9593DB32A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsOperatingJournalEntryGroup.swift; sourceTree = "<group>"; };
 		F9593DB62A62B61C00A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOperatingJournalEntryGroupViewController.swift; sourceTree = "<group>"; };
 		F9593DBA2A62B64800A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsOperatingJournalEntryGroupViewController.storyboard; sourceTree = "<group>"; };
@@ -2132,6 +2135,7 @@
 			children = (
 				F9C2BC24277DEF08006334D0 /* ClassicCalculatorViewController.swift */,
 				F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */,
+				F958A3722BF5EEF800C357CC /* SemiModalIndicatorView.swift */,
 			);
 			path = ClassicCalculator;
 			sourceTree = "<group>";
@@ -3314,6 +3318,7 @@
 				F9EC65E12BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift in Sources */,
 				F9F3A01C27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */,
 				F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
+				F958A3732BF5EEF800C357CC /* SemiModalIndicatorView.swift in Sources */,
 				F98D8A5327A55F27009560AA /* WSPresenter.swift in Sources */,
 				F9C6C74129A3A5D700BA8F83 /* PopUpViewController.swift in Sources */,
 				F909645629C32D8B00BB5298 /* Date+extension.swift in Sources */,
@@ -3567,6 +3572,7 @@
 				F9EC65E22BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift in Sources */,
 				F9F3A01D27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */,
 				F9EC670527B90BC60003FBB6 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
+				F958A3742BF5EEF800C357CC /* SemiModalIndicatorView.swift in Sources */,
 				F9EC670627B90BC60003FBB6 /* WSPresenter.swift in Sources */,
 				F9C6C74229A3A5D700BA8F83 /* PopUpViewController.swift in Sources */,
 				F909645729C32D8B00BB5298 /* Date+extension.swift in Sources */,
