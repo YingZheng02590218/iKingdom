@@ -12,11 +12,18 @@ import UIKit
 class PeriodYearViewController: UIViewController {
     
     @IBOutlet var pickerView: UIPickerView!
-    @IBOutlet var pickerViewView: EMTNeumorphicView!
+    @IBOutlet var backgroundView: EMTNeumorphicView!
     @IBOutlet private var pickerViewViewView: EMTNeumorphicView!
     @IBOutlet private var doneButton: EMTNeumorphicButton!
     @IBOutlet private var cancelButton: EMTNeumorphicButton!
     
+    /// モーダル上部に設置されるインジケータ
+    private lazy var indicatorView: SemiModalIndicatorView = {
+        let indicator = SemiModalIndicatorView()
+        indicator.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(indicatorDidTap(_:))))
+        return indicator
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -38,13 +45,13 @@ class PeriodYearViewController: UIViewController {
         pickerView.isHidden = false
         //        pickerViewView.isHidden = false
         
-        if let datePickerView = pickerViewView {
-            datePickerView.neumorphicLayer?.cornerRadius = 15
-            datePickerView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
-            datePickerView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
-            datePickerView.neumorphicLayer?.edged = Constant.edged
-            datePickerView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+        if let backgroundView = backgroundView {
+            backgroundView.neumorphicLayer?.cornerRadius = 15
+            backgroundView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            backgroundView.neumorphicLayer?.edged = Constant.edged
+            backgroundView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
         }
         
         if let datePickerView = pickerViewViewView {
@@ -77,6 +84,17 @@ class PeriodYearViewController: UIViewController {
         cancelButton.neumorphicLayer?.edged = Constant.edged
         cancelButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         cancelButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+        
+        // 中央上部に配置する
+        indicatorView.frame = CGRect(x: 0, y: 0, width: 40, height: 5)
+        backgroundView.addSubview(indicatorView)
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            indicatorView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+            indicatorView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5),
+            indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
+            indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
+        ])
     }
     
     @IBAction func doneButtonTapped(_ sender: EMTNeumorphicButton) {
@@ -127,6 +145,11 @@ class PeriodYearViewController: UIViewController {
         }
     }
     
+    // インジケータ タップ
+    @objc
+    private func indicatorDidTap(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension PeriodYearViewController: UIPickerViewDataSource, UIPickerViewDelegate {
