@@ -17,6 +17,8 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
     // MARK: - var let
     
     var gADBannerView: GADBannerView!
+    
+    @IBOutlet var backgroundBaseView: UIView!
     /// 勘定　上部
     @IBOutlet private var dateYearLabel: UILabel!
     @IBOutlet private var topView: UIView!
@@ -49,6 +51,12 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
     var account: String = ""
     // 編集機能
     var tappedIndexPath: IndexPath?
+    /// モーダル上部に設置されるインジケータ
+    private lazy var indicatorView: SemiModalIndicatorView = {
+        let indicator = SemiModalIndicatorView()
+        indicator.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(indicatorDidTap(_:))))
+        return indicator
+    }()
     
     /// GUIアーキテクチャ　MVP
     private var presenter: GeneralLedgerAccountPresenterInput!
@@ -125,6 +133,19 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
                 backgroundView.layer.insertSublayer(gradientLayer, at: 0)
             }
         }
+        
+        if let backgroundView = backgroundBaseView {
+            // 中央上部に配置する
+            indicatorView.frame = CGRect(x: 0, y: 0, width: 40, height: 5)
+            backgroundView.addSubview(indicatorView)
+            indicatorView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                indicatorView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+                indicatorView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5),
+                indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
+                indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
+            ])
+        }
     }
     
     private func setLongPressRecognizer() {
@@ -192,6 +213,12 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
                 }
             }
         }
+    }
+    
+    // インジケータ タップ
+    @objc
+    private func indicatorDidTap(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Navigation
