@@ -250,14 +250,16 @@ class SettingsUpgradeViewController: UIViewController {
     }
     // 購入
     @IBAction func purchaseButtonTapped(_ sender: EMTNeumorphicButton) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = self.feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
+        // 選択されていたボタンを選択解除する
+        sender.isSelected = false
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             sender.isSelected = !sender.isSelected
-            // フィードバック
-            if #available(iOS 10.0, *), let generator = self.feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
-                generator.impactOccurred()
-            }
         }
         // インジゲーターを開始
         self.showActivityIndicatorView()
@@ -276,14 +278,16 @@ class SettingsUpgradeViewController: UIViewController {
     }
     // リストア
     @IBAction func restoreButtonTapped(_ sender: EMTNeumorphicButton) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = self.feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
+        // 選択されていたボタンを選択解除する
+        sender.isSelected = false
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             sender.isSelected = !sender.isSelected
-            // フィードバック
-            if #available(iOS 10.0, *), let generator = self.feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
-                generator.impactOccurred()
-            }
         }
         // インジゲーターを開始
         self.showActivityIndicatorView()
@@ -313,23 +317,36 @@ class SettingsUpgradeViewController: UIViewController {
         }
     }
     // 解約
-    @IBAction func howToCancelButtonTapped(_ sender: Any) {
-        // アプリ内でブラウザを開く
-        if Locale.current.regionCode == "JP" {
-            let url = URL(
-                string:
-                    "https://support.apple.com/ja-jp/HT202039#:~:text=%E3%80%8C%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%8A%E3%82%88%E3%81%B3%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%80%8D%E3%82%92%E9%81%B8%E6%8A%9E,%E3%81%95%E3%82%8C%E3%82%8B%E3%81%93%E3%81%A8%E3%82%82%E3%81%82%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93)%E3%80%82"
-            )
-            if let url = url {
-                let vc = SFSafariViewController(url: url)
-                present(vc, animated: true, completion: nil)
-            }
-        } else {
+    @IBAction func howToCancelButtonTapped(_ sender: EMTNeumorphicButton) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = self.feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
+        // 選択されていたボタンを選択解除する
+        sender.isSelected = false
+        // ボタンを選択する
+        sender.isSelected = !sender.isSelected
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            sender.isSelected = !sender.isSelected
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             // アプリ内でブラウザを開く
-            let url = URL(string: "https://support.apple.com/en-us/HT202039")
-            if let url = url {
-                let vc = SFSafariViewController(url: url)
-                present(vc, animated: true, completion: nil)
+            if Locale.current.regionCode == "JP" {
+                let url = URL(
+                    string:
+                        "https://support.apple.com/ja-jp/HT202039#:~:text=%E3%80%8C%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%8A%E3%82%88%E3%81%B3%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%80%8D%E3%82%92%E9%81%B8%E6%8A%9E,%E3%81%95%E3%82%8C%E3%82%8B%E3%81%93%E3%81%A8%E3%82%82%E3%81%82%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93)%E3%80%82"
+                )
+                if let url = url {
+                    let vc = SFSafariViewController(url: url)
+                    self.present(vc, animated: true, completion: nil)
+                }
+            } else {
+                // アプリ内でブラウザを開く
+                let url = URL(string: "https://support.apple.com/en-us/HT202039")
+                if let url = url {
+                    let vc = SFSafariViewController(url: url)
+                    self.present(vc, animated: true, completion: nil)
+                }
             }
         }
     }

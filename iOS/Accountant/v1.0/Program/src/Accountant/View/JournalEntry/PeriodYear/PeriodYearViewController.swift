@@ -80,13 +80,14 @@ class PeriodYearViewController: UIViewController {
     }
     
     @IBAction func doneButtonTapped(_ sender: EMTNeumorphicButton) {
+        // 選択されていたボタンを選択解除する
+        sender.isSelected = false
         // ボタンを選択する
-        sender.isSelected = true
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.doneButton.isSelected = false
+        sender.isSelected = !sender.isSelected
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            sender.isSelected = false
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 let fiscalYear = Int(self.getPeriodFromDB(row: self.pickerView.selectedRow(inComponent: 0)))
                 
                 let alert = UIAlertController(title: "最終確認", message: "年度を 「\(self.getPeriodFromDB(row: self.pickerView.selectedRow(inComponent: 0)))」 に変更しますか？", preferredStyle: .alert)
@@ -113,13 +114,14 @@ class PeriodYearViewController: UIViewController {
     }
     
     @IBAction func cancelButtonTapped(_ sender: EMTNeumorphicButton) {
+        // 選択されていたボタンを選択解除する
+        sender.isSelected = false
         // ボタンを選択する
-        sender.isSelected = true
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.cancelButton.isSelected = false
+        sender.isSelected = !sender.isSelected
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            sender.isSelected = false
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.dismiss(animated: true, completion: nil)
             }
         }

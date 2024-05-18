@@ -63,7 +63,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
                 textFieldSmallWritting.text = journalEntryData.smallWritting
             }
         } else if journalEntryType == .SettingsJournalEntriesFixing {
-            labelTitle.text = "よく使う仕訳"
+            labelTitle.text = "よく使う仕訳 編集"
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
             deleteButton.isHidden = false
             // データベース　よく使う仕訳を追加
@@ -160,9 +160,11 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
             generator.impactOccurred()
         }
+        // 選択されていたボタンを選択解除する
+        sender.isSelected = false
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             sender.isSelected = !sender.isSelected
         }
         // バリデーションチェック
@@ -238,7 +240,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
                 creditAmount: Int64(amountCreditTextField) ?? 0, // カンマを削除してからデータベースに書き込む
                 smallWritting: textFieldSmallWritting
             )
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 // 設定よく使う仕訳画面
                 if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
                    let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
@@ -331,10 +333,17 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
     // 削除ボタン
     @IBOutlet private var deleteButton: EMTNeumorphicButton!
     
-    @IBAction func deleteButton(_ sender: Any) {
+    @IBAction func deleteButton(_ sender: EMTNeumorphicButton) {
         // フィードバック
         if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
             generator.impactOccurred()
+        }
+        // 選択されていたボタンを選択解除する
+        sender.isSelected = false
+        // ボタンを選択する
+        sender.isSelected = !sender.isSelected
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            sender.isSelected = !sender.isSelected
         }
         // 確認のポップアップを表示したい
         self.showPopover()

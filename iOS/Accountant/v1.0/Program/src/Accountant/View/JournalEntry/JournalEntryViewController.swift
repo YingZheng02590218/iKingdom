@@ -598,7 +598,7 @@ class JournalEntryViewController: UIViewController {
         }
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             sender.isSelected = !sender.isSelected
         }
         
@@ -621,7 +621,7 @@ class JournalEntryViewController: UIViewController {
         }
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             sender.isSelected = !sender.isSelected
         }
         
@@ -738,7 +738,7 @@ class JournalEntryViewController: UIViewController {
         }
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             sender.isSelected = !sender.isSelected
         }
         
@@ -1083,7 +1083,7 @@ class JournalEntryViewController: UIViewController {
         }
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             sender.isSelected = !sender.isSelected
         }
         textFieldCategoryDebit.text = ""
@@ -1094,7 +1094,9 @@ class JournalEntryViewController: UIViewController {
         // 終了させる　仕訳帳画面か精算表画面へ戻る
         if journalEntryType != .JournalEntry && // 仕訳 タブバーの仕訳タブからの遷移の場合
             journalEntryType != .AdjustingAndClosingEntry { // 決算整理仕訳 タブバーの仕訳タブからの遷移の場合
-            self.dismiss(animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
     

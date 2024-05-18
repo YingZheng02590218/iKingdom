@@ -210,9 +210,11 @@ class BackupViewController: UIViewController {
         if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
             generator.impactOccurred()
         }
+        // 選択されていたボタンを選択解除する
+        sender.isSelected = false
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             sender.isSelected = !sender.isSelected
         }
         // オフラインの場合iCloudへアクセスできないので、ネットワーク接続を確認する

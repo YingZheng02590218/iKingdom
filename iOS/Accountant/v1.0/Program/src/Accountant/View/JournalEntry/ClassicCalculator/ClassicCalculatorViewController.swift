@@ -173,7 +173,7 @@ class ClassicCalculatorViewController: UIViewController {
         }
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             sender.isSelected = !sender.isSelected
         }
         
@@ -257,8 +257,16 @@ class ClassicCalculatorViewController: UIViewController {
         if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
             generator.impactOccurred()
         }
-        
-        closeScreen()
+        // 選択されていたボタンを選択解除する
+        sender.isSelected = false
+        // ボタンを選択する
+        sender.isSelected = !sender.isSelected
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            sender.isSelected = !sender.isSelected
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.closeScreen()
+        }
     }
     
     func closeScreen() {
