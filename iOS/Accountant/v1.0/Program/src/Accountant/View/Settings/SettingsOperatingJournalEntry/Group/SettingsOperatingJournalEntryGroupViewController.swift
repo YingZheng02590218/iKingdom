@@ -187,9 +187,26 @@ extension SettingsOperatingJournalEntryGroupViewController: UITableViewDataSourc
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         
         let objects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
-        
         cell.textLabel?.text = objects[indexPath.row].groupName
+        
+        // Accessory Color
+        let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
+        let disclosureView = UIImageView(image: disclosureImage)
+        disclosureView.tintColor = UIColor.accentColor
+        cell.accessoryView = disclosureView
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            // タップされたセルの位置をフィールドで保持する
+            self.tappedIndexPath = indexPath
+            tableView.deselectRow(at: indexPath, animated: true)
+            setupCellLongPressed(indexPath: indexPath)
+        default:
+            break
+        }
     }
     // 削除機能 セルを左へスワイプ
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

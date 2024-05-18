@@ -133,7 +133,9 @@ class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
         }
         // 編集　グループ一覧画面で選択されたセルの位置
         if let tappedIndexPath = tappedIndexPath {
-            inputButton.setTitle("更新", for: .normal)
+            inputButton.setTitle("更　新", for: .normal)
+        } else {
+            inputButton.setTitle("登　録", for: .normal)
         }
         inputButton.setTitleColor(.accentColor, for: .normal)
         inputButton.neumorphicLayer?.cornerRadius = 15
