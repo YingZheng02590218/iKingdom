@@ -269,6 +269,15 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
                             presentingViewController.viewWillAppear(true)
                         })
                     }
+                    // 仕訳帳画面（仕訳編集、決算整理仕訳編集）、勘定画面（仕訳編集、決算整理仕訳編集）からの遷移の場合
+                    if let presentingViewController = self.presentingViewController as? JournalEntryViewController {
+                        // viewWillAppearを呼び出す　更新のため
+                        self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                            // よく使う仕訳　エリア カルーセルをリロードする
+                            JournalEntryViewController.viewReload = true
+                            presentingViewController.viewWillAppear(true)
+                        })
+                    }
                     // 仕訳帳画面（仕訳）、精算表画面（決算整理仕訳）からの遷移の場合
                     if let navigationController = self.presentingViewController as? UINavigationController,
                        let presentingViewController = navigationController.topViewController as? JournalEntryViewController {

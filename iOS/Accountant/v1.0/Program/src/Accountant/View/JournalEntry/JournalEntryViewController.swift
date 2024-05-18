@@ -198,9 +198,25 @@ class JournalEntryViewController: UIViewController {
     func reloadCarousel() {
         if JournalEntryViewController.viewReload {
             DispatchQueue.main.async { [self] in
-                // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
-                self.textFieldCategoryDebit.text = nil
-                textFieldCategoryCredit.text = nil
+                // データベース　よく使う仕訳
+                if let text = textFieldCategoryDebit.text {
+                    let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+                        account: text
+                    )
+                    if objects.isEmpty {
+                        // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
+                        textFieldCategoryDebit.text = nil
+                    }
+                }
+                if let text = textFieldCategoryCredit.text {
+                    let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+                        account: text
+                    )
+                    if objects.isEmpty {
+                        // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
+                        textFieldCategoryCredit.text = nil
+                    }
+                }
                 // よく使う仕訳　エリア
                 tableView.reloadData()
                 
