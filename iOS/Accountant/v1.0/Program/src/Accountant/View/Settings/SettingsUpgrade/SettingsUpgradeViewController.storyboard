@@ -23,6 +23,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DTr-hN-OGx">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <viewLayoutGuide key="safeArea" id="tmh-ea-XNf"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G2V-hj-w9w">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <subviews>
@@ -405,13 +410,18 @@
                         <color key="backgroundColor" name="BaseColor"/>
                         <constraints>
                             <constraint firstItem="G2V-hj-w9w" firstAttribute="top" secondItem="B6R-TG-5lf" secondAttribute="top" id="44m-US-1N3"/>
+                            <constraint firstItem="DTr-hN-OGx" firstAttribute="trailing" secondItem="35Q-iN-loI" secondAttribute="trailing" id="5Mh-TT-6C4"/>
                             <constraint firstItem="35Q-iN-loI" firstAttribute="bottom" secondItem="G2V-hj-w9w" secondAttribute="bottom" id="CIc-EH-jug"/>
                             <constraint firstItem="G2V-hj-w9w" firstAttribute="trailing" secondItem="35Q-iN-loI" secondAttribute="trailing" id="axB-Cd-fdL"/>
+                            <constraint firstItem="35Q-iN-loI" firstAttribute="leading" secondItem="DTr-hN-OGx" secondAttribute="leading" id="dwL-GP-ZzY"/>
+                            <constraint firstItem="DTr-hN-OGx" firstAttribute="top" secondItem="B6R-TG-5lf" secondAttribute="top" id="jVn-Ti-g0e"/>
+                            <constraint firstItem="DTr-hN-OGx" firstAttribute="bottom" secondItem="35Q-iN-loI" secondAttribute="bottom" id="m6N-fq-uSA"/>
                             <constraint firstItem="G2V-hj-w9w" firstAttribute="leading" secondItem="35Q-iN-loI" secondAttribute="leading" id="u98-NC-Ys0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="アップグレード" id="jIF-Go-i6u"/>
                     <connections>
+                        <outlet property="backgroundView" destination="DTr-hN-OGx" id="Ddp-qR-nPj"/>
                         <outlet property="button" destination="D5q-FZ-rj1" id="3KG-y5-bhK"/>
                         <outlet property="buyLabel" destination="mg8-V5-hjB" id="4D3-Ov-5ki"/>
                         <outlet property="contentView" destination="0pE-s0-mB9" id="miQ-If-wN7"/>

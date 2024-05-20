@@ -16,6 +16,7 @@ import UIKit
 // アップグレード画面
 class SettingsUpgradeViewController: UIViewController {
     
+    @IBOutlet var backgroundView: UIView!
     @IBOutlet private var scrollView: UIScrollView!
     // 【Xcode11】いつもスクロールしなかったUIScrollView + AutoLayoutをやっと攻略できた
     // https://swallow-incubate.com/archives/blog/20200805
@@ -47,6 +48,12 @@ class SettingsUpgradeViewController: UIViewController {
     @IBOutlet var termsButton: UIButton!
     // プラポリ
     @IBOutlet var privacyPolicyButton: UIButton!
+    /// モーダル上部に設置されるインジケータ
+    private lazy var indicatorView: SemiModalIndicatorView = {
+        let indicator = SemiModalIndicatorView()
+        indicator.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(indicatorDidTap(_:))))
+        return indicator
+    }()
     // フィードバック
     private let feedbackGeneratorHeavy: Any? = {
         if #available(iOS 10.0, *) {
@@ -144,6 +151,19 @@ class SettingsUpgradeViewController: UIViewController {
         howToCancelButton.neumorphicLayer?.edged = Constant.edged
         howToCancelButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         howToCancelButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+        
+        if let backgroundView = backgroundView {
+            // 中央上部に配置する
+            indicatorView.frame = CGRect(x: 0, y: 0, width: 40, height: 5)
+            backgroundView.addSubview(indicatorView)
+            indicatorView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                indicatorView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+                indicatorView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5),
+                indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
+                indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
+            ])
+        }
     }
     // ラベル
     func setupExplainLabel() {
@@ -409,6 +429,12 @@ class SettingsUpgradeViewController: UIViewController {
         }
     }
 
+    // インジケータ タップ
+    @objc
+    private func indicatorDidTap(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     // インジゲーターを開始
     func showActivityIndicatorView() {
         DispatchQueue.main.async {

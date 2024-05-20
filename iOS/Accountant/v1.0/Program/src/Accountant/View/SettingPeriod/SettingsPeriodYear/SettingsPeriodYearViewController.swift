@@ -170,7 +170,9 @@ class SettingsPeriodYearViewController: UIViewController, UIPickerViewDataSource
                                 name: "SettingsUpgradeViewController",
                                 bundle: nil
                             ).instantiateViewController(withIdentifier: "SettingsUpgradeViewController") as? SettingsUpgradeViewController {
-                                self.present(viewController, animated: true, completion: nil)
+                                // ナビゲーションバーを表示させる
+                                let navigation = UINavigationController(rootViewController: viewController)
+                                self.present(navigation, animated: true, completion: nil)
                             }
                         } else {
 
