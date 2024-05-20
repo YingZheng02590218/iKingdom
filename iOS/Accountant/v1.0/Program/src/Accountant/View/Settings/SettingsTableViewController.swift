@@ -32,7 +32,12 @@ class SettingsTableViewController: UIViewController {
     @IBOutlet private var headerView: UIView!
     var posX: CGFloat = 0
     // 通知設定 設定アプリ　Allow Notifications
-    var isOn = false
+    var isOn = false {
+        didSet {
+            // 記帳する時刻を通知する のセルをリロードする
+            self.reloadRow(section: 3, row: 4)
+        }
+    }
     // フィードバック
     private let feedbackGeneratorMedium: Any? = {
         if #available(iOS 10.0, *) {
@@ -81,7 +86,7 @@ class SettingsTableViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .accentColor
         
         scrollView.parallaxHeader.view = headerView
-        scrollView.parallaxHeader.height = self.view.frame.height * 0.15
+        scrollView.parallaxHeader.height = self.view.frame.height * 0.1
         scrollView.parallaxHeader.mode = .fill
         scrollView.parallaxHeader.minimumHeight = 0
         scrollView.contentSize = contentView.frame.size
@@ -104,8 +109,6 @@ class SettingsTableViewController: UIViewController {
         tableView.tableFooterView = tableFooterView
         // 会計期間のセルをリロードする
         reloadRow(section: 2, row: 1)
-        // 通知設定のセルをリロードする
-        reloadRow(section: 3, row: 3)
     }
     
     override func viewDidLayoutSubviews() {
@@ -131,10 +134,12 @@ class SettingsTableViewController: UIViewController {
         }
     }
     
-    // 会計期間のセルをリロードする
+    // セルをリロードする
     func reloadRow(section: Int, row: Int) {
         let indexPath = IndexPath(row: row, section: section)
-        tableView.reloadRows(at: [indexPath], with: .fade)
+        DispatchQueue.main.async {
+            self.tableView.reloadRows(at: [indexPath], with: .fade)
+        }
     }
     // 生体認証パスコードロック　設定スイッチ 切り替え
     @objc
@@ -177,9 +182,9 @@ class SettingsTableViewController: UIViewController {
             }
         }
     }
-    // PUSH通知　ボタン
+    // iOS の設定を開く　ボタン
     @objc
-    func pushNotificationSettingButtonTapped(sender: UIButton) {
+    func iosSettingsButtonTapped(sender: UIButton) {
         // フィードバック
         if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
             generator.impactOccurred()
@@ -390,7 +395,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 70
+            return 75
         } else {
             return 50
         }
@@ -486,6 +491,34 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         } else if indexPath.section == 3 {
             switch indexPath.row {
             case 0:
+                cell.centerLabel.text = "よく使う仕訳"
+                cell.leftImageView.image = UIImage(named: "border_color-border_color_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
+                // セルの選択を可にする
+                cell.selectionStyle = .gray
+                
+            case 1:
+                cell.centerLabel.text = "主要簿"
+                cell.leftImageView.image = UIImage(named: "import_contacts-import_contacts_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
+                // セルの選択を可にする
+                cell.selectionStyle = .gray
+                
+            case 2:
+                cell.centerLabel.text = "iOS の設定を開く"
+                // ボタン
+                let button = UIButton(frame: CGRect(x: 0, y: cell.frame.size.height / 2, width: 25, height: 25))
+                // iOS の設定を開く　設定スイッチ
+                button.tintColor = .accentColor
+                let picture = UIImage(named: "baseline_open_in_new_black_36pt")?.withRenderingMode(.alwaysTemplate)
+                button.setImage(picture, for: .normal)
+                button.imageView?.tintColor = .accentColor
+                cell.leftImageView.image = UIImage(named: "settings-settings_symbol")?.withRenderingMode(.alwaysTemplate)
+                button.tag = indexPath.row
+                button.addTarget(self, action: #selector(iosSettingsButtonTapped), for: .touchUpInside)
+                cell.accessoryView = button
+                // セルの選択を可にする
+                cell.selectionStyle = .gray
+
+            case 3:
                 cell.centerLabel.text = "生体認証・パスコード"
                 // 生体認証かパスコードのいずれかが使用可能かを確認する
                 if LocalAuthentication.canEvaluatePolicy() {
@@ -504,44 +537,15 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.selectionStyle = .none
 
                 return cell
-            case 1:
-                cell.centerLabel.text = "よく使う仕訳"
-                cell.leftImageView.image = UIImage(named: "border_color-border_color_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
-                // セルの選択を可にする
-                cell.selectionStyle = .gray
-                
-            case 2:
-                cell.centerLabel.text = "主要簿"
-                cell.leftImageView.image = UIImage(named: "import_contacts-import_contacts_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
-                // セルの選択を可にする
-                cell.selectionStyle = .gray
-                
-            case 3:
-                cell.centerLabel.text = "通知設定"
-                // ボタン
-                let button = UIButton(frame: CGRect(x: 0, y: cell.frame.size.height / 2, width: 25, height: 25))
-                // PUSH通知　設定スイッチ
-                button.tintColor = .accentColor
-                let picture = UIImage(systemName: "square.and.arrow.up")?.withRenderingMode(.alwaysTemplate)
-                button.setImage(picture, for: .normal)
-                button.imageView?.tintColor = .accentColor
+            case 4:
+                cell.centerLabel.text = "記帳する時刻を通知する"
                 // 通知設定
                 if isOn {
-                    cell.leftImageView.image = UIImage(named: "baseline_notifications_active_black_36pt")?.withRenderingMode(.alwaysTemplate)
+                    cell.leftImageView.image = UIImage(named: "baseline_alarm_black_36pt")?.withRenderingMode(.alwaysTemplate)
                 } else {
                     // OSの設定　がOFFの場合
-                    cell.leftImageView.image = UIImage(named: "baseline_notifications_off_black_36pt")?.withRenderingMode(.alwaysTemplate)
+                    cell.leftImageView.image = UIImage(named: "baseline_alarm_off_black_36pt")?.withRenderingMode(.alwaysTemplate)
                 }
-                button.tag = indexPath.row
-                button.addTarget(self, action: #selector(pushNotificationSettingButtonTapped), for: .touchUpInside)
-                cell.accessoryView = button
-                // セルの選択不可にする
-                cell.selectionStyle = .none
-
-            case 4:
-                cell.centerLabel.text = "帳簿付け時刻の通知"
-                cell.leftImageView.image = UIImage(named: "baseline_alarm_black_36pt")?.withRenderingMode(.alwaysTemplate)
-
                 let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                 // ローカル通知　設定スイッチ
                 switchView.onTintColor = .accentColor
@@ -631,7 +635,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.subLabel.text = "要望・不具合報告"
                 cell.lowerLabel.text = "メールを受信できるように受信拒否設定は解除してください。"
                 cell.lowerLabel.isHidden = false
-                cell.leftImageView.image = UIImage(named: "forum-forum_symbol")?.withRenderingMode(.alwaysTemplate)
+                cell.leftImageView.image = UIImage(named: "mail-mail_symbol")?.withRenderingMode(.alwaysTemplate)
                 // セルの選択を可にする
                 cell.selectionStyle = .gray
                 
@@ -649,13 +653,13 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         case 3:
             switch indexPath.row {
             case 0:
-                return nil
-            case 3:
-                return nil
-            case 4:
-                return nil
-            default:
                 return indexPath
+            case 1:
+                return indexPath
+            case 2:
+                return indexPath
+            default:
+                return nil
             }
         case 4:
             switch indexPath.row {
@@ -698,11 +702,12 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         } else if indexPath.section == 3 {
             switch indexPath.row {
             case 0:
-                break
-            case 1:
                 performSegue(withIdentifier: "SettingsOperatingJournalEntryViewController", sender: tableView.cellForRow(at: indexPath))
-            case 2:
+            case 1:
                 performSegue(withIdentifier: "SettingsOperatingTableViewController", sender: tableView.cellForRow(at: indexPath))
+            case 2:
+                // OSの通知設定画面へ遷移
+                linkToSettingsScreen()
             default:
                 break
             }
