@@ -81,7 +81,7 @@ class SettingsTableViewController: UIViewController {
         
         self.navigationItem.title = "設定"
         // largeTitle表示
-        navigationItem.largeTitleDisplayMode = .always
+        navigationItem.largeTitleDisplayMode = .automatic
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .accentColor
         
