@@ -278,6 +278,8 @@
 		F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F95F59A626502DC200EFE522 /* CarouselTabCollectionViewCell.xib */; };
 		F95F59AD26503E0600EFE522 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95F59AC26503E0600EFE522 /* PageContentViewController.swift */; };
 		F95F59B226503E1D00EFE522 /* PageContentViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F95F59B126503E1D00EFE522 /* PageContentViewController.storyboard */; };
+		F9623C582BFB231400D1D503 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9623C572BFB231400D1D503 /* SplitViewController.swift */; };
+		F9623C592BFB231400D1D503 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9623C572BFB231400D1D503 /* SplitViewController.swift */; };
 		F963E29B2961D686002DF49E /* BalanceSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E29A2961D686002DF49E /* BalanceSheetViewController.swift */; };
 		F963E29C2961D686002DF49E /* BalanceSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E29A2961D686002DF49E /* BalanceSheetViewController.swift */; };
 		F963E29E2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F963E29D2961D6A7002DF49E /* BalanceSheetViewController.storyboard */; };
@@ -1048,6 +1050,7 @@
 		F95F59A626502DC200EFE522 /* CarouselTabCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselTabCollectionViewCell.xib; sourceTree = "<group>"; };
 		F95F59AC26503E0600EFE522 /* PageContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		F95F59B126503E1D00EFE522 /* PageContentViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PageContentViewController.storyboard; sourceTree = "<group>"; };
+		F9623C572BFB231400D1D503 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		F963E29A2961D686002DF49E /* BalanceSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceSheetViewController.swift; sourceTree = "<group>"; };
 		F963E29D2961D6A7002DF49E /* BalanceSheetViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BalanceSheetViewController.storyboard; sourceTree = "<group>"; };
 		F963E2A02962B6C3002DF49E /* BalacneSheetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalacneSheetPresenter.swift; sourceTree = "<group>"; };
@@ -2094,6 +2097,7 @@
 				F986CC162945BA9A005A2138 /* SplashViewController.swift */,
 				F94EDD9A237AEB3A0074D812 /* Main.storyboard */,
 				F9941D6926458259008B3970 /* TabBarController.swift */,
+				F9623C572BFB231400D1D503 /* SplitViewController.swift */,
 				F9F324522833A5A400DA813E /* WalkThrough */,
 				F9E620FA256527E000C2C3B3 /* Gecco */,
 				F9860FBB285B3826008D0714 /* PassCodeLock */,
@@ -3230,6 +3234,7 @@
 				F92F4EF4249CCD5B00D50767 /* TBViewController.swift in Sources */,
 				F9789A342475C49B00B62CAF /* SettingsTableViewController.swift in Sources */,
 				F9D5D54A247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift in Sources */,
+				F9623C582BFB231400D1D503 /* SplitViewController.swift in Sources */,
 				F9AC55192927ACDA003966E4 /* BSData.swift in Sources */,
 				F93A630024FA79A400C1C2C1 /* DataBaseManager.swift in Sources */,
 				F98289B82978E0E800F8F1B8 /* AppVersion.swift in Sources */,
@@ -3484,6 +3489,7 @@
 				F9EC66D727B90BC60003FBB6 /* SettingsTableViewController.swift in Sources */,
 				F9EC66D827B90BC60003FBB6 /* GeneralLedgerAccountViewController.swift in Sources */,
 				F9AC551A2927ACDA003966E4 /* BSData.swift in Sources */,
+				F9623C592BFB231400D1D503 /* SplitViewController.swift in Sources */,
 				F9EC66D927B90BC60003FBB6 /* DataBaseManager.swift in Sources */,
 				F98289B92978E0E800F8F1B8 /* AppVersion.swift in Sources */,
 				F9EC66DA27B90BC60003FBB6 /* WithIconTableViewCell.swift in Sources */,
