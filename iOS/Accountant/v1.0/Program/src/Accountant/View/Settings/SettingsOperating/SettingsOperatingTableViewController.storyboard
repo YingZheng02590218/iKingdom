@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8W8-Pg-KOj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8W8-Pg-KOj">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--設定　主要簿画面-->
+        <!--主要簿-->
         <scene sceneID="vnW-Fq-hBy">
             <objects>
                 <tableViewController id="v7G-SR-b55" customClass="SettingsOperatingTableViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
@@ -56,7 +56,7 @@
                             <outlet property="delegate" destination="v7G-SR-b55" id="VRf-sW-mgj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="設定　主要簿画面" id="8po-Cp-Yca"/>
+                    <navigationItem key="navigationItem" title="主要簿" id="8po-Cp-Yca"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6kJ-IJ-44U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -108,7 +108,7 @@
     </scenes>
     <resources>
         <namedColor name="AccentLight">
-            <color red="0.13300000131130219" green="0.27799999713897705" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="BaseColor">
             <color red="0.87800002098083496" green="0.89800000190734863" blue="0.92500001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

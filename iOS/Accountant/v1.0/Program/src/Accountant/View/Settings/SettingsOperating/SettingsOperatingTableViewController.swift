@@ -10,7 +10,7 @@ import AudioToolbox // 効果音
 import GoogleMobileAds // マネタイズ対応
 import UIKit
 
-// 操作設定クラス
+// 設定主要簿クラス
 class SettingsOperatingTableViewController: UITableViewController {
     
     @IBOutlet private var gADBannerView: GADBannerView!
@@ -28,6 +28,12 @@ class SettingsOperatingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "主要簿"
+        // largeTitle表示
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .accentColor
+
         tableView.separatorColor = .accentColor
     }
     
