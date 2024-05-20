@@ -124,7 +124,10 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         // まとめて編集機能 setEditingメソッドを使用するため、Storyboard上の編集ボタンを上書きしてボタンを生成する
         editButtonItem.tintColor = .accentColor
-        navigationItem.leftBarButtonItem = editButtonItem
+        if var rightBarButtonItems = navigationItem.rightBarButtonItems {
+            rightBarButtonItems.insert(editButtonItem, at: 0)
+            navigationItem.setRightBarButtonItems(rightBarButtonItems, animated: false)
+        }
         tableView.allowsMultipleSelectionDuringEditing = true // 複数選択を可能にする
         editWithSlectionButton.isHidden = true
         editWithSlectionButton.tintColor = tableView.isEditing ? .accentBlue : UIColor.clear// 色
