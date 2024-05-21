@@ -34,7 +34,7 @@ class SettingsTableViewController: UIViewController {
     // 通知設定 設定アプリ　Allow Notifications
     var isOn = false {
         didSet {
-            // 記帳する時刻を通知する のセルをリロードする
+            // 記帳の時刻を通知する のセルをリロードする
             self.reloadRow(section: 3, row: 4)
         }
     }
@@ -538,7 +538,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
 
                 return cell
             case 4:
-                cell.centerLabel.text = "記帳する時刻を通知する"
+                cell.centerLabel.text = "記帳の時刻を通知する"
                 // 通知設定
                 if isOn {
                     cell.leftImageView.image = UIImage(named: "baseline_alarm_black_36pt")?.withRenderingMode(.alwaysTemplate)
