@@ -86,7 +86,7 @@ class SettingsTableViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .accentColor
         
         scrollView.parallaxHeader.view = headerView
-        scrollView.parallaxHeader.height = self.view.frame.height * 0.1
+        scrollView.parallaxHeader.height = self.view.frame.height * 0.15
         scrollView.parallaxHeader.mode = .fill
         scrollView.parallaxHeader.minimumHeight = 0
         scrollView.contentSize = contentView.frame.size
