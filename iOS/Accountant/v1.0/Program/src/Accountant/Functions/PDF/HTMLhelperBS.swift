@@ -218,7 +218,7 @@ struct HTMLhelperBS {
         margin: 0px 0; }
         
       th, td {
-              font-size: 14px;
+              font-size: 12px;
       border: 0px solid #05203a;
       padding: 2px; }
       
