@@ -56,6 +56,8 @@ struct HTMLhelperBS {
             }
             .skyBlueBackgroundColor {
                   background-color: #e5f0fa;}
+            .yellowBackgroundColor {
+                  background-color: #ffff00; }
             .BlueBackgroundColor {
                   background-color: #008080;}
     <!--     /*　罫線　*/ -->
@@ -147,7 +149,7 @@ struct HTMLhelperBS {
             width: 210mm;
             height: 296mm;
             box-sizing: border-box;
-            padding: 10mm 10mm;
+            padding: 0mm 10mm;
             display: block;
     <!--         break-after: always; -->
         }
@@ -194,7 +196,7 @@ struct HTMLhelperBS {
       text-align: center;
       line-height: 1.28;
       margin: 0 auto;
-      padding: 0 0.6em 10px;
+      padding: 0 0.6em 3px;
       border-bottom: 1px solid; }
       
     .borderBottom {
@@ -205,10 +207,7 @@ struct HTMLhelperBS {
       padding: 5px; }
       
       .l-container {
-      max-width: 880px;
-      margin: auto;
-      padding-left: 15px;
-      padding-right: 15px; }
+      margin: auto; }
       
       table {
             border: 1px solid #05203a;
@@ -219,9 +218,9 @@ struct HTMLhelperBS {
         margin: 0px 0; }
         
       th, td {
-              font-size: 15px;
+              font-size: 14px;
       border: 0px solid #05203a;
-      padding: 5px; }
+      padding: 2px; }
       
       th {
       width: 70%;
@@ -269,17 +268,17 @@ struct HTMLhelperBS {
     // ページごとに1回コール
     func headerstring(company: String, fiscalYear: Int, theDayOfReckoning: String) -> String {
          """
-                <section class="page">
-        <div class="richediter public-notice l-container">
+        <section class="page">
+            <div class="richediter public-notice l-container">
 
-        <p class="text-right">\(DateManager.shared.getDate())</p>
-        <h2>貸借対照表</h2>
-        <div class="flex margin20">
-        <span class="halfWidth">\(company)</span>
-        <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)</p></span>
-        </div>
+                <p class="text-right">\(DateManager.shared.getDate())</p>
+                <h2>貸借対照表</h2>
+                <div class="flex">
+                    <span class="halfWidth">\(company)</span>
+                    <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)</p></span>
+                </div>
 
-        <div class="flex line_single_black_all">
+            <div class="flex line_single_black_all">
     """
     }
     // ページごとに1回コール
