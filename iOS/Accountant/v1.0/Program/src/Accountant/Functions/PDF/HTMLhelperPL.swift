@@ -145,7 +145,7 @@ struct HTMLhelperPL {
                     }
         .page{
             width: 210mm;
-            height: 296mm;
+            height: 294mm;
             box-sizing: border-box;
             padding: 0mm 10mm;
             display: block;
