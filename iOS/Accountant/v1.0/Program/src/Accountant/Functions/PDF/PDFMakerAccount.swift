@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 import UIKit
 
 class PDFMakerAccount {
@@ -18,6 +19,20 @@ class PDFMakerAccount {
     // 勘定名
     var account: String = ""
     var fiscalYear = 0
+    // 通常仕訳 勘定別に月別に取得
+    private var databaseJournalEntriesSection0: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection1: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection2: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection3: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection4: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection5: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection6: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection7: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection8: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection9: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection10: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection11: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection12: Results<DataBaseJournalEntry>?
     
     func initialize(account: String, completion: (URL?) -> Void) {
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
@@ -76,6 +91,112 @@ class PDFMakerAccount {
             dataBaseAdjustingEntries: dataBaseAdjustingEntries,
             dataBaseCapitalTransferJournalEntry: dataBaseCapitalTransferJournalEntry
         )
+        
+        // 月別の月末日を取得 12ヶ月分
+        let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+        for i in 0..<lastDays.count {
+            // 通常仕訳 勘定別に月別に取得
+            let dataBaseJournalEntries = generalLedgerAccountModel.getJournalEntryInAccountInMonth(
+                account: account,
+                yearMonth: "\(lastDays[i].year)" + "/" + "\(String(format: "%02d", lastDays[i].month))"
+            )
+            switch i {
+            case 0:
+                databaseJournalEntriesSection0 = dataBaseJournalEntries
+            case 1:
+                databaseJournalEntriesSection1 = dataBaseJournalEntries
+            case 2:
+                databaseJournalEntriesSection2 = dataBaseJournalEntries
+            case 3:
+                databaseJournalEntriesSection3 = dataBaseJournalEntries
+            case 4:
+                databaseJournalEntriesSection4 = dataBaseJournalEntries
+            case 5:
+                databaseJournalEntriesSection5 = dataBaseJournalEntries
+            case 6:
+                databaseJournalEntriesSection6 = dataBaseJournalEntries
+            case 7:
+                databaseJournalEntriesSection7 = dataBaseJournalEntries
+            case 8:
+                databaseJournalEntriesSection8 = dataBaseJournalEntries
+            case 9:
+                databaseJournalEntriesSection9 = dataBaseJournalEntries
+            case 10:
+                databaseJournalEntriesSection10 = dataBaseJournalEntries
+            case 11:
+                databaseJournalEntriesSection11 = dataBaseJournalEntries
+            case 12:
+                databaseJournalEntriesSection12 = dataBaseJournalEntries
+            default:
+                break
+            }
+        }
+        // 通常仕訳　月次残高
+        func numberOfDatabaseJournalEntries(forSection: Int) -> Int {
+            switch forSection {
+            case 0:
+                return databaseJournalEntriesSection0?.count ?? 0
+            case 1:
+                return databaseJournalEntriesSection1?.count ?? 0
+            case 2:
+                return databaseJournalEntriesSection2?.count ?? 0
+            case 3:
+                return databaseJournalEntriesSection3?.count ?? 0
+            case 4:
+                return databaseJournalEntriesSection4?.count ?? 0
+            case 5:
+                return databaseJournalEntriesSection5?.count ?? 0
+            case 6:
+                return databaseJournalEntriesSection6?.count ?? 0
+            case 7:
+                return databaseJournalEntriesSection7?.count ?? 0
+            case 8:
+                return databaseJournalEntriesSection8?.count ?? 0
+            case 9:
+                return databaseJournalEntriesSection9?.count ?? 0
+            case 10:
+                return databaseJournalEntriesSection10?.count ?? 0
+            case 11:
+                return databaseJournalEntriesSection11?.count ?? 0
+            case 12:
+                return databaseJournalEntriesSection12?.count ?? 0
+            default:
+                return 0
+            }
+        }
+        // 通常仕訳　月次残高
+        func databaseJournalEntries(forSection: Int, forRow row: Int) -> DataBaseJournalEntry? {
+            switch forSection {
+            case 0:
+                return databaseJournalEntriesSection0?[row]
+            case 1:
+                return databaseJournalEntriesSection1?[row]
+            case 2:
+                return databaseJournalEntriesSection2?[row]
+            case 3:
+                return databaseJournalEntriesSection3?[row]
+            case 4:
+                return databaseJournalEntriesSection4?[row]
+            case 5:
+                return databaseJournalEntriesSection5?[row]
+            case 6:
+                return databaseJournalEntriesSection6?[row]
+            case 7:
+                return databaseJournalEntriesSection7?[row]
+            case 8:
+                return databaseJournalEntriesSection8?[row]
+            case 9:
+                return databaseJournalEntriesSection9?[row]
+            case 10:
+                return databaseJournalEntriesSection10?[row]
+            case 11:
+                return databaseJournalEntriesSection11?[row]
+            case 12:
+                return databaseJournalEntriesSection12?[row]
+            default:
+                return nil
+            }
+        }
         
         var htmlString = ""
         
@@ -162,61 +283,68 @@ class PDFMakerAccount {
         }
 
         // 仕訳
-        for i in 0..<dataBaseJournalEntries.count {
-            
-            let fiscalYear = dataBaseJournalEntries[i].fiscalYear
-            if counter == 0 {
-                let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
-                htmlString.append(tableHeader)
-            }
-            // 日付
-            guard let date = DateManager.shared.dateFormatter.date(from: dataBaseJournalEntries[i].date) else {
-                return nil
-            }
-
-            let debitCategory = dataBaseJournalEntries[i].debit_category
-            let debitAmount = dataBaseJournalEntries[i].debit_amount
-            let creditCategory = dataBaseJournalEntries[i].credit_category
-            let creditAmount = dataBaseJournalEntries[i].credit_amount
-            _ = dataBaseJournalEntries[i].smallWritting
-            var correspondingAccounts: String = "" // 当勘定の相手勘定
-            if debitCategory == account {
-                correspondingAccounts = creditCategory
-            } else if creditCategory == account {
-                correspondingAccounts = debitCategory
-            }
-            let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
-            _ = dataBaseJournalEntries[i].balance_left
-            _ = dataBaseJournalEntries[i].balance_right
-            
-            let balanceAmount = generalLedgerAccountModel.getBalanceAmount(indexPath: IndexPath(row: i, section: 0))
-            let balanceDebitOrCredit = generalLedgerAccountModel.getBalanceDebitOrCredit(indexPath: IndexPath(row: i, section: 0))
-            
-            let rowString = hTMLhelper.getSingleRow(
-                month: String(date.month),
-                day: String(date.day),
-                debitCategory: debitCategory,
-                debitAmount: debitAmount,
-                creditCategory: creditCategory,
-                creditAmount: creditAmount,
-                correspondingAccounts: correspondingAccounts,
-                numberOfAccount: numberOfAccount,
-                balanceAmount: balanceAmount,
-                balanceDebitOrCredit: balanceDebitOrCredit
-            )
-            htmlString.append(rowString)
-            
-            totalDebitAmount += dataBaseJournalEntries[i].debit_amount
-            totalCreditAmount += dataBaseJournalEntries[i].credit_amount
-            
-            if counter >= 29 {
-                let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
-                htmlString.append(tableFooter)
-            }
-            counter += 1
-            if counter >= 30 {
-                counter = 0
-                pageNumber += 1
+        // 月別の月末日を取得 12ヶ月分
+        for month in 0..<lastDays.count {
+            // 仕訳の数だけ繰り返す
+            for i in 0..<numberOfDatabaseJournalEntries(forSection: month) {
+                // 通常仕訳　通常仕訳 勘定別
+                if let databaseJournalEntry = databaseJournalEntries(forSection: month, forRow: i) {
+                    
+                    let fiscalYear = databaseJournalEntry.fiscalYear
+                    if counter == 0 {
+                        let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
+                        htmlString.append(tableHeader)
+                    }
+                    // 日付
+                    guard let date = DateManager.shared.dateFormatter.date(from: databaseJournalEntry.date) else {
+                        return nil
+                    }
+                    
+                    let debitCategory = databaseJournalEntry.debit_category
+                    let debitAmount = databaseJournalEntry.debit_amount
+                    let creditCategory = databaseJournalEntry.credit_category
+                    let creditAmount = databaseJournalEntry.credit_amount
+                    _ = databaseJournalEntry.smallWritting
+                    var correspondingAccounts: String = "" // 当勘定の相手勘定
+                    if debitCategory == account {
+                        correspondingAccounts = creditCategory
+                    } else if creditCategory == account {
+                        correspondingAccounts = debitCategory
+                    }
+                    let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
+                    _ = databaseJournalEntry.balance_left
+                    _ = databaseJournalEntry.balance_right
+                    
+                    let balanceAmount = generalLedgerAccountModel.getBalanceAmount(indexPath: IndexPath(row: i, section: 0))
+                    let balanceDebitOrCredit = generalLedgerAccountModel.getBalanceDebitOrCredit(indexPath: IndexPath(row: i, section: 0))
+                    
+                    let rowString = hTMLhelper.getSingleRow(
+                        month: String(date.month),
+                        day: String(date.day),
+                        debitCategory: debitCategory,
+                        debitAmount: debitAmount,
+                        creditCategory: creditCategory,
+                        creditAmount: creditAmount,
+                        correspondingAccounts: correspondingAccounts,
+                        numberOfAccount: numberOfAccount,
+                        balanceAmount: balanceAmount,
+                        balanceDebitOrCredit: balanceDebitOrCredit
+                    )
+                    htmlString.append(rowString)
+                    
+                    totalDebitAmount += databaseJournalEntry.debit_amount
+                    totalCreditAmount += databaseJournalEntry.credit_amount
+                    
+                    if counter >= 29 {
+                        let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
+                        htmlString.append(tableFooter)
+                    }
+                    counter += 1
+                    if counter >= 30 {
+                        counter = 0
+                        pageNumber += 1
+                    }
+                }
             }
         }
         
