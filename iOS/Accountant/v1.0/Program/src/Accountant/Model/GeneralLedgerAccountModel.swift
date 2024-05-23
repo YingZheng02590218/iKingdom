@@ -19,15 +19,6 @@ protocol GeneralLedgerAccountModelInput {
         dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
     )
 
-    func getBalanceAmountOpeningJournalEntry() -> Int64
-    func getBalanceDebitOrCreditOpeningJournalEntry() -> String
-    func getBalanceAmount(indexPath: IndexPath) -> Int64
-    func getBalanceDebitOrCredit(indexPath: IndexPath) -> String
-    func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64
-    func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String
-    func getBalanceAmountCapitalTransferJournalEntry() -> Int64
-    func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String
-
     func getNumberOfAccount(accountName: String) -> Int
     func getOpeningJournalEntryInAccount(account: String) -> DataBaseOpeningJournalEntry?
     func getJournalEntryInAccount(account: String) -> Results<DataBaseJournalEntry>
@@ -154,47 +145,6 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
     }
     
     // MARK: Read
-
-    // 取得　差引残高額　 開始仕訳
-    func getBalanceAmountOpeningJournalEntry() -> Int64 {
-
-        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceAmountOpeningJournalEntry()
-    }
-    // 借又貸を取得 開始仕訳
-    func getBalanceDebitOrCreditOpeningJournalEntry() -> String {
-
-        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceDebitOrCreditOpeningJournalEntry()
-    }
-    // 取得　差引残高額　仕訳
-    func getBalanceAmount(indexPath: IndexPath) -> Int64 {
-        
-        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceAmount(indexPath: indexPath)
-    }
-    // 借又貸を取得
-    func getBalanceDebitOrCredit(indexPath: IndexPath) -> String {
-
-        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceDebitOrCredit(indexPath: indexPath)
-    }
-    // 取得　差引残高額　 決算整理仕訳
-    func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64 {
-        
-        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceAmountAdjusting(indexPath: indexPath)
-    }
-    // 借又貸を取得 決算整理仕訳
-    func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String {
-
-        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceDebitOrCreditAdjusting(indexPath: indexPath)
-    }
-    // 取得　差引残高額　 資本振替仕訳
-    func getBalanceAmountCapitalTransferJournalEntry() -> Int64 {
-
-        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceAmountCapitalTransferJournalEntry()
-    }
-    // 借又貸を取得 資本振替仕訳
-    func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String {
-
-        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceDebitOrCreditCapitalTransferJournalEntry()
-    }
 
     // MARK: - 勘定
     // 取得　通常仕訳 勘定別に取得

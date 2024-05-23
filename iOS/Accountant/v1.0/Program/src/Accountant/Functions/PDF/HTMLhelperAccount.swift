@@ -331,16 +331,17 @@ struct HTMLhelperAccount {
     """
     }
     
+    // 開始仕訳　仕訳　決算整理仕訳　資本振替仕訳　損益振替仕訳　月次残高振替仕訳（前月繰越）（次月繰越）合計、次月繰越の行
     func getSingleRow(
         month: String,
         day: String,
         debitCategory: String,
-        debitAmount: Int64,
+        debitAmount: Int64? = nil,
         creditCategory: String,
-        creditAmount: Int64,
+        creditAmount: Int64? = nil,
         correspondingAccounts: String,
         numberOfAccount: Int,
-        balanceAmount: Int64,
+        balanceAmount: Int64? = nil,
         balanceDebitOrCredit: String
     ) -> String {
         // 摘要は勘定科目を右寄せか左よせを分岐する
@@ -352,9 +353,9 @@ struct HTMLhelperAccount {
                   <td class="smallWritting line_single_blue_bottom line_double_red_right left fontsize95">\(debitCategory)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95"></td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right fontsize95">\(String(creditAmount))</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right fontsize95">\(creditAmount == nil ? "" : String(creditAmount!))</p></td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(balanceDebitOrCredit)</td>
-                  <td class="line_single_blue_bottom fontsize95"><p class="right fontsize95">\(String(balanceAmount))</p></td>
+                  <td class="line_single_blue_bottom fontsize95"><p class="right fontsize95">\(balanceAmount == nil ? "" : String(balanceAmount!))</p></td>
                 </tr>
     """
         } else {
@@ -364,10 +365,10 @@ struct HTMLhelperAccount {
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(day)</td>
                   <td class="smallWritting line_single_blue_bottom line_double_red_right right fontsize95">\(creditCategory)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right fontsize95">\(String(debitAmount))</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right fontsize95">\(debitAmount == nil ? "" : String(debitAmount!))</p></td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95"></td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(balanceDebitOrCredit)</td>
-                  <td class="line_single_blue_bottom fontsize95"><p class="right fontsize95">\(String(balanceAmount))</p></td>
+                  <td class="line_single_blue_bottom fontsize95"><p class="right fontsize95">\(balanceAmount == nil ? "" : String(balanceAmount!))</p></td>
                 </tr>
     """
         }

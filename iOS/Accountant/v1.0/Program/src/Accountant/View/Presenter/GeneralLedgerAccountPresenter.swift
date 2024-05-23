@@ -35,12 +35,6 @@ protocol GeneralLedgerAccountPresenterInput {
     func viewWillDisappear()
     func viewDidAppear()
     
-    func getBalanceAmountOpeningJournalEntry() -> Int64
-    func getBalanceDebitOrCreditOpeningJournalEntry() -> String
-    func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64
-    func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String
-    func getBalanceAmountCapitalTransferJournalEntry() -> Int64
-    func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String
     func getNumberOfAccount(accountName: String) -> Int
     
     func pdfBarButtonItemTapped()
@@ -333,49 +327,6 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
         dataBaseCapitalTransferJournalEntry
     }
     
-    // MARK: - 差引残高額
-    
-    // 取得　差引残高額　 開始仕訳
-    func getBalanceAmountOpeningJournalEntry() -> Int64 {
-        
-        model.getBalanceAmountOpeningJournalEntry()
-    }
-    // 借又貸を取得 開始仕訳
-    func getBalanceDebitOrCreditOpeningJournalEntry() -> String {
-        
-        model.getBalanceDebitOrCreditOpeningJournalEntry()
-    }
-    // 取得　差引残高額　 決算整理仕訳
-    func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64 {
-        
-        model.getBalanceAmountAdjusting(indexPath: indexPath)
-    }
-    // 借又貸を取得 決算整理仕訳
-    func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String {
-        
-        model.getBalanceDebitOrCreditAdjusting(indexPath: indexPath)
-    }
-    // 取得　差引残高額　 資本振替仕訳
-    func getBalanceAmountCapitalTransferJournalEntry() -> Int64 {
-        
-        model.getBalanceAmountCapitalTransferJournalEntry()
-    }
-    // 借又貸を取得 資本振替仕訳
-    func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String {
-        
-        model.getBalanceDebitOrCreditCapitalTransferJournalEntry()
-    }
-    // FIXME: 省略
-    //    // 取得　差引残高額 損益振替仕訳
-    //    func getBalanceAmountCapitalTransferJournalEntry() -> Int64 {
-    //
-    //        model.getBalanceAmountCapitalTransferJournalEntry()
-    //    }
-    //    // 借又貸を取得 損益振替仕訳
-    //    func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String {
-    //
-    //        model.getBalanceDebitOrCreditCapitalTransferJournalEntry()
-    //    }
     // 丁数を取得
     func getNumberOfAccount(accountName: String) -> Int {
         
