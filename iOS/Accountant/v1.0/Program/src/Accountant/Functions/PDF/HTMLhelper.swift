@@ -136,9 +136,9 @@ struct HTMLhelper {
                 }
     .page{
         width: 210mm;
-        height: 296mm; /*　296mmを指定していたが、レイアウトが崩れていたので変更　*/
+        height: 294mm; /*　296mmを指定していたが、レイアウトが崩れていたので変更　*/
         box-sizing: border-box;
-        padding: 10mm 10mm;
+        padding: 0mm 10mm;
         display: block;
         break-after: always;
     }
@@ -185,7 +185,7 @@ struct HTMLhelper {
           text-align: center;
           line-height: 1.28;
           margin: 0 auto;
-          padding: 0 0.6em 10px; }
+          padding: 0 0.6em 3px; }
 
     .borderTop {
         border-top: 1px solid; }
@@ -203,9 +203,9 @@ struct HTMLhelper {
         margin: 0px 0; }
 
       th, td {
-        font-size: 17px;
+        font-size: 12px;
         border: 0px solid #05203a;
-        padding: 5px;
+        padding: 2px;
       }
 
       th {

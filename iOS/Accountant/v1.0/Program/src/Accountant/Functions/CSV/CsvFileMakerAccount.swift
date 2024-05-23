@@ -424,6 +424,108 @@ class CsvFileMakerAccount {
                     csv += line // csv = CSVとして出力する内容全体
                 }
             }
+            
+            // MARK: 次月繰越
+            // 貸借科目　のみに絞る
+            if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
+                // 月別の翌月の初日を取得 12ヶ月分
+                let nextFirstDays = DateManager.shared.getTheDayOfEndingOfMonth(isLastDay: false)
+                
+                switch x {
+                case 0:
+                    // 通常仕訳 期首
+                    index = 0
+                case 1:
+                    index = 1
+                case 2:
+                    index = 2
+                case 3:
+                    index = 3
+                case 4:
+                    index = 4
+                case 5:
+                    index = 5
+                case 6:
+                    index = 6
+                case 7:
+                    index = 7
+                case 8:
+                    index = 8
+                case 9:
+                    index = 9
+                case 10:
+                    index = 10 // 決算月　決算日が月末の場合
+                case 11:
+                    index = 11 // 決算月　決算日が月末ではない場合
+                    // 決算整理仕訳の下に次月繰越を表示させる。月次残高振替仕訳には決算整理仕訳も含まれるため。
+                    // 通常仕訳 期末
+                default:
+                    index = nil
+                }
+                
+                if let index = index,
+                   // 月別の月末を取得 12ヶ月分　に存在するか
+                   lastDays.count > index,
+                   // 取得 月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                   let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: account,
+                    yearMonth: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))" // BEGINSWITH 前方一致
+                   ) {
+                    var line = ""
+                    
+                    // 先頭行
+                    let fiscalYear = dataBaseMonthlyTransferEntry.fiscalYear
+                    
+                    let debitCategory = dataBaseMonthlyTransferEntry.credit_category // 借方勘定　＊引数の貸方勘定を振替える
+                    let debitAmount = dataBaseMonthlyTransferEntry.balance_right // 借方勘定　＊引数の貸方勘定を振替える
+
+                    let creditCategory = dataBaseMonthlyTransferEntry.debit_category // 貸方勘定　＊引数の借方勘定を振替える
+                    let creditAmount = dataBaseMonthlyTransferEntry.balance_left // 貸方勘定　＊引数の借方勘定を振替える
+                    let smallWritting = dataBaseMonthlyTransferEntry.smallWritting
+                    var correspondingAccounts: String = "" // 当勘定の相手勘定
+                    if debitCategory == account {
+                        correspondingAccounts = creditCategory
+                    } else if creditCategory == account {
+                        correspondingAccounts = debitCategory
+                    }
+                    // 借又貸
+                    var balanceDebitOrCredit: String = ""
+                    if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right {
+                        balanceDebitOrCredit = "借"
+                    } else if dataBaseMonthlyTransferEntry.balance_left < dataBaseMonthlyTransferEntry.balance_right {
+                        balanceDebitOrCredit = "貸"
+                    } else {
+                        balanceDebitOrCredit = "-"
+                    }
+                    // 差引残高額
+                    var balanceAmount: Int64 = 0
+                    if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right { // 借方と貸方を比較
+                        balanceAmount = dataBaseMonthlyTransferEntry.balance_left
+                    } else if dataBaseMonthlyTransferEntry.balance_right > dataBaseMonthlyTransferEntry.balance_left {
+                        balanceAmount = dataBaseMonthlyTransferEntry.balance_right
+                    } else {
+                        balanceAmount = 0
+                    }
+
+                    // 次月繰越 次月繰越
+                    // 日付
+                    line += "\(dataBaseMonthlyTransferEntry.date)" + ","
+                    // 相手勘定
+                    line += "\"" + "次月繰越" + "\","
+                    // 摘要
+                    line += "\"" + (smallWritting.replacingOccurrences(of: "\"", with: "\"\"") as String) + "\","
+                    // 借方 相手勘定の残高勘定
+                    line += debitCategory == correspondingAccounts ? String(debitAmount) + "," : ","
+                    // 貸方 相手勘定の残高勘定
+                    line += creditCategory == correspondingAccounts ? String(creditAmount) + "," : ","
+                    // 借又貸
+                    line += "\"" + "-" + "\","
+                    // 差引残高
+                    line += "0" + "\r\n"
+                    
+                    csv += line // csv = CSVとして出力する内容全体
+                }
+            }
         }
         
         // 決算整理仕訳

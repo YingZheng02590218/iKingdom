@@ -77,6 +77,12 @@ struct HTMLhelperAccount {
             .line_single_blue_bottom {
                 border-bottom: 1px solid #66b3ff;
             }
+            .line_single_red_top {
+                border-top: 1px solid #f66;
+            }
+            .line_double_red_bottom {
+                border-bottom: 3px double #f66;
+            }
             .line_double_gray_bottom {
                 border-bottom: 4px double #888;
             }
@@ -129,27 +135,27 @@ struct HTMLhelperAccount {
             section {
             }
                 h2 {
-                    width: 100%;
-                height: 12mm;/*  8.560311284% 22mm　*/
+                    width: 50%;
+                    height: 12mm;/*  8.560311284% 22mm　*/
                 }
                 table {
                     width: 100%;
-                height: 235mm;/*  91.439688716% 235mm　*/
+                    height: 235mm;/*  91.439688716% 235mm　*/
                 }
                     thead {
-                    height: 13mm;/*　5.0583657588% 13mm　*/
+                        height: 13mm;/*　5.0583657588% 13mm　*/
                     }
                     tbody {
-                    height: 217mm;/* 84.4357976654%　217mm　*/
+                        height: 217mm;/* 84.4357976654%　217mm　*/
                     }
                     tfoot {
-                    height: 5mm;/*　10.5058365758% 1.9455252918% 5mm　*/
+                        height: 5mm;/*　10.5058365758% 1.9455252918% 5mm　*/
                     }
         .page{
             width: 210mm;
-            height: 296mm; /*　296mmを指定していたが、レイアウトが崩れていたので変更　*/
+            height: 294mm; /*　296mmを指定していたが、レイアウトが崩れていたので変更　*/
             box-sizing: border-box;
-            padding: 10mm 10mm;
+            padding: 0mm 10mm;
             display: block;
             break-after: always;
         }
@@ -196,7 +202,7 @@ struct HTMLhelperAccount {
               text-align: center;
               line-height: 1.28;
               margin: 0 auto;
-              padding: 0 0.6em 10px; }
+              padding: 0 0.6em 3px; }
 
         .borderTop {
             border-top: 1px solid; }
@@ -214,9 +220,9 @@ struct HTMLhelperAccount {
             margin: 0px 0; }
 
         th, td {
-          font-size: 17px;
+          font-size: 12px;
           border: 0px solid #05203a;
-          padding: 5px;
+          padding: 2px;
         }
 
           th {
@@ -386,6 +392,81 @@ struct HTMLhelperAccount {
                                      <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
                                      <td class="line_single_blue_bottom fontsize95 clearColor"> あ</td>
                                    </tr>
+    """
+    }
+    // 月次残高振替仕訳（次月繰越）合計の行
+    func getFirstRow(
+        month: String, // 空白
+        day: String, // 空白
+        debitCategory: String, // 空白
+        debitAmount: Int64,
+        creditCategory: String,
+        creditAmount: Int64,
+        numberOfAccount: Int, // 空白
+        balanceAmount: Int64? = nil, // 空白
+        balanceDebitOrCredit: String // 空白
+    ) -> String {
+            return """
+                <tr class="rowHeight">
+                  <td class="line_single_red_right line_single_blue_bottom fontsize95 center">\(month)</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(day)</td>
+                  <td class="smallWritting line_single_blue_bottom line_double_red_right right fontsize95">\(creditCategory)</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
+                  <td class="line_double_red_right line_single_blue_bottom line_single_red_top fontsize95"><p class="right fontsize95">\(String(debitAmount))</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom line_single_red_top fontsize95"><p class="right fontsize95">\(String(creditAmount))</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(balanceDebitOrCredit)</td>
+                  <td class="line_single_blue_bottom fontsize95"><p class="right fontsize95">\("")</p></td>
+                </tr>
+    """
+    }
+    // 月次残高振替仕訳（次月繰越）次期繰越の行
+    func getSecondRow(
+        month: String, // 空白
+        day: String, // 空白
+        debitCategory: String, // 空白
+        debitAmount: Int64,
+        creditCategory: String,
+        creditAmount: Int64,
+        numberOfAccount: Int, // 空白
+        balanceAmount: Int64? = nil, // 空白
+        balanceDebitOrCredit: String // 空白
+    ) -> String {
+            return """
+                <tr class="rowHeight">
+                  <td class="line_single_red_right line_single_blue_bottom fontsize95 center">\(month)</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(day)</td>
+                  <td class="smallWritting line_single_blue_bottom line_double_red_right right fontsize95">\(creditCategory)</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right fontsize95">\(debitAmount == 0 ? "" : String(debitAmount))</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right fontsize95">\(creditAmount == 0 ? "" : String(creditAmount))</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(balanceDebitOrCredit)</td>
+                  <td class="line_single_blue_bottom fontsize95"><p class="right fontsize95">\("")</p></td>
+                </tr>
+    """
+    }
+    // 月次残高振替仕訳（次月繰越）貸借の合計の行
+    func getThirdRow(
+        month: String, // 空白
+        day: String, // 空白
+        debitCategory: String, // 空白
+        debitAmount: Int64,
+        creditCategory: String,
+        creditAmount: Int64,
+        numberOfAccount: Int, // 空白
+        balanceAmount: Int64? = nil, // 空白
+        balanceDebitOrCredit: String // 空白
+    ) -> String {
+            return """
+                <tr class="rowHeight">
+                  <td class="line_single_red_right line_double_red_bottom fontsize95 center">\(month)</td>
+                  <td class="line_double_red_right line_double_red_bottom fontsize95 center">\(day)</td>
+                  <td class="smallWritting line_single_blue_bottom line_double_red_right right fontsize95">\(creditCategory)</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
+                  <td class="line_double_red_right line_double_red_bottom line_single_red_top fontsize95"><p class="right fontsize95">\(String(debitAmount))</p></td>
+                  <td class="line_double_red_right line_double_red_bottom line_single_red_top fontsize95"><p class="right fontsize95">\(String(creditAmount))</p></td>
+                  <td class="line_double_red_right line_double_red_bottom fontsize95 center">\(balanceDebitOrCredit)</td>
+                  <td class="line_double_red_bottom fontsize95"><p class="right fontsize95">\("")</p></td>
+                </tr>
     """
     }
 
