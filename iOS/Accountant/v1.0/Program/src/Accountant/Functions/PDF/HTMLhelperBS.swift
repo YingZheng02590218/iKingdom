@@ -209,10 +209,10 @@ struct HTMLhelperBS {
       .l-container {
       margin: auto; }
       
-      table {
-            border: 1px solid #05203a;
-      border-collapse: collapse;
-      border-spacing: 0; }
+    table {
+        border: 1px solid #05203a;
+        border-collapse: collapse;
+        border-spacing: 0; }
       
         table{
         margin: 0px 0; }
@@ -278,15 +278,15 @@ struct HTMLhelperBS {
                     <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)</p></span>
                 </div>
 
-            <div class="flex line_single_black_all">
+                <div class="flex line_single_black_all">
     """
     }
     // ページごとに1回コール
     func footerstring() -> String {
          """
+                </div>
+                <p class="fontsize95 right">©複式簿記の会計帳簿 Paciolist</p>
             </div>
-        <p class="fontsize95 right margin5">©複式簿記の会計帳簿 Paciolist</p>
-        </div>
         </section>
         """
     }

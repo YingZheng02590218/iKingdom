@@ -141,6 +141,7 @@ struct HTMLhelperPL {
                     tbody {
                     }
                     tfoot {
+                        height: 5mm;
     <!--                     height: 10.5058365758%;/*　1.9455252918% 5mm　*/ -->
                     }
         .page{
@@ -209,10 +210,9 @@ struct HTMLhelperPL {
       .l-container {
       margin: auto; }
     
-      table {
-            border: 1px solid #05203a;
-      border-collapse: collapse;
-      border-spacing: 0; }
+    table {
+        border-collapse: collapse;
+        border-spacing: 0; }
     
         table{
         margin: 0px 0; }
@@ -278,15 +278,14 @@ struct HTMLhelperPL {
                     <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)</p></span>
                 </div>
     
-            <div>
+                <div>
     """
     }
     // ページごとに1回コール
     func footerstring() -> String {
          """
                 </div>
-        <p class="fontsize95 right margin5">©複式簿記の会計帳簿 Paciolist</p>
-        </div>
+            </div>
         </section>
         """
     }
@@ -301,7 +300,13 @@ struct HTMLhelperPL {
     // テーブル　エンド
     func tableEndString() -> String {
          """
-    </tbody>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th id="asset-1" class="left">　</th>
+                <td colspan="1" class="fontsize80"><p class="right">©複式簿記の会計帳簿 Paciolist</p></td>
+            </tr>
+        </tfoot>
     </table>
     """
     }
