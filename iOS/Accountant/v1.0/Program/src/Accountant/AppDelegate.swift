@@ -238,6 +238,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    // Custom URL Scheme
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        print("\n")
+        print("Url     : \(url.absoluteString)")
+        print("Scheme  : \(url.scheme ?? "")")
+        print("Host    : \(url.host ?? "")")
+        print("Port    : \(url.port ?? 0)")
+        print("Path    : \(url.path)")
+        print("Query   : \(url.query ?? "")")
+        print("Fragment: \(url.fragment ?? "")")
+        print("\n")
+        return true
+    }
+    
     // MARK: - APNs 登録
     
     // APNs 登録成功時に呼ばれる
