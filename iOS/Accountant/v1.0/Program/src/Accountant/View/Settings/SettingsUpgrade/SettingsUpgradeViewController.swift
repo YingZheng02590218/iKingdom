@@ -84,6 +84,8 @@ class SettingsUpgradeViewController: UIViewController {
             setupExplainLabel()
         }
     }
+    // 画面タイプ(Push, Modal)
+    var screenType: ScreenType = .modal
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -152,17 +154,20 @@ class SettingsUpgradeViewController: UIViewController {
         howToCancelButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         howToCancelButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
         
-        if let backgroundView = backgroundView {
-            // 中央上部に配置する
-            indicatorView.frame = CGRect(x: 0, y: 0, width: 40, height: 5)
-            backgroundView.addSubview(indicatorView)
-            indicatorView.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                indicatorView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-                indicatorView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5),
-                indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
-                indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
-            ])
+        // 画面タイプ(Push, Modal)判定
+        if screenType == .modal {
+            if let backgroundView = backgroundView {
+                // 中央上部に配置する
+                indicatorView.frame = CGRect(x: 0, y: 0, width: 40, height: 5)
+                backgroundView.addSubview(indicatorView)
+                indicatorView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    indicatorView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+                    indicatorView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5),
+                    indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
+                    indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
+                ])
+            }
         }
     }
     // ラベル
@@ -508,4 +513,11 @@ extension SettingsUpgradeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollView.contentOffset.x = posX
     }
+}
+// 画面タイプ(Push, Modal)
+enum ScreenType {
+    // 設定画面
+    case push
+    // モーダル画面　仕訳入力後
+    case modal
 }

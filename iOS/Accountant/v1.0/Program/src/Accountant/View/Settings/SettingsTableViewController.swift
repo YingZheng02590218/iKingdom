@@ -314,7 +314,15 @@ class SettingsTableViewController: UIViewController {
             // Fallback on earlier versions
         }
     }
-
+    // 追加機能　画面遷移の準備　仕訳画面
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let navigationController = segue.destination as? UINavigationController,
+           let controller = navigationController.topViewController as? SettingsUpgradeViewController {
+            if segue.identifier == "SettingsUpgradeViewController" {
+                controller.screenType = .push
+            }
+        }
+    }
 }
 
 extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSource {

@@ -480,17 +480,21 @@ class JournalEntryViewController: UIViewController {
             addButton.layer.shadowOpacity = 1.0
         }
         
-        if let backgroundView = backgroundView {
-            // 中央上部に配置する
-            indicatorView.frame = CGRect(x: 0, y: 0, width: 40, height: 5)
-            backgroundView.addSubview(indicatorView)
-            indicatorView.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                indicatorView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-                indicatorView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5),
-                indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
-                indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
-            ])
+        // 仕訳タイプ判定
+        if journalEntryType != .JournalEntry && journalEntryType != .AdjustingAndClosingEntry {
+            // 仕訳 タブバーの仕訳タブからの遷移の場合
+            if let backgroundView = backgroundView {
+                // 中央上部に配置する
+                indicatorView.frame = CGRect(x: 0, y: 0, width: 40, height: 5)
+                backgroundView.addSubview(indicatorView)
+                indicatorView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    indicatorView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+                    indicatorView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5),
+                    indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
+                    indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
+                ])
+            }
         }
     }
     
