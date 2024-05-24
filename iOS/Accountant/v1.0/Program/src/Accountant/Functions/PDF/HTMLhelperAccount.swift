@@ -440,8 +440,8 @@ struct HTMLhelperAccount {
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center red">\(day)</td>
                   <td class="smallWritting line_single_blue_bottom line_double_red_right right fontsize95 red">\(creditCategory)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right fontsize95 red">\(debitAmount == 0 ? "" : String(debitAmount))</p></td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right fontsize95 red">\(creditAmount == 0 ? "" : String(creditAmount))</p></td>
+                  <td class="line_double_red_right line_single_red_bottom fontsize95"><p class="right fontsize95 red">\(debitAmount == 0 ? "" : String(debitAmount))</p></td>
+                  <td class="line_double_red_right line_single_red_bottom fontsize95"><p class="right fontsize95 red">\(creditAmount == 0 ? "" : String(creditAmount))</p></td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(balanceDebitOrCredit)</td>
                   <td class="line_single_blue_bottom fontsize95"><p class="right fontsize95">\("")</p></td>
                 </tr>
@@ -465,8 +465,8 @@ struct HTMLhelperAccount {
                   <td class="line_double_red_right line_double_red_bottom fontsize95 center">\(day)</td>
                   <td class="smallWritting line_single_blue_bottom line_double_red_right right fontsize95">\(creditCategory)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
-                  <td class="line_double_red_right line_double_red_bottom line_single_red_top fontsize95"><p class="right fontsize95">\(String(debitAmount))</p></td>
-                  <td class="line_double_red_right line_double_red_bottom line_single_red_top fontsize95"><p class="right fontsize95">\(String(creditAmount))</p></td>
+                  <td class="line_double_red_right line_double_red_bottom fontsize95"><p class="right fontsize95">\(String(debitAmount))</p></td>
+                  <td class="line_double_red_right line_double_red_bottom fontsize95"><p class="right fontsize95">\(String(creditAmount))</p></td>
                   <td class="line_double_red_right line_double_red_bottom fontsize95 center">\(balanceDebitOrCredit)</td>
                   <td class="line_double_red_bottom fontsize95"><p class="right fontsize95">\("")</p></td>
                 </tr>
