@@ -206,11 +206,22 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
                 creditAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_amount             // 貸方金額
                 numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")
                 numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")
-
-                // 差引残高　差引残高クラスで計算した計算結果を取得
-                balanceAmount = presenter.getBalanceAmount(indexPath: indexPath)
-                balanceDebitOrCredit = presenter.getBalanceDebitOrCredit(indexPath: indexPath)
-                
+                // 借又貸
+                if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left > presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right {
+                    balanceDebitOrCredit = "借"
+                } else if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left < presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right {
+                    balanceDebitOrCredit = "貸"
+                } else {
+                    balanceDebitOrCredit = "-"
+                }
+                // 差引残高額
+                if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left > presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right { // 借方と貸方を比較
+                    balanceAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left
+                } else if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right > presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left {
+                    balanceAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right
+                } else {
+                    balanceAmount = 0
+                }
                 // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                 if DateManager.shared.isInPeriod(date: presenter.dataBaseTransferEntries(forRow: indexPath.row).date) {
                     cell.listDateMonthLabel.textColor = .textColor
@@ -257,9 +268,22 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
                     } else {
                         numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(Constant.capitalAccountName)")
                     }
-                    balanceAmount = presenter.getBalanceAmountCapitalTransferJournalEntry()
-                    balanceDebitOrCredit = presenter.getBalanceDebitOrCreditCapitalTransferJournalEntry()
-
+                    // 借又貸
+                    if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left > presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right {
+                        balanceDebitOrCredit = "借"
+                    } else if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left < presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right {
+                        balanceDebitOrCredit = "貸"
+                    } else {
+                        balanceDebitOrCredit = "-"
+                    }
+                    // 差引残高額
+                    if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left > presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right { // 借方と貸方を比較
+                        balanceAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left
+                    } else if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right > presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left {
+                        balanceAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right
+                    } else {
+                        balanceAmount = 0
+                    }
                     // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                     if DateManager.shared.isInPeriod(date: dataBaseCapitalTransferJournalEntry.date) {
                         cell.listDateMonthLabel.textColor = .textColor

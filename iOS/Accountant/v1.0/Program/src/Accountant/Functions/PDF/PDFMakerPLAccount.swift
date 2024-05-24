@@ -110,10 +110,24 @@ class PDFMakerPLAccount {
             let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
             _ = dataBaseTransferEntries[i].balance_left
             _ = dataBaseTransferEntries[i].balance_right
-
-            let balanceAmount = generalLedgerAccountModel.getBalanceAmount(indexPath: IndexPath(row: i, section: 0))
-            let balanceDebitOrCredit = generalLedgerAccountModel.getBalanceDebitOrCredit(indexPath: IndexPath(row: i, section: 0))
-
+            // 借又貸
+            var balanceDebitOrCredit: String = ""
+            if dataBaseTransferEntries[i].balance_left > dataBaseTransferEntries[i].balance_right {
+                balanceDebitOrCredit = "借"
+            } else if dataBaseTransferEntries[i].balance_left < dataBaseTransferEntries[i].balance_right {
+                balanceDebitOrCredit = "貸"
+            } else {
+                balanceDebitOrCredit = "-"
+            }
+            // 差引残高額
+            var balanceAmount: Int64 = 0
+            if dataBaseTransferEntries[i].balance_left > dataBaseTransferEntries[i].balance_right { // 借方と貸方を比較
+                balanceAmount = dataBaseTransferEntries[i].balance_left
+            } else if dataBaseTransferEntries[i].balance_right > dataBaseTransferEntries[i].balance_left {
+                balanceAmount = dataBaseTransferEntries[i].balance_right
+            } else {
+                balanceAmount = 0
+            }
             let rowString = hTMLhelper.getSingleRow(
                 month: String(date.month),
                 day: String(date.day),
@@ -180,10 +194,24 @@ class PDFMakerPLAccount {
             let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
             _ = dataBaseCapitalTransferJournalEntry.balance_left
             _ = dataBaseCapitalTransferJournalEntry.balance_right
-
-            let balanceAmount = generalLedgerAccountModel.getBalanceAmountCapitalTransferJournalEntry()
-            let balanceDebitOrCredit = generalLedgerAccountModel.getBalanceDebitOrCreditCapitalTransferJournalEntry()
-
+            // 借又貸
+            var balanceDebitOrCredit: String = ""
+            if dataBaseCapitalTransferJournalEntry.balance_left > dataBaseCapitalTransferJournalEntry.balance_right {
+                balanceDebitOrCredit = "借"
+            } else if dataBaseCapitalTransferJournalEntry.balance_left < dataBaseCapitalTransferJournalEntry.balance_right {
+                balanceDebitOrCredit = "貸"
+            } else {
+                balanceDebitOrCredit = "-"
+            }
+            // 差引残高額
+            var balanceAmount: Int64 = 0
+            if dataBaseCapitalTransferJournalEntry.balance_left > dataBaseCapitalTransferJournalEntry.balance_right { // 借方と貸方を比較
+                balanceAmount = dataBaseCapitalTransferJournalEntry.balance_left
+            } else if dataBaseCapitalTransferJournalEntry.balance_right > dataBaseCapitalTransferJournalEntry.balance_left {
+                balanceAmount = dataBaseCapitalTransferJournalEntry.balance_right
+            } else {
+                balanceAmount = 0
+            }
             let rowString = hTMLhelper.getSingleRow(
                 month: String(date.month),
                 day: String(date.day),
