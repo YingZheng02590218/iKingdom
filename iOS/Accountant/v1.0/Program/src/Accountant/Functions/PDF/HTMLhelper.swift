@@ -122,7 +122,7 @@ struct HTMLhelper {
                 height: 12mm;/*  8.560311284% 22mm　*/
             }
             table {
-                width: 100%;
+                width: 99%; /* 100%にすると、空白ページが発生する 　*/
                 height: 235mm;/*  91.439688716% 235mm　*/
             }
                 thead {
