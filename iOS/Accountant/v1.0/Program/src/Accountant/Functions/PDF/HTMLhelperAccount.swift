@@ -52,6 +52,9 @@ struct HTMLhelperAccount {
                           background-color: #ffff00; }
                     .BlueBackgroundColor {
                           background-color: #008080;}
+            .red {
+                color: #ff0000;
+            }
         /*　罫線　*/
             .line_single_gray_bottom {
                 border-bottom: 1px solid #888;
@@ -433,12 +436,12 @@ struct HTMLhelperAccount {
     ) -> String {
             return """
                 <tr class="rowHeight">
-                  <td class="line_single_red_right line_single_blue_bottom fontsize95 center">\(month)</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(day)</td>
-                  <td class="smallWritting line_single_blue_bottom line_double_red_right right fontsize95">\(creditCategory)</td>
+                  <td class="line_single_red_right line_single_blue_bottom fontsize95 center red">\(month)</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center red">\(day)</td>
+                  <td class="smallWritting line_single_blue_bottom line_double_red_right right fontsize95 red">\(creditCategory)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right fontsize95">\(debitAmount == 0 ? "" : String(debitAmount))</p></td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right fontsize95">\(creditAmount == 0 ? "" : String(creditAmount))</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right fontsize95 red">\(debitAmount == 0 ? "" : String(debitAmount))</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right fontsize95 red">\(creditAmount == 0 ? "" : String(creditAmount))</p></td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(balanceDebitOrCredit)</td>
                   <td class="line_single_blue_bottom fontsize95"><p class="right fontsize95">\("")</p></td>
                 </tr>
