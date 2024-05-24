@@ -138,7 +138,7 @@ struct HTMLhelper {
         width: 210mm;
         height: 294mm; /*　296mmを指定していたが、レイアウトが崩れていたので変更　*/
         box-sizing: border-box;
-        padding: 0mm 10mm;
+        padding: 0mm 10mm; /*　上下　1mmでも指定すると、レイアウトが崩れる　*/
         display: block;
         break-after: always;
     }
@@ -279,7 +279,7 @@ struct HTMLhelper {
                   </td>
                   <td class="line_double_red_right line_double_red_top line_single_red_bottom numberOfAccount">
                     <div class="center flex-colum">
-                      <span class="fontsize60">丁</span><span class="fontsize60">数</span>
+                      <span class="fontsize80">丁</span><span class="fontsize80">数</span>
                     </div>
                   </td>
                   <td class="line_double_red_right line_double_red_top line_single_red_bottom amount">
@@ -339,7 +339,7 @@ struct HTMLhelper {
                   <td class="line_single_red_right line_single_blue_bottom"></td>
                   <td class="line_double_red_right line_single_blue_bottom"></td>
                   <td class="smallWritting line_single_blue_bottom line_double_red_right left fontsize80">\(smallWritting)</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor center"> </td>
                   <td class="line_double_red_right line_single_blue_bottom"></td>
                   <td class="line_single_blue_bottom"></td>
                 </tr>
@@ -349,28 +349,28 @@ struct HTMLhelper {
     func getSingleRowEmpty() -> String {
          """
                  <tr class="rowHeight">
-                   <td class="line_single_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
-                   <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95 clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                   <td class="line_single_blue_bottom fontsize95 clearColor"> あ</td>
+                   <td class="line_single_red_right line_single_blue_bottom fontsize95 center clearColor"> </td>
+                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> </td>
+                   <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95 clearColor"> </td>
+                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> </td>
+                   <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> </td>
+                   <td class="line_single_blue_bottom fontsize95 clearColor"> </td>
                  </tr>
                  <tr class="rowHeight">
-                   <td class="line_single_red_right line_single_blue_bottom center fontsize95 clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom center fontsize95 clearColor"> あ</td>
-                   <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95 clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                   <td class="line_single_blue_bottom fontsize95 clearColor"> あ</td>
+                   <td class="line_single_red_right line_single_blue_bottom center fontsize95 clearColor"> </td>
+                   <td class="line_double_red_right line_single_blue_bottom center fontsize95 clearColor"> </td>
+                   <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95 clearColor"> </td>
+                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> </td>
+                   <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> </td>
+                   <td class="line_single_blue_bottom fontsize95 clearColor"> </td>
                  </tr>
                  <tr class="rowHeight">
-                   <td class="line_single_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                   <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95 clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                   <td class="line_single_blue_bottom fontsize95 clearColor"> あ</td>
+                   <td class="line_single_red_right line_single_blue_bottom fontsize95 center clearColor"> </td>
+                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> </td>
+                   <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95 clearColor"> </td>
+                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> </td>
+                   <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> </td>
+                   <td class="line_single_blue_bottom fontsize95 clearColor"> </td>
                  </tr>
     """
     }
@@ -378,12 +378,12 @@ struct HTMLhelper {
     func footerstring(debitAmount: Int64, creditAmount: Int64) -> String {
          """
                  <tr class="rowHeight">
-                    <td class="line_single_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                    <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                    <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95 clearColor"> あ</td>
-                    <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                    <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                    <td class="line_single_blue_bottom fontsize95 clearColor"> あ</td>
+                    <td class="line_single_red_right line_single_blue_bottom fontsize95 center clearColor"> </td>
+                    <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> </td>
+                    <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95 clearColor"> </td>
+                    <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> </td>
+                    <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> </td>
+                    <td class="line_single_blue_bottom fontsize95 clearColor"> </td>
                   </tr>
               </tbody>
             </table>
