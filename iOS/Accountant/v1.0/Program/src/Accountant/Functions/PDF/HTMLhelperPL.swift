@@ -61,6 +61,12 @@ struct HTMLhelperPL {
                   background-color: #ffff00; }
             .BlueBackgroundColor {
                   background-color: #008080;}
+            .accentColor10 {
+                  background-color: rgb(65 105 225 / 10%);}
+            .accentColor20 {
+                  background-color: rgb(65 105 225 / 20%);}
+            .accentColor30 {
+                  background-color: rgb(65 105 225 / 30%);}
     <!--     /*　罫線　*/ -->
             .line_single_gray_bottom {
                 border-bottom: 1px solid #888;
@@ -332,7 +338,7 @@ struct HTMLhelperPL {
     // 中区分 合計 段落1
     func middleRowEnd(title: String, amount: String) -> String {
          """
-    <tr  class="skyBlueBackgroundColor">
+    <tr  class="accentColor20">
                 <th id="asset-1" class="left textIndent1">\(title)</th>
                 <td headers="assets asset-1" class="borderBottom">\(amount)</td>
                 </tr>
@@ -352,7 +358,7 @@ struct HTMLhelperPL {
     // レコードごとに1回コール 段落0 五つの利益
     func getSingleRowForBenefits(title: String, amount: String) -> String {
          """
-    <tr  class="skyBlueBackgroundColor">
+    <tr  class="accentColor30">
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1" class="borderTop borderBottom">\(amount)</td>
                 </tr>

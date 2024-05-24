@@ -60,6 +60,12 @@ struct HTMLhelperBS {
                   background-color: #ffff00; }
             .BlueBackgroundColor {
                   background-color: #008080;}
+            .accentColor10 {
+                  background-color: rgb(65 105 225 / 10%);}
+            .accentColor20 {
+                  background-color: rgb(65 105 225 / 20%);}
+            .accentColor30 {
+                  background-color: rgb(65 105 225 / 30%);}
     <!--     /*　罫線　*/ -->
             .line_single_gray_bottom {
                 border-bottom: 1px solid #888;
@@ -297,29 +303,29 @@ struct HTMLhelperBS {
         <table class="halfWidth marginBottomAuto">
                 <tbody>
                 <tr>
-                <th class="skyBlueBackgroundColor" scope="col" colspan="2" id="assets" style="width:50%"><strong>\(BalanceSheet.Block.assets.rawValue)</strong></th>
+                <th class="accentColor10" scope="col" colspan="2" id="assets" style="width:50%"><strong>\(BalanceSheet.Block.assets.rawValue)</strong></th>
                 </tr>
     """
     }
     // テーブル　トップ 負債の部、資本の部
     func tableTopString(block: String) -> String {
          """
-                <table style="width:100%">
-                <tbody>
+        <table style="width:100%">
+            <tbody>
                 <tr>
-                <th class="skyBlueBackgroundColor" scope="col" colspan="2" id="assets" style="width:50%"><strong>\(block)</strong></th>
+                    <th class="accentColor10" scope="col" colspan="2" id="assets" style="width:50%"><strong>\(block)</strong></th>
                 </tr>
     """
     }
     // テーブル　エンド 資産の部 合計
     func tableEndString(title: String, amount: String) -> String {
          """
-    <tr class="skyBlueBackgroundColor line_single_black_all">
-    <th id="capital-4"><strong>\(title)</strong></th>
-    <td headers="capital capital-4">\(amount)</td>
-    </tr>
-    </tbody>
-    </table>
+                <tr class="accentColor30 line_single_black_all">
+                    <th id="capital-4"><strong>\(title)</strong></th>
+                    <td headers="capital capital-4">\(amount)</td>
+                </tr>
+            </tbody>
+        </table>
     
     <div class="halfWidth">
     """
@@ -327,26 +333,26 @@ struct HTMLhelperBS {
     // テーブル　エンド 負債の部 合計
     func tableEndString(amount: String) -> String {
          """
-    <tr class="skyBlueBackgroundColor line_single_black_all">
-    <th id="capital-4"><strong>\(BalanceSheet.Block.liabilities.getTotalAmount())</strong></th>
-    <td headers="capital capital-4">\(amount)</td>
-    </tr>
-    </tbody>
+            <tr class="accentColor30 line_single_black_all">
+                <th id="capital-4"><strong>\(BalanceSheet.Block.liabilities.getTotalAmount())</strong></th>
+                <td headers="capital capital-4">\(amount)</td>
+            </tr>
+        </tbody>
     </table>
     """
     }
     // テーブル　エンド 負債・純資産の部 合計
     func tableEndString(capitalAmount: String, amount: String) -> String {
          """
-    <tr class="skyBlueBackgroundColor line_single_black_all">
-    <th id="capital-3">\(BalanceSheet.Block.netAssets.getTotalAmount())</th>
-    <td headers="capital capital-3">\(capitalAmount)</td>
-    </tr>
-    <tr class="skyBlueBackgroundColor line_single_black_all">
-    <th id="assets-capital"><strong>\(BalanceSheet.Block.liabilityAndEquity.getTotalAmount())</strong></th>
-    <td headers="assets assets-capital">\(amount)</td>
-    </tr>
-    </tbody>
+            <tr class="accentColor30 line_single_black_all">
+                <th id="capital-3">\(BalanceSheet.Block.netAssets.getTotalAmount())</th>
+                <td headers="capital capital-3">\(capitalAmount)</td>
+            </tr>
+            <tr class="accentColor30 line_single_black_all">
+                <th id="assets-capital"><strong>\(BalanceSheet.Block.liabilityAndEquity.getTotalAmount())</strong></th>
+                <td headers="assets assets-capital">\(amount)</td>
+            </tr>
+        </tbody>
     </table>
     
     </div>
@@ -366,7 +372,7 @@ struct HTMLhelperBS {
     // 中区分 合計 段落1
     func middleRowEnd(title: String, amount: String) -> String {
          """
-                <tr>
+                <tr class="accentColor20">
                 <th id="asset-1" class="left textIndent1">\(title)</th>
                 <td headers="assets asset-1" class="borderBottom">\(amount)</td>
                 </tr>
@@ -376,7 +382,7 @@ struct HTMLhelperBS {
     // 中区分 合計 段落0　新株予約権、TODO、非支配株主持分、TODO
     func middleRowEndIndent0space(title: String, amount: String) -> String {
          """
-                <tr>
+                <tr class="accentColor20">
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1" class="borderBottom">\(amount)</td>
                 </tr>
