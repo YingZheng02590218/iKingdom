@@ -13,7 +13,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var label: UILabel!
     
-    lazy var spinner = UIActivityIndicatorView(style: .large)
+    lazy var spinner = UIActivityIndicatorView(style: .medium)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -50,7 +50,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
         // まとめて編集機能 setEditingメソッドを使用するため、Storyboard上の編集ボタンを上書きしてボタンを生成する
         editButtonItem.tintColor = .accentColor
         if var rightBarButtonItems = navigationItem.rightBarButtonItems {
-            rightBarButtonItems.append(editButtonItem)
+            rightBarButtonItems.insert(editButtonItem, at: 0)
             navigationItem.setRightBarButtonItems(rightBarButtonItems, animated: false)
         }
         

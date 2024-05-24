@@ -12,8 +12,18 @@ import UIKit
 // 設定勘定科目一覧　画面
 class CategoryListTableViewController: UITableViewController {
     
-    // MARK: - Variable/Let
     
+    // MARK: - Variable/Let
+    // フィードバック
+    private let feedbackGeneratorHeavy: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     var index: Int = 0 // カルーセルのタブの識別
     
     /// GUIアーキテクチャ　MVP
@@ -55,6 +65,16 @@ class CategoryListTableViewController: UITableViewController {
     
     // 勘定科目の有効無効　変更時のアクション TableViewの中のどのTableViewCellに配置されたトグルスイッチかを探す
     @objc func hundleSwitch(sender: UISwitch) {
+        // システムサウンドを鳴らす
+        if sender.isOn {
+            AudioServicesPlaySystemSound(1_484) // UISwitch_On_Haptic.caf
+        } else {
+            AudioServicesPlaySystemSound(1_485) // UISwitch_Off_Haptic.caf
+        }
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // UISwitchが配置されたセルを探す
         var hoge = sender.superview // 親ビュー
         while hoge?.isKind(of: CategoryListTableViewCell.self) == false {

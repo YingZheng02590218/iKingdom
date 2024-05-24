@@ -20,7 +20,7 @@
         <!--設定-->
         <scene sceneID="nKs-wx-s0s">
             <objects>
-                <splitViewController allowDoubleColumnStyle="YES" id="SZ1-CS-6Sk" sceneMemberID="viewController">
+                <splitViewController allowDoubleColumnStyle="YES" id="SZ1-CS-6Sk" customClass="SplitViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="設定" image="tools_wrench-tools_wrench_symbol" id="iV4-KT-KPX"/>
                     <navigationItem key="navigationItem" id="BGb-82-uru"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>

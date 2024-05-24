@@ -12,18 +12,24 @@ import UIKit
 class PeriodYearViewController: UIViewController {
     
     @IBOutlet var pickerView: UIPickerView!
-    @IBOutlet var pickerViewView: EMTNeumorphicView!
+    @IBOutlet var backgroundView: EMTNeumorphicView!
     @IBOutlet private var pickerViewViewView: EMTNeumorphicView!
     @IBOutlet private var doneButton: EMTNeumorphicButton!
     @IBOutlet private var cancelButton: EMTNeumorphicButton!
     
+    /// モーダル上部に設置されるインジケータ
+    private lazy var indicatorView: SemiModalIndicatorView = {
+        let indicator = SemiModalIndicatorView()
+        indicator.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(indicatorDidTap(_:))))
+        return indicator
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        createPicker()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -31,6 +37,14 @@ class PeriodYearViewController: UIViewController {
         // ドラムロールの初期位置
         pickerView.selectRow(DataBaseManagerSettingsPeriod.shared.getMainBooksAllCount() - 1, inComponent: 0, animated: true)
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // viewDidLayoutSubviews()に書くと何度も呼ばれて、落ちる?
+        createPicker()
+    }
+    
     // ピッカー作成
     func createPicker() {
         pickerView.delegate = self
@@ -38,13 +52,13 @@ class PeriodYearViewController: UIViewController {
         pickerView.isHidden = false
         //        pickerViewView.isHidden = false
         
-        if let datePickerView = pickerViewView {
-            datePickerView.neumorphicLayer?.cornerRadius = 15
-            datePickerView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
-            datePickerView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
-            datePickerView.neumorphicLayer?.edged = Constant.edged
-            datePickerView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+        if let backgroundView = backgroundView {
+            backgroundView.neumorphicLayer?.cornerRadius = 15
+            backgroundView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            backgroundView.neumorphicLayer?.edged = Constant.edged
+            backgroundView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
         }
         
         if let datePickerView = pickerViewViewView {
@@ -77,16 +91,28 @@ class PeriodYearViewController: UIViewController {
         cancelButton.neumorphicLayer?.edged = Constant.edged
         cancelButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         cancelButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+        
+        // 中央上部に配置する
+        indicatorView.frame = CGRect(x: 0, y: 0, width: 40, height: 5)
+        backgroundView.addSubview(indicatorView)
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            indicatorView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+            indicatorView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5),
+            indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
+            indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
+        ])
     }
     
     @IBAction func doneButtonTapped(_ sender: EMTNeumorphicButton) {
+        // 選択されていたボタンを選択解除する
+        sender.isSelected = false
         // ボタンを選択する
-        sender.isSelected = true
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.doneButton.isSelected = false
+        sender.isSelected = !sender.isSelected
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            sender.isSelected = false
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 let fiscalYear = Int(self.getPeriodFromDB(row: self.pickerView.selectedRow(inComponent: 0)))
                 
                 let alert = UIAlertController(title: "最終確認", message: "年度を 「\(self.getPeriodFromDB(row: self.pickerView.selectedRow(inComponent: 0)))」 に変更しますか？", preferredStyle: .alert)
@@ -113,18 +139,24 @@ class PeriodYearViewController: UIViewController {
     }
     
     @IBAction func cancelButtonTapped(_ sender: EMTNeumorphicButton) {
+        // 選択されていたボタンを選択解除する
+        sender.isSelected = false
         // ボタンを選択する
-        sender.isSelected = true
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.cancelButton.isSelected = false
+        sender.isSelected = !sender.isSelected
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            sender.isSelected = false
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.dismiss(animated: true, completion: nil)
             }
         }
     }
     
+    // インジケータ タップ
+    @objc
+    private func indicatorDidTap(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension PeriodYearViewController: UIPickerViewDataSource, UIPickerViewDelegate {

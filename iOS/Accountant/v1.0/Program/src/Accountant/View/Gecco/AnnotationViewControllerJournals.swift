@@ -218,7 +218,7 @@ private extension AnnotationViewControllerJournals {
             let second = viewControllerHasNavigationItem?.navigationItem.rightBarButtonItems?[1].value(forKey: "view") as? UIView,
             let third  = tableViewControllerHasCell?.view.viewWithTag(0)?.viewWithTag(33),
             let fifth  = tableViewControllerHasCell?.view.viewWithTag(0)?.viewWithTag(333),
-            let forth  = viewControllerHasNavigationItem?.navigationItem.leftBarButtonItems?[0].value(forKey: "view") as? UIView
+            let forth  = viewControllerHasNavigationItem?.navigationItem.rightBarButtonItems?[0].value(forKey: "view") as? UIView
         else {
             fatalError("Unexpected extract view from UIBarButtonItem via value(forKey:)")
         }

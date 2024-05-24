@@ -6,10 +6,11 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
+import AudioToolbox // 効果音
 import GoogleMobileAds // マネタイズ対応
 import UIKit
 
-// 操作設定クラス
+// 設定主要簿クラス
 class SettingsOperatingTableViewController: UITableViewController {
     
     @IBOutlet private var gADBannerView: GADBannerView!
@@ -27,6 +28,12 @@ class SettingsOperatingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "主要簿"
+        // largeTitle表示
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .accentColor
+
         tableView.separatorColor = .accentColor
     }
     
@@ -200,6 +207,12 @@ class SettingsOperatingTableViewController: UITableViewController {
     // 有効無効　変更時のアクション
     @objc
     func hundleSwitch(sender: UISwitch) {
+        // システムサウンドを鳴らす
+        if sender.isOn {
+            AudioServicesPlaySystemSound(1_484) // UISwitch_On_Haptic.caf
+        } else {
+            AudioServicesPlaySystemSound(1_485) // UISwitch_Off_Haptic.caf
+        }
         // フィードバック
         if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
             generator.impactOccurred()

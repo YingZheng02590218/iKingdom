@@ -17,6 +17,8 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
     // MARK: - var let
     
     var gADBannerView: GADBannerView!
+    
+    @IBOutlet var backgroundBaseView: UIView!
     /// 勘定　上部
     @IBOutlet private var dateYearLabel: UILabel!
     @IBOutlet private var topView: UIView!
@@ -49,6 +51,12 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
     var account: String = ""
     // 編集機能
     var tappedIndexPath: IndexPath?
+    /// モーダル上部に設置されるインジケータ
+    private lazy var indicatorView: SemiModalIndicatorView = {
+        let indicator = SemiModalIndicatorView()
+        indicator.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(indicatorDidTap(_:))))
+        return indicator
+    }()
     
     /// GUIアーキテクチャ　MVP
     private var presenter: GeneralLedgerAccountPresenterInput!
@@ -125,6 +133,19 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
                 backgroundView.layer.insertSublayer(gradientLayer, at: 0)
             }
         }
+        
+        if let backgroundView = backgroundBaseView {
+            // 中央上部に配置する
+            indicatorView.frame = CGRect(x: 0, y: 0, width: 40, height: 5)
+            backgroundView.addSubview(indicatorView)
+            indicatorView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                indicatorView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+                indicatorView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5),
+                indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
+                indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
+            ])
+        }
     }
     
     private func setLongPressRecognizer() {
@@ -192,6 +213,12 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
                 }
             }
         }
+    }
+    
+    // インジケータ タップ
+    @objc
+    private func indicatorDidTap(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Navigation
@@ -703,11 +730,22 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     debitAmount = dataBaseTransferEntry.debit_amount
                     numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")
                     numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")
-                    
-                    // 差引残高　差引残高クラスで計算した計算結果を取得
-                    balanceAmount = presenter.getBalanceAmountOpeningJournalEntry()
-                    balanceDebitOrCredit = presenter.getBalanceDebitOrCreditOpeningJournalEntry()
-                    
+                    // 借又貸
+                    if dataBaseTransferEntry.balance_left > dataBaseTransferEntry.balance_right {
+                        balanceDebitOrCredit = "借"
+                    } else if dataBaseTransferEntry.balance_left < dataBaseTransferEntry.balance_right {
+                        balanceDebitOrCredit = "貸"
+                    } else {
+                        balanceDebitOrCredit = "-"
+                    }
+                    // 差引残高額
+                    if dataBaseTransferEntry.balance_left > dataBaseTransferEntry.balance_right { // 借方と貸方を比較
+                        balanceAmount = dataBaseTransferEntry.balance_left
+                    } else if dataBaseTransferEntry.balance_right > dataBaseTransferEntry.balance_left {
+                        balanceAmount = dataBaseTransferEntry.balance_right
+                    } else {
+                        balanceAmount = 0
+                    }
                     // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                     if DateManager.shared.isInPeriod(date: dataBaseTransferEntry.date) {
                         cell.listDateMonthLabel.textColor = .textColor
@@ -731,22 +769,35 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 }
             } else if indexPath.section == 14 {
                 // 決算整理仕訳　勘定別　損益勘定以外
-                date = "\(presenter.dataBaseAdjustingEntries(forRow: indexPath.row).date)"
+                let dataBaseAdjustingEntry = presenter.dataBaseAdjustingEntries(forRow: indexPath.row)
+                date = "\(dataBaseAdjustingEntry.date)"
                 if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
                     upperCellMonth = "\(presenter.dataBaseAdjustingEntries(forRow: indexPath.row - 1).date)"
                 }
-                debitCategory = presenter.dataBaseAdjustingEntries(forRow: indexPath.row).debit_category
-                creditCategory = presenter.dataBaseAdjustingEntries(forRow: indexPath.row).credit_category
-                debitAmount = presenter.dataBaseAdjustingEntries(forRow: indexPath.row).debit_amount
-                creditAmount = presenter.dataBaseAdjustingEntries(forRow: indexPath.row).credit_amount
+                debitCategory = dataBaseAdjustingEntry.debit_category
+                creditCategory = dataBaseAdjustingEntry.credit_category
+                debitAmount = dataBaseAdjustingEntry.debit_amount
+                creditAmount = dataBaseAdjustingEntry.credit_amount
                 numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")// 損益勘定の場合はエラーになる
                 numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")// 損益勘定の場合はエラーになる
-                
-                balanceAmount = presenter.getBalanceAmountAdjusting(indexPath: indexPath) // TODO: メソッドをまとめる
-                balanceDebitOrCredit = presenter.getBalanceDebitOrCreditAdjusting(indexPath: indexPath)
-                
+                // 借又貸
+                if dataBaseAdjustingEntry.balance_left > dataBaseAdjustingEntry.balance_right {
+                    balanceDebitOrCredit = "借"
+                } else if dataBaseAdjustingEntry.balance_left < dataBaseAdjustingEntry.balance_right {
+                    balanceDebitOrCredit = "貸"
+                } else {
+                    balanceDebitOrCredit = "-"
+                }
+                // 差引残高額
+                if dataBaseAdjustingEntry.balance_left > dataBaseAdjustingEntry.balance_right { // 借方と貸方を比較
+                    balanceAmount = dataBaseAdjustingEntry.balance_left
+                } else if dataBaseAdjustingEntry.balance_right > dataBaseAdjustingEntry.balance_left {
+                    balanceAmount = dataBaseAdjustingEntry.balance_right
+                } else {
+                    balanceAmount = 0
+                }
                 // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
-                if DateManager.shared.isInPeriod(date: presenter.dataBaseAdjustingEntries(forRow: indexPath.row).date) {
+                if DateManager.shared.isInPeriod(date: dataBaseAdjustingEntry.date) {
                     cell.listDateMonthLabel.textColor = .textColor
                     cell.listDateDayLabel.textColor = .textColor
                     cell.listSummaryLabel.textColor = .textColor
@@ -792,9 +843,22 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     } else {
                         numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(Constant.capitalAccountName)")
                     }
-                    balanceAmount = presenter.getBalanceAmountCapitalTransferJournalEntry()
-                    balanceDebitOrCredit = presenter.getBalanceDebitOrCreditCapitalTransferJournalEntry()
-                    
+                    // 借又貸
+                    if dataBaseCapitalTransferJournalEntry.balance_left > dataBaseCapitalTransferJournalEntry.balance_right {
+                        balanceDebitOrCredit = "借"
+                    } else if dataBaseCapitalTransferJournalEntry.balance_left < dataBaseCapitalTransferJournalEntry.balance_right {
+                        balanceDebitOrCredit = "貸"
+                    } else {
+                        balanceDebitOrCredit = "-"
+                    }
+                    // 差引残高額
+                    if dataBaseCapitalTransferJournalEntry.balance_left > dataBaseCapitalTransferJournalEntry.balance_right { // 借方と貸方を比較
+                        balanceAmount = dataBaseCapitalTransferJournalEntry.balance_left
+                    } else if dataBaseCapitalTransferJournalEntry.balance_right > dataBaseCapitalTransferJournalEntry.balance_left {
+                        balanceAmount = dataBaseCapitalTransferJournalEntry.balance_right
+                    } else {
+                        balanceAmount = 0
+                    }
                     // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                     if DateManager.shared.isInPeriod(date: dataBaseCapitalTransferJournalEntry.date) {
                         cell.listDateMonthLabel.textColor = .textColor
@@ -866,17 +930,21 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     creditAmount = databaseJournalEntry.credit_amount             // 貸方金額
                     numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")// 損益勘定の場合はエラーになる
                     numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")// 損益勘定の場合はエラーになる
-                    
-                    // 差引残高　差引残高クラスで計算した計算結果を取得
-                    // balanceAmount = presenter.getBalanceAmount(indexPath: indexPath)
-                    balanceAmount = databaseJournalEntry.balance_left > databaseJournalEntry.balance_right ? databaseJournalEntry.balance_left : databaseJournalEntry.balance_right
-                    // balanceDebitOrCredit = presenter.getBalanceDebitOrCredit(indexPath: indexPath)
+                    // 借又貸
                     if databaseJournalEntry.balance_left > databaseJournalEntry.balance_right {
                         balanceDebitOrCredit = "借"
                     } else if databaseJournalEntry.balance_left < databaseJournalEntry.balance_right {
                         balanceDebitOrCredit = "貸"
                     } else {
                         balanceDebitOrCredit = "-"
+                    }
+                    // 差引残高額
+                    if databaseJournalEntry.balance_left > databaseJournalEntry.balance_right { // 借方と貸方を比較
+                        balanceAmount = databaseJournalEntry.balance_left
+                    } else if databaseJournalEntry.balance_right > databaseJournalEntry.balance_left {
+                        balanceAmount = databaseJournalEntry.balance_right
+                    } else {
+                        balanceAmount = 0
                     }
                     // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                     if DateManager.shared.isInPeriod(date: databaseJournalEntry.date) {

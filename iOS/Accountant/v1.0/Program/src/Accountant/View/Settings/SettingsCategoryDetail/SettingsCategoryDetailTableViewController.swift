@@ -512,7 +512,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
         inputButton.isSelected = false
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             sender.isSelected = !sender.isSelected
         }
         // 勘定科目　追加か編集か
@@ -543,29 +543,30 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
                             print("    navigationController2[1]: ", navigationController2.viewControllers[1])   // CategoryListCarouselAndPageViewController
                             if let categoryListCarouselAndPageViewController = navigationController2.viewControllers[1] as? CategoryListCarouselAndPageViewController,
                                let presentingViewController = categoryListCarouselAndPageViewController.pageViewController.viewControllers?.first as? CategoryListTableViewController {
-                                // viewWillAppearを呼び出す　更新のため
-                                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                                    // 表示科目が紐付けされていない場合
-                                    var numberOfTaxonomyString = ""
-                                    if let numberOfTaxonomy = self.numberOfTaxonomy {
-                                        numberOfTaxonomyString = String(numberOfTaxonomy)
-                                    }
-                                    newnumber = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
-                                        rank0: self.bigNum,
-                                        rank1: self.midNum,
-                                        rank2: self.smallNum,
-                                        numberOfTaxonomy: numberOfTaxonomyString,
-                                        category: self.accountname,
-                                        switching: true
-                                    )
-                                    // 新規追加　を終了するためにフラグを倒す
-                                    if newnumber != 0 {
-                                        self.addAccount = false
-                                        // presentingViewController.numberOfAccount = num // 勘定科目　詳細画面 の勘定科目番号に代入
-                                        // TableViewをリロードする処理がある
-                                        presentingViewController.reloadDataAferAdding()
-                                    }
-                                })
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                                        // 表示科目が紐付けされていない場合
+                                        var numberOfTaxonomyString = ""
+                                        if let numberOfTaxonomy = self.numberOfTaxonomy {
+                                            numberOfTaxonomyString = String(numberOfTaxonomy)
+                                        }
+                                        newnumber = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
+                                            rank0: self.bigNum,
+                                            rank1: self.midNum,
+                                            rank2: self.smallNum,
+                                            numberOfTaxonomy: numberOfTaxonomyString,
+                                            category: self.accountname,
+                                            switching: true
+                                        )
+                                        // 新規追加　を終了するためにフラグを倒す
+                                        if newnumber != 0 {
+                                            self.addAccount = false
+                                            // presentingViewController.numberOfAccount = num // 勘定科目　詳細画面 の勘定科目番号に代入
+                                            // TableViewをリロードする処理がある
+                                            presentingViewController.reloadDataAferAdding()
+                                        }
+                                    })
+                                }
                             }
                         }
                     } else { // iPhone
@@ -582,29 +583,30 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
                             print("    navigationController2[1]: ", navigationController2.viewControllers[1])   // CategoryListCarouselAndPageViewController
                             if let categoryListCarouselAndPageViewController = navigationController2.viewControllers[1] as? CategoryListCarouselAndPageViewController,
                                let presentingViewController = categoryListCarouselAndPageViewController.pageViewController.viewControllers?.first as? CategoryListTableViewController {
-                                // viewWillAppearを呼び出す　更新のため
-                                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                                    // 表示科目が紐付けされていない場合
-                                    var numberOfTaxonomyString = ""
-                                    if let numberOfTaxonomy = self.numberOfTaxonomy {
-                                        numberOfTaxonomyString = String(numberOfTaxonomy)
-                                    }
-                                    newnumber = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
-                                        rank0: self.bigNum,
-                                        rank1: self.midNum,
-                                        rank2: self.smallNum,
-                                        numberOfTaxonomy: numberOfTaxonomyString,
-                                        category: self.accountname,
-                                        switching: true
-                                    )
-                                    // 新規追加　を終了するためにフラグを倒す
-                                    if newnumber != 0 {
-                                        self.addAccount = false
-                                        // presentingViewController.numberOfAccount = num // 勘定科目　詳細画面 の勘定科目番号に代入
-                                        // TableViewをリロードする処理がある
-                                        presentingViewController.reloadDataAferAdding()
-                                    }
-                                })
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                                        // 表示科目が紐付けされていない場合
+                                        var numberOfTaxonomyString = ""
+                                        if let numberOfTaxonomy = self.numberOfTaxonomy {
+                                            numberOfTaxonomyString = String(numberOfTaxonomy)
+                                        }
+                                        newnumber = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
+                                            rank0: self.bigNum,
+                                            rank1: self.midNum,
+                                            rank2: self.smallNum,
+                                            numberOfTaxonomy: numberOfTaxonomyString,
+                                            category: self.accountname,
+                                            switching: true
+                                        )
+                                        // 新規追加　を終了するためにフラグを倒す
+                                        if newnumber != 0 {
+                                            self.addAccount = false
+                                            // presentingViewController.numberOfAccount = num // 勘定科目　詳細画面 の勘定科目番号に代入
+                                            // TableViewをリロードする処理がある
+                                            presentingViewController.reloadDataAferAdding()
+                                        }
+                                    })
+                                }
                             }
                         }
                     }

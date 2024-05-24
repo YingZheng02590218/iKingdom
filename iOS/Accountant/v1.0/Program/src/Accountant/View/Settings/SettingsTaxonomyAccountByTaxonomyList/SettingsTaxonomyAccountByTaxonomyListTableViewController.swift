@@ -22,6 +22,17 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
         self.tableView.reloadData()
     }
     
+    // フィードバック
+    private let feedbackGeneratorHeavy: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -257,6 +268,16 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
     }
     // 勘定科目の有効無効　変更時のアクション TableViewの中のどのTableViewCellに配置されたトグルスイッチかを探す
     @objc func hundleSwitch(sender: UISwitch) {
+        // システムサウンドを鳴らす
+        if sender.isOn {
+            AudioServicesPlaySystemSound(1_484) // UISwitch_On_Haptic.caf
+        } else {
+            AudioServicesPlaySystemSound(1_485) // UISwitch_Off_Haptic.caf
+        }
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // UISwitchが配置されたセルを探す
         var hoge = sender.superview // 親ビュー
         while hoge?.isKind(of: CategoryListTableViewCell.self) == false {
