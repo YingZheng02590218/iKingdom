@@ -262,6 +262,8 @@
 		F955B6112490FD3E005E2C6D /* CFTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B6102490FD3E005E2C6D /* CFTableViewController.swift */; };
 		F9578BDD2858CA13001C5D74 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9578BDC2858CA13001C5D74 /* Network.framework */; };
 		F9578BDE2858CA1B001C5D74 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9578BDC2858CA13001C5D74 /* Network.framework */; };
+		F958A3732BF5EEF800C357CC /* SemiModalIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F958A3722BF5EEF800C357CC /* SemiModalIndicatorView.swift */; };
+		F958A3742BF5EEF800C357CC /* SemiModalIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F958A3722BF5EEF800C357CC /* SemiModalIndicatorView.swift */; };
 		F9593DB42A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9593DB32A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift */; };
 		F9593DB52A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9593DB32A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift */; };
 		F9593DB72A62B61C00A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9593DB62A62B61C00A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.swift */; };
@@ -276,6 +278,8 @@
 		F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F95F59A626502DC200EFE522 /* CarouselTabCollectionViewCell.xib */; };
 		F95F59AD26503E0600EFE522 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95F59AC26503E0600EFE522 /* PageContentViewController.swift */; };
 		F95F59B226503E1D00EFE522 /* PageContentViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F95F59B126503E1D00EFE522 /* PageContentViewController.storyboard */; };
+		F9623C582BFB231400D1D503 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9623C572BFB231400D1D503 /* SplitViewController.swift */; };
+		F9623C592BFB231400D1D503 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9623C572BFB231400D1D503 /* SplitViewController.swift */; };
 		F963E29B2961D686002DF49E /* BalanceSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E29A2961D686002DF49E /* BalanceSheetViewController.swift */; };
 		F963E29C2961D686002DF49E /* BalanceSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E29A2961D686002DF49E /* BalanceSheetViewController.swift */; };
 		F963E29E2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F963E29D2961D6A7002DF49E /* BalanceSheetViewController.storyboard */; };
@@ -1032,6 +1036,7 @@
 		F955B606248FE6EF005E2C6D /* FinancialStatementTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FinancialStatementTableViewController.swift; path = Accountant/View/FinancialStatement/FinancialStatementTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		F955B6102490FD3E005E2C6D /* CFTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFTableViewController.swift; sourceTree = "<group>"; };
 		F9578BDC2858CA13001C5D74 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = System/Library/Frameworks/Network.framework; sourceTree = SDKROOT; };
+		F958A3722BF5EEF800C357CC /* SemiModalIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiModalIndicatorView.swift; sourceTree = "<group>"; };
 		F9593DB32A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsOperatingJournalEntryGroup.swift; sourceTree = "<group>"; };
 		F9593DB62A62B61C00A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOperatingJournalEntryGroupViewController.swift; sourceTree = "<group>"; };
 		F9593DBA2A62B64800A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsOperatingJournalEntryGroupViewController.storyboard; sourceTree = "<group>"; };
@@ -1045,6 +1050,7 @@
 		F95F59A626502DC200EFE522 /* CarouselTabCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselTabCollectionViewCell.xib; sourceTree = "<group>"; };
 		F95F59AC26503E0600EFE522 /* PageContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		F95F59B126503E1D00EFE522 /* PageContentViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PageContentViewController.storyboard; sourceTree = "<group>"; };
+		F9623C572BFB231400D1D503 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		F963E29A2961D686002DF49E /* BalanceSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceSheetViewController.swift; sourceTree = "<group>"; };
 		F963E29D2961D6A7002DF49E /* BalanceSheetViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BalanceSheetViewController.storyboard; sourceTree = "<group>"; };
 		F963E2A02962B6C3002DF49E /* BalacneSheetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalacneSheetPresenter.swift; sourceTree = "<group>"; };
@@ -2091,6 +2097,7 @@
 				F986CC162945BA9A005A2138 /* SplashViewController.swift */,
 				F94EDD9A237AEB3A0074D812 /* Main.storyboard */,
 				F9941D6926458259008B3970 /* TabBarController.swift */,
+				F9623C572BFB231400D1D503 /* SplitViewController.swift */,
 				F9F324522833A5A400DA813E /* WalkThrough */,
 				F9E620FA256527E000C2C3B3 /* Gecco */,
 				F9860FBB285B3826008D0714 /* PassCodeLock */,
@@ -2132,6 +2139,7 @@
 			children = (
 				F9C2BC24277DEF08006334D0 /* ClassicCalculatorViewController.swift */,
 				F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */,
+				F958A3722BF5EEF800C357CC /* SemiModalIndicatorView.swift */,
 			);
 			path = ClassicCalculator;
 			sourceTree = "<group>";
@@ -3226,6 +3234,7 @@
 				F92F4EF4249CCD5B00D50767 /* TBViewController.swift in Sources */,
 				F9789A342475C49B00B62CAF /* SettingsTableViewController.swift in Sources */,
 				F9D5D54A247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift in Sources */,
+				F9623C582BFB231400D1D503 /* SplitViewController.swift in Sources */,
 				F9AC55192927ACDA003966E4 /* BSData.swift in Sources */,
 				F93A630024FA79A400C1C2C1 /* DataBaseManager.swift in Sources */,
 				F98289B82978E0E800F8F1B8 /* AppVersion.swift in Sources */,
@@ -3314,6 +3323,7 @@
 				F9EC65E12BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift in Sources */,
 				F9F3A01C27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */,
 				F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
+				F958A3732BF5EEF800C357CC /* SemiModalIndicatorView.swift in Sources */,
 				F98D8A5327A55F27009560AA /* WSPresenter.swift in Sources */,
 				F9C6C74129A3A5D700BA8F83 /* PopUpViewController.swift in Sources */,
 				F909645629C32D8B00BB5298 /* Date+extension.swift in Sources */,
@@ -3479,6 +3489,7 @@
 				F9EC66D727B90BC60003FBB6 /* SettingsTableViewController.swift in Sources */,
 				F9EC66D827B90BC60003FBB6 /* GeneralLedgerAccountViewController.swift in Sources */,
 				F9AC551A2927ACDA003966E4 /* BSData.swift in Sources */,
+				F9623C592BFB231400D1D503 /* SplitViewController.swift in Sources */,
 				F9EC66D927B90BC60003FBB6 /* DataBaseManager.swift in Sources */,
 				F98289B92978E0E800F8F1B8 /* AppVersion.swift in Sources */,
 				F9EC66DA27B90BC60003FBB6 /* WithIconTableViewCell.swift in Sources */,
@@ -3567,6 +3578,7 @@
 				F9EC65E22BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift in Sources */,
 				F9F3A01D27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */,
 				F9EC670527B90BC60003FBB6 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
+				F958A3742BF5EEF800C357CC /* SemiModalIndicatorView.swift in Sources */,
 				F9EC670627B90BC60003FBB6 /* WSPresenter.swift in Sources */,
 				F9C6C74229A3A5D700BA8F83 /* PopUpViewController.swift in Sources */,
 				F909645729C32D8B00BB5298 /* Date+extension.swift in Sources */,
@@ -3816,7 +3828,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.1.0;
+				MARKETING_VERSION = 5.2.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3854,7 +3866,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.1.0;
+				MARKETING_VERSION = 5.2.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4006,10 +4018,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = T526NZN54U;
+				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				ENABLE_BITCODE = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -4027,11 +4040,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.1.0;
+				MARKETING_VERSION = 5.2.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "PaciolistSTG Development Provisioning Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "PaciolistSTG Development Provisioning Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4046,10 +4059,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = T526NZN54U;
+				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				ENABLE_BITCODE = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -4067,11 +4081,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.1.0;
+				MARKETING_VERSION = 5.2.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "PaciolistSTG Development Provisioning Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "PaciolistSTG Development Provisioning Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

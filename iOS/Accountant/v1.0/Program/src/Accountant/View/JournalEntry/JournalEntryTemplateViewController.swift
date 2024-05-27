@@ -16,6 +16,16 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
     @IBOutlet private var nicknameCounterLabel: UILabel!
     @IBOutlet private var nicknameView: EMTNeumorphicView!
     // フィードバック
+    private let feedbackGeneratorHeavy: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
+    // フィードバック
     private let feedbackGeneratorNotification: Any? = {
         if #available(iOS 10.0, *) {
             let generator = UINotificationFeedbackGenerator()
@@ -53,7 +63,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
                 textFieldSmallWritting.text = journalEntryData.smallWritting
             }
         } else if journalEntryType == .SettingsJournalEntriesFixing {
-            labelTitle.text = "よく使う仕訳"
+            labelTitle.text = "よく使う仕訳 編集"
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
             deleteButton.isHidden = false
             // データベース　よく使う仕訳を追加
@@ -146,6 +156,17 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
     }
     
     @IBAction override func inputButtonTapped(_ sender: EMTNeumorphicButton) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
+        // 選択されていたボタンを選択解除する
+        sender.isSelected = false
+        // ボタンを選択する
+        sender.isSelected = !sender.isSelected
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            sender.isSelected = !sender.isSelected
+        }
         // バリデーションチェック
         if self.textInputCheckForSettingsJournalEntries() {
             if journalEntryType == .SettingsJournalEntries {
@@ -219,42 +240,54 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
                 creditAmount: Int64(amountCreditTextField) ?? 0, // カンマを削除してからデータベースに書き込む
                 smallWritting: textFieldSmallWritting
             )
-            // 設定よく使う仕訳画面
-            if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
-               let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
-               let navigationController = splitViewController.viewControllers[0] as? UINavigationController, // スプリットコントローラから、現在選択されているコントローラを取得する
-               let navigationController2 = navigationController.viewControllers[1] as? UINavigationController,
-               let presentingViewController = navigationController2.viewControllers[0] as? SettingsOperatingJournalEntryViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
-                print(navigationController.viewControllers[0])
-                print(navigationController.viewControllers[1])
-                // 画面を閉じる
-                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                    presentingViewController.viewReload = true
-                    presentingViewController.viewWillAppear(true)
-                })
-            } else {
-                // 仕訳画面 タブバー
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                // 設定よく使う仕訳画面
                 if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
-                   let navigationController = tabBarController.selectedViewController as? UINavigationController,
-                   let presentingViewController = navigationController.topViewController as? JournalEntryViewController {
-                    print(navigationController.topViewController)
-                    print(navigationController.viewControllers)
+                   let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
+                   let navigationController = splitViewController.viewControllers[0] as? UINavigationController, // スプリットコントローラから、現在選択されているコントローラを取得する
+                   let navigationController2 = navigationController.viewControllers[1] as? UINavigationController,
+                   let presentingViewController = navigationController2.viewControllers[0] as? SettingsOperatingJournalEntryViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+                    // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+                    print(navigationController.viewControllers[0])
+                    print(navigationController.viewControllers[1])
                     // 画面を閉じる
                     self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                        // よく使う仕訳　エリア カルーセルをリロードする
-                        JournalEntryViewController.viewReload = true
+                        presentingViewController.viewReload = true
                         presentingViewController.viewWillAppear(true)
                     })
-                }
-                // 仕訳画面 仕訳帳画面、精算表画面
-                if let presentingViewController = presentingViewController as? JournalEntryViewController {
-                    // 画面を閉じる
-                    self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                        // よく使う仕訳　エリア カルーセルをリロードする
-                        JournalEntryViewController.viewReload = true
-                        presentingViewController.viewWillAppear(true)
-                    })
+                } else {
+                    // 仕訳画面 タブバー
+                    if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
+                       let navigationController = tabBarController.selectedViewController as? UINavigationController,
+                       let presentingViewController = navigationController.topViewController as? JournalEntryViewController {
+                        print(navigationController.topViewController)
+                        print(navigationController.viewControllers)
+                        // 画面を閉じる
+                        self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                            // よく使う仕訳　エリア カルーセルをリロードする
+                            JournalEntryViewController.viewReload = true
+                            presentingViewController.viewWillAppear(true)
+                        })
+                    }
+                    // 仕訳帳画面（仕訳編集、決算整理仕訳編集）、勘定画面（仕訳編集、決算整理仕訳編集）からの遷移の場合
+                    if let presentingViewController = self.presentingViewController as? JournalEntryViewController {
+                        // viewWillAppearを呼び出す　更新のため
+                        self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                            // よく使う仕訳　エリア カルーセルをリロードする
+                            JournalEntryViewController.viewReload = true
+                            presentingViewController.viewWillAppear(true)
+                        })
+                    }
+                    // 仕訳帳画面（仕訳）、精算表画面（決算整理仕訳）からの遷移の場合
+                    if let navigationController = self.presentingViewController as? UINavigationController,
+                       let presentingViewController = navigationController.topViewController as? JournalEntryViewController {
+                        // 画面を閉じる
+                        self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                            // よく使う仕訳　エリア カルーセルをリロードする
+                            JournalEntryViewController.viewReload = true
+                            presentingViewController.viewWillAppear(true)
+                        })
+                    }
                 }
             }
         }
@@ -309,10 +342,17 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
     // 削除ボタン
     @IBOutlet private var deleteButton: EMTNeumorphicButton!
     
-    @IBAction func deleteButton(_ sender: Any) {
+    @IBAction func deleteButton(_ sender: EMTNeumorphicButton) {
         // フィードバック
         if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
             generator.impactOccurred()
+        }
+        // 選択されていたボタンを選択解除する
+        sender.isSelected = false
+        // ボタンを選択する
+        sender.isSelected = !sender.isSelected
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            sender.isSelected = !sender.isSelected
         }
         // 確認のポップアップを表示したい
         self.showPopover()

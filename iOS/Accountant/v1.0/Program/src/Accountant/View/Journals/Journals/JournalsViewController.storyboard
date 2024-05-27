@@ -20,26 +20,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWJ-SB-FwY" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                                <rect key="frame" x="7" y="55" width="0.0" height="800"/>
+                                <rect key="frame" x="7" y="55" width="400" height="800"/>
                                 <subviews>
                                     <view opaque="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="3WR-VZ-ahH" userLabel="ViewBase">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="120"/>
                                         <subviews>
                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x1g-F1-sE4" userLabel="View top">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="120"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="120"/>
                                                 <subviews>
                                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVB-HA-sb7" userLabel="ViewUpper">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="400" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="eWE-1V-x9k" userLabel="company_name">
-                                                                <rect key="frame" x="0.0" y="30" width="0.0" height="30"/>
+                                                                <rect key="frame" x="0.0" y="30" width="400" height="30"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
                                                                 <color key="textColor" name="TextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="＊" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIP-xT-tcO" userLabel="title">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="400" height="60"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="21"/>
@@ -47,7 +47,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="O7L-5s-hJI" userLabel="closingDate">
-                                                                <rect key="frame" x="0.0" y="30" width="0.0" height="30"/>
+                                                                <rect key="frame" x="0.0" y="30" width="400" height="30"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
@@ -71,14 +71,14 @@
                                                             <constraint firstItem="aIP-xT-tcO" firstAttribute="leading" secondItem="fVB-HA-sb7" secondAttribute="leading" id="wgo-5U-IVM"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xrb-hu-A8w" userLabel="TopView">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xrb-hu-A8w" userLabel="TopView">
                                                         <rect key="frame" x="0.0" y="60" width="400" height="60"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7bR-9B-asA" userLabel="ViewDate">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="47.5" height="60"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 年" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="uc9-bY-flm" userLabel="list_date_year">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="47.5" height="30"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="16"/>
@@ -86,10 +86,10 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bPI-y1-mIv">
-                                                                        <rect key="frame" x="0.0" y="30" width="0.0" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="30" width="47.5" height="30"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="LIn-Nw-o69" userLabel="list_date_month">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="21" height="30"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="16"/>
@@ -97,7 +97,7 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="zQ6-04-aSy" userLabel="list_date_day">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
+                                                                                <rect key="frame" x="21" y="0.0" width="26.5" height="30"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="16"/>
@@ -148,10 +148,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c2z-of-O6b" userLabel="ViewMemo">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                                <rect key="frame" x="47.5" y="0.0" width="198" height="60"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="摘要" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Uem-OH-enj" userLabel="list_summary">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="198" height="60"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -179,16 +179,16 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qEn-e1-OdM" userLabel="ViewNumber">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                                <rect key="frame" x="245.5" y="0.0" width="16" height="60"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="丁" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jYx-oE-b8a" userLabel="list_number">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="16" height="30"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="13"/>
                                                                         <color key="textColor" name="TextColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1Oq-Ly-5N9" userLabel="list_number_2">
-                                                                        <rect key="frame" x="0.0" y="30" width="0.0" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="30" width="16" height="30"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="13"/>
                                                                         <color key="textColor" name="TextColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -221,10 +221,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yrs-UW-4Jn" userLabel="ViewDebit">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                                <rect key="frame" x="261.5" y="0.0" width="69" height="60"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="u3Y-48-vOA" userLabel="list_debit">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="69" height="60"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                         <color key="textColor" name="TextColor"/>
@@ -251,10 +251,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hkb-QP-lR6" userLabel="ViewCredit">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                                <rect key="frame" x="330.5" y="0.0" width="69.5" height="60"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PgD-xW-kCT" userLabel="list_credit">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="69.5" height="60"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                         <color key="textColor" name="TextColor"/>
@@ -294,7 +294,7 @@
                                                             <constraint firstItem="Hkb-QP-lR6" firstAttribute="leading" secondItem="yrs-UW-4Jn" secondAttribute="trailing" id="JfY-R9-9E5"/>
                                                             <constraint firstItem="c2z-of-O6b" firstAttribute="leading" secondItem="7bR-9B-asA" secondAttribute="trailing" id="KF3-jC-dJ1"/>
                                                             <constraint firstItem="yrs-UW-4Jn" firstAttribute="top" secondItem="Xrb-hu-A8w" secondAttribute="top" id="MsK-vc-gkK"/>
-                                                            <constraint firstItem="c2z-of-O6b" firstAttribute="width" secondItem="Xrb-hu-A8w" secondAttribute="width" multiplier="0.493164" id="NXF-dM-CbB"/>
+                                                            <constraint firstItem="c2z-of-O6b" firstAttribute="width" relation="greaterThanOrEqual" secondItem="Xrb-hu-A8w" secondAttribute="width" multiplier="0.493164" id="NXF-dM-CbB"/>
                                                             <constraint firstAttribute="bottom" secondItem="7bR-9B-asA" secondAttribute="bottom" id="OgT-rg-UOt"/>
                                                             <constraint firstItem="7bR-9B-asA" firstAttribute="height" secondItem="Xrb-hu-A8w" secondAttribute="height" id="SA6-WZ-Vdy"/>
                                                             <constraint firstItem="7bR-9B-asA" firstAttribute="leading" secondItem="Xrb-hu-A8w" secondAttribute="leading" id="W9K-KD-NoC"/>
@@ -309,7 +309,7 @@
                                                             <constraint firstItem="c2z-of-O6b" firstAttribute="height" secondItem="Xrb-hu-A8w" secondAttribute="height" id="lkB-zd-3lr"/>
                                                             <constraint firstItem="qEn-e1-OdM" firstAttribute="leading" secondItem="c2z-of-O6b" secondAttribute="trailing" id="pn4-lj-H7g"/>
                                                             <constraint firstAttribute="bottom" secondItem="c2z-of-O6b" secondAttribute="bottom" id="tcn-FV-CIY"/>
-                                                            <constraint firstItem="qEn-e1-OdM" firstAttribute="width" secondItem="Xrb-hu-A8w" secondAttribute="width" multiplier="0.0410156" id="zG9-X3-pOo"/>
+                                                            <constraint firstItem="qEn-e1-OdM" firstAttribute="width" secondItem="Xrb-hu-A8w" secondAttribute="width" multiplier="0.04" id="zG9-X3-pOo"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -342,25 +342,25 @@
                                         </constraints>
                                     </view>
                                     <tableView opaque="NO" clipsSubviews="YES" tag="333" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="55" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="V3Q-kP-pLv">
-                                        <rect key="frame" x="0.0" y="120" width="0.0" height="665"/>
+                                        <rect key="frame" x="0.0" y="120" width="400" height="665"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_journalEntry" id="V1E-RO-R0Q" customClass="JournalsTableViewCell" customModule="Paciolist" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="50" width="0.0" height="55"/>
+                                                <rect key="frame" x="0.0" y="50" width="400" height="55"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V1E-RO-R0Q" id="CDS-uX-WNE">
-                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="55"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="400" height="55"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d4e-rD-eCp" userLabel="View1">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="55"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="47.5" height="55"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a1T-kT-1d6">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="47.5" height="18.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="vJp-Pk-dX2" userLabel="list_date">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="19"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="21" height="19"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                             <color key="textColor" name="TextColor"/>
@@ -375,7 +375,7 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="RMB-BR-qah" userLabel="list_date">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="19"/>
+                                                                            <rect key="frame" x="21" y="0.0" width="26.5" height="19"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                             <color key="textColor" name="TextColor"/>
@@ -414,10 +414,10 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Km-8O-N10">
-                                                                    <rect key="frame" x="0.0" y="18.5" width="0.0" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="18.5" width="47.5" height="18"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="4yj-BE-gkw" userLabel="list_date2">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="18"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="21" height="18"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                             <color key="textColor" name="TextColor"/>
@@ -431,8 +431,8 @@
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
-                                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="gAc-mf-toK" userLabel="list_date2">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="18"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="gAc-mf-toK" userLabel="list_date2">
+                                                                            <rect key="frame" x="21" y="0.0" width="26.5" height="18"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                             <color key="textColor" name="TextColor"/>
@@ -471,10 +471,10 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4R9-6c-PCn">
-                                                                    <rect key="frame" x="0.0" y="36.5" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="36.5" width="47.5" height="18.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="BS6-rj-eSX" userLabel="list_date3">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="21" height="18.5"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                             <color key="textColor" name="TextColor"/>
@@ -489,7 +489,7 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="m2y-a0-Raj" userLabel="list_date3">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.5"/>
+                                                                            <rect key="frame" x="21" y="0.0" width="26.5" height="18.5"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                             <color key="textColor" name="TextColor"/>
@@ -563,10 +563,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3c9-6A-ZcG" userLabel="View2">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="55"/>
+                                                            <rect key="frame" x="47.5" y="0.0" width="198" height="55"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="lqL-eb-go1" userLabel="label_list_summary_debit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="198" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -581,7 +581,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="MzK-ht-71v" userLabel="label_list_summary_credit">
-                                                                    <rect key="frame" x="0.0" y="18.5" width="0.0" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="18.5" width="198" height="18"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -596,7 +596,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="cYm-xa-3Nl" userLabel="list_summary">
-                                                                    <rect key="frame" x="0.0" y="36.5" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="36.5" width="198" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -640,10 +640,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ztb-J0-tJf" userLabel="View3">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="55"/>
+                                                            <rect key="frame" x="245.5" y="0.0" width="16" height="55"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="C07-dQ-fgX" userLabel="list_number">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="16" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -658,7 +658,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="mVa-QV-im9" userLabel="list_number2">
-                                                                    <rect key="frame" x="0.0" y="18.5" width="0.0" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="18.5" width="16" height="18"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -673,7 +673,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="frX-9m-Dcl" userLabel="list_number3">
-                                                                    <rect key="frame" x="0.0" y="36.5" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="36.5" width="16" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -717,10 +717,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJB-9h-cYP" userLabel="View4">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="55"/>
+                                                            <rect key="frame" x="261.5" y="0.0" width="69" height="55"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="aPd-Oj-5kn" userLabel="list_debit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="69" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -735,7 +735,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="Hwh-81-pnL" userLabel="list_debit2">
-                                                                    <rect key="frame" x="0.0" y="18.5" width="0.0" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="18.5" width="69" height="18"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -750,7 +750,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="G5I-PJ-D79" userLabel="list_debit3">
-                                                                    <rect key="frame" x="0.0" y="36.5" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="36.5" width="69" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -794,10 +794,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vct-je-qo4" userLabel="View5">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="55"/>
+                                                            <rect key="frame" x="330.5" y="0.0" width="69.5" height="55"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="uMm-yx-HU4" userLabel="list_credit1">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="69.5" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -812,7 +812,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="Mgu-8l-mZZ" userLabel="list_credit">
-                                                                    <rect key="frame" x="0.0" y="18.5" width="0.0" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="18.5" width="69.5" height="18"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -827,7 +827,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="Noe-xz-h4G" userLabel="list_credit3">
-                                                                    <rect key="frame" x="0.0" y="36.5" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="36.5" width="69.5" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -884,7 +884,7 @@
                                                         <constraint firstItem="ztb-J0-tJf" firstAttribute="leading" secondItem="3c9-6A-ZcG" secondAttribute="trailing" id="L4N-z2-0SG"/>
                                                         <constraint firstAttribute="trailing" secondItem="vct-je-qo4" secondAttribute="trailing" id="M6e-bE-dKn"/>
                                                         <constraint firstItem="d4e-rD-eCp" firstAttribute="top" secondItem="CDS-uX-WNE" secondAttribute="top" id="RgT-7j-HQa"/>
-                                                        <constraint firstItem="3c9-6A-ZcG" firstAttribute="width" secondItem="CDS-uX-WNE" secondAttribute="width" multiplier="0.493164" id="VMF-VV-0ga"/>
+                                                        <constraint firstItem="3c9-6A-ZcG" firstAttribute="width" relation="greaterThanOrEqual" secondItem="CDS-uX-WNE" secondAttribute="width" multiplier="0.493164" id="VMF-VV-0ga"/>
                                                         <constraint firstAttribute="bottom" secondItem="d4e-rD-eCp" secondAttribute="bottom" id="X9I-ZI-sEJ"/>
                                                         <constraint firstItem="vct-je-qo4" firstAttribute="top" secondItem="CDS-uX-WNE" secondAttribute="top" id="Xyr-v8-wUe"/>
                                                         <constraint firstItem="d4e-rD-eCp" firstAttribute="width" secondItem="CDS-uX-WNE" secondAttribute="width" multiplier="0.119141" id="bjK-pa-aUm"/>
@@ -942,10 +942,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IaW-QJ-s9A">
-                                <rect key="frame" x="3" y="785" width="8" height="50"/>
+                                <rect key="frame" x="83" y="785" width="248" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Haf-gE-g6w">
-                                        <rect key="frame" x="0.0" y="0.0" width="8" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="248" height="50"/>
                                         <color key="tintColor" name="AccentColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="選択した項目を編集"/>
@@ -963,7 +963,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" tag="55" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rAK-W9-R5l">
-                                <rect key="frame" x="-63" y="785" width="50" height="50"/>
+                                <rect key="frame" x="337" y="785" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="rAK-W9-R5l" secondAttribute="height" multiplier="25:25" id="bvw-3c-6iZ"/>
                                     <constraint firstAttribute="width" constant="50" id="n6j-TB-oME"/>
@@ -1161,7 +1161,7 @@
             <color red="0.13300000131130219" green="0.27799999713897705" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="BaseColor">
-            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.87800002098083496" green="0.89800000190734863" blue="0.92500001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="BorderBlueColor">
             <color red="0.41600000858306885" green="0.76899999380111694" blue="0.86299997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

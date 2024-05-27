@@ -12,14 +12,16 @@ import UIKit
 
 // 月次貸借対照表
 class MonthlyTrendsBalanceSheetViewController: UIViewController {
-
+    
     /// 貸借対照表　上部
     @IBOutlet var companyNameLabel: UILabel!
     @IBOutlet var closingDateLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var spreadsheetView: SpreadsheetView!
     @IBOutlet private var backgroundView: EMTNeumorphicView!
-    
+    // インジゲーター
+    var activityIndicatorView = UIActivityIndicatorView()
+    let backView = UIView()
     // グラデーションレイヤー　書類系画面
     let gradientLayer = CAGradientLayer()
     
@@ -85,41 +87,51 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
         
         titleLabel.text = "貸借対照表"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 21)
-        
-        // 月次推移表を更新する　true: リロードする 仕訳入力時にフラグを立てる。フラグが立っていれば下記の処理を実行する
-        if Constant.needToReload {
-            // 月次貸借対照表と月次損益計算書の、五大区分の合計額と、大区分の合計額と当期純利益の額を再計算する
-            DataBaseManagerMonthlyBSnPL.shared.setupAmountForBsAndPL(isBs: true)
-            
-            // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（仕訳、総勘定元帳、貸借対照表、損益計算書、精算表、試算表 で使用している）
-            objects0 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 0)
-            objects1 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 1)
-            objects2 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 2)
-            
-            objects3 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 3)
-            objects4 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 4)
-            objects5 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 5)
-            
-            objects6 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 2, rank1: 6)
-            
-            objects7 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 3, rank1: 7)
-            objects8 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 3, rank1: 8)
-            
-            objects9 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 4, rank1: 9)
-            
-            objects10 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 10) // 株主資本
-            objects11 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 11) // 評価・換算差額等
-            objects12 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 12) // 新株予約権
-            objects13 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 19) // 非支配株主持分
-            // 月次推移表を更新する　true: リロードする
-            Constant.needToReload = false
-            
-            spreadsheetView.reloadData()
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        // 月次推移表を更新する　true: リロードする 仕訳入力時にフラグを立てる。フラグが立っていれば下記の処理を実行する
+        if Constant.needToReload {
+            // ローディング処理
+            // インジゲーターを開始
+            self.showActivityIndicatorView()
+            // 集計処理
+            DispatchQueue.global(qos: .default).async {
+                // 月次貸借対照表と月次損益計算書の、五大区分の合計額と、大区分の合計額と当期純利益の額を再計算する
+                DataBaseManagerMonthlyBSnPL.shared.setupAmountForBsAndPL(isBs: true)
+                // 重要: 仕訳データを参照する際、メインスレッドで行う
+                DispatchQueue.main.async {
+                    // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（仕訳、総勘定元帳、貸借対照表、損益計算書、精算表、試算表 で使用している）
+                    self.objects0 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 0)
+                    self.objects1 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 1)
+                    self.objects2 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 2)
+                    
+                    self.objects3 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 3)
+                    self.objects4 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 4)
+                    self.objects5 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 5)
+                    
+                    self.objects6 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 2, rank1: 6)
+                    
+                    self.objects7 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 3, rank1: 7)
+                    self.objects8 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 3, rank1: 8)
+                    
+                    self.objects9 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 4, rank1: 9)
+                    
+                    self.objects10 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 10) // 株主資本
+                    self.objects11 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 11) // 評価・換算差額等
+                    self.objects12 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 12) // 新株予約権
+                    self.objects13 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 19) // 非支配株主持分
+                    // 月次推移表を更新する　true: リロードする
+                    Constant.needToReload = false
+                    
+                    self.spreadsheetView.reloadData()
+                    // インジケーターを終了
+                    self.finishActivityIndicatorView()
+                }
+            }
+        }
+        
         spreadsheetView.flashScrollIndicators()
         
         // アップグレード機能　スタンダードプラン
@@ -227,8 +239,67 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
                 name: "SettingsUpgradeViewController",
                 bundle: nil
             ).instantiateViewController(withIdentifier: "SettingsUpgradeViewController") as? SettingsUpgradeViewController {
-                self.present(viewController, animated: true, completion: nil)
+                // ナビゲーションバーを表示させる
+                let navigation = UINavigationController(rootViewController: viewController)
+                self.present(navigation, animated: true, completion: nil)
             }
+        }
+    }
+    
+    // インジゲーターを開始
+    func showActivityIndicatorView() {
+        DispatchQueue.main.async {
+            // タブの無効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = false
+                    }
+                }
+            }
+            // 背景になるView
+            self.backView.backgroundColor = .mainColor
+            // 表示位置を設定（画面中央）
+            self.activityIndicatorView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            // インジケーターのスタイルを指定（白色＆大きいサイズ）
+            self.activityIndicatorView.style = UIActivityIndicatorView.Style.large
+            // インジケーターを View に追加
+            self.backView.addSubview(self.activityIndicatorView)
+            // インジケーターを表示＆アニメーション開始
+            self.activityIndicatorView.startAnimating()
+            
+            // tabBarControllerのViewを使う
+            guard let tabBarView = self.tabBarController?.view else {
+                return
+            }
+            // 背景をNavigationControllerのViewに貼り付け
+            tabBarView.addSubview(self.backView)
+            
+            // サイズ合わせはAutoLayoutで
+            self.backView.translatesAutoresizingMaskIntoConstraints = false
+            self.backView.topAnchor.constraint(equalTo: tabBarView.topAnchor).isActive = true
+            self.backView.bottomAnchor.constraint(equalTo: tabBarView.bottomAnchor).isActive = true
+            self.backView.leftAnchor.constraint(equalTo: tabBarView.leftAnchor).isActive = true
+            self.backView.rightAnchor.constraint(equalTo: tabBarView.rightAnchor).isActive = true
+        }
+    }
+    // インジケーターを終了
+    func finishActivityIndicatorView() {
+        // 非同期処理などが終了したらメインスレッドでアニメーション終了
+        DispatchQueue.main.async {
+            // 非同期処理などを実行（今回は2秒間待つだけ）
+            Thread.sleep(forTimeInterval: 1.0)
+            // アニメーション終了
+            self.activityIndicatorView.stopAnimating()
+            // タブの有効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = true
+                    }
+                }
+            }
+            self.backView.removeFromSuperview()
         }
     }
 }
@@ -655,7 +726,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
         } else if case (1...(dates.count + 1), objects0Count..<(objects1Count)) = (indexPath.column, indexPath.row) {
@@ -684,7 +755,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
         } else if case (1...(dates.count + 1), objects1Count..<(objects2Count)) = (indexPath.column, indexPath.row) {
@@ -713,7 +784,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
@@ -741,7 +812,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
@@ -771,7 +842,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
         } else if case (1...(dates.count + 1), objects3Count..<(objects4Count)) = (indexPath.column, indexPath.row) {
@@ -800,7 +871,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
         } else if case (1...(dates.count + 1), objects4Count..<(objects5Count)) = (indexPath.column, indexPath.row) {
@@ -829,7 +900,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
@@ -857,7 +928,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
@@ -887,7 +958,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
@@ -915,7 +986,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
@@ -943,7 +1014,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
@@ -973,7 +1044,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
         } else if case (1...(dates.count + 1), objects7Count..<(objects8Count)) = (indexPath.column, indexPath.row) {
@@ -1002,7 +1073,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
@@ -1030,7 +1101,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
@@ -1060,7 +1131,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
@@ -1088,7 +1159,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
@@ -1116,7 +1187,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
@@ -1146,7 +1217,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
         } else if case (1...(dates.count + 1), objects10Count..<(objects11Count)) = (indexPath.column, indexPath.row) {
@@ -1175,7 +1246,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
         } else if case (1...(dates.count + 1), objects11Count..<(objects12Count)) = (indexPath.column, indexPath.row) {
@@ -1204,7 +1275,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
         } else if case (1...(dates.count + 1), objects12Count..<objects13Count) = (indexPath.column, indexPath.row) {
@@ -1233,7 +1304,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .none
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
@@ -1261,7 +1332,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             
@@ -1289,7 +1360,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 }
                 // アップグレード機能　スタンダードプラン
-//                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                //                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
                 return cell
             }
             

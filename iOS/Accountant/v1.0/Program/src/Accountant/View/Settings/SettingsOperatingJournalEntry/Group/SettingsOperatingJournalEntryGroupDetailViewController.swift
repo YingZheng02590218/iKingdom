@@ -133,7 +133,9 @@ class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
         }
         // 編集　グループ一覧画面で選択されたセルの位置
         if let tappedIndexPath = tappedIndexPath {
-            inputButton.setTitle("更新", for: .normal)
+            inputButton.setTitle("更　新", for: .normal)
+        } else {
+            inputButton.setTitle("登　録", for: .normal)
         }
         inputButton.setTitleColor(.accentColor, for: .normal)
         inputButton.neumorphicLayer?.cornerRadius = 15
@@ -216,14 +218,12 @@ class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
             generator.impactOccurred()
         }
         // 選択されていたボタンを選択解除する
-        inputButton.isSelected = false
-        
+        sender.isSelected = false
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             sender.isSelected = !sender.isSelected
         }
-        
         // バリデーションチェック
         if self.textInputCheckForSettingsJournalEntryGroup() {
             // 編集　グループ一覧画面で選択されたセルの位置
@@ -276,7 +276,7 @@ class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
         }
         let alert = UIAlertController(title: "エラー", message: errorMessage, preferredStyle: .alert)
         self.present(alert, animated: true) { () -> Void in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.dismiss(animated: true, completion: nil)
                 completion()
             }

@@ -17,6 +17,8 @@ class GeneralLedgerPLAccountViewController: UIViewController {
     // MARK: - var let
 
    var gADBannerView: GADBannerView!
+    
+    @IBOutlet var backgroundBaseView: UIView!
     /// 勘定　上部
     @IBOutlet private var dateYearLabel: UILabel!
     @IBOutlet private var topView: UIView!
@@ -36,7 +38,13 @@ class GeneralLedgerPLAccountViewController: UIViewController {
     
     // 勘定名
     let account: String = "損益"
-
+    /// モーダル上部に設置されるインジケータ
+    private lazy var indicatorView: SemiModalIndicatorView = {
+        let indicator = SemiModalIndicatorView()
+        indicator.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(indicatorDidTap(_:))))
+        return indicator
+    }()
+    
     /// GUIアーキテクチャ　MVP
     private var presenter: GeneralLedgerPLAccountPresenterInput!
     func inject(presenter: GeneralLedgerPLAccountPresenterInput) {
@@ -112,6 +120,19 @@ class GeneralLedgerPLAccountViewController: UIViewController {
                 backgroundView.layer.insertSublayer(gradientLayer, at: 0)
             }
         }
+        
+        if let backgroundView = backgroundBaseView {
+            // 中央上部に配置する
+            indicatorView.frame = CGRect(x: 0, y: 0, width: 40, height: 5)
+            backgroundView.addSubview(indicatorView)
+            indicatorView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                indicatorView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+                indicatorView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5),
+                indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
+                indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
+            ])
+        }
     }
     
     // MARK: - Action
@@ -125,6 +146,12 @@ class GeneralLedgerPLAccountViewController: UIViewController {
     
     @IBAction func csvBarButtonItemTapped(_ sender: Any) {
         presenter.csvBarButtonItemTapped()
+    }
+    
+    // インジケータ タップ
+    @objc
+    private func indicatorDidTap(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -179,11 +206,22 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
                 creditAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_amount             // 貸方金額
                 numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")
                 numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")
-
-                // 差引残高　差引残高クラスで計算した計算結果を取得
-                balanceAmount = presenter.getBalanceAmount(indexPath: indexPath)
-                balanceDebitOrCredit = presenter.getBalanceDebitOrCredit(indexPath: indexPath)
-                
+                // 借又貸
+                if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left > presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right {
+                    balanceDebitOrCredit = "借"
+                } else if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left < presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right {
+                    balanceDebitOrCredit = "貸"
+                } else {
+                    balanceDebitOrCredit = "-"
+                }
+                // 差引残高額
+                if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left > presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right { // 借方と貸方を比較
+                    balanceAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left
+                } else if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right > presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left {
+                    balanceAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right
+                } else {
+                    balanceAmount = 0
+                }
                 // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                 if DateManager.shared.isInPeriod(date: presenter.dataBaseTransferEntries(forRow: indexPath.row).date) {
                     cell.listDateMonthLabel.textColor = .textColor
@@ -230,9 +268,22 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
                     } else {
                         numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(Constant.capitalAccountName)")
                     }
-                    balanceAmount = presenter.getBalanceAmountCapitalTransferJournalEntry()
-                    balanceDebitOrCredit = presenter.getBalanceDebitOrCreditCapitalTransferJournalEntry()
-
+                    // 借又貸
+                    if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left > presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right {
+                        balanceDebitOrCredit = "借"
+                    } else if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left < presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right {
+                        balanceDebitOrCredit = "貸"
+                    } else {
+                        balanceDebitOrCredit = "-"
+                    }
+                    // 差引残高額
+                    if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left > presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right { // 借方と貸方を比較
+                        balanceAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left
+                    } else if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right > presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left {
+                        balanceAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right
+                    } else {
+                        balanceAmount = 0
+                    }
                     // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                     if DateManager.shared.isInPeriod(date: dataBaseCapitalTransferJournalEntry.date) {
                         cell.listDateMonthLabel.textColor = .textColor

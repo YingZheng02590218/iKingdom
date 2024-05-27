@@ -56,8 +56,16 @@ struct HTMLhelperBS {
             }
             .skyBlueBackgroundColor {
                   background-color: #e5f0fa;}
+            .yellowBackgroundColor {
+                  background-color: #ffff00; }
             .BlueBackgroundColor {
                   background-color: #008080;}
+            .accentColor10 {
+                  background-color: rgb(65 105 225 / 10%);}
+            .accentColor20 {
+                  background-color: rgb(65 105 225 / 20%);}
+            .accentColor30 {
+                  background-color: rgb(65 105 225 / 30%);}
     <!--     /*　罫線　*/ -->
             .line_single_gray_bottom {
                 border-bottom: 1px solid #888;
@@ -145,9 +153,9 @@ struct HTMLhelperBS {
                     }
         .page{
             width: 210mm;
-            height: 296mm;
+            height: 294mm;
             box-sizing: border-box;
-            padding: 10mm 10mm;
+            padding: 0mm 10mm;
             display: block;
     <!--         break-after: always; -->
         }
@@ -194,7 +202,7 @@ struct HTMLhelperBS {
       text-align: center;
       line-height: 1.28;
       margin: 0 auto;
-      padding: 0 0.6em 10px;
+      padding: 0 0.6em 3px;
       border-bottom: 1px solid; }
       
     .borderBottom {
@@ -205,23 +213,20 @@ struct HTMLhelperBS {
       padding: 5px; }
       
       .l-container {
-      max-width: 880px;
-      margin: auto;
-      padding-left: 15px;
-      padding-right: 15px; }
+      margin: auto; }
       
-      table {
-            border: 1px solid #05203a;
-      border-collapse: collapse;
-      border-spacing: 0; }
+    table {
+        border: 1px solid #05203a;
+        border-collapse: collapse;
+        border-spacing: 0; }
       
         table{
         margin: 0px 0; }
         
       th, td {
-              font-size: 15px;
+              font-size: 12px;
       border: 0px solid #05203a;
-      padding: 5px; }
+      padding: 2px; }
       
       th {
       width: 70%;
@@ -269,25 +274,25 @@ struct HTMLhelperBS {
     // ページごとに1回コール
     func headerstring(company: String, fiscalYear: Int, theDayOfReckoning: String) -> String {
          """
-                <section class="page">
-        <div class="richediter public-notice l-container">
+        <section class="page">
+            <div class="richediter public-notice l-container">
 
-        <p class="text-right">\(DateManager.shared.getDate())</p>
-        <h2>貸借対照表</h2>
-        <div class="flex margin20">
-        <span class="halfWidth">\(company)</span>
-        <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)</p></span>
-        </div>
+                <p class="text-right">\(DateManager.shared.getDate())</p>
+                <h2>貸借対照表</h2>
+                <div class="flex">
+                    <span class="halfWidth">\(company)</span>
+                    <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)</p></span>
+                </div>
 
-        <div class="flex line_single_black_all">
+                <div class="flex line_single_black_all">
     """
     }
     // ページごとに1回コール
     func footerstring() -> String {
          """
+                </div>
+                <p class="fontsize95 right">©複式簿記の会計帳簿 Paciolist</p>
             </div>
-        <p class="fontsize95 right margin5">©複式簿記の会計帳簿 Paciolist</p>
-        </div>
         </section>
         """
     }
@@ -298,29 +303,29 @@ struct HTMLhelperBS {
         <table class="halfWidth marginBottomAuto">
                 <tbody>
                 <tr>
-                <th class="skyBlueBackgroundColor" scope="col" colspan="2" id="assets" style="width:50%"><strong>\(BalanceSheet.Block.assets.rawValue)</strong></th>
+                <th class="accentColor10" scope="col" colspan="2" id="assets" style="width:50%"><strong>\(BalanceSheet.Block.assets.rawValue)</strong></th>
                 </tr>
     """
     }
     // テーブル　トップ 負債の部、資本の部
     func tableTopString(block: String) -> String {
          """
-                <table style="width:100%">
-                <tbody>
+        <table style="width:100%">
+            <tbody>
                 <tr>
-                <th class="skyBlueBackgroundColor" scope="col" colspan="2" id="assets" style="width:50%"><strong>\(block)</strong></th>
+                    <th class="accentColor10" scope="col" colspan="2" id="assets" style="width:50%"><strong>\(block)</strong></th>
                 </tr>
     """
     }
     // テーブル　エンド 資産の部 合計
     func tableEndString(title: String, amount: String) -> String {
          """
-    <tr class="skyBlueBackgroundColor line_single_black_all">
-    <th id="capital-4"><strong>\(title)</strong></th>
-    <td headers="capital capital-4">\(amount)</td>
-    </tr>
-    </tbody>
-    </table>
+                <tr class="accentColor30 line_single_black_all">
+                    <th id="capital-4"><strong>\(title)</strong></th>
+                    <td headers="capital capital-4">\(amount)</td>
+                </tr>
+            </tbody>
+        </table>
     
     <div class="halfWidth">
     """
@@ -328,26 +333,26 @@ struct HTMLhelperBS {
     // テーブル　エンド 負債の部 合計
     func tableEndString(amount: String) -> String {
          """
-    <tr class="skyBlueBackgroundColor line_single_black_all">
-    <th id="capital-4"><strong>\(BalanceSheet.Block.liabilities.getTotalAmount())</strong></th>
-    <td headers="capital capital-4">\(amount)</td>
-    </tr>
-    </tbody>
+            <tr class="accentColor30 line_single_black_all">
+                <th id="capital-4"><strong>\(BalanceSheet.Block.liabilities.getTotalAmount())</strong></th>
+                <td headers="capital capital-4">\(amount)</td>
+            </tr>
+        </tbody>
     </table>
     """
     }
     // テーブル　エンド 負債・純資産の部 合計
     func tableEndString(capitalAmount: String, amount: String) -> String {
          """
-    <tr class="skyBlueBackgroundColor line_single_black_all">
-    <th id="capital-3">\(BalanceSheet.Block.netAssets.getTotalAmount())</th>
-    <td headers="capital capital-3">\(capitalAmount)</td>
-    </tr>
-    <tr class="skyBlueBackgroundColor line_single_black_all">
-    <th id="assets-capital"><strong>\(BalanceSheet.Block.liabilityAndEquity.getTotalAmount())</strong></th>
-    <td headers="assets assets-capital">\(amount)</td>
-    </tr>
-    </tbody>
+            <tr class="accentColor30 line_single_black_all">
+                <th id="capital-3">\(BalanceSheet.Block.netAssets.getTotalAmount())</th>
+                <td headers="capital capital-3">\(capitalAmount)</td>
+            </tr>
+            <tr class="accentColor30 line_single_black_all">
+                <th id="assets-capital"><strong>\(BalanceSheet.Block.liabilityAndEquity.getTotalAmount())</strong></th>
+                <td headers="assets assets-capital">\(amount)</td>
+            </tr>
+        </tbody>
     </table>
     
     </div>
@@ -367,7 +372,7 @@ struct HTMLhelperBS {
     // 中区分 合計 段落1
     func middleRowEnd(title: String, amount: String) -> String {
          """
-                <tr>
+                <tr class="accentColor20">
                 <th id="asset-1" class="left textIndent1">\(title)</th>
                 <td headers="assets asset-1" class="borderBottom">\(amount)</td>
                 </tr>
@@ -377,7 +382,7 @@ struct HTMLhelperBS {
     // 中区分 合計 段落0　新株予約権、TODO、非支配株主持分、TODO
     func middleRowEndIndent0space(title: String, amount: String) -> String {
          """
-                <tr>
+                <tr class="accentColor20">
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1" class="borderBottom">\(amount)</td>
                 </tr>

@@ -61,6 +61,12 @@ struct HTMLhelperPL {
                   background-color: #ffff00; }
             .BlueBackgroundColor {
                   background-color: #008080;}
+            .accentColor10 {
+                  background-color: rgb(65 105 225 / 10%);}
+            .accentColor20 {
+                  background-color: rgb(65 105 225 / 20%);}
+            .accentColor30 {
+                  background-color: rgb(65 105 225 / 30%);}
     <!--     /*　罫線　*/ -->
             .line_single_gray_bottom {
                 border-bottom: 1px solid #888;
@@ -141,13 +147,14 @@ struct HTMLhelperPL {
                     tbody {
                     }
                     tfoot {
+                        height: 5mm;
     <!--                     height: 10.5058365758%;/*　1.9455252918% 5mm　*/ -->
                     }
         .page{
             width: 210mm;
-            height: 296mm;
+            height: 294mm;
             box-sizing: border-box;
-            padding: 10mm 10mm;
+            padding: 0mm 10mm;
             display: block;
     <!--         break-after: always; -->
         }
@@ -194,7 +201,7 @@ struct HTMLhelperPL {
       text-align: center;
       line-height: 1.28;
       margin: 0 auto;
-      padding: 0 0.6em 10px;
+      padding: 0 0.6em 3px;
       border-bottom: 1px solid; }
     
     .borderTop {
@@ -209,18 +216,17 @@ struct HTMLhelperPL {
       .l-container {
       margin: auto; }
     
-      table {
-            border: 1px solid #05203a;
-      border-collapse: collapse;
-      border-spacing: 0; }
+    table {
+        border-collapse: collapse;
+        border-spacing: 0; }
     
         table{
         margin: 0px 0; }
     
       th, td {
-              font-size: 15px;
+              font-size: 12px;
       border: 0px solid #05203a;
-      padding: 5px; }
+      padding: 2px; }
     
       th {
       width: 70%;
@@ -268,25 +274,24 @@ struct HTMLhelperPL {
     // ページごとに1回コール
     func headerstring(company: String, fiscalYear: Int, theDayOfReckoning: String) -> String {
          """
-                <section class="page">
-        <div class="richediter public-notice l-container">
+        <section class="page">
+            <div class="richediter public-notice l-container">
     
-        <p class="text-right">\(DateManager.shared.getDate())</p>
-    <h2>損益計算書</h2>
-        <div class="flex margin20">
-        <span class="halfWidth">\(company)</span>
-        <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)</p></span>
-        </div>
+                <p class="text-right">\(DateManager.shared.getDate())</p>
+                <h2>損益計算書</h2>
+                <div class="flex">
+                    <span class="halfWidth">\(company)</span>
+                    <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)</p></span>
+                </div>
     
-    <div>
+                <div>
     """
     }
     // ページごとに1回コール
     func footerstring() -> String {
          """
                 </div>
-        <p class="fontsize95 right margin5">©複式簿記の会計帳簿 Paciolist</p>
-        </div>
+            </div>
         </section>
         """
     }
@@ -301,7 +306,13 @@ struct HTMLhelperPL {
     // テーブル　エンド
     func tableEndString() -> String {
          """
-    </tbody>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th id="asset-1" class="left">　</th>
+                <td colspan="1" class="fontsize80"><p class="right">©複式簿記の会計帳簿 Paciolist</p></td>
+            </tr>
+        </tfoot>
     </table>
     """
     }
@@ -327,7 +338,7 @@ struct HTMLhelperPL {
     // 中区分 合計 段落1
     func middleRowEnd(title: String, amount: String) -> String {
          """
-    <tr  class="skyBlueBackgroundColor">
+    <tr  class="accentColor20">
                 <th id="asset-1" class="left textIndent1">\(title)</th>
                 <td headers="assets asset-1" class="borderBottom">\(amount)</td>
                 </tr>
@@ -347,7 +358,7 @@ struct HTMLhelperPL {
     // レコードごとに1回コール 段落0 五つの利益
     func getSingleRowForBenefits(title: String, amount: String) -> String {
          """
-    <tr  class="skyBlueBackgroundColor">
+    <tr  class="accentColor30">
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1" class="borderTop borderBottom">\(amount)</td>
                 </tr>

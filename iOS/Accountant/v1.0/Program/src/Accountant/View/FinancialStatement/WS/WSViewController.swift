@@ -137,7 +137,16 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
         sender.animateView()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             // 別の画面に遷移 仕訳画面
-            self.performSegue(withIdentifier: "buttonTapped2", sender: nil)
+            if let viewController = UIStoryboard(
+                name: "JournalEntryViewController",
+                bundle: nil
+            ).instantiateInitialViewController() as? JournalEntryViewController {
+                viewController.journalEntryType = .AdjustingAndClosingEntries // セルに表示した仕訳タイプを取得
+                viewController.segmentedControl.isHidden = true
+                // ナビゲーションバーを表示させる
+                let navigation = UINavigationController(rootViewController: viewController)
+                self.present(navigation, animated: true, completion: nil)
+            }
         }
     }
     
@@ -196,11 +205,7 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
     
     // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // segue.destinationの型はUIViewController
-        if let controller = segue.destination as? JournalEntryViewController {
-            // 遷移先のコントローラに値を渡す
-            controller.journalEntryType = .AdjustingAndClosingEntries // セルに表示した仕訳タイプを取得
-        }
+
     }
 }
 
