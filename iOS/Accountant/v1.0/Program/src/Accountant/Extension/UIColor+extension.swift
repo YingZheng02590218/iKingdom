@@ -75,6 +75,10 @@ extension UIColor {
         UIColor(named: "PaperTextColor") ?? .white
     }
     
+    class var bsPlAccentColor: UIColor {
+        UIColor(named: "BsPlAccentColor") ?? .white
+    }
+    
     class var textColor: UIColor {
         UIColor(named: "TextColor") ?? .white
     }

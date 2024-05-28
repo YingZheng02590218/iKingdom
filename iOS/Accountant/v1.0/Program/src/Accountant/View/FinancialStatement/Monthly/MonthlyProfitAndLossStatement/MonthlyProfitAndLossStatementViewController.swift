@@ -391,7 +391,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             // 空白
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = ""
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.1)
                 cell.borders.top = .none
                 cell.borders.bottom = .none
                 return cell
@@ -402,7 +402,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = "勘定科目"
                 cell.label.textAlignment = .center
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.1)
                 cell.borders.top = .none
                 cell.borders.bottom = .none
                 return cell
@@ -425,7 +425,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = ProfitAndLossStatement.Block.sales.getTotalAmount() // 売上高
                 cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 return cell
@@ -458,7 +458,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = ProfitAndLossStatement.Block.costOfGoodsSold.getTotalAmount() // 売上原価
                 cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 return cell
@@ -468,7 +468,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.textAlignment = .right
                 cell.label.text = ProfitAndLossStatement.Benefits.grossProfitOrLoss.rawValue // 売上総利益
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 return cell
@@ -491,7 +491,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = ProfitAndLossStatement.Block.sellingGeneralAndAdministrativeExpenses.getTotalAmount() // 販売費及び一般管理費
                 cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 return cell
@@ -501,7 +501,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.textAlignment = .right
                 cell.label.text = ProfitAndLossStatement.Benefits.otherCapitalSurplusesTotal.rawValue // 営業利益
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 return cell
@@ -524,7 +524,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = ProfitAndLossStatement.Block.nonOperatingIncome.getTotalAmount() // 営業外収益
                 cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 return cell
@@ -546,7 +546,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = ProfitAndLossStatement.Block.nonOperatingExpenses.getTotalAmount() // 営業外費用
                 cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 return cell
@@ -556,7 +556,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.textAlignment = .right
                 cell.label.text = ProfitAndLossStatement.Benefits.ordinaryIncomeOrLoss.rawValue // 経常利益
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 return cell
@@ -579,7 +579,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = ProfitAndLossStatement.Block.extraordinaryProfits.getTotalAmount() // 特別利益
                 cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 return cell
@@ -601,7 +601,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = ProfitAndLossStatement.Block.extraordinaryLoss.getTotalAmount() // 特別損失
                 cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 return cell
@@ -611,7 +611,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.textAlignment = .right
                 cell.label.text = ProfitAndLossStatement.Benefits.incomeOrLossBeforeIncomeTaxes.rawValue // 税引前当期純利益
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 return cell
@@ -634,7 +634,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = ProfitAndLossStatement.Block.incomeTaxes.getTotalAmount() // 法人税、住民税及び事業税
                 cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 return cell
@@ -644,7 +644,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.textAlignment = .right
                 cell.label.text = ProfitAndLossStatement.Benefits.netIncomeOrLoss.rawValue // 当期純利益
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 return cell
@@ -656,7 +656,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             // 日付
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: DateCell.self), for: indexPath) as? DateCell {
                 cell.label.text = "\(dates[indexPath.column - 1].year)" + "-" + "\(String(format: "%02d", dates[indexPath.column - 1].month))"
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.1)
                 cell.borders.top = .none
                 cell.borders.bottom = .none
                 return cell
@@ -666,7 +666,7 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
             // 空白 曜日
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: DateCell.self), for: indexPath) as? DateCell {
                 cell.label.text = ""
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.1)
                 cell.borders.top = .none
                 cell.borders.bottom = .none
                 return cell
@@ -717,12 +717,12 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
@@ -803,12 +803,12 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
@@ -830,12 +830,12 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 }
@@ -888,12 +888,12 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
@@ -915,12 +915,12 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 }
@@ -973,12 +973,12 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
@@ -1030,12 +1030,12 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
@@ -1057,12 +1057,12 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 }
@@ -1115,12 +1115,12 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
@@ -1172,12 +1172,12 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
@@ -1199,12 +1199,12 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 }
@@ -1257,12 +1257,12 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
@@ -1284,12 +1284,12 @@ extension MonthlyProfitAndLossStatementViewController: SpreadsheetViewDataSource
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 }

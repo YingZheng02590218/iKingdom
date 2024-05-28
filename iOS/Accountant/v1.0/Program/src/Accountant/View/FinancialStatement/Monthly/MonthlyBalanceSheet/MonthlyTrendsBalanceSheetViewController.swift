@@ -398,7 +398,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             // 空白
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = ""
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.1)
                 cell.borders.top = .none
                 cell.borders.bottom = .none
                 return cell
@@ -409,7 +409,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = "勘定科目"
                 cell.label.textAlignment = .center
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.1)
                 cell.borders.top = .none
                 cell.borders.bottom = .none
                 return cell
@@ -455,7 +455,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = "流動資産　合計"
                 cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 return cell
@@ -500,7 +500,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = "固定資産　合計"
                 cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 return cell
@@ -523,7 +523,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.textAlignment = .right
                 cell.label.text = "繰越資産　合計"
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 return cell
@@ -534,7 +534,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.textAlignment = .right
                 cell.label.text = "資産　合計"
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 return cell
@@ -568,7 +568,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = "流動負債　合計"
                 cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 return cell
@@ -591,7 +591,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = "固定負債　合計"
                 cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 return cell
@@ -602,7 +602,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.textAlignment = .right
                 cell.label.text = "負債　合計"
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 return cell
@@ -658,7 +658,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.text = "資本　合計"
                 cell.label.textAlignment = .right
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 return cell
@@ -669,7 +669,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
                 cell.label.textAlignment = .right
                 cell.label.text = "純資産　合計"
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                 cell.borders.top = .none
                 cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 return cell
@@ -682,7 +682,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             // 日付
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: DateCell.self), for: indexPath) as? DateCell {
                 cell.label.text = "\(dates[indexPath.column - 1].year)" + "-" + "\(String(format: "%02d", dates[indexPath.column - 1].month))"
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.1)
                 cell.borders.top = .none
                 cell.borders.bottom = .none
                 return cell
@@ -692,7 +692,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             // 空白 曜日
             if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: DateCell.self), for: indexPath) as? DateCell {
                 cell.label.text = ""
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
+                cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.1)
                 cell.borders.top = .none
                 cell.borders.bottom = .none
                 return cell
@@ -802,12 +802,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
@@ -918,12 +918,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
@@ -976,12 +976,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
@@ -1004,12 +1004,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 }
@@ -1091,12 +1091,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
@@ -1149,12 +1149,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
@@ -1177,12 +1177,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 }
@@ -1322,12 +1322,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 2, color: .lightGray)
                 }
@@ -1350,12 +1350,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                 if !text.isEmpty {
                     cell.label.text = text
                     cell.label.textColor = text.contains("△") ? .red : .paperTextColor
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 } else {
                     cell.label.text = nil
-                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
                     cell.borders.top = .none
                     cell.borders.bottom = .solid(width: 3, color: .lightGray)
                 }
