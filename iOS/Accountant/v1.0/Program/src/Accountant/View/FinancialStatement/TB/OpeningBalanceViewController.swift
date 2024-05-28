@@ -20,7 +20,6 @@ class OpeningBalanceViewController: UIViewController {
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var closingDateLabel: UILabel!
     
-    @IBOutlet private var printButton: UIButton!
     /// 開始残高　下部
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var backgroundView: EMTNeumorphicView!
@@ -112,13 +111,13 @@ class OpeningBalanceViewController: UIViewController {
             backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
-            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.mainColor2.cgColor
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.paperColor.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
             
             // グラデーション
             gradientLayer.frame = backgroundView.bounds
             gradientLayer.cornerRadius = 15
-            gradientLayer.colors = [UIColor.cellBackgroundGradationStart.cgColor, UIColor.cellBackgroundGradationEnd.cgColor]
+            gradientLayer.colors = [UIColor.paperGradationStart.cgColor, UIColor.paperGradationEnd.cgColor]
             gradientLayer.startPoint = CGPoint(x: 0, y: 0.6)
             gradientLayer.endPoint = CGPoint(x: 0.4, y: 1)
             if let sublayers = backgroundView.layer.sublayers, sublayers.contains(gradientLayer) {
@@ -257,13 +256,7 @@ class OpeningBalanceViewController: UIViewController {
     }
     
     // MARK: - Action
-    
-    /**
-     * 印刷ボタン押下時メソッド
-     */
-    @IBAction func printButtonTapped(_ sender: UIButton) {
-        
-    }
+
 }
 
 extension OpeningBalanceViewController: UITableViewDelegate, UITableViewDataSource {
@@ -328,8 +321,8 @@ extension OpeningBalanceViewController: UITableViewDelegate, UITableViewDataSour
                 cell.debitLabel.textColor = .red
                 cell.creditLabel.textColor = .red
             } else {
-                cell.debitLabel.textColor = .textColor
-                cell.creditLabel.textColor = .textColor
+                cell.debitLabel.textColor = .paperTextColor
+                cell.creditLabel.textColor = .paperTextColor
             }
             return cell
         }
@@ -406,7 +399,6 @@ extension OpeningBalanceViewController: OpeningBalancePresenterOutput {
         //        let printoutButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(button_print))
         //        //ナビゲーションに定義したボタンを置く
         //        self.navigationItem.rightBarButtonItem = printoutButton
-        printButton.isHidden = true
     }
     
     func setupViewForViewWillAppear() {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bw9-Kk-OcI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bw9-Kk-OcI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -27,28 +27,28 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="erp-bX-L3k">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="113.5"/>
                                                 <subviews>
-                                                    <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wqe-TZ-AuG" userLabel="ViewUpper">
-                                                        <rect key="frame" x="0.0" y="0.0" width="400" height="56.5"/>
+                                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wqe-TZ-AuG" userLabel="ViewUpper">
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="56.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="Fc2-HD-pSV" userLabel="company_name">
                                                                 <rect key="frame" x="0.0" y="28.5" width="0.0" height="28"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
-                                                                <nil key="textColor"/>
+                                                                <color key="textColor" name="PaperTextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="＊" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000149011612" translatesAutoresizingMaskIntoConstraints="NO" id="aHQ-AM-Ixh" userLabel="title">
                                                                 <rect key="frame" x="0.0" y="0.0" width="816" height="61"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="18"/>
-                                                                <nil key="textColor"/>
+                                                                <color key="textColor" name="PaperTextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="5dR-qc-gzB" userLabel="closingDate">
                                                                 <rect key="frame" x="0.0" y="28.5" width="0.0" height="28"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
-                                                                <nil key="textColor"/>
+                                                                <color key="textColor" name="PaperTextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
@@ -70,8 +70,8 @@
                                                             <constraint firstItem="Fc2-HD-pSV" firstAttribute="leading" secondItem="wqe-TZ-AuG" secondAttribute="leading" id="xzc-SF-r6b"/>
                                                         </constraints>
                                                     </view>
-                                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nLx-ow-noB" userLabel="ViewLower">
-                                                        <rect key="frame" x="0.0" y="56.5" width="0.0" height="57"/>
+                                                    <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nLx-ow-noB" userLabel="ViewLower">
+                                                        <rect key="frame" x="0.0" y="56.5" width="400" height="57"/>
                                                         <subviews>
                                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UFW-fO-F9C">
                                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="57"/>
@@ -81,7 +81,7 @@
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
-                                                                        <nil key="textColor"/>
+                                                                        <color key="textColor" name="PaperTextColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -103,7 +103,7 @@
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
-                                                                        <nil key="textColor"/>
+                                                                        <color key="textColor" name="PaperTextColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -126,7 +126,7 @@
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
-                                                                        <nil key="textColor"/>
+                                                                        <color key="textColor" name="PaperTextColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -208,7 +208,7 @@
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
-                                                                    <nil key="textColor"/>
+                                                                    <color key="textColor" name="PaperTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -222,7 +222,7 @@
                                                                 <textField opaque="NO" tag="333" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="0" clearsOnBeginEditing="YES" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="nNV-Ft-twZ">
                                                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
                                                                     <color key="backgroundColor" name="TextFieldColor"/>
-                                                                    <color key="textColor" name="TextColor"/>
+                                                                    <color key="textColor" name="PaperTextColor"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                                     <connections>
@@ -251,7 +251,7 @@
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
-                                                                    <nil key="textColor"/>
+                                                                    <color key="textColor" name="PaperTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -280,7 +280,7 @@
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
-                                                                    <nil key="textColor"/>
+                                                                    <color key="textColor" name="PaperTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -294,7 +294,7 @@
                                                                 <textField opaque="NO" tag="444" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="0" clearsOnBeginEditing="YES" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="tmo-ko-Jz7">
                                                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
                                                                     <color key="backgroundColor" name="TextFieldColor"/>
-                                                                    <color key="textColor" name="TextColor"/>
+                                                                    <color key="textColor" name="PaperTextColor"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                                     <connections>
@@ -370,7 +370,7 @@
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="20"/>
-                                                                    <color key="textColor" name="TextColor"/>
+                                                                    <color key="textColor" name="PaperTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -402,7 +402,7 @@
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
-                                                                    <nil key="textColor"/>
+                                                                    <color key="textColor" name="PaperTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -434,7 +434,7 @@
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="20"/>
-                                                                    <color key="textColor" name="TextColor"/>
+                                                                    <color key="textColor" name="PaperTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -531,23 +531,11 @@
                             <constraint firstItem="14z-DW-9U7" firstAttribute="top" secondItem="sS2-gl-8gr" secondAttribute="top" constant="7" id="qnT-52-Vun"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="開始残高" id="ao6-7n-s8L">
-                        <barButtonItem key="rightBarButtonItem" title="＊" id="VnI-pU-PdX">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="3W1-VF-l83">
-                                <rect key="frame" x="319" y="7" width="75" height="30"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="印刷">
-                                    <color key="titleColor" name="AccentBlue"/>
-                                </state>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="開始残高" id="ao6-7n-s8L"/>
                     <connections>
                         <outlet property="backgroundView" destination="14z-DW-9U7" id="vlb-cW-G83"/>
                         <outlet property="closingDateLabel" destination="5dR-qc-gzB" id="Ce8-00-THE"/>
                         <outlet property="companyNameLabel" destination="Fc2-HD-pSV" id="Z5i-aB-eAZ"/>
-                        <outlet property="printButton" destination="3W1-VF-l83" id="BkK-t7-VQE"/>
                         <outlet property="tableView" destination="fNc-Jo-BVR" id="hTz-7M-neB"/>
                         <outlet property="titleLabel" destination="aHQ-AM-Ixh" id="cN4-RT-euv"/>
                     </connections>
@@ -639,9 +627,6 @@
         <segue reference="2TR-Pd-pgD"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <namedColor name="AccentBlue">
-            <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="AccentOrange">
             <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -654,7 +639,7 @@
         <namedColor name="BorderRedColor">
             <color red="1" green="0.21600000560283661" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="TextColor">
+        <namedColor name="PaperTextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextFieldColor">

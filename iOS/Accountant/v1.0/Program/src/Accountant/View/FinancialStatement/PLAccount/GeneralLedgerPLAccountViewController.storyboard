@@ -38,7 +38,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="1256.5" height="56.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="21"/>
-                                                                <color key="textColor" name="TextColor"/>
+                                                                <color key="textColor" name="PaperTextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
@@ -64,7 +64,7 @@
                                                                                 <rect key="frame" x="0.0" y="0.0" width="151" height="28.5"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
-                                                                                <color key="textColor" name="TextColor"/>
+                                                                                <color key="textColor" name="PaperTextColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                         </subviews>
@@ -86,7 +86,7 @@
                                                                                         <rect key="frame" x="0.0" y="0.0" width="67" height="28.5"/>
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
-                                                                                        <color key="textColor" name="TextColor"/>
+                                                                                        <color key="textColor" name="PaperTextColor"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                 </subviews>
@@ -104,7 +104,7 @@
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="hLV-Jf-ehI" userLabel="list_date_day">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="84" height="28.5"/>
                                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
-                                                                                        <color key="textColor" name="TextColor"/>
+                                                                                        <color key="textColor" name="PaperTextColor"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                 </subviews>
@@ -167,7 +167,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="351.5" height="57"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
-                                                                        <color key="textColor" name="TextColor"/>
+                                                                        <color key="textColor" name="PaperTextColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -199,7 +199,7 @@
                                                                         <string key="text">丁
 数</string>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
-                                                                        <color key="textColor" name="TextColor"/>
+                                                                        <color key="textColor" name="PaperTextColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -229,7 +229,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="217.5" height="57"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
-                                                                        <color key="textColor" name="TextColor"/>
+                                                                        <color key="textColor" name="PaperTextColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -259,7 +259,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="218" height="57"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
-                                                                        <color key="textColor" name="TextColor"/>
+                                                                        <color key="textColor" name="PaperTextColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -292,7 +292,7 @@
 又
 貸</string>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
-                                                                        <color key="textColor" name="TextColor"/>
+                                                                        <color key="textColor" name="PaperTextColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -322,7 +322,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="218" height="57"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
-                                                                        <color key="textColor" name="TextColor"/>
+                                                                        <color key="textColor" name="PaperTextColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -434,7 +434,7 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="67" height="20"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                            <color key="textColor" name="TextColor"/>
+                                                                            <color key="textColor" name="PaperTextColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -464,7 +464,7 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="84" height="20"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                            <color key="textColor" name="TextColor"/>
+                                                                            <color key="textColor" name="PaperTextColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -510,7 +510,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="351.5" height="20"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <color key="textColor" name="TextColor"/>
+                                                                    <color key="textColor" name="PaperTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -540,7 +540,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="50.5" height="20"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                                    <color key="textColor" name="TextColor"/>
+                                                                    <color key="textColor" name="PaperTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -570,7 +570,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="217.5" height="20"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <color key="textColor" name="TextColor"/>
+                                                                    <color key="textColor" name="PaperTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -600,7 +600,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="218" height="20"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <color key="textColor" name="TextColor"/>
+                                                                    <color key="textColor" name="PaperTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -630,7 +630,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="20"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                    <color key="textColor" name="TextColor"/>
+                                                                    <color key="textColor" name="PaperTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -660,7 +660,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="218" height="20"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <color key="textColor" name="TextColor"/>
+                                                                    <color key="textColor" name="PaperTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -855,6 +855,9 @@
         </namedColor>
         <namedColor name="BorderRedColor">
             <color red="1" green="0.21600000560283661" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="PaperTextColor">
+            <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
