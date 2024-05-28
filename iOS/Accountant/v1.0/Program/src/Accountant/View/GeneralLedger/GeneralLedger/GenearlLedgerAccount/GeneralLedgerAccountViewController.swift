@@ -118,13 +118,13 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
             backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
-            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.mainColor2.cgColor
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.paperColor.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
             
             // グラデーション
             gradientLayer.frame = backgroundView.bounds
             gradientLayer.cornerRadius = 15
-            gradientLayer.colors = [UIColor.cellBackgroundGradationStart.cgColor, UIColor.cellBackgroundGradationEnd.cgColor]
+            gradientLayer.colors = [UIColor.paperGradationStart.cgColor, UIColor.paperGradationEnd.cgColor]
             gradientLayer.startPoint = CGPoint(x: 0, y: 0.6)
             gradientLayer.endPoint = CGPoint(x: 0.4, y: 1)
             if let sublayers = backgroundView.layer.sublayers, sublayers.contains(gradientLayer) {
@@ -471,13 +471,13 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                     if DateManager.shared.isInPeriod(date: dataBaseMonthlyTransferEntry.date) {
                         // 文字色　次期繰越
-                        headerView.listDateMonthLabel.textColor = .textColor
-                        headerView.listDateDayLabel.textColor = .textColor
-                        headerView.listSummaryLabel.textColor = .textColor
-                        headerView.listDebitLabel.textColor = .textColor
-                        headerView.listCreditLabel.textColor = .textColor
-                        headerView.listDebitOrCreditLabel.textColor = .textColor
-                        headerView.listBalanceLabel.textColor = .textColor
+                        headerView.listDateMonthLabel.textColor = .paperTextColor
+                        headerView.listDateDayLabel.textColor = .paperTextColor
+                        headerView.listSummaryLabel.textColor = .paperTextColor
+                        headerView.listDebitLabel.textColor = .paperTextColor
+                        headerView.listCreditLabel.textColor = .paperTextColor
+                        headerView.listDebitOrCreditLabel.textColor = .paperTextColor
+                        headerView.listBalanceLabel.textColor = .paperTextColor
                     } else {
                         // 文字色　次期繰越
                         headerView.listDateMonthLabel.textColor = .red
@@ -591,18 +591,18 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                     if DateManager.shared.isInPeriod(date: dataBaseMonthlyTransferEntry.date) {
                         // 文字色　次期繰越
-                        headerView.listDateMonthLabel.textColor = .textColor
-                        headerView.listDateDayLabel.textColor = .textColor
-                        headerView.listSummaryLabel.textColor = .textColor
+                        headerView.listDateMonthLabel.textColor = .paperTextColor
+                        headerView.listDateDayLabel.textColor = .paperTextColor
+                        headerView.listSummaryLabel.textColor = .paperTextColor
                         headerView.listSummarySecondLabel.textColor = .accentRedColor
-                        headerView.listDebitLabel.textColor = .textColor
+                        headerView.listDebitLabel.textColor = .paperTextColor
                         headerView.listDebitSecondLabel.textColor = .accentRedColor
-                        headerView.listDebitThirdLabel.textColor = .textColor
-                        headerView.listCreditLabel.textColor = .textColor
+                        headerView.listDebitThirdLabel.textColor = .paperTextColor
+                        headerView.listCreditLabel.textColor = .paperTextColor
                         headerView.listCreditSecondLabel.textColor = .accentRedColor
-                        headerView.listCreditThirdLabel.textColor = .textColor
-                        headerView.listDebitOrCreditLabel.textColor = .textColor
-                        headerView.listBalanceLabel.textColor = .textColor
+                        headerView.listCreditThirdLabel.textColor = .paperTextColor
+                        headerView.listDebitOrCreditLabel.textColor = .paperTextColor
+                        headerView.listBalanceLabel.textColor = .paperTextColor
                     } else {
                         // 文字色　次期繰越
                         headerView.listDateMonthLabel.textColor = .red
@@ -637,6 +637,14 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
         } else {
             return nil
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = UIColor.paperColor
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        view.tintColor = UIColor.paperColor
     }
     
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
@@ -748,14 +756,14 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     }
                     // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                     if DateManager.shared.isInPeriod(date: dataBaseTransferEntry.date) {
-                        cell.listDateMonthLabel.textColor = .textColor
-                        cell.listDateDayLabel.textColor = .textColor
-                        cell.listSummaryLabel.textColor = .textColor
-                        cell.listNumberLabel.textColor = .textColor
-                        cell.listDebitLabel.textColor = .textColor
-                        cell.listCreditLabel.textColor = .textColor
-                        cell.listDebitOrCreditLabel.textColor = .textColor
-                        cell.listBalanceLabel.textColor = .textColor
+                        cell.listDateMonthLabel.textColor = .paperTextColor
+                        cell.listDateDayLabel.textColor = .paperTextColor
+                        cell.listSummaryLabel.textColor = .paperTextColor
+                        cell.listNumberLabel.textColor = .paperTextColor
+                        cell.listDebitLabel.textColor = .paperTextColor
+                        cell.listCreditLabel.textColor = .paperTextColor
+                        cell.listDebitOrCreditLabel.textColor = .paperTextColor
+                        cell.listBalanceLabel.textColor = .paperTextColor
                     } else {
                         cell.listDateMonthLabel.textColor = .red
                         cell.listDateDayLabel.textColor = .red
@@ -798,14 +806,14 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 }
                 // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                 if DateManager.shared.isInPeriod(date: dataBaseAdjustingEntry.date) {
-                    cell.listDateMonthLabel.textColor = .textColor
-                    cell.listDateDayLabel.textColor = .textColor
-                    cell.listSummaryLabel.textColor = .textColor
-                    cell.listNumberLabel.textColor = .textColor
-                    cell.listDebitLabel.textColor = .textColor
-                    cell.listCreditLabel.textColor = .textColor
-                    cell.listDebitOrCreditLabel.textColor = .textColor
-                    cell.listBalanceLabel.textColor = .textColor
+                    cell.listDateMonthLabel.textColor = .paperTextColor
+                    cell.listDateDayLabel.textColor = .paperTextColor
+                    cell.listSummaryLabel.textColor = .paperTextColor
+                    cell.listNumberLabel.textColor = .paperTextColor
+                    cell.listDebitLabel.textColor = .paperTextColor
+                    cell.listCreditLabel.textColor = .paperTextColor
+                    cell.listDebitOrCreditLabel.textColor = .paperTextColor
+                    cell.listBalanceLabel.textColor = .paperTextColor
                 } else {
                     cell.listDateMonthLabel.textColor = .red
                     cell.listDateDayLabel.textColor = .red
@@ -861,14 +869,14 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     }
                     // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                     if DateManager.shared.isInPeriod(date: dataBaseCapitalTransferJournalEntry.date) {
-                        cell.listDateMonthLabel.textColor = .textColor
-                        cell.listDateDayLabel.textColor = .textColor
-                        cell.listSummaryLabel.textColor = .textColor
-                        cell.listNumberLabel.textColor = .textColor
-                        cell.listDebitLabel.textColor = .textColor
-                        cell.listCreditLabel.textColor = .textColor
-                        cell.listDebitOrCreditLabel.textColor = .textColor
-                        cell.listBalanceLabel.textColor = .textColor
+                        cell.listDateMonthLabel.textColor = .paperTextColor
+                        cell.listDateDayLabel.textColor = .paperTextColor
+                        cell.listSummaryLabel.textColor = .paperTextColor
+                        cell.listNumberLabel.textColor = .paperTextColor
+                        cell.listDebitLabel.textColor = .paperTextColor
+                        cell.listCreditLabel.textColor = .paperTextColor
+                        cell.listDebitOrCreditLabel.textColor = .paperTextColor
+                        cell.listBalanceLabel.textColor = .paperTextColor
                     } else {
                         cell.listDateMonthLabel.textColor = .red
                         cell.listDateDayLabel.textColor = .red
@@ -896,14 +904,14 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     
                     // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                     if DateManager.shared.isInPeriod(date: dataBaseTransferEntry.date) {
-                        cell.listDateMonthLabel.textColor = .textColor
-                        cell.listDateDayLabel.textColor = .textColor
-                        cell.listSummaryLabel.textColor = .textColor
-                        cell.listNumberLabel.textColor = .textColor
-                        cell.listDebitLabel.textColor = .textColor
-                        cell.listCreditLabel.textColor = .textColor
-                        cell.listDebitOrCreditLabel.textColor = .textColor
-                        cell.listBalanceLabel.textColor = .textColor
+                        cell.listDateMonthLabel.textColor = .paperTextColor
+                        cell.listDateDayLabel.textColor = .paperTextColor
+                        cell.listSummaryLabel.textColor = .paperTextColor
+                        cell.listNumberLabel.textColor = .paperTextColor
+                        cell.listDebitLabel.textColor = .paperTextColor
+                        cell.listCreditLabel.textColor = .paperTextColor
+                        cell.listDebitOrCreditLabel.textColor = .paperTextColor
+                        cell.listBalanceLabel.textColor = .paperTextColor
                     } else {
                         cell.listDateMonthLabel.textColor = .red
                         cell.listDateDayLabel.textColor = .red
@@ -948,14 +956,14 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     }
                     // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                     if DateManager.shared.isInPeriod(date: databaseJournalEntry.date) {
-                        cell.listDateMonthLabel.textColor = .textColor
-                        cell.listDateDayLabel.textColor = .textColor
-                        cell.listSummaryLabel.textColor = .textColor
-                        cell.listNumberLabel.textColor = .textColor
-                        cell.listDebitLabel.textColor = .textColor
-                        cell.listCreditLabel.textColor = .textColor
-                        cell.listDebitOrCreditLabel.textColor = .textColor
-                        cell.listBalanceLabel.textColor = .textColor
+                        cell.listDateMonthLabel.textColor = .paperTextColor
+                        cell.listDateDayLabel.textColor = .paperTextColor
+                        cell.listSummaryLabel.textColor = .paperTextColor
+                        cell.listNumberLabel.textColor = .paperTextColor
+                        cell.listDebitLabel.textColor = .paperTextColor
+                        cell.listCreditLabel.textColor = .paperTextColor
+                        cell.listDebitOrCreditLabel.textColor = .paperTextColor
+                        cell.listBalanceLabel.textColor = .paperTextColor
                     } else {
                         cell.listDateMonthLabel.textColor = .red
                         cell.listDateDayLabel.textColor = .red

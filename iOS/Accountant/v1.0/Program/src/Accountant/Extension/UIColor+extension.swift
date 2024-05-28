@@ -35,6 +35,10 @@ extension UIColor {
         UIColor(named: "BaseColor") ?? .white
     }
 
+    class var paperColor: UIColor {
+        UIColor(named: "PaperColor") ?? .white
+    }
+
     class var borderBlueColor: UIColor {
         UIColor(named: "BorderBlueColor") ?? .white
     }
@@ -59,12 +63,20 @@ extension UIColor {
         UIColor(named: "CellBackground") ?? .white
     }
     
-    class var cellBackgroundGradationStart: UIColor {
-        UIColor(named: "CellBackgroundGradationStart") ?? .white
+    class var paperGradationStart: UIColor {
+        UIColor(named: "PaperGradationStart") ?? .white
     }
     
-    class var cellBackgroundGradationEnd: UIColor {
-        UIColor(named: "CellBackgroundGradationEnd") ?? .white
+    class var paperGradationEnd: UIColor {
+        UIColor(named: "PaperGradationEnd") ?? .white
+    }
+    
+    class var paperTextColor: UIColor {
+        UIColor(named: "PaperTextColor") ?? .white
+    }
+    
+    class var bsPlAccentColor: UIColor {
+        UIColor(named: "BsPlAccentColor") ?? .white
     }
     
     class var textColor: UIColor {
