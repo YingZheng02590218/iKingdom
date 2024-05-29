@@ -189,22 +189,22 @@
                                             <constraint firstAttribute="trailing" secondItem="erp-bX-L3k" secondAttribute="trailing" id="ej0-zx-Dp1"/>
                                         </constraints>
                                     </view>
-                                    <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="20" estimatedRowHeight="-1" sectionHeaderHeight="25" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fNc-Jo-BVR">
+                                    <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="25" estimatedRowHeight="-1" sectionHeaderHeight="25" sectionFooterHeight="25" translatesAutoresizingMaskIntoConstraints="NO" id="fNc-Jo-BVR">
                                         <rect key="frame" x="0.0" y="113.5" width="400" height="627.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_TB" id="sQ5-fY-wHT" customClass="OpeningBalanceTableViewCell" customModule="Paciolist" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="50" width="400" height="20"/>
+                                                <rect key="frame" x="0.0" y="50" width="400" height="25"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sQ5-fY-wHT" id="ZN2-d6-xhu">
-                                                    <rect key="frame" x="0.0" y="0.0" width="400" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="400" height="25"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nM6-OM-ZCk">
-                                                            <rect key="frame" x="0.0" y="0.0" width="97.5" height="20"/>
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nM6-OM-ZCk">
+                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="25"/>
                                                             <subviews>
-                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="n6c-eZ-lsk" userLabel="debit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="97.5" height="20"/>
+                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="n6c-eZ-lsk" userLabel="debit">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="25"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
@@ -219,8 +219,8 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <textField opaque="NO" tag="333" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="0" clearsOnBeginEditing="YES" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="nNV-Ft-twZ">
-                                                                    <rect key="frame" x="-3" y="0.0" width="100.5" height="20"/>
+                                                                <textField opaque="NO" tag="333" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="0" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="nNV-Ft-twZ">
+                                                                    <rect key="frame" x="1" y="1" width="0.0" height="23"/>
                                                                     <color key="backgroundColor" name="TextFieldColor"/>
                                                                     <color key="textColor" name="PaperTextColor"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -234,20 +234,20 @@
                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstItem="n6c-eZ-lsk" firstAttribute="top" secondItem="nM6-OM-ZCk" secondAttribute="top" id="1TY-Je-ue9"/>
-                                                                <constraint firstItem="nNV-Ft-twZ" firstAttribute="leading" secondItem="n6c-eZ-lsk" secondAttribute="leading" constant="-3" id="2gs-dJ-koT"/>
+                                                                <constraint firstItem="nNV-Ft-twZ" firstAttribute="leading" secondItem="n6c-eZ-lsk" secondAttribute="leading" constant="1" id="2gs-dJ-koT"/>
                                                                 <constraint firstAttribute="bottom" secondItem="n6c-eZ-lsk" secondAttribute="bottom" id="D84-kt-mME"/>
                                                                 <constraint firstAttribute="trailing" secondItem="n6c-eZ-lsk" secondAttribute="trailing" id="DrF-pf-anL"/>
-                                                                <constraint firstItem="nNV-Ft-twZ" firstAttribute="bottom" secondItem="n6c-eZ-lsk" secondAttribute="bottom" id="Ljw-4f-bZ4"/>
-                                                                <constraint firstItem="nNV-Ft-twZ" firstAttribute="trailing" secondItem="n6c-eZ-lsk" secondAttribute="trailing" id="VfX-l7-bkU"/>
-                                                                <constraint firstItem="nNV-Ft-twZ" firstAttribute="top" secondItem="n6c-eZ-lsk" secondAttribute="top" id="dFx-p9-YbR"/>
+                                                                <constraint firstItem="nNV-Ft-twZ" firstAttribute="bottom" secondItem="n6c-eZ-lsk" secondAttribute="bottom" constant="-1" id="Ljw-4f-bZ4"/>
+                                                                <constraint firstItem="nNV-Ft-twZ" firstAttribute="trailing" secondItem="n6c-eZ-lsk" secondAttribute="trailing" constant="-1" id="VfX-l7-bkU"/>
+                                                                <constraint firstItem="nNV-Ft-twZ" firstAttribute="top" secondItem="n6c-eZ-lsk" secondAttribute="top" constant="1" id="dFx-p9-YbR"/>
                                                                 <constraint firstItem="n6c-eZ-lsk" firstAttribute="leading" secondItem="nM6-OM-ZCk" secondAttribute="leading" id="tMc-dJ-Cmc"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NjM-aC-taG">
-                                                            <rect key="frame" x="97.5" y="0.0" width="205" height="20"/>
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NjM-aC-taG">
+                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="25"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="TJb-yI-iLr" userLabel="account">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="205" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="205" height="25"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
@@ -272,11 +272,11 @@
                                                                 <constraint firstItem="TJb-yI-iLr" firstAttribute="leading" secondItem="NjM-aC-taG" secondAttribute="leading" id="pbz-Kc-cKh"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9DZ-Ly-bo4">
-                                                            <rect key="frame" x="302.5" y="0.0" width="97.5" height="20"/>
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9DZ-Ly-bo4">
+                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="25"/>
                                                             <subviews>
-                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="kNd-DI-dCK" userLabel="credit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="97.5" height="20"/>
+                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="kNd-DI-dCK" userLabel="credit">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="25"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
@@ -291,8 +291,8 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <textField opaque="NO" tag="444" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="0" clearsOnBeginEditing="YES" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="tmo-ko-Jz7">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="94.5" height="20"/>
+                                                                <textField opaque="NO" tag="444" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="0" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="tmo-ko-Jz7">
+                                                                    <rect key="frame" x="1" y="1" width="0.0" height="23"/>
                                                                     <color key="backgroundColor" name="TextFieldColor"/>
                                                                     <color key="textColor" name="PaperTextColor"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -307,12 +307,12 @@
                                                             <constraints>
                                                                 <constraint firstItem="kNd-DI-dCK" firstAttribute="top" secondItem="9DZ-Ly-bo4" secondAttribute="top" id="3U8-ud-Z52"/>
                                                                 <constraint firstItem="kNd-DI-dCK" firstAttribute="leading" secondItem="9DZ-Ly-bo4" secondAttribute="leading" id="7Dq-rl-BOJ"/>
-                                                                <constraint firstItem="tmo-ko-Jz7" firstAttribute="bottom" secondItem="kNd-DI-dCK" secondAttribute="bottom" id="Fd2-hh-eRa"/>
+                                                                <constraint firstItem="tmo-ko-Jz7" firstAttribute="bottom" secondItem="kNd-DI-dCK" secondAttribute="bottom" constant="-1" id="Fd2-hh-eRa"/>
                                                                 <constraint firstAttribute="bottom" secondItem="kNd-DI-dCK" secondAttribute="bottom" id="Hm0-wY-Tlg"/>
-                                                                <constraint firstItem="tmo-ko-Jz7" firstAttribute="top" secondItem="kNd-DI-dCK" secondAttribute="top" id="SOa-8f-SRL"/>
+                                                                <constraint firstItem="tmo-ko-Jz7" firstAttribute="top" secondItem="kNd-DI-dCK" secondAttribute="top" constant="1" id="SOa-8f-SRL"/>
                                                                 <constraint firstAttribute="trailing" secondItem="kNd-DI-dCK" secondAttribute="trailing" id="UBN-A9-mHa"/>
-                                                                <constraint firstItem="tmo-ko-Jz7" firstAttribute="leading" secondItem="kNd-DI-dCK" secondAttribute="leading" id="hJP-TL-ddz"/>
-                                                                <constraint firstItem="tmo-ko-Jz7" firstAttribute="trailing" secondItem="kNd-DI-dCK" secondAttribute="trailing" constant="-3" id="zuA-LQ-EuK"/>
+                                                                <constraint firstItem="tmo-ko-Jz7" firstAttribute="leading" secondItem="kNd-DI-dCK" secondAttribute="leading" constant="1" id="hJP-TL-ddz"/>
+                                                                <constraint firstItem="tmo-ko-Jz7" firstAttribute="trailing" secondItem="kNd-DI-dCK" secondAttribute="trailing" constant="-1" id="zuA-LQ-EuK"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -356,17 +356,17 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_last_TB" id="sYL-Wy-4Zu" userLabel="cell_last_TB" customClass="TBTableViewCell" customModule="Paciolist" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="70" width="400" height="20"/>
+                                                <rect key="frame" x="0.0" y="75" width="400" height="25"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sYL-Wy-4Zu" id="aIN-To-wMj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="400" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="400" height="25"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxx-op-Kzi">
-                                                            <rect key="frame" x="0.0" y="0.0" width="97.5" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="97.5" height="25"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6P4-4f-eyC" userLabel="debit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="97.5" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="97.5" height="25"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="20"/>
@@ -395,10 +395,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3P-Lf-sGX">
-                                                            <rect key="frame" x="97.5" y="0.0" width="205" height="20"/>
+                                                            <rect key="frame" x="97.5" y="0.0" width="205" height="25"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="Jac-nZ-whg" userLabel="account">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="205" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="205" height="25"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
@@ -427,10 +427,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7VK-So-Bab">
-                                                            <rect key="frame" x="302.5" y="0.0" width="97.5" height="20"/>
+                                                            <rect key="frame" x="302.5" y="0.0" width="97.5" height="25"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BEj-TK-Fun" userLabel="credit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="97.5" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="97.5" height="25"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="20"/>
