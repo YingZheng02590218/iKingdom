@@ -24,6 +24,16 @@ class OpeningBalanceTableViewCell: UITableViewCell {
     private var handler: Handler?
     // 設定残高振替仕訳　連番
     var primaryKey: Int = 0
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        
+        // selectedBackgroundView を明示的に生成することで、nilになることを防ぐ
+        let selectedBackgroundView = UIView()
+        selectedBackgroundView.backgroundColor = UIColor.mainColor
+        self.selectedBackgroundView = selectedBackgroundView
+    }
 
     func setup(primaryKey: Int, category: String, valueDebitText: String, valueCreditText: String, tapHandler: @escaping Handler) {
 
