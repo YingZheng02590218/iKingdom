@@ -93,8 +93,9 @@ class ScheduleCell: BlurCell {
         backgroundColor = .clear
         
         backgroundView = UIView()
+        // selectedBackgroundView を明示的に生成することで、nilになることを防ぐ
         selectedBackgroundView = UIView()
-        selectedBackgroundView?.backgroundColor = .lightGray
+        selectedBackgroundView?.backgroundColor = .mainColor
 
         label.frame = bounds
         label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
