@@ -277,7 +277,9 @@ extension OpeningBalanceViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section < presenter.numberOfsections() {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as? OpeningBalanceTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as? OpeningBalanceTableViewCell else { 
+                return UITableViewCell()
+            }
             // delegate設定
             cell.delegate = self
             
@@ -311,7 +313,9 @@ extension OpeningBalanceViewController: UITableViewDelegate, UITableViewDataSour
             }
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_last_TB", for: indexPath) as? TBTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_last_TB", for: indexPath) as? TBTableViewCell else { 
+                return UITableViewCell()
+            }
             // 残高　借方
             cell.debitLabel.text = presenter.debit_balance_total()
             // 残高　貸方

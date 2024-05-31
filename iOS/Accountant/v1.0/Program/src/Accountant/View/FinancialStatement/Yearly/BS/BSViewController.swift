@@ -239,7 +239,9 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BSTableViewCell", for: indexPath) as? BSTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BSTableViewCell", for: indexPath) as? BSTableViewCell else { 
+            return UITableViewCell()
+        }
         cell.labelForThisYear.font = UIFont.systemFont(ofSize: 14)
         cell.labelForPrevious.font = UIFont.systemFont(ofSize: 14)
         cell.labelForThisYear.attributedText = nil

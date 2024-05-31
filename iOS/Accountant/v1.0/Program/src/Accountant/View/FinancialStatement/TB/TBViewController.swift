@@ -186,7 +186,9 @@ extension TBViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section < presenter.numberOfsections() {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as? TBTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as? TBTableViewCell else { 
+                return UITableViewCell()
+            }
             // 勘定科目をセルに表示する
             //        cell.textLabel?.text = "\(presenter.objects(forRow:indexPath.row].category as String)"
             cell.accountLabel.text = "\(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)"
@@ -205,7 +207,9 @@ extension TBViewController: UITableViewDelegate, UITableViewDataSource {
             }
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_last_TB", for: indexPath) as? TBTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_last_TB", for: indexPath) as? TBTableViewCell else {
+                return UITableViewCell()
+            }
             //            let r = 0
             //            switch r {
             switch segmentedControl.selectedSegmentIndex {
