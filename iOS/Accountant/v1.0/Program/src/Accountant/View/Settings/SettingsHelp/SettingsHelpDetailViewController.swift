@@ -39,7 +39,7 @@ class SettingsHelpDetailViewController: UIViewController {
         webView.translatesAutoresizingMaskIntoConstraints = false
         // 背景色が白くなるので透明にする
         webView.isOpaque = false
-        webView.backgroundColor = .cellBackground
+        webView.backgroundColor = .mainColor2
         webView.scrollView.backgroundColor = .clear
         // バウンスを禁止する
         webView.scrollView.bounces = false
