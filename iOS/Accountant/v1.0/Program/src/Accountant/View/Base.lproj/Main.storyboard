@@ -26,6 +26,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="Uz0-cH-dgV" kind="relationship" relationship="masterViewController" id="owR-fP-7kw"/>
+                        <segue destination="YWM-yH-mN2" kind="relationship" relationship="detailViewController" id="nbJ-7Y-c0k"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFc-RV-kFu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -121,6 +122,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Akv-US-neH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2108" y="1766"/>
+        </scene>
+        <!--SettingsCategoryTableViewController-->
+        <scene sceneID="seR-UZ-aZK">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SettingsCategoryTableViewController" id="YWM-yH-mN2" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tD6-fF-682" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4011" y="1766"/>
         </scene>
         <!--総勘定元帳-->
         <scene sceneID="1yU-Pm-tWx">
@@ -242,13 +251,13 @@
         <image name="menu_book-menu_book_symbol" width="19" height="14"/>
         <image name="tools_wrench-tools_wrench_symbol" width="17" height="17"/>
         <namedColor name="AccentBlue">
-            <color red="0.13300000131130219" green="0.27799999713897705" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="AccentColor">
-            <color red="0.1803921568627451" green="0.13333333333333333" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.13300000131130219" green="0.27799999713897705" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="BaseColor">
-            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.87800002098083496" green="0.89800000190734863" blue="0.92500001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
