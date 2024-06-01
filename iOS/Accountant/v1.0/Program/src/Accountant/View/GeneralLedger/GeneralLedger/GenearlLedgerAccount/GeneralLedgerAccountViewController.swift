@@ -711,8 +711,9 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     // セルを生成して返却するメソッド
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger_account", for: indexPath) as? GeneralLedgerAccountTableViewCell else { return UITableViewCell() }
-        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger_account", for: indexPath) as? GeneralLedgerAccountTableViewCell else {
+            return UITableViewCell()
+        }
         var date: String = ""                      // 日付
         var upperCellMonth: String = ""         // 日付
         var debitCategory: String = ""         // 借方勘定の場合      この勘定が借方の場合

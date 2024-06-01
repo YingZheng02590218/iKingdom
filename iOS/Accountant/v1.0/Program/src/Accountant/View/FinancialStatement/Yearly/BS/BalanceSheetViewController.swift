@@ -447,7 +447,9 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BSTableViewCell", for: indexPath) as? BSTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BSTableViewCell", for: indexPath) as? BSTableViewCell else { 
+            return UITableViewCell()
+        }
         // タイトル
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
         cell.textLabel?.minimumScaleFactor = 0.05

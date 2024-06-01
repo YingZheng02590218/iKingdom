@@ -465,7 +465,7 @@ class CsvFileMakerAccount {
                 
                 if let index = index,
                    // 月別の月末を取得 12ヶ月分　に存在するか
-                   lastDays.count > index,
+                   lastDays.count - 1 > index, // 決算月の次月繰越は表示させない
                    // 取得 月次残高振替仕訳　今年度の勘定別で日付の先方一致
                    let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
                     account: account,

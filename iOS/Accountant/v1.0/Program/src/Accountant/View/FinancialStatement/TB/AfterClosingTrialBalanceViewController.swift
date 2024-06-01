@@ -133,7 +133,9 @@ extension AfterClosingTrialBalanceViewController: UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section < presenter.numberOfsections() {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as? TBTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as? TBTableViewCell else { 
+                return UITableViewCell()
+            }
             // 勘定科目をセルに表示する
             cell.accountLabel.text = "\(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)"
             cell.accountLabel.textAlignment = NSTextAlignment.center
@@ -143,7 +145,9 @@ extension AfterClosingTrialBalanceViewController: UITableViewDelegate, UITableVi
             cell.creditLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)", leftOrRight: 3)
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_last_TB", for: indexPath) as? TBTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_last_TB", for: indexPath) as? TBTableViewCell else { 
+                return UITableViewCell()
+            }
             // 借方　残高　集計
             cell.debitLabel.text = presenter.debit_balance_total()
             // 貸方　残高　集計
