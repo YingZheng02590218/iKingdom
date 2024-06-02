@@ -124,44 +124,71 @@ class ProfitAndLossStatementModel: ProfitAndLossStatementModelInput {
     
     // MARK: Local method　読み出し
     
-    // 合計残高　勘定別の合計額　借方と貸方でより大きい方の合計を取得
-    private func getTotalAmount(account: String) -> Int64 {
+    // 合計残高　勘定別の合計額　借方と貸方でより大きい方の合計を取得 借又貸を取得
+    private func getTotalAmountDebitOrCredit(
+        big5: Int? = nil,
+        bigCategory: Int? = nil,
+        midCategory: Int? = nil,
+        account: String
+    ) -> (Int64, String) {
         var result: Int64 = 0
-        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        if let dataBaseGeneralLedger = dataBaseAccountingBooks.dataBaseGeneralLedger {
-            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
-                // 決算整理後の値を利用する
-                if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                    result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting
-                } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                    result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting
-                } else {
-                    result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting
+        var debitOrCredit: String = "" // 借又貸
+        var positiveOrNegative: String = "" // 借又貸
+
+        // 法人/個人フラグ
+        let capitalAccount = Constant.capitalAccountName
+        // 開いている会計帳簿の年度を取得
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
+            if capitalAccount == account {
+                if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount {
+                    // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
+                    if dataBaseCapitalAccount.debit_balance_AfterAdjusting > dataBaseCapitalAccount.credit_balance_AfterAdjusting {
+                        result = dataBaseCapitalAccount.debit_balance_AfterAdjusting
+                        debitOrCredit = "借"
+                    } else if dataBaseCapitalAccount.debit_balance_AfterAdjusting < dataBaseCapitalAccount.credit_balance_AfterAdjusting {
+                        result = dataBaseCapitalAccount.credit_balance_AfterAdjusting
+                        debitOrCredit = "貸"
+                    } else {
+                        result = dataBaseCapitalAccount.debit_balance_AfterAdjusting
+                        debitOrCredit = "-"
+                    }
+                }
+            } else {
+                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                if let account = dataBaseGeneralLedger.dataBaseAccounts.first(where: { $0.accountName == account }) {
+                    // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
+                    if account.debit_balance_AfterAdjusting > account.credit_balance_AfterAdjusting {
+                        result = account.debit_balance_AfterAdjusting
+                        debitOrCredit = "借"
+                    } else if account.debit_balance_AfterAdjusting < account.credit_balance_AfterAdjusting {
+                        result = account.credit_balance_AfterAdjusting
+                        debitOrCredit = "貸"
+                    } else {
+                        result = account.debit_balance_AfterAdjusting
+                        debitOrCredit = "-"
+                    }
                 }
             }
         }
-        return result
-    }
-    // 借又貸を取得
-    private func getTotalDebitOrCredit(bigCategory: Int, midCategory: Int, account: String) -> String {
-        var debitOrCredit: String = "" // 借又貸
-        var positiveOrNegative: String = "" // 借又貸
-        
-        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        if let dataBaseGeneralLedger = dataBaseAccountingBooks.dataBaseGeneralLedger {
-            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
-                // 借方と貸方で金額が大きい方はどちらか
-                if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                    debitOrCredit = "借"
-                } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                    debitOrCredit = "貸"
-                } else {
-                    debitOrCredit = "-"
+        if let big5 = big5 {
+            switch big5 {
+            case 0, 3: // 資産　費用
+                switch debitOrCredit {
+                case "貸":
+                    positiveOrNegative = "-"
+                default:
+                    positiveOrNegative = ""
+                }
+            default: // 1,2,4（負債、純資産、収益）
+                switch debitOrCredit {
+                case "借":
+                    positiveOrNegative = "-"
+                default:
+                    positiveOrNegative = ""
                 }
             }
-            
+        } else {
             switch bigCategory {
             case 0, 1, 2, 7, 8, 11: // 流動資産 固定資産 繰延資産,売上原価 販売費及び一般管理費 税金
                 switch debitOrCredit {
@@ -195,9 +222,10 @@ class ProfitAndLossStatementModel: ProfitAndLossStatementModelInput {
                 }
             }
         }
-        return positiveOrNegative
+
+        return (result, positiveOrNegative)
     }
-    
+
     // MARK: Update
     
     // 初期化　中区分、大区分　ごとに計算
@@ -330,12 +358,17 @@ class ProfitAndLossStatementModel: ProfitAndLossStatementModelInput {
         let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInRank0(rank0: rank0)
         // オブジェクトを作成 勘定
         for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
-            let totalAmount = getTotalAmount(account: dataBaseSettingsTaxonomyAccounts[i].category)
-            let totalDebitOrCredit = getTotalDebitOrCredit(bigCategory: rank0, midCategory: Int(dataBaseSettingsTaxonomyAccounts[i].Rank1) ?? 999, account: dataBaseSettingsTaxonomyAccounts[i].category)
-            if totalDebitOrCredit == "-"{
-                totalAmountOfRank0 -= totalAmount
-            } else {
-                totalAmountOfRank0 += totalAmount
+            if let rank1 = Int(dataBaseSettingsTaxonomyAccounts[i].Rank1) {
+                let total = getTotalAmountDebitOrCredit(
+                    bigCategory: rank0,
+                    midCategory: rank1,
+                    account: dataBaseSettingsTaxonomyAccounts[i].category
+                )
+                if total.1 == "-" {
+                    totalAmountOfRank0 -= total.0
+                } else {
+                    totalAmountOfRank0 += total.0
+                }
             }
         }
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
@@ -367,17 +400,16 @@ class ProfitAndLossStatementModel: ProfitAndLossStatementModelInput {
         let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInRank1(rank1: rank1)
         // オブジェクトを作成 勘定
         for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
-            let totalAmount = getTotalAmount(account: dataBaseSettingsTaxonomyAccounts[i].category)
-            if let rank0 = dataBaseSettingsTaxonomyAccounts[i].Rank0 as? String {
-                let totalDebitOrCredit = getTotalDebitOrCredit(
-                    bigCategory: Int(rank0) ?? 0,
+            if let rank0 = Int(dataBaseSettingsTaxonomyAccounts[i].Rank0) {
+                let total = getTotalAmountDebitOrCredit(
+                    bigCategory: rank0,
                     midCategory: rank1,
                     account: dataBaseSettingsTaxonomyAccounts[i].category
                 )
-                if totalDebitOrCredit == "-" {
-                    totalAmountOfRank1 -= totalAmount
+                if total.1 == "-" {
+                    totalAmountOfRank1 -= total.0
                 } else {
-                    totalAmountOfRank1 += totalAmount
+                    totalAmountOfRank1 += total.0
                 }
             }
         }

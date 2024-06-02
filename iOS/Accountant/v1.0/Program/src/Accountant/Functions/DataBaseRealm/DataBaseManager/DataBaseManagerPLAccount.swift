@@ -342,12 +342,11 @@ class DataBaseManagerPLAccount {
                         // MARK: 損益振替仕訳は、仕訳帳には追加しない。
                         // 相手方の勘定
                         if let dataBaseGeneralLedger = dataBaseAccountingBook.dataBaseGeneralLedger {
-                            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                            if let account = dataBaseGeneralLedger.dataBaseAccounts.first(where: { $0.accountName == account }) {
                                 try DataBaseManager.realm.write {
                                     // 損益振替仕訳データを代入
-                                    dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseAccounts[i].dataBaseTransferEntry = dataBaseJournalEntry
+                                    account.dataBaseTransferEntry = dataBaseJournalEntry
                                 }
-                                break
                             }
                         }
                         // 損益勘定
@@ -581,12 +580,11 @@ class DataBaseManagerPLAccount {
                                 dataBaseGeneralLedger.dataBaseCapitalAccount?.dataBaseTransferEntry = dataBaseJournalEntry
                             }
                         } else {
-                            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                            if let account = dataBaseGeneralLedger.dataBaseAccounts.first(where: { $0.accountName == account }) {
                                 try DataBaseManager.realm.write {
                                     // 残高振替仕訳データを代入
-                                    dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseAccounts[i].dataBaseTransferEntry = dataBaseJournalEntry
+                                    account.dataBaseTransferEntry = dataBaseJournalEntry
                                 }
-                                break
                             }
                         }
                     }

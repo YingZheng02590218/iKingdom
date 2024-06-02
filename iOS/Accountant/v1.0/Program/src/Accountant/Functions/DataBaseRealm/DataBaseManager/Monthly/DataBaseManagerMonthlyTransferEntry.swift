@@ -82,12 +82,11 @@ class DataBaseManagerMonthlyTransferEntry {
                                 dataBaseGeneralLedger.dataBaseCapitalAccount?.dataBaseMonthlyTransferEntries.append(dataBaseJournalEntry)
                             }
                         } else {
-                            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                            if let account = dataBaseGeneralLedger.dataBaseAccounts.first(where: { $0.accountName == account }) {
                                 try DataBaseManager.realm.write {
                                     // 月次損益振替仕訳、月次残高振替仕訳
-                                    dataBaseGeneralLedger.dataBaseAccounts[i].dataBaseMonthlyTransferEntries.append(dataBaseJournalEntry)
+                                    account.dataBaseMonthlyTransferEntries.append(dataBaseJournalEntry)
                                 }
-                                break
                             }
                         }
                     }
@@ -163,12 +162,11 @@ class DataBaseManagerMonthlyTransferEntry {
                                 dataBaseGeneralLedger.dataBaseCapitalAccount?.dataBaseMonthlyTransferEntries.append(dataBaseJournalEntry)
                             }
                         } else {
-                            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                            if let account = dataBaseGeneralLedger.dataBaseAccounts.first(where: { $0.accountName == account }) {
                                 try DataBaseManager.realm.write {
                                     // 月次損益振替仕訳、月次残高振替仕訳
-                                    dataBaseGeneralLedger.dataBaseAccounts[i].dataBaseMonthlyTransferEntries.append(dataBaseJournalEntry)
+                                    account.dataBaseMonthlyTransferEntries.append(dataBaseJournalEntry)
                                 }
-                                break
                             }
                         }
                     }

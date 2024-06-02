@@ -99,7 +99,7 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
             // 集計処理
             DispatchQueue.global(qos: .default).async {
                 // 月次貸借対照表と月次損益計算書の、五大区分の合計額と、大区分の合計額と当期純利益の額を再計算する
-                DataBaseManagerMonthlyBSnPL.shared.setupAmountForBsAndPL(isBs: true)
+                DataBaseManagerMonthlyBSnPL.shared.setupAmountForBsAndPL()
                 // 重要: 仕訳データを参照する際、メインスレッドで行う
                 DispatchQueue.main.async {
                     // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（仕訳、総勘定元帳、貸借対照表、損益計算書、精算表、試算表 で使用している）
