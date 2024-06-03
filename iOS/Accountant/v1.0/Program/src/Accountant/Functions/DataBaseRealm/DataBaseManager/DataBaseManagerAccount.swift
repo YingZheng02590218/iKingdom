@@ -144,15 +144,15 @@ class DataBaseManagerAccount {
                 }
             } else {
                 // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-                for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == accountNameOfSettingsTaxonomyAccount {
-                    print("借方残高", dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting)
-                    print("貸方残高", dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting)
+                if let account = dataBaseGeneralLedger.dataBaseAccounts.first(where: { $0.accountName == accountNameOfSettingsTaxonomyAccount }) {
+                    print("借方残高", account.debit_balance_AfterAdjusting)
+                    print("貸方残高", account.credit_balance_AfterAdjusting)
                     // 借方と貸方で金額が大きい方はどちらか
-                    if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                        result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting
+                    if account.debit_balance_AfterAdjusting > account.credit_balance_AfterAdjusting {
+                        result = account.debit_balance_AfterAdjusting
                         debitOrCredit = "借"
-                    } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                        result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting
+                    } else if account.debit_balance_AfterAdjusting < account.credit_balance_AfterAdjusting {
+                        result = account.credit_balance_AfterAdjusting
                         debitOrCredit = "貸"
                     } else {
                         debitOrCredit = "-"
@@ -290,13 +290,11 @@ class DataBaseManagerAccount {
             let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
             if let dataBaseGeneralLedger = dataBaseAccountingBook.dataBaseGeneralLedger {
                 do {
-                    for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                    if let account = dataBaseGeneralLedger.dataBaseAccounts.first(where: { $0.accountName == account }) {
                         try DataBaseManager.realm.write {
                             // 勘定から削除前開始仕訳データの関連を削除
-                            dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseAccounts[i].dataBaseOpeningJournalEntry = nil
+                            account.dataBaseOpeningJournalEntry = nil
                         }
-
-                        break
                     }
                 } catch {
                     print("エラーが発生しました")
@@ -378,12 +376,11 @@ class DataBaseManagerAccount {
                                     dataBaseGeneralLedger.dataBaseCapitalAccount?.dataBaseOpeningJournalEntry = dataBaseJournalEntry
                                 }
                             } else {
-                                for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                                if let account = dataBaseGeneralLedger.dataBaseAccounts.first(where: { $0.accountName == account }) {
                                     try DataBaseManager.realm.write {
                                         // 開始仕訳データを代入
-                                        dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseAccounts[i].dataBaseOpeningJournalEntry = dataBaseJournalEntry
+                                        account.dataBaseOpeningJournalEntry = dataBaseJournalEntry
                                     }
-                                    break
                                 }
                             }
                         }
@@ -468,12 +465,11 @@ class DataBaseManagerAccount {
                                     dataBaseGeneralLedger.dataBaseCapitalAccount?.dataBaseOpeningJournalEntry = dataBaseJournalEntry
                                 }
                             } else {
-                                for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                                if let account = dataBaseGeneralLedger.dataBaseAccounts.first(where: { $0.accountName == account }) {
                                     try DataBaseManager.realm.write {
                                         // 開始仕訳データを代入
-                                        dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseAccounts[i].dataBaseOpeningJournalEntry = dataBaseJournalEntry
+                                        account.dataBaseOpeningJournalEntry = dataBaseJournalEntry
                                     }
-                                    break
                                 }
                             }
                         }

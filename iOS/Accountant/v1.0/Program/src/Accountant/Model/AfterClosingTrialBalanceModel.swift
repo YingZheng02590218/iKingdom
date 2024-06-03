@@ -55,16 +55,16 @@ class AfterClosingTrialBalanceModel: AfterClosingTrialBalanceModelInput {
                 }
             } else {
                 // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-                for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                if let account = dataBaseGeneralLedger.dataBaseAccounts.first(where: { $0.accountName == account }) {
                     switch leftOrRight {
                     case 0: // 合計　借方
-                        result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_total_AfterAdjusting
+                        result = account.debit_total_AfterAdjusting
                     case 1: // 合計　貸方
-                        result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_total_AfterAdjusting
+                        result = account.credit_total_AfterAdjusting
                     case 2: // 残高　借方
-                        result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting
+                        result = account.debit_balance_AfterAdjusting
                     case 3: // 残高　貸方
-                        result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting
+                        result = account.credit_balance_AfterAdjusting
                     default:
                         print("getTotalAmountAfterAdjusting")
                     }
