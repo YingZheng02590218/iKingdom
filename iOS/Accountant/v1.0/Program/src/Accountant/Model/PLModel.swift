@@ -167,40 +167,45 @@ class PLModel: PLModelInput {
                 }
             }
         } else {
-            switch bigCategory {
-            case 0, 1, 2, 7, 8, 11: // 流動資産 固定資産 繰延資産,売上原価 販売費及び一般管理費 税金
-                switch debitOrCredit {
-                case "貸":
-                    positiveOrNegative = "-"
-                default:
-                    positiveOrNegative = ""
-                }
-            case 9, 10: // 営業外損益 特別損益
-                if midCategory == 15 || midCategory == 17 {
-                    switch debitOrCredit {
-                    case "借":
-                        positiveOrNegative = "-"
-                    default:
-                        positiveOrNegative = ""
-                    }
-                } else if midCategory == 16 || midCategory == 18 {
+            if let bigCategory = bigCategory {
+                
+                switch bigCategory {
+                case 0, 1, 2, 7, 8, 11: // 流動資産 固定資産 繰延資産,売上原価 販売費及び一般管理費 税金
                     switch debitOrCredit {
                     case "貸":
                         positiveOrNegative = "-"
                     default:
                         positiveOrNegative = ""
                     }
-                }
-            default: // 3,4,5,6（流動負債 固定負債 資本）, 売上
-                switch debitOrCredit {
-                case "借":
-                    positiveOrNegative = "-"
-                default:
-                    positiveOrNegative = ""
+                case 9, 10: // 営業外損益 特別損益
+                    if let midCategory = midCategory {
+                        
+                        if midCategory == 15 || midCategory == 17 {
+                            switch debitOrCredit {
+                            case "借":
+                                positiveOrNegative = "-"
+                            default:
+                                positiveOrNegative = ""
+                            }
+                        } else if midCategory == 16 || midCategory == 18 {
+                            switch debitOrCredit {
+                            case "貸":
+                                positiveOrNegative = "-"
+                            default:
+                                positiveOrNegative = ""
+                            }
+                        }
+                    }
+                default: // 3,4,5,6（流動負債 固定負債 資本）, 売上
+                    switch debitOrCredit {
+                    case "借":
+                        positiveOrNegative = "-"
+                    default:
+                        positiveOrNegative = ""
+                    }
                 }
             }
         }
-
         return (result, positiveOrNegative)
     }
 
@@ -320,17 +325,15 @@ class PLModel: PLModelInput {
         let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInRank0(rank0: rank0)
         // オブジェクトを作成 勘定
         for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
-            if let rank1 = Int(dataBaseSettingsTaxonomyAccounts[i].Rank1) {
-                let total = getTotalAmountDebitOrCredit(
-                    bigCategory: rank0,
-                    midCategory: rank1,
-                    account: dataBaseSettingsTaxonomyAccounts[i].category
-                )
-                if total.1 == "-" {
-                    totalAmountOfRank0 -= total.0
-                } else {
-                    totalAmountOfRank0 += total.0
-                }
+            let total = getTotalAmountDebitOrCredit(
+                bigCategory: rank0,
+                midCategory: Int(dataBaseSettingsTaxonomyAccounts[i].Rank1), // WARNING: Rank1（中区分）がない勘定科目も存在する
+                account: dataBaseSettingsTaxonomyAccounts[i].category
+            )
+            if total.1 == "-" {
+                totalAmountOfRank0 -= total.0
+            } else {
+                totalAmountOfRank0 += total.0
             }
         }
         // 開いている会計帳簿の年度を取得
