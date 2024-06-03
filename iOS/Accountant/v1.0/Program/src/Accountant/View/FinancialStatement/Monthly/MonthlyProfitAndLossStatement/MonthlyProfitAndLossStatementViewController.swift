@@ -63,7 +63,8 @@ class MonthlyProfitAndLossStatementViewController: UIViewController {
         spreadsheetView.intercellSpacing = CGSize(width: 2, height: 1)
         // spreadsheetView.gridStyle = .none
         spreadsheetView.allowsMultipleSelection = true
-        
+        spreadsheetView.indicatorStyle = .black
+
         spreadsheetView.register(DateCell.self, forCellWithReuseIdentifier: String(describing: DateCell.self))
         spreadsheetView.register(TimeTitleCell.self, forCellWithReuseIdentifier: String(describing: TimeTitleCell.self))
         spreadsheetView.register(TimeCell.self, forCellWithReuseIdentifier: String(describing: TimeCell.self))

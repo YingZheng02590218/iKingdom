@@ -225,6 +225,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private func setRefreshControl() {
         tableView.refreshControl = refreshControl
+        refreshControl.tintColor = .mainColor
         refreshControl.addTarget(self, action: #selector(refreshTable), for: UIControl.Event.valueChanged)
     }
     
@@ -1219,6 +1220,8 @@ extension JournalsViewController: JournalsPresenterOutput {
             self.activityIndicatorView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
             // インジケーターのスタイルを指定（白色＆大きいサイズ）
             self.activityIndicatorView.style = UIActivityIndicatorView.Style.large
+
+            self.activityIndicatorView.color = UIColor.mainColor
             // インジケーターを View に追加
             self.backView.addSubview(self.activityIndicatorView)
             // インジケーターを表示＆アニメーション開始
