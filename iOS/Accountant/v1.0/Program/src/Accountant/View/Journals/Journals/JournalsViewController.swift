@@ -171,13 +171,13 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
-            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.mainColor2.cgColor
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.paperColor.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
             
             // グラデーション
             gradientLayer.frame = backgroundView.bounds
             gradientLayer.cornerRadius = 15
-            gradientLayer.colors = [UIColor.cellBackgroundGradationStart.cgColor, UIColor.cellBackgroundGradationEnd.cgColor]
+            gradientLayer.colors = [UIColor.paperGradationStart.cgColor, UIColor.paperGradationEnd.cgColor]
             gradientLayer.startPoint = CGPoint(x: 0, y: 0.6)
             gradientLayer.endPoint = CGPoint(x: 0.4, y: 1)
             if let sublayers = backgroundView.layer.sublayers, sublayers.contains(gradientLayer) {
@@ -225,6 +225,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private func setRefreshControl() {
         tableView.refreshControl = refreshControl
+        refreshControl.tintColor = .mainColor
         refreshControl.addTarget(self, action: #selector(refreshTable), for: UIControl.Event.valueChanged)
     }
     
@@ -1219,6 +1220,8 @@ extension JournalsViewController: JournalsPresenterOutput {
             self.activityIndicatorView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
             // インジケーターのスタイルを指定（白色＆大きいサイズ）
             self.activityIndicatorView.style = UIActivityIndicatorView.Style.large
+
+            self.activityIndicatorView.color = UIColor.mainColor
             // インジケーターを View に追加
             self.backView.addSubview(self.activityIndicatorView)
             // インジケーターを表示＆アニメーション開始

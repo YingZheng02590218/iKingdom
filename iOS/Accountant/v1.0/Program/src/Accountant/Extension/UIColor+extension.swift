@@ -11,16 +11,28 @@ import UIKit
 
 extension UIColor {
 
-    class var accentBlue: UIColor {
-        UIColor(named: "AccentBlue") ?? .white
-    }
-
+    // MARK: Accent
+    
     class var accentColor: UIColor {
         UIColor(named: "AccentColor") ?? .white
     }
 
-    class var accentRedColor: UIColor {
-        UIColor(named: "AccentRedColor") ?? .white
+    // MARK: Base
+
+    class var baseColor: UIColor {
+        UIColor(named: "BaseColor") ?? .white
+    }
+    
+    // MARK: Main
+
+    class var mainColor2: UIColor {
+        UIColor(named: "MainColor2") ?? .white
+    }
+    
+    // MARK: Other
+
+    class var accentBlue: UIColor {
+        UIColor(named: "AccentBlue") ?? .white
     }
 
     class var accentDark: UIColor {
@@ -30,18 +42,6 @@ extension UIColor {
     class var accentLight: UIColor {
         UIColor(named: "AccentLight") ?? .white
     }
-
-    class var baseColor: UIColor {
-        UIColor(named: "BaseColor") ?? .white
-    }
-
-    class var borderBlueColor: UIColor {
-        UIColor(named: "BorderBlueColor") ?? .white
-    }
-
-    class var borderRedColor: UIColor {
-        UIColor(named: "BorderRedColor") ?? .white
-    }
     
     class var calculatorDisplay: UIColor {
         UIColor(named: "CalculatorDisplay") ?? .white
@@ -50,26 +50,43 @@ extension UIColor {
     class var mainColor: UIColor {
         UIColor(named: "MainColor") ?? .white
     }
+    
+    // MARK: Paper
 
-    class var mainColor2: UIColor {
-        UIColor(named: "MainColor2") ?? .white
-    }
-
-    class var cellBackground: UIColor {
-        UIColor(named: "CellBackground") ?? .white
+    class var accentRedColor: UIColor {
+        UIColor(named: "AccentRedColor") ?? .white
     }
     
-    class var cellBackgroundGradationStart: UIColor {
-        UIColor(named: "CellBackgroundGradationStart") ?? .white
+    class var borderBlueColor: UIColor {
+        UIColor(named: "BorderBlueColor") ?? .white
+    }
+
+    class var borderRedColor: UIColor {
+        UIColor(named: "BorderRedColor") ?? .white
     }
     
-    class var cellBackgroundGradationEnd: UIColor {
-        UIColor(named: "CellBackgroundGradationEnd") ?? .white
+    class var bsPlAccentColor: UIColor {
+        UIColor(named: "BsPlAccentColor") ?? .white
+    }
+    
+    class var paperColor: UIColor {
+        UIColor(named: "PaperColor") ?? .white
+    }
+
+    class var paperGradationEnd: UIColor {
+        UIColor(named: "PaperGradationEnd") ?? .white
+    }
+
+    class var paperGradationStart: UIColor {
+        UIColor(named: "PaperGradationStart") ?? .white
+    }
+    
+    class var paperTextColor: UIColor {
+        UIColor(named: "PaperTextColor") ?? .white
     }
     
     class var textColor: UIColor {
         UIColor(named: "TextColor") ?? .white
     }
 
-    static let theme = UIColor(named: "C1D2EB")
 }

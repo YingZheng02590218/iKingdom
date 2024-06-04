@@ -98,13 +98,13 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
             backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
-            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.mainColor2.cgColor
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.paperColor.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
             
             // グラデーション
             gradientLayer.frame = backgroundView.bounds
             gradientLayer.cornerRadius = 15
-            gradientLayer.colors = [UIColor.cellBackgroundGradationStart.cgColor, UIColor.cellBackgroundGradationEnd.cgColor]
+            gradientLayer.colors = [UIColor.paperGradationStart.cgColor, UIColor.paperGradationEnd.cgColor]
             gradientLayer.startPoint = CGPoint(x: 0, y: 0.6)
             gradientLayer.endPoint = CGPoint(x: 0.4, y: 1)
             if let sublayers = backgroundView.layer.sublayers, sublayers.contains(gradientLayer) {
@@ -230,7 +230,9 @@ extension WSViewController: UITableViewDelegate, UITableViewDataSource {
         // セル　決算整理前残高試算表の行
         if indexPath.section < presenter.numberOfsections() {
             // ① UI部品を指定
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS", for: indexPath) as? WSTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS", for: indexPath) as? WSTableViewCell else { 
+                return UITableViewCell()
+            }
             // 設定勘定科目　の勘定名
             let category = presenter.objects(forRow: indexPath.row, section: indexPath.section).category
             // 勘定科目をセルに表示する
@@ -293,7 +295,9 @@ extension WSViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else if indexPath.section < presenter.numberOfsections() + 1 {
             // 試算表の合計の行
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS_total", for: indexPath) as? WSTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS_total", for: indexPath) as? WSTableViewCell else {
+                return UITableViewCell()
+            }
             cell.accountLabel.text = ""
             // 決算整理前残高試算表
             cell.debitLabel.text = presenter.debit_balance_total()
@@ -301,7 +305,9 @@ extension WSViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else if indexPath.section < presenter.numberOfsections() + 1 + 1 {
             // 当期純利益の行
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS", for: indexPath) as? WSTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS", for: indexPath) as? WSTableViewCell else { 
+                return UITableViewCell()
+            }
             // 勘定科目をセルに表示する
             cell.accountLabel.text = "当期純利益"
             cell.accountLabel.textAlignment = NSTextAlignment.center
@@ -332,7 +338,9 @@ extension WSViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else if indexPath.section < presenter.numberOfsections() + 1 + 1 + 1 {
             // 修正記入と損益計算書、貸借対照表の合計の行
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS_total_2", for: indexPath) as? WSTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS_total_2", for: indexPath) as? WSTableViewCell else {
+                return UITableViewCell()
+            }
             cell.accountLabel.text = ""
             // 決算整理前残高試算表
             cell.debitLabel.text = ""
@@ -371,7 +379,9 @@ extension WSViewController: UITableViewDelegate, UITableViewDataSource {
             }
             return cell
         }
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS", for: indexPath) as? WSTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS", for: indexPath) as? WSTableViewCell else {
+            return UITableViewCell()
+        }
         return cell
     }
 }

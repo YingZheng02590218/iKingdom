@@ -22,6 +22,11 @@ class GeneralLedgerAccountTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        // selectedBackgroundView を明示的に生成することで、nilになることを防ぐ
+        let selectedBackgroundView = UIView()
+        selectedBackgroundView.backgroundColor = UIColor.mainColor
+        self.selectedBackgroundView = selectedBackgroundView
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

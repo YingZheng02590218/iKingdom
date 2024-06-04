@@ -93,8 +93,7 @@ class DataBaseManagerTaxonomy {
                 }
             } else {
                 // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-                if let dataBaseAccount = dataBaseGeneralLedger.dataBaseAccounts.where({ $0.accountName == account }).first {
-                    print(dataBaseAccount)
+                if let dataBaseAccount = dataBaseGeneralLedger.dataBaseAccounts.first(where: { $0.accountName == account }) {
                     // 借方と貸方で金額が大きい方はどちらか　2020/10/12 決算整理後の合計　→ 決算整理後の残高
                     if dataBaseAccount.debit_balance_AfterAdjusting > dataBaseAccount.credit_balance_AfterAdjusting {
                         result = dataBaseAccount.debit_balance_AfterAdjusting
@@ -138,11 +137,11 @@ class DataBaseManagerTaxonomy {
                 }
             } else {
                 // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-                for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                if let account = dataBaseGeneralLedger.dataBaseAccounts.first(where: { $0.accountName == account }) {
                     // 借方と貸方で金額が大きい方はどちらか
-                    if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    if account.debit_balance_AfterAdjusting > account.credit_balance_AfterAdjusting {
                         debitOrCredit = "借"
-                    } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    } else if account.debit_balance_AfterAdjusting < account.credit_balance_AfterAdjusting {
                         debitOrCredit = "貸"
                     } else {
                         debitOrCredit = "-"

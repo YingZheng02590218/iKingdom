@@ -24,6 +24,11 @@ class JournalsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        // selectedBackgroundView を明示的に生成することで、nilになることを防ぐ
+        let selectedBackgroundView = UIView()
+        selectedBackgroundView.backgroundColor = UIColor.mainColor
+        self.selectedBackgroundView = selectedBackgroundView
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -48,15 +53,15 @@ class JournalsTableViewCell: UITableViewCell {
     
     func setTextColor(isInPeriod: Bool) {
         // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
-        listDateMonthLabel.textColor = isInPeriod ? .textColor : .red
-        listDateSecondLabel.textColor = isInPeriod ? .textColor : .red
-        listDateLabel.textColor = isInPeriod ? .textColor : .red
-        listSummaryDebitLabel.textColor = isInPeriod ? .textColor : .red
-        listSummaryCreditLabel.textColor = isInPeriod ? .textColor : .red
-        listSummaryLabel.textColor = isInPeriod ? .textColor : .red
-        listNumberLeftLabel.textColor = isInPeriod ? .textColor : .red
-        listNumberRightLabel.textColor = isInPeriod ? .textColor : .red
-        listDebitLabel.textColor = isInPeriod ? .textColor : .red
-        listCreditLabel.textColor = isInPeriod ? .textColor : .red
+        listDateMonthLabel.textColor = isInPeriod ? .paperTextColor : .red
+        listDateSecondLabel.textColor = isInPeriod ? .paperTextColor : .red
+        listDateLabel.textColor = isInPeriod ? .paperTextColor : .red
+        listSummaryDebitLabel.textColor = isInPeriod ? .paperTextColor : .red
+        listSummaryCreditLabel.textColor = isInPeriod ? .paperTextColor : .red
+        listSummaryLabel.textColor = isInPeriod ? .paperTextColor : .red
+        listNumberLeftLabel.textColor = isInPeriod ? .paperTextColor : .red
+        listNumberRightLabel.textColor = isInPeriod ? .paperTextColor : .red
+        listDebitLabel.textColor = isInPeriod ? .paperTextColor : .red
+        listCreditLabel.textColor = isInPeriod ? .paperTextColor : .red
     }
 }
