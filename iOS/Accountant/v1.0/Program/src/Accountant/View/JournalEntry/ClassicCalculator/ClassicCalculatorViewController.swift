@@ -101,7 +101,7 @@ class ClassicCalculatorViewController: UIViewController {
     func setupLayout() {
         if let backgroundView = backgroundView {
             //　左上と右上を角丸にする設定
-            backgroundView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+            backgroundView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
             backgroundView.layer.cornerRadius = 20
             backgroundView.clipsToBounds = true
             backgroundView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY

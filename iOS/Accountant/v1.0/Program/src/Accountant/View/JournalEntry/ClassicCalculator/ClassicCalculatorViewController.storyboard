@@ -22,300 +22,312 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hrN-O8-LWP" userLabel="ClearView" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                                <rect key="frame" x="0.0" y="367" width="414" height="529"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OYM-Lc-oLO">
+                                <rect key="frame" x="0.0" y="333" width="414" height="529"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xY-0v-zIO" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                                        <rect key="frame" x="43" y="20" width="328.5" height="80"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hrN-O8-LWP" userLabel="ClearView" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                        <rect key="frame" x="10" y="0.0" width="394" height="519"/>
                                         <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAD-qk-30y">
-                                                <rect key="frame" x="1" y="1" width="326.5" height="78"/>
-                                                <color key="backgroundColor" name="CalculatorDisplay"/>
-                                                <fontDescription key="fontDescription" name="DSEG14Classic-Regular" family="DSEG14 Classic" pointSize="39"/>
-                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xY-0v-zIO" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="33" y="20" width="328.5" height="80"/>
+                                                <subviews>
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAD-qk-30y">
+                                                        <rect key="frame" x="1" y="1" width="326.5" height="78"/>
+                                                        <color key="backgroundColor" name="CalculatorDisplay"/>
+                                                        <fontDescription key="fontDescription" name="DSEG14Classic-Regular" family="DSEG14 Classic" pointSize="39"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="7"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.15000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 8888888888" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rol-Dp-Knt">
+                                                        <rect key="frame" x="1" y="1" width="326.5" height="78"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="DSEG14Classic-Regular" family="DSEG14 Classic" pointSize="39"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="7"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JQr-4L-AiR">
+                                                        <rect key="frame" x="1" y="1" width="326.5" height="78"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="DSEG14Classic-Regular" family="DSEG14 Classic" pointSize="39"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="7"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="jAD-qk-30y" firstAttribute="bottom" secondItem="rol-Dp-Knt" secondAttribute="bottom" id="33L-t5-hKJ"/>
+                                                    <constraint firstItem="JQr-4L-AiR" firstAttribute="bottom" secondItem="rol-Dp-Knt" secondAttribute="bottom" id="5aA-ec-aTc"/>
+                                                    <constraint firstAttribute="height" constant="80" id="83X-nH-dvR"/>
+                                                    <constraint firstItem="JQr-4L-AiR" firstAttribute="top" secondItem="rol-Dp-Knt" secondAttribute="top" id="DFz-Os-HHR"/>
+                                                    <constraint firstItem="rol-Dp-Knt" firstAttribute="top" secondItem="2xY-0v-zIO" secondAttribute="top" constant="1" id="GLw-9w-mEM"/>
+                                                    <constraint firstAttribute="bottom" secondItem="rol-Dp-Knt" secondAttribute="bottom" constant="1" id="OnQ-zU-2zP"/>
+                                                    <constraint firstItem="rol-Dp-Knt" firstAttribute="width" secondItem="2xY-0v-zIO" secondAttribute="width" constant="-2" id="SGk-mU-Ef6"/>
+                                                    <constraint firstItem="jAD-qk-30y" firstAttribute="trailing" secondItem="rol-Dp-Knt" secondAttribute="trailing" id="e3v-Mx-sHY"/>
+                                                    <constraint firstItem="JQr-4L-AiR" firstAttribute="leading" secondItem="rol-Dp-Knt" secondAttribute="leading" id="ejM-du-gwT"/>
+                                                    <constraint firstItem="JQr-4L-AiR" firstAttribute="width" secondItem="rol-Dp-Knt" secondAttribute="width" id="fYI-Oj-eyr"/>
+                                                    <constraint firstAttribute="trailing" secondItem="rol-Dp-Knt" secondAttribute="trailing" constant="1" id="lqZ-E2-DAp"/>
+                                                    <constraint firstItem="JQr-4L-AiR" firstAttribute="height" secondItem="rol-Dp-Knt" secondAttribute="height" id="ufN-Ih-Pfc"/>
+                                                    <constraint firstItem="rol-Dp-Knt" firstAttribute="height" secondItem="2xY-0v-zIO" secondAttribute="height" constant="-2" id="vKj-O1-hhX"/>
+                                                    <constraint firstItem="JQr-4L-AiR" firstAttribute="trailing" secondItem="rol-Dp-Knt" secondAttribute="trailing" id="vL1-5U-qAb"/>
+                                                    <constraint firstItem="jAD-qk-30y" firstAttribute="leading" secondItem="rol-Dp-Knt" secondAttribute="leading" id="vbQ-ga-DHl"/>
+                                                    <constraint firstItem="rol-Dp-Knt" firstAttribute="leading" secondItem="2xY-0v-zIO" secondAttribute="leading" constant="1" id="xyh-IG-4Yq"/>
+                                                    <constraint firstItem="jAD-qk-30y" firstAttribute="top" secondItem="rol-Dp-Knt" secondAttribute="top" id="yer-Us-kW8"/>
+                                                </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="7"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.15000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 8888888888" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rol-Dp-Knt">
-                                                <rect key="frame" x="1" y="1" width="326.5" height="78"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="DSEG14Classic-Regular" family="DSEG14 Classic" pointSize="39"/>
-                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="7"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JQr-4L-AiR">
-                                                <rect key="frame" x="1" y="1" width="326.5" height="78"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="DSEG14Classic-Regular" family="DSEG14 Classic" pointSize="39"/>
-                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="7"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </label>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qaE-hJ-5UJ">
+                                                <rect key="frame" x="19.5" y="120" width="355" height="369"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Zgw-vZ-aNQ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="65.5"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7R-DU-4BS" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="0.0" y="0.0" width="111.5" height="65.5"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="AC">
+                                                                    <color key="titleColor" name="ButtonTextColor"/>
+                                                                </state>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VaX-Oy-oxU">
+                                                                <rect key="frame" x="121.5" y="0.0" width="112" height="65.5"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title=" ">
+                                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UzO-2h-Uqr">
+                                                                <rect key="frame" x="243.5" y="0.0" width="111.5" height="65.5"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title=" "/>
+                                                            </button>
+                                                            <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQA-Db-dfL" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="355" y="0.0" width="0.0" height="65.5"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="8">
+                                                                    <color key="titleColor" name="ButtonTextColor"/>
+                                                                </state>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zI2-xY-o4N">
+                                                        <rect key="frame" x="0.0" y="75.5" width="355" height="66"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDU-k4-flG" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="0.0" y="0.0" width="111.5" height="66"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="7">
+                                                                    <color key="titleColor" name="ButtonTextColor"/>
+                                                                </state>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHG-r9-gOZ" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="121.5" y="0.0" width="112" height="66"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="8">
+                                                                    <color key="titleColor" name="ButtonTextColor"/>
+                                                                </state>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xa-9U-hff" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="243.5" y="0.0" width="111.5" height="66"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="9">
+                                                                    <color key="titleColor" name="ButtonTextColor"/>
+                                                                </state>
+                                                            </button>
+                                                            <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXE-2f-HKE" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="355" y="0.0" width="0.0" height="66"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="8">
+                                                                    <color key="titleColor" name="ButtonTextColor"/>
+                                                                </state>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QFE-6g-7fi">
+                                                        <rect key="frame" x="0.0" y="151.5" width="355" height="66"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3X-KY-UT0" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="0.0" y="0.0" width="111.5" height="66"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="4">
+                                                                    <color key="titleColor" name="ButtonTextColor"/>
+                                                                </state>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bqw-my-Qin" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="121.5" y="0.0" width="112" height="66"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="5">
+                                                                    <color key="titleColor" name="ButtonTextColor"/>
+                                                                </state>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XoO-4n-QWe" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="243.5" y="0.0" width="111.5" height="66"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="6">
+                                                                    <color key="titleColor" name="ButtonTextColor"/>
+                                                                </state>
+                                                            </button>
+                                                            <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUl-ck-MAZ" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="355" y="0.0" width="0.0" height="66"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="8"/>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6Kb-xq-HZx">
+                                                        <rect key="frame" x="0.0" y="227.5" width="355" height="65.5"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZq-cq-dco" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="0.0" y="0.0" width="111.5" height="65.5"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="1">
+                                                                    <color key="titleColor" name="ButtonTextColor"/>
+                                                                </state>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfa-w0-7A1" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="121.5" y="0.0" width="112" height="65.5"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="2">
+                                                                    <color key="titleColor" name="ButtonTextColor"/>
+                                                                </state>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Vk-6h-Mug" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="243.5" y="0.0" width="111.5" height="65.5"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="3">
+                                                                    <color key="titleColor" name="ButtonTextColor"/>
+                                                                </state>
+                                                            </button>
+                                                            <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qVe-2f-Doy" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="355" y="0.0" width="0.0" height="65.5"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="8"/>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gN8-cm-7OS">
+                                                        <rect key="frame" x="0.0" y="303" width="355" height="66"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67Q-c1-Utk" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="0.0" y="0.0" width="111.5" height="66"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="0">
+                                                                    <color key="titleColor" name="ButtonTextColor"/>
+                                                                </state>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDn-Al-IDc" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="121.5" y="0.0" width="112" height="66"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="00">
+                                                                    <color key="titleColor" name="ButtonTextColor"/>
+                                                                </state>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Erw-G6-iSV" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <rect key="frame" x="243.5" y="0.0" width="111.5" height="66"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="=">
+                                                                    <color key="titleColor" name="ButtonTextColor"/>
+                                                                </state>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
+                                        <color key="backgroundColor" name="BaseColor"/>
                                         <constraints>
-                                            <constraint firstItem="jAD-qk-30y" firstAttribute="bottom" secondItem="rol-Dp-Knt" secondAttribute="bottom" id="33L-t5-hKJ"/>
-                                            <constraint firstItem="JQr-4L-AiR" firstAttribute="bottom" secondItem="rol-Dp-Knt" secondAttribute="bottom" id="5aA-ec-aTc"/>
-                                            <constraint firstAttribute="height" constant="80" id="83X-nH-dvR"/>
-                                            <constraint firstItem="JQr-4L-AiR" firstAttribute="top" secondItem="rol-Dp-Knt" secondAttribute="top" id="DFz-Os-HHR"/>
-                                            <constraint firstItem="rol-Dp-Knt" firstAttribute="top" secondItem="2xY-0v-zIO" secondAttribute="top" constant="1" id="GLw-9w-mEM"/>
-                                            <constraint firstAttribute="bottom" secondItem="rol-Dp-Knt" secondAttribute="bottom" constant="1" id="OnQ-zU-2zP"/>
-                                            <constraint firstItem="rol-Dp-Knt" firstAttribute="width" secondItem="2xY-0v-zIO" secondAttribute="width" constant="-2" id="SGk-mU-Ef6"/>
-                                            <constraint firstItem="jAD-qk-30y" firstAttribute="trailing" secondItem="rol-Dp-Knt" secondAttribute="trailing" id="e3v-Mx-sHY"/>
-                                            <constraint firstItem="JQr-4L-AiR" firstAttribute="leading" secondItem="rol-Dp-Knt" secondAttribute="leading" id="ejM-du-gwT"/>
-                                            <constraint firstItem="JQr-4L-AiR" firstAttribute="width" secondItem="rol-Dp-Knt" secondAttribute="width" id="fYI-Oj-eyr"/>
-                                            <constraint firstAttribute="trailing" secondItem="rol-Dp-Knt" secondAttribute="trailing" constant="1" id="lqZ-E2-DAp"/>
-                                            <constraint firstItem="JQr-4L-AiR" firstAttribute="height" secondItem="rol-Dp-Knt" secondAttribute="height" id="ufN-Ih-Pfc"/>
-                                            <constraint firstItem="rol-Dp-Knt" firstAttribute="height" secondItem="2xY-0v-zIO" secondAttribute="height" constant="-2" id="vKj-O1-hhX"/>
-                                            <constraint firstItem="JQr-4L-AiR" firstAttribute="trailing" secondItem="rol-Dp-Knt" secondAttribute="trailing" id="vL1-5U-qAb"/>
-                                            <constraint firstItem="jAD-qk-30y" firstAttribute="leading" secondItem="rol-Dp-Knt" secondAttribute="leading" id="vbQ-ga-DHl"/>
-                                            <constraint firstItem="rol-Dp-Knt" firstAttribute="leading" secondItem="2xY-0v-zIO" secondAttribute="leading" constant="1" id="xyh-IG-4Yq"/>
-                                            <constraint firstItem="jAD-qk-30y" firstAttribute="top" secondItem="rol-Dp-Knt" secondAttribute="top" id="yer-Us-kW8"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2xY-0v-zIO" secondAttribute="trailing" id="9DP-Vc-hXg"/>
+                                            <constraint firstItem="2xY-0v-zIO" firstAttribute="centerX" secondItem="hrN-O8-LWP" secondAttribute="centerX" id="ASv-Fp-YH0"/>
+                                            <constraint firstItem="qaE-hJ-5UJ" firstAttribute="centerX" secondItem="hrN-O8-LWP" secondAttribute="centerX" id="BUl-OR-g4f"/>
+                                            <constraint firstAttribute="bottom" secondItem="qaE-hJ-5UJ" secondAttribute="bottom" constant="30" id="F54-Zu-Ge5"/>
+                                            <constraint firstItem="qaE-hJ-5UJ" firstAttribute="width" secondItem="hrN-O8-LWP" secondAttribute="width" multiplier="0.9" id="JEn-qv-Dtf"/>
+                                            <constraint firstItem="qaE-hJ-5UJ" firstAttribute="top" secondItem="2xY-0v-zIO" secondAttribute="bottom" constant="20" id="dwN-gE-d2y"/>
+                                            <constraint firstItem="2xY-0v-zIO" firstAttribute="width" relation="lessThanOrEqual" secondItem="hrN-O8-LWP" secondAttribute="width" multiplier="0.9" id="i69-FH-AlC"/>
+                                            <constraint firstItem="2xY-0v-zIO" firstAttribute="top" secondItem="hrN-O8-LWP" secondAttribute="top" constant="20" id="kys-pM-hyo"/>
+                                            <constraint firstItem="2xY-0v-zIO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hrN-O8-LWP" secondAttribute="leading" id="tUw-ao-KaE"/>
                                         </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="7"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qaE-hJ-5UJ">
-                                        <rect key="frame" x="20.5" y="120" width="373" height="379"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Zgw-vZ-aNQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="373" height="67.5"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7R-DU-4BS" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="117.5" height="67.5"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="AC">
-                                                            <color key="titleColor" name="ButtonTextColor"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VaX-Oy-oxU">
-                                                        <rect key="frame" x="127.5" y="0.0" width="118" height="67.5"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title=" ">
-                                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UzO-2h-Uqr">
-                                                        <rect key="frame" x="255.5" y="0.0" width="117.5" height="67.5"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title=" "/>
-                                                    </button>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQA-Db-dfL" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="373" y="0.0" width="0.0" height="67.5"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="8">
-                                                            <color key="titleColor" name="ButtonTextColor"/>
-                                                        </state>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zI2-xY-o4N">
-                                                <rect key="frame" x="0.0" y="77.5" width="373" height="68"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDU-k4-flG" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="117.5" height="68"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="7">
-                                                            <color key="titleColor" name="ButtonTextColor"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHG-r9-gOZ" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="127.5" y="0.0" width="118" height="68"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="8">
-                                                            <color key="titleColor" name="ButtonTextColor"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xa-9U-hff" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="255.5" y="0.0" width="117.5" height="68"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="9">
-                                                            <color key="titleColor" name="ButtonTextColor"/>
-                                                        </state>
-                                                    </button>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXE-2f-HKE" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="373" y="0.0" width="0.0" height="68"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="8">
-                                                            <color key="titleColor" name="ButtonTextColor"/>
-                                                        </state>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QFE-6g-7fi">
-                                                <rect key="frame" x="0.0" y="155.5" width="373" height="68"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3X-KY-UT0" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="117.5" height="68"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="4">
-                                                            <color key="titleColor" name="ButtonTextColor"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bqw-my-Qin" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="127.5" y="0.0" width="118" height="68"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="5">
-                                                            <color key="titleColor" name="ButtonTextColor"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XoO-4n-QWe" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="255.5" y="0.0" width="117.5" height="68"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="6">
-                                                            <color key="titleColor" name="ButtonTextColor"/>
-                                                        </state>
-                                                    </button>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUl-ck-MAZ" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="373" y="0.0" width="0.0" height="68"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="8"/>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6Kb-xq-HZx">
-                                                <rect key="frame" x="0.0" y="233.5" width="373" height="67.5"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZq-cq-dco" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="117.5" height="67.5"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="1">
-                                                            <color key="titleColor" name="ButtonTextColor"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfa-w0-7A1" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="127.5" y="0.0" width="118" height="67.5"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="2">
-                                                            <color key="titleColor" name="ButtonTextColor"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Vk-6h-Mug" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="255.5" y="0.0" width="117.5" height="67.5"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="3">
-                                                            <color key="titleColor" name="ButtonTextColor"/>
-                                                        </state>
-                                                    </button>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qVe-2f-Doy" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="373" y="0.0" width="0.0" height="67.5"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="8"/>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gN8-cm-7OS">
-                                                <rect key="frame" x="0.0" y="311" width="373" height="68"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67Q-c1-Utk" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="117.5" height="68"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="0">
-                                                            <color key="titleColor" name="ButtonTextColor"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDn-Al-IDc" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="127.5" y="0.0" width="118" height="68"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="00">
-                                                            <color key="titleColor" name="ButtonTextColor"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Erw-G6-iSV" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="255.5" y="0.0" width="117.5" height="68"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="40"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="=">
-                                                            <color key="titleColor" name="ButtonTextColor"/>
-                                                        </state>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                    </stackView>
                                 </subviews>
-                                <color key="backgroundColor" name="BaseColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2xY-0v-zIO" secondAttribute="trailing" id="9DP-Vc-hXg"/>
-                                    <constraint firstItem="2xY-0v-zIO" firstAttribute="centerX" secondItem="hrN-O8-LWP" secondAttribute="centerX" id="ASv-Fp-YH0"/>
-                                    <constraint firstItem="qaE-hJ-5UJ" firstAttribute="centerX" secondItem="hrN-O8-LWP" secondAttribute="centerX" id="BUl-OR-g4f"/>
-                                    <constraint firstAttribute="bottom" secondItem="qaE-hJ-5UJ" secondAttribute="bottom" constant="30" id="F54-Zu-Ge5"/>
-                                    <constraint firstItem="qaE-hJ-5UJ" firstAttribute="width" secondItem="hrN-O8-LWP" secondAttribute="width" multiplier="0.9" id="JEn-qv-Dtf"/>
-                                    <constraint firstItem="qaE-hJ-5UJ" firstAttribute="top" secondItem="2xY-0v-zIO" secondAttribute="bottom" constant="20" id="dwN-gE-d2y"/>
-                                    <constraint firstItem="2xY-0v-zIO" firstAttribute="width" relation="lessThanOrEqual" secondItem="hrN-O8-LWP" secondAttribute="width" multiplier="0.9" id="i69-FH-AlC"/>
-                                    <constraint firstItem="2xY-0v-zIO" firstAttribute="top" secondItem="hrN-O8-LWP" secondAttribute="top" constant="20" id="kys-pM-hyo"/>
-                                    <constraint firstItem="2xY-0v-zIO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hrN-O8-LWP" secondAttribute="leading" id="tUw-ao-KaE"/>
+                                    <constraint firstItem="hrN-O8-LWP" firstAttribute="top" secondItem="OYM-Lc-oLO" secondAttribute="top" id="0mu-sY-WPp"/>
+                                    <constraint firstItem="hrN-O8-LWP" firstAttribute="leading" secondItem="OYM-Lc-oLO" secondAttribute="leading" constant="10" id="5fl-jy-QYW"/>
+                                    <constraint firstAttribute="trailing" secondItem="hrN-O8-LWP" secondAttribute="trailing" constant="10" id="6Xg-pZ-mJ5"/>
+                                    <constraint firstAttribute="bottom" secondItem="hrN-O8-LWP" secondAttribute="bottom" constant="10" id="ovs-CX-BYQ"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -323,11 +335,11 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="hrN-O8-LWP" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="top" id="5rI-nZ-v6d"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hrN-O8-LWP" secondAttribute="trailing" id="US3-JI-gDQ"/>
-                            <constraint firstItem="hrN-O8-LWP" firstAttribute="height" secondItem="vDu-zF-Fre" secondAttribute="height" multiplier="0.65" id="Yed-py-J5z"/>
-                            <constraint firstItem="hrN-O8-LWP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="b8B-K0-uXe"/>
-                            <constraint firstAttribute="bottom" secondItem="hrN-O8-LWP" secondAttribute="bottom" id="cYu-NU-ipF"/>
+                            <constraint firstItem="OYM-Lc-oLO" firstAttribute="height" secondItem="vDu-zF-Fre" secondAttribute="height" multiplier="0.65" id="23k-he-fal"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="OYM-Lc-oLO" secondAttribute="bottom" id="Ab9-cQ-0Me"/>
+                            <constraint firstItem="OYM-Lc-oLO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="top" id="R4m-SQ-C6q"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="OYM-Lc-oLO" secondAttribute="trailing" id="xV2-An-uPw"/>
+                            <constraint firstItem="OYM-Lc-oLO" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="xuQ-Vd-eOZ"/>
                         </constraints>
                     </view>
                     <connections>
@@ -353,19 +365,19 @@
                         <outlet property="buttonPlusMinus" destination="VaX-Oy-oxU" id="R7x-Oq-aAm"/>
                         <outlet property="label" destination="JQr-4L-AiR" id="hIG-dM-450"/>
                         <outlet property="labelView" destination="2xY-0v-zIO" id="t5l-br-ufb"/>
-                        <outletCollection property="arrayHugo" destination="t7R-DU-4BS" collectionClass="NSMutableArray" id="b2u-hu-pHU"/>
-                        <outletCollection property="arrayHugo" destination="aDU-k4-flG" collectionClass="NSMutableArray" id="mXI-kh-Itk"/>
-                        <outletCollection property="arrayHugo" destination="YHG-r9-gOZ" collectionClass="NSMutableArray" id="V1b-N5-BgP"/>
-                        <outletCollection property="arrayHugo" destination="0xa-9U-hff" collectionClass="NSMutableArray" id="T27-Le-SCF"/>
-                        <outletCollection property="arrayHugo" destination="q3X-KY-UT0" collectionClass="NSMutableArray" id="rII-mx-KjL"/>
                         <outletCollection property="arrayHugo" destination="Bqw-my-Qin" collectionClass="NSMutableArray" id="VXK-9n-aGd"/>
-                        <outletCollection property="arrayHugo" destination="XoO-4n-QWe" collectionClass="NSMutableArray" id="QbM-WM-ASf"/>
+                        <outletCollection property="arrayHugo" destination="Erw-G6-iSV" collectionClass="NSMutableArray" id="X6w-dM-BhW"/>
                         <outletCollection property="arrayHugo" destination="KZq-cq-dco" collectionClass="NSMutableArray" id="CoK-7d-4r9"/>
-                        <outletCollection property="arrayHugo" destination="jfa-w0-7A1" collectionClass="NSMutableArray" id="UB3-74-3W3"/>
+                        <outletCollection property="arrayHugo" destination="0xa-9U-hff" collectionClass="NSMutableArray" id="T27-Le-SCF"/>
                         <outletCollection property="arrayHugo" destination="6Vk-6h-Mug" collectionClass="NSMutableArray" id="emf-wI-0Vy"/>
                         <outletCollection property="arrayHugo" destination="67Q-c1-Utk" collectionClass="NSMutableArray" id="Pst-x5-5CG"/>
-                        <outletCollection property="arrayHugo" destination="Erw-G6-iSV" collectionClass="NSMutableArray" id="X6w-dM-BhW"/>
+                        <outletCollection property="arrayHugo" destination="YHG-r9-gOZ" collectionClass="NSMutableArray" id="V1b-N5-BgP"/>
+                        <outletCollection property="arrayHugo" destination="t7R-DU-4BS" collectionClass="NSMutableArray" id="b2u-hu-pHU"/>
+                        <outletCollection property="arrayHugo" destination="q3X-KY-UT0" collectionClass="NSMutableArray" id="rII-mx-KjL"/>
+                        <outletCollection property="arrayHugo" destination="XoO-4n-QWe" collectionClass="NSMutableArray" id="QbM-WM-ASf"/>
+                        <outletCollection property="arrayHugo" destination="aDU-k4-flG" collectionClass="NSMutableArray" id="mXI-kh-Itk"/>
                         <outletCollection property="arrayHugo" destination="lDn-Al-IDc" collectionClass="NSMutableArray" id="Ilt-va-JR7"/>
+                        <outletCollection property="arrayHugo" destination="jfa-w0-7A1" collectionClass="NSMutableArray" id="UB3-74-3W3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -375,7 +387,7 @@
     </scenes>
     <resources>
         <namedColor name="BaseColor">
-            <color red="0.87800002098083496" green="0.89800000190734863" blue="0.92500001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ButtonTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -18,16 +18,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nyl-c7-Qn1">
-                                <rect key="frame" x="0.0" y="482" width="393" height="336"/>
+                                <rect key="frame" x="0.0" y="472" width="393" height="346"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GrU-NM-lDB" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="336"/>
+                                        <rect key="frame" x="10" y="0.0" width="373" height="336"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="890-sQ-7Rk" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                                                <rect key="frame" x="20" y="80" width="353" height="236"/>
+                                                <rect key="frame" x="20" y="80" width="333" height="236"/>
                                                 <subviews>
                                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vg7-Eb-hUR">
-                                                        <rect key="frame" x="10" y="10" width="333" height="216"/>
+                                                        <rect key="frame" x="10" y="10" width="313" height="216"/>
                                                     </pickerView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -55,7 +55,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eeH-76-pol" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                <rect key="frame" x="293" y="20" width="80" height="40"/>
+                                                <rect key="frame" x="273" y="20" width="80" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="8I9-3U-VXM"/>
@@ -86,10 +86,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="GrU-NM-lDB" secondAttribute="bottom" id="BXX-fa-qwp"/>
+                                    <constraint firstAttribute="bottom" secondItem="GrU-NM-lDB" secondAttribute="bottom" constant="10" id="BXX-fa-qwp"/>
                                     <constraint firstItem="GrU-NM-lDB" firstAttribute="top" secondItem="Nyl-c7-Qn1" secondAttribute="top" id="Ep5-Nj-kRy"/>
-                                    <constraint firstAttribute="trailing" secondItem="GrU-NM-lDB" secondAttribute="trailing" id="N5o-Cm-Bc5"/>
-                                    <constraint firstItem="GrU-NM-lDB" firstAttribute="leading" secondItem="Nyl-c7-Qn1" secondAttribute="leading" id="yx4-sQ-0PL"/>
+                                    <constraint firstAttribute="trailing" secondItem="GrU-NM-lDB" secondAttribute="trailing" constant="10" id="N5o-Cm-Bc5"/>
+                                    <constraint firstItem="GrU-NM-lDB" firstAttribute="leading" secondItem="Nyl-c7-Qn1" secondAttribute="leading" constant="10" id="yx4-sQ-0PL"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -118,7 +118,7 @@
     </scenes>
     <resources>
         <namedColor name="BaseColor">
-            <color red="0.87800002098083496" green="0.89800000190734863" blue="0.92500001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ButtonTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
