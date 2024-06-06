@@ -34,6 +34,9 @@ class SettingAccountDetailTableViewCell: UITableViewCell {
         // 勘定科目名
         if let accountDetailAccountTextField = accountDetailAccountTextField {
             accountDetailAccountTextField.delegate = self
+            // テキストの入力位置を指すライン、これはカーソルではなくキャレット(caret)と呼ぶそうです。
+            accountDetailAccountTextField.tintColor = UIColor.accentColor
+
             let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
             //　toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3) // RGBで指定する alpha 0透明　1不透明
             toolbar.isTranslucent = true
