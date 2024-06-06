@@ -46,6 +46,8 @@ class ClassicCalculatorViewController: UIViewController {
         indicator.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(indicatorDidTap(_:))))
         return indicator
     }()
+    // 内側の影
+    let subLayer = CALayer()
     // 設定残高振替仕訳　連番
     var primaryKey: Int = 0
     // 勘定科目名
@@ -112,26 +114,32 @@ class ClassicCalculatorViewController: UIViewController {
         }
         
         if let labelView = labelView {
+            labelView.layer.cornerRadius = 7
+            // labelView.clipsToBounds = true ニューモフィズムが効かなくなるため不要
             // Default is 1.
-            labelView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            labelView.neumorphicLayer?.lightShadowOpacity = 0.5
             // Default is 0.3.
             labelView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             // Adding a thin border on the edge of the element.
             labelView.neumorphicLayer?.edged = true
             labelView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            labelView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+            labelView.neumorphicLayer?.elementBackgroundColor = UIColor.calculatorDisplay.cgColor
         }
         
         if let label = label {
+            label.layer.cornerRadius = 7
+            label.clipsToBounds = true
             // label.font = UIFont(name: "DSEG14 Classic-Regular", size: 34)
             label.text = numbersOnDisplay.description
             label.textAlignment = .right
+            // 内側へ影をつける
+            addDropShadowToView(toView: label)
         }
         
         for button in arrayHugo {
             // button.setTitle("1", for: .normal)
             button.setTitleColor(.textColor, for: .normal)
-            button.neumorphicLayer?.cornerRadius = button.frame.height / 2.8
+            button.neumorphicLayer?.cornerRadius = button.frame.height / 2.0
             button.contentVerticalAlignment = .fill
             // button.contentHorizontalAlignment = .fill
             button.setTitleColor(.textColor, for: .selected)
@@ -152,6 +160,41 @@ class ClassicCalculatorViewController: UIViewController {
             indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
             indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
         ])
+    }
+
+    // 内側へ影をつける
+    func addDropShadowToView(toView: UIView) {
+        subLayer.frame = toView.bounds
+        if let sublayers = toView.layer.sublayers, sublayers.contains(subLayer) {
+            toView.layer.replaceSublayer(subLayer, with: subLayer)
+        } else {
+            toView.layer.addSublayer(subLayer)
+        }
+        subLayer.masksToBounds = true
+        
+        let size = subLayer.bounds.size
+        var x: CGFloat = -10.0
+        var y: CGFloat = -10.0
+        var pathRef = CGMutablePath()
+        pathRef.move(to: CGPoint(x: x, y: y))
+        x += size.width + 10.0
+        pathRef.addLine(to: CGPoint(x: x, y: y))
+        y += 10.0
+        pathRef.addLine(to: CGPoint(x: x, y: y))
+        x -= size.width
+        pathRef.addLine(to: CGPoint(x: x, y: y))
+        y += size.height
+        pathRef.addLine(to: CGPoint(x: x, y: y))
+        x -= 5.0   // -10
+        pathRef.addLine(to: CGPoint(x: x, y: y))
+        y -= size.height   // +10
+        pathRef.addLine(to: CGPoint(x: x, y: y))
+        pathRef.closeSubpath()
+        
+        subLayer.shadowOffset = CGSizeMake(2.5, 2.5)
+        subLayer.shadowColor = UIColor.black.cgColor
+        subLayer.shadowOpacity = 0.9
+        subLayer.shadowPath = pathRef
     }
     
     func setupActions() {
