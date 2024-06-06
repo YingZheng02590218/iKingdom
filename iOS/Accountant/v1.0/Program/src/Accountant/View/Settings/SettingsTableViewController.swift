@@ -190,7 +190,17 @@ class SettingsTableViewController: UIViewController {
             generator.impactOccurred()
         }
         // OSの通知設定画面へ遷移
-        self.linkToSettingsScreen()
+        linkToSettingsScreen()
+    }
+    // AppStoreを開く　ボタン
+    @objc
+    func appStoreButtonTapped(sender: UIButton) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
+        // AppStoreへ遷移
+        jumpToAppStore()
     }
     // ローカル通知　設定スイッチ 切り替え
     @objc
@@ -246,14 +256,14 @@ class SettingsTableViewController: UIViewController {
         df.calendar = Calendar(identifier: .gregorian)
         df.locale = Locale(identifier: "ja_JP")
         df.timeZone = .current
-
+        
         df.dateStyle = .none
         df.timeStyle = .short
         let time = df.string(from: sender.date) // String "21:00"
         UserDefaults.standard.set(time, forKey: "localNotificationEvereyDay")
         UserDefaults.standard.synchronize()
     }
-
+    
     // 通知設定状況を取得
     func pushPermissionState(completion: @escaping (Bool) -> Void) {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
@@ -400,7 +410,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         }
         return nil
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return 75
@@ -416,7 +426,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         cell.centerLabelMiddleCenterY.priority = .defaultHigh
         cell.lowerLabel.text = nil
         cell.lowerLabel.isHidden = true
-
+        
         // Accessory Color
         let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
         let disclosureView = UIImageView(image: disclosureImage)
@@ -525,7 +535,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.accessoryView = button
                 // セルの選択を可にする
                 cell.selectionStyle = .gray
-
+                
             case 3:
                 cell.centerLabel.text = "生体認証・パスコード"
                 // 生体認証かパスコードのいずれかが使用可能かを確認する
@@ -543,7 +553,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.accessoryView = switchView
                 // セルの選択不可にする
                 cell.selectionStyle = .none
-
+                
                 return cell
             case 4:
                 cell.centerLabel.text = "記帳の時刻を通知する"
@@ -563,11 +573,11 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.accessoryView = switchView
                 // セルの選択不可にする
                 cell.selectionStyle = .none
-
+                
             case 5:
                 cell.centerLabel.text = "指定時刻"
                 cell.leftImageView.image = nil
-
+                
                 let picker = UIDatePicker()
                 picker.tintColor = .accentColor
                 picker.locale = Locale(identifier: "ja_JP") // Locale(identifier: "en_US_POSIX")
@@ -597,7 +607,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.accessoryView = picker
                 // セルの選択不可にする
                 cell.selectionStyle = .none
-
+                
             case 6:
                 // ウィジェット 単位　設定
                 cell.centerLabel.text = "Widget"
@@ -606,7 +616,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.subLabel.text = "金額の単位"
                 cell.lowerLabel.text = "ウィジェットに表示させる金額の単位を指定します。"
                 cell.lowerLabel.isHidden = false
-
+                
                 cell.leftImageView.image = UIImage(named: "baseline_widgets_black_36pt")?.withRenderingMode(.alwaysTemplate)
                 // ウィジェット 単位　設定 セグメントコントロール
                 let segment = UISegmentedControl(items: ["千円", "円"])
@@ -631,7 +641,17 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 
             case 1:
                 cell.centerLabel.text = "評価・レビュー"
+                // ボタン
+                let button = UIButton(frame: CGRect(x: 0, y: cell.frame.size.height / 2, width: 25, height: 25))
+                // iOS の設定を開く　設定スイッチ
+                button.tintColor = .accentColor
+                let picture = UIImage(named: "baseline_open_in_new_black_36pt")?.withRenderingMode(.alwaysTemplate)
+                button.setImage(picture, for: .normal)
+                button.imageView?.tintColor = .accentColor
                 cell.leftImageView.image = UIImage(named: "thumb_up-thumb_up_symbol")?.withRenderingMode(.alwaysTemplate)
+                button.tag = indexPath.row
+                button.addTarget(self, action: #selector(appStoreButtonTapped), for: .touchUpInside)
+                cell.accessoryView = button
                 // セルの選択を可にする
                 cell.selectionStyle = .gray
                 
@@ -724,14 +744,8 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             case 0:
                 performSegue(withIdentifier: "SettingsHelpViewController", sender: tableView.cellForRow(at: indexPath))
             case 1:
-                /// TODO: -  アプリ名変更
-                // アプリ内でブラウザを開く
-                let url = URL(string:  "https://apps.apple.com/jp/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-thereckoning-%E3%82%B6-%E3%83%AC%E3%82%B3%E3%83%8B%E3%83%B3%E3%82%B0/id1535793378?l=ja&ls=1&mt=8&action=write-review")
-                if let url = url {
-                    let vc = SFSafariViewController(url: url)
-                    vc.preferredControlTintColor = .accentBlue
-                    present(vc, animated: true, completion: nil)
-                }
+                // AppStoreへ遷移
+                jumpToAppStore()
             case 2:
                 // お問い合わせ機能
                 if MFMailComposeViewController.canSendMail() {
@@ -756,6 +770,20 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             default:
                 break
             }
+        }
+    }
+    
+    // AppStoreへ遷移
+    func jumpToAppStore() {
+        // TODO: アプリ名を変更
+        // 中間ブラウザ　アプリ内でブラウザを開く
+        let url = URL(
+            string:  "https://apps.apple.com/jp/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-thereckoning-%E3%82%B6-%E3%83%AC%E3%82%B3%E3%83%8B%E3%83%B3%E3%82%B0/id1535793378?l=ja&ls=1&mt=8&action=write-review"
+        )
+        if let url = url {
+            let vc = SFSafariViewController(url: url)
+            vc.preferredControlTintColor = .accentBlue
+            present(vc, animated: true, completion: nil)
         }
     }
 }
