@@ -92,7 +92,7 @@ class PopUpViewController: UIViewController {
         self.footerView.addBorder(width: 0.3, color: UIColor.gray, position: .top)
         // 右上と左下を角丸にする設定
         button.layer.borderColor = UIColor.accentColor.cgColor
-        button.layer.borderWidth = 0.1
+        button.layer.borderWidth = 0.3
         button.layer.cornerRadius = button.frame.height / 2
         button.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         // ダークモード対応 HTML上の文字色を変更する

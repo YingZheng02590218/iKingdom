@@ -270,18 +270,18 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
                         numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(Constant.capitalAccountName)")
                     }
                     // 借又貸
-                    if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left > presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right {
+                    if dataBaseCapitalTransferJournalEntry.balance_left > dataBaseCapitalTransferJournalEntry.balance_right {
                         balanceDebitOrCredit = "借"
-                    } else if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left < presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right {
+                    } else if dataBaseCapitalTransferJournalEntry.balance_left < dataBaseCapitalTransferJournalEntry.balance_right {
                         balanceDebitOrCredit = "貸"
                     } else {
                         balanceDebitOrCredit = "-"
                     }
                     // 差引残高額
-                    if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left > presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right { // 借方と貸方を比較
-                        balanceAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left
-                    } else if presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right > presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_left {
-                        balanceAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).balance_right
+                    if dataBaseCapitalTransferJournalEntry.balance_left > dataBaseCapitalTransferJournalEntry.balance_right { // 借方と貸方を比較
+                        balanceAmount = dataBaseCapitalTransferJournalEntry.balance_left
+                    } else if dataBaseCapitalTransferJournalEntry.balance_right > dataBaseCapitalTransferJournalEntry.balance_left {
+                        balanceAmount = dataBaseCapitalTransferJournalEntry.balance_right
                     } else {
                         balanceAmount = 0
                     }
