@@ -223,8 +223,6 @@ extension ProfitAndLossStatementViewController: UITableViewDelegate, UITableView
     // セクションヘッダーの色とか調整する
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
-            //            header.backgroundColor = .orange
-            
             header.textLabel?.textColor = .paperTextColor
             header.textLabel?.textAlignment = .left
             // システムフォントのサイズを設定
@@ -234,6 +232,52 @@ extension ProfitAndLossStatementViewController: UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        if let header = view as? UITableViewHeaderFooterView {
+            header.backgroundView = UIView()
+            switch section {
+            case 0:
+                // 売上高
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
+            case 1:
+                // 売上原価
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
+            case 2:
+                // 売上総利益
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
+            case 3:
+                // 販売費及び一般管理費
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
+            case 4:
+                // 営業利益
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
+            case 5:
+                // 営業外収益
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
+            case 6:
+                // 営業外費用
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
+            case 7:
+                // 経常利益
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
+            case 8:
+                // 特別利益
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
+            case 9:
+                // 特別損失
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
+            case 10:
+                // 税引前当期純利益
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
+            case 11:
+                // 法人税、住民税及び事業税
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
+            case 12:
+                // 当期純利益
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
+            default:
+                break
+            }
+        }
         view.tintColor = UIColor.paperColor
     }
     
