@@ -216,17 +216,76 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
     // セクションヘッダーの色とか調整する
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
-            //            header.backgroundColor = .orange
-            
             header.textLabel?.textColor = .paperTextColor
             header.textLabel?.textAlignment = .left
             // システムフォントのサイズを設定
             header.textLabel?.font = UIFont.systemFont(ofSize: 16)
+            header.backgroundView = UIView()
+            header.backgroundView?.backgroundColor = .paperColor
+            switch section {
+            case 0:
+                // 資産の部
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.1)
+            case 1:
+                break
+            case 2:
+                break
+            case 3:
+                break
+            case 4: // 資産合計
+                break
+            case 5:
+                // 負債の部
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.1)
+            case 6:
+                break
+            case 7:
+                break
+            case 8: // 負債合計
+                break
+            case 9:
+                // 資本の部
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.1)
+            case 10:
+                break
+            case 11:
+                break
+            default:
+                break
+            }
         }
         view.tintColor = UIColor.paperColor
     }
     
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        if let header = view as? UITableViewHeaderFooterView {
+            header.backgroundView = UIView()
+            switch section {
+                //　case 0: // 資産の部
+            case 1: // MARK: - "    流動資産合計"
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
+            case 2: // MARK: - "    固定資産合計"
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
+            case 3: // MARK: - "    繰越資産合計"
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
+            case 4: // MARK: - "資産合計"
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
+                //　case 5: // 負債の部
+            case 6: // MARK: - "    流動負債合計"
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
+            case 7: // MARK: - "    固定負債合計"
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.2)
+            case 8: // MARK: - "負債合計"
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
+                //　case 9: // 資本の部
+            case 10: // MARK: - "純資産合計"
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
+            case 11: // MARK: - "負債純資産合計"
+                header.backgroundView?.backgroundColor = .bsPlAccentColor.withAlphaComponent(0.3)
+            default:
+                break
+            }
+        }
         view.tintColor = UIColor.paperColor
     }
     // セクションヘッダーのテキスト決める
