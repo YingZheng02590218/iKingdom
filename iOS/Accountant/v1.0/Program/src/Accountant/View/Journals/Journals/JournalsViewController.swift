@@ -16,7 +16,6 @@ import UIKit
 class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - var let
-    private var interstitial: GADInterstitialAd?
     
     var gADBannerView: GADBannerView!
     // 仕訳帳　上部
@@ -1046,9 +1045,6 @@ extension JournalsViewController: JournalsPresenterOutput {
                 removeBannerViewToView(gADBannerView)
             }
         }
-        // セットアップ AdMob
-        setupAdMob()
-        
         // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
         for i in 0..<presenter.numberOfobjects where !DateManager.shared.isInPeriod(date: presenter.objects(forRow: i).date) {
             Toast.show("仕訳の日付が会計期間の範囲外です。", self.backgroundView)
@@ -1116,59 +1112,6 @@ extension JournalsViewController: JournalsPresenterOutput {
             self.setButtons()
             // 下へスクロールする
             self.scrollToBottom()
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 1.5 ... 3)) {
-                // インタースティシャル広告を表示　マネタイズ対応
-                self.showAd()
-            }
-        }
-    }
-    // インタースティシャル広告を表示　マネタイズ対応
-    func showAd() {
-        // アップグレード機能　スタンダードプラン
-        if !UpgradeManager.shared.inAppPurchaseFlag {
-            
-            var iValue = 0
-            // 仕訳が50件以上入力済みの場合は毎回広告を表示する　マネタイズ対応
-            let results = DataBaseManagerJournalEntry.shared.getJournalEntryCount()
-            if results.count <= 10 {
-                // 仕訳10件以下　広告を表示しない
-                iValue = 1
-            } else if results.count <= 50 {
-                // 乱数　1から6までのIntを生成
-                iValue = Int.random(in: 1 ... 6)
-            }
-            if iValue % 2 == 0 {
-                if interstitial != nil {
-                    interstitial?.present(fromRootViewController: self)
-                } else {
-                    print("Ad wasn't ready")
-                    // セットアップ AdMob
-                    setupAdMob()
-                }
-            }
-        }
-    }
-    // MARK: GADInterstitialAd
-    // セットアップ AdMob　アップグレード機能　スタンダードプラン
-    func setupAdMob() {
-        // アップグレード機能　スタンダードプラン
-        if !UpgradeManager.shared.inAppPurchaseFlag {
-            // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-            // GADBannerView プロパティを設定する
-            // GADInterstitial を作成する
-            let request = GADRequest()
-            GADInterstitialAd.load(
-                withAdUnitID: Constant.ADMOBIDINTERSTITIAL,
-                request: request,
-                completionHandler: { [self] ad, error in
-                    if let error = error {
-                        print("Failed to load interstitial ad with error: \(error.localizedDescription)")
-                        return
-                    }
-                    interstitial = ad
-                    interstitial?.fullScreenContentDelegate = self
-                }
-            )
         }
     }
     
@@ -1220,7 +1163,7 @@ extension JournalsViewController: JournalsPresenterOutput {
             self.activityIndicatorView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
             // インジケーターのスタイルを指定（白色＆大きいサイズ）
             self.activityIndicatorView.style = UIActivityIndicatorView.Style.large
-
+            
             self.activityIndicatorView.color = UIColor.mainColor
             // インジケーターを View に追加
             self.backView.addSubview(self.activityIndicatorView)
@@ -1289,29 +1232,5 @@ extension JournalsViewController: QLPreviewControllerDataSource {
             return "" as! QLPreviewItem
         }
         return filePath as QLPreviewItem
-    }
-}
-
-// MARK: - GADFullScreenContentDelegate
-
-extension JournalsViewController: GADFullScreenContentDelegate {
-    
-    /// Tells the delegate that the ad failed to present full screen content.
-    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
-        print("Ad did fail to present full screen content.")
-    }
-    
-    /// Tells the delegate that the ad will present full screen content.
-    func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        print("Ad will present full screen content.")
-    }
-    
-    /// Tells the delegate that the ad dismissed full screen content.
-    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        print("Ad did dismiss full screen content.")
-        // セットアップ AdMob
-        setupAdMob()
-        // アップグレード画面を表示
-        showUpgradeScreen()
     }
 }

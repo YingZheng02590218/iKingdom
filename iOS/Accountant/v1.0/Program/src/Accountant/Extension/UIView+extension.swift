@@ -149,6 +149,17 @@ extension UIView {
             self.layer.removeAllAnimations()
         }
     }
+    
+    // フェードイン・アウトメソッド
+    func animateViewFadeOut() {
+        UIView.animate(withDuration: 1.5, delay: 0, options: .curveEaseIn) {
+            self.alpha = 1
+        } completion: { _ in
+            UIView.animate(withDuration: 1.5, delay: 0, options: .curveEaseOut) {
+                self.alpha = 0
+            }
+        }
+    }
 }
 
 extension UIView {

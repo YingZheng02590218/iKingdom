@@ -25,13 +25,19 @@ enum Constant {
     static let ADMOBID = "ca-app-pub-3940256099942544/2934735716"
     // テスト用広告ユニットID インタースティシャル
     static let ADMOBIDINTERSTITIAL = "ca-app-pub-3940256099942544/4411468910"
+    // テスト用広告ユニットID リワード
+    static let ADMOB_ID_REWARD = "ca-app-pub-3940256099942544/1712485313"
 #else
     // 広告ユニットID
     static let ADMOBID = "ca-app-pub-7616440336243237/8565070944"
     // 広告ユニットID インタースティシャル
     static let ADMOBIDINTERSTITIAL = "ca-app-pub-7616440336243237/4964823000"
+    // 広告ユニットID リワード
+    static let ADMOB_ID_REWARD = "ca-app-pub-7616440336243237/9207320341"
 #endif
-    
+    // 広告を表示しない仕訳件数
+    static let SHOW_REWARD_AD_COUNT: Int = 50
+
     // ニューモフィズム
     static let LIGHTSHADOWOPACITY: Float = 0.3
     static let DARKSHADOWOPACITY: Float = 0.5

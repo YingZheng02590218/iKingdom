@@ -16,7 +16,9 @@ class JournalEntryViewController: UIViewController {
     
     // MARK: - var let
     
-    private var interstitial: GADInterstitialAd?
+    private var rewardedAd: GADRewardedAd?
+    /// Text that indicates current coin count.
+    @IBOutlet var coinCountLabel: UILabel!
     
     @IBOutlet var backgroundView: UIView!
     // タイトルラベル
@@ -498,6 +500,29 @@ class JournalEntryViewController: UIViewController {
         }
     }
     
+    func updateCoinCountLabel() {
+        if journalEntryType != .SettingsJournalEntries  && // よく使う仕訳 追加
+            journalEntryType != .SettingsJournalEntriesFixing { // よく使う仕訳 更新
+            // アップグレード機能　スタンダードプラン 未購入
+            if !UpgradeManager.shared.inAppPurchaseFlag {
+                // 仕訳が50件超の入力がある場合は、ダイアログを表示する　マネタイズ対応
+                let results = DataBaseManagerJournalEntry.shared.getJournalEntryCount()
+                if results.count > Constant.SHOW_REWARD_AD_COUNT {
+                    // リワード広告　報酬
+                    coinCountLabel.text = "残り \(UserData.rewardAdCoinCount) 回の入力ができます"
+                    coinCountLabel.sizeToFit()
+                    coinCountLabel.isHidden = false
+                    // フェードイン・アウトメソッド
+                    coinCountLabel.animateViewFadeOut()
+                } else {
+                    coinCountLabel.isHidden = true
+                }
+            } else {
+                coinCountLabel.isHidden = true
+            }
+        }
+    }
+    
     // MARK: PickerTextField
     // TextField作成　勘定科目
     func createTextFieldForCategory() {
@@ -570,30 +595,6 @@ class JournalEntryViewController: UIViewController {
             if textFieldAmountDebit.text != "" || textFieldAmountDebit.text != "" {
                 textFieldAmountCredit.text = textFieldAmountDebit.text
             }
-        }
-    }
-    
-    // MARK: GADInterstitialAd
-    // セットアップ AdMob　アップグレード機能　スタンダードプラン
-    func setupAdMob() {
-        // アップグレード機能　スタンダードプラン
-        if !UpgradeManager.shared.inAppPurchaseFlag {
-            // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-            // GADBannerView プロパティを設定する
-            // GADInterstitial を作成する
-            let request = GADRequest()
-            GADInterstitialAd.load(
-                withAdUnitID: Constant.ADMOBIDINTERSTITIAL,
-                request: request,
-                completionHandler: { [self] ad, error in
-                    if let error = error {
-                        print("Failed to load interstitial ad with error: \(error.localizedDescription)")
-                        return
-                    }
-                    interstitial = ad
-                    interstitial?.fullScreenContentDelegate = self
-                }
-            )
         }
     }
     
@@ -1084,31 +1085,47 @@ class JournalEntryViewController: UIViewController {
             }
         }
     }
-    // インタースティシャル広告を表示　マネタイズ対応
-    func showAd() {
+    
+    // リワード広告を表示　マネタイズ対応
+    func showAd() async {
+        guard let ad = rewardedAd else {
+            Task {
+                // セットアップ AdMob
+                await setupAdMob()
+            }
+            return print("Ad wasn't ready.")
+        }
+        // The UIViewController parameter is an optional.
+        ad.present(fromRootViewController: nil) {
+            let reward = ad.adReward
+            print("Reward received with currency \(reward.amount), amount \(reward.amount.doubleValue)")
+            // リワード　報酬を獲得
+            self.earnCoins(NSInteger(truncating: reward.amount))
+        }
+    }
+    
+    // MARK: GADRewardedAd
+    // セットアップ AdMob　アップグレード機能　スタンダードプラン
+    func setupAdMob() async {
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
-            
-            var iValue = 0
-            // 仕訳が50件以上入力済みの場合は毎回広告を表示する　マネタイズ対応
-            let results = DataBaseManagerJournalEntry.shared.getJournalEntryCount()
-            if results.count <= 10 {
-                // 仕訳10件以下　広告を表示しない
-                iValue = 1
-            } else if results.count <= 50 {
-                // 乱数　1から6までのIntを生成
-                iValue = Int.random(in: 1 ... 6)
-            }
-            if iValue % 2 == 0 {
-                if interstitial != nil {
-                    interstitial?.present(fromRootViewController: self)
-                } else {
-                    print("Ad wasn't ready")
-                    // セットアップ AdMob
-                    setupAdMob()
-                }
+            do {
+                // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+                rewardedAd = try await GADRewardedAd.load(
+                    withAdUnitID: Constant.ADMOB_ID_REWARD, request: GADRequest()
+                )
+                rewardedAd?.fullScreenContentDelegate = self
+            } catch {
+                print("Rewarded ad failed to load with error: \(error.localizedDescription)")
             }
         }
+    }
+    
+    // リワード　報酬を獲得
+    fileprivate func earnCoins(_ coins: NSInteger) {
+        UserData.rewardAdCoinCount += coins
+        
+        updateCoinCountLabel()
     }
     
     // MARK: UIButton
@@ -1200,10 +1217,10 @@ extension JournalEntryViewController: GADFullScreenContentDelegate {
     /// Tells the delegate that the ad dismissed full screen content.
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         print("Ad did dismiss full screen content.")
-        // セットアップ AdMob
-        setupAdMob()
-        // 広告を閉じた
-        presenter.adDidDismissFullScreenContent()
+        Task {
+            // セットアップ AdMob
+            await setupAdMob()
+        }
     }
 }
 
@@ -1231,7 +1248,7 @@ extension JournalEntryViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CarouselTableViewCell.self), for: indexPath) as? CarouselTableViewCell else { return UITableViewCell() }
-
+        
         cell.collectionView.delegate = self
         cell.collectionView.dataSource = self
         if indexPath.row == groupObjects.count {
@@ -1310,7 +1327,7 @@ extension JournalEntryViewController: UICollectionViewDataSource {
             group: collectionView.tag // グループ　その他 collectionView.tag == 0
         )
         cell.nicknameLabel.text = objects[indexPath.row].nickname
-
+        
         return cell
     }
 }
@@ -1701,8 +1718,12 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             isMaskedDatePicker = false
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
         }
-        // セットアップ AdMob
-        setupAdMob()
+        Task {
+            // セットアップ AdMob
+            await setupAdMob()
+        }
+        
+        updateCoinCountLabel()
     }
     
     // MARK: - チュートリアル対応 ウォークスルー型
@@ -1816,6 +1837,28 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         self.present(alert, animated: true, completion: nil)
         
     }
+    
+    // ダイアログ　リワード広告　仕訳を入力する（広告動画を見る）/　広告を非表示（アップグレード）
+    func showDialogForRewardAd() {
+        // ポップアップを表示させる
+        if let viewController = UIStoryboard(
+            name: "PopUpDialogViewController",
+            bundle: nil
+        ).instantiateViewController(
+            withIdentifier: "PopUpDialogViewController"
+        ) as? PopUpDialogViewController {
+            viewController.modalPresentationStyle = .overCurrentContext
+            viewController.modalTransitionStyle = .crossDissolve
+            // tabBarControllerのViewを使う
+            guard let tabBarController = self.tabBarController else {
+                // 遷移元画面が、仕訳入力後に、モーダル表示している場合
+                self.present(viewController, animated: true, completion: nil)
+                return
+            }
+            tabBarController.present(viewController, animated: true, completion: nil)
+        }
+    }
+    
     // 画面を閉じる　仕訳帳へ編集した仕訳データを渡す
     func closeScreen(journalEntryData: JournalEntryData) {
         if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
@@ -1832,18 +1875,14 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
     }
     // アップグレード画面を表示
     func showUpgradeScreen() {
-        // 乱数　1から6までのIntを生成
-        let iValue = Int.random(in: 1 ... 6)
-        if iValue % 2 == 0 {
-            DispatchQueue.main.async {
-                if let viewController = UIStoryboard(
-                    name: "SettingsUpgradeViewController",
-                    bundle: nil
-                ).instantiateViewController(withIdentifier: "SettingsUpgradeViewController") as? SettingsUpgradeViewController {
-                    // ナビゲーションバーを表示させる
-                    let navigation = UINavigationController(rootViewController: viewController)
-                    self.present(navigation, animated: true, completion: nil)
-                }
+        DispatchQueue.main.async {
+            if let viewController = UIStoryboard(
+                name: "SettingsUpgradeViewController",
+                bundle: nil
+            ).instantiateViewController(withIdentifier: "SettingsUpgradeViewController") as? SettingsUpgradeViewController {
+                // ナビゲーションバーを表示させる
+                let navigation = UINavigationController(rootViewController: viewController)
+                self.present(navigation, animated: true, completion: nil)
             }
         }
     }
@@ -1859,11 +1898,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
         self.present(alert, animated: true) { () -> Void in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.dismiss(animated: true, completion: { [self] () -> Void in
-                    DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 0 ... 1.5)) {
-                        self.showAd()
-                    }
-                })
+                self.dismiss(animated: true)
             }
         }
     }
@@ -1893,9 +1928,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             let alert = UIAlertController(title: "決算整理仕訳", message: "記帳しました", preferredStyle: .alert)
             self.present(alert, animated: true) { () -> Void in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.dismiss(animated: true, completion: { [self] () -> Void in
-                        self.showAd()
-                    })
+                    self.dismiss(animated: true)
                 }
             }
             // イベントログ

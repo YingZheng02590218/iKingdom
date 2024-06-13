@@ -27,8 +27,8 @@ protocol JournalEntryPresenterInput {
     func okButtonTappedDialogForFinal(journalEntryData: JournalEntryData)
     // OKボタン ダイアログ　オフライン
     func okButtonTappedDialogForOfline()
-    // 広告を閉じた
-    func adDidDismissFullScreenContent()
+    // アップグレード画面を表示
+    func showUpgradeScreen()
 }
 
 protocol JournalEntryPresenterOutput: AnyObject {
@@ -72,6 +72,8 @@ protocol JournalEntryPresenterOutput: AnyObject {
     func goBackToJournalsScreen(number: Int)
     // 仕訳帳画面へ戻る
     func goBackToJournalsScreenJournalEntry(number: Int)
+    // ダイアログ　リワード広告　仕訳を入力する（広告動画を見る）/　広告を非表示（アップグレード）
+    func showDialogForRewardAd()
 }
 
 final class JournalEntryPresenter: JournalEntryPresenterInput {
@@ -123,7 +125,21 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
     }
     // 入力ボタン
     func inputButtonTapped(journalEntryType: JournalEntryType) {
-        
+        // アップグレード機能　スタンダードプラン 未購入
+        if !UpgradeManager.shared.inAppPurchaseFlag {
+            // 仕訳が50件以上入力済みの場合は毎回広告を表示する　マネタイズ対応
+            let results = DataBaseManagerJournalEntry.shared.getJournalEntryCount()
+            if results.count > 50 {
+                // リワード　報酬を消費
+                guard spendCoin() else {
+                    // ダイアログ　リワード広告　仕訳を入力する（広告動画を見る）/　広告を非表示（アップグレード）
+                    view.showDialogForRewardAd()
+                    return
+                }
+            }
+        }
+        // 仕訳 50件以下　広告を表示しない
+
         if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集 仕訳帳画面からの遷移の場合
             // 入力値を取得する
             let journalEntryData = view.buttonTappedForJournalEntriesPackageFixing()
@@ -211,18 +227,21 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
     }
     // OKボタン
     func okButtonTappedDialogForSameJournalEntry(journalEntryType: JournalEntryType, journalEntryData: JournalEntryData) {
-        // 仕訳
-        model.addJournalEntry(isForced: true, journalEntryData: journalEntryData) { number in
-            if journalEntryType == .JournalEntries { // 仕訳 仕訳帳画面からの遷移の場合
-                // 仕訳帳画面へ戻る
-                view.goBackToJournalsScreenJournalEntry(number: number)
-            } else if journalEntryType == .JournalEntry { // 仕訳 タブバーの仕訳タブからの遷移の場合
-                // ダイアログ 記帳しました
-                view.showDialogForSucceed()
+        // リワード　報酬を消費
+        if self.spendCoin() {
+            // 仕訳
+            model.addJournalEntry(isForced: true, journalEntryData: journalEntryData) { number in
+                if journalEntryType == .JournalEntries { // 仕訳 仕訳帳画面からの遷移の場合
+                    // 仕訳帳画面へ戻る
+                    view.goBackToJournalsScreenJournalEntry(number: number)
+                } else if journalEntryType == .JournalEntry { // 仕訳 タブバーの仕訳タブからの遷移の場合
+                    // ダイアログ 記帳しました
+                    view.showDialogForSucceed()
+                }
+            } errorHandler: { _ in
+                // ダイアログ　日付と借方勘定科目、貸方勘定科目、金額が同一
+                view.showDialogForSameJournalEntry(journalEntryType: journalEntryType, journalEntryData: journalEntryData)
             }
-        } errorHandler: { _ in
-            // ダイアログ　日付と借方勘定科目、貸方勘定科目、金額が同一
-            view.showDialogForSameJournalEntry(journalEntryType: journalEntryType, journalEntryData: journalEntryData)
         }
     }
     // OKボタン
@@ -235,9 +254,18 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
         // アップグレード画面を表示
         view.showUpgradeScreen()
     }
-    // 広告を閉じた
-    func adDidDismissFullScreenContent() {
+    // アップグレード画面を表示
+    func showUpgradeScreen() {
         // アップグレード画面を表示
         view.showUpgradeScreen()
+    }
+    
+    // リワード　報酬を消費
+    func spendCoin() -> Bool {
+        if UserData.rewardAdCoinCount >= 1 {
+            UserData.rewardAdCoinCount -= 1
+            return true
+        }
+        return false
     }
 }
