@@ -459,9 +459,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.centerLabel.text = "アップグレード"
                 cell.centerLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
                 cell.centerLabel.textColor = .mainColor2
-                cell.leftImageView.image = UIImage(named: "military_tech-military_tech_symbol")?.withRenderingMode(.alwaysTemplate)
+                cell.leftImageView.image = UIImage(named: "baseline_workspace_premium_black_36pt")?.withRenderingMode(.alwaysTemplate)
                 // アイコン画像の色を指定する
-                cell.leftImageView.tintColor = .mainColor2
+                cell.leftImageView.tintColor = .baseColor
                 // 背景色
                 cell.backgroundColor = .accentColor
                 // セルの選択を可にする
