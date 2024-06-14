@@ -554,7 +554,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 }
                 let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                 // 生体認証パスコードロック　設定スイッチ
-                switchView.onTintColor = .accentColor
+                switchView.onTintColor = .accentBlue
                 switchView.isOn = UserDefaults.standard.bool(forKey: "biometrics_switch")
                 switchView.tag = indexPath.row
                 switchView.addTarget(self, action: #selector(switchTriggered), for: .valueChanged)
@@ -574,7 +574,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 }
                 let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                 // ローカル通知　設定スイッチ
-                switchView.onTintColor = .accentColor
+                switchView.onTintColor = .accentBlue
                 switchView.isOn = UserDefaults.standard.bool(forKey: "local_notification_switch")
                 switchView.tag = indexPath.row
                 switchView.addTarget(self, action: #selector(localNotificationSettingSwitchTriggered), for: .valueChanged)
