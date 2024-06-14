@@ -30,7 +30,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="400" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="dYw-Kd-2M0" userLabel="company_name">
-                                                                <rect key="frame" x="0.0" y="30" width="400" height="30"/>
+                                                                <rect key="frame" x="0.0" y="35" width="400" height="30"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
@@ -46,7 +46,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="jEQ-Jo-c7p" userLabel="closingDate">
-                                                                <rect key="frame" x="0.0" y="30" width="400" height="30"/>
+                                                                <rect key="frame" x="0.0" y="35" width="400" height="30"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
@@ -59,8 +59,8 @@
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="cjW-Xb-r53" secondAttribute="trailing" id="0ue-qP-dhj"/>
                                                             <constraint firstItem="cjW-Xb-r53" firstAttribute="leading" secondItem="Xhg-ex-R0s" secondAttribute="leading" id="7Rf-xF-IhB"/>
-                                                            <constraint firstAttribute="bottom" secondItem="dYw-Kd-2M0" secondAttribute="bottom" id="B9B-WX-yY6"/>
-                                                            <constraint firstAttribute="bottom" secondItem="jEQ-Jo-c7p" secondAttribute="bottom" id="BtO-hT-f7k"/>
+                                                            <constraint firstAttribute="bottom" secondItem="dYw-Kd-2M0" secondAttribute="bottom" constant="-5" id="B9B-WX-yY6"/>
+                                                            <constraint firstAttribute="bottom" secondItem="jEQ-Jo-c7p" secondAttribute="bottom" constant="-5" id="BtO-hT-f7k"/>
                                                             <constraint firstItem="jEQ-Jo-c7p" firstAttribute="leading" secondItem="Xhg-ex-R0s" secondAttribute="leading" id="Jml-H1-F1m"/>
                                                             <constraint firstAttribute="trailing" secondItem="dYw-Kd-2M0" secondAttribute="trailing" id="Z19-9p-vD4"/>
                                                             <constraint firstAttribute="trailing" secondItem="jEQ-Jo-c7p" secondAttribute="trailing" id="adj-ca-MIa"/>
