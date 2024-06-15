@@ -7,7 +7,6 @@
 //
 
 import EMTNeumorphicView
-import Firebase // イベントログ対応
 import GoogleMobileAds // マネタイズ対応
 import UIKit
 
@@ -783,17 +782,41 @@ class JournalEntryViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             sender.isSelected = !sender.isSelected
         }
-        
-        if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集 仕訳帳画面からの遷移の場合
+        // バリデーションチェック
+        if journalEntryType == .JournalEntriesPackageFixing {
             // バリデーションチェック ひとつでも変更されているか、小書き
-            if textInputCheckForJournalEntriesPackageFixing() {
-                presenter.inputButtonTapped(journalEntryType: journalEntryType)
+            guard textInputCheckForJournalEntriesPackageFixing() else {
+                return
             }
-        } else { // 一括編集以外
+        } else {
             // バリデーションチェック　全て入力されているか
-            if textInputCheck() {
-                presenter.inputButtonTapped(journalEntryType: journalEntryType)
+            guard textInputCheck() else {
+                return
             }
+        }
+        
+        switch journalEntryType {
+            
+        case .JournalEntry, .AdjustingAndClosingEntry, .JournalEntries, .AdjustingAndClosingEntries:
+            // ユーザーが入力した仕訳の内容を取得する
+            if let journalEntryData = getInputJournalEntryData() {
+                presenter.inputButtonTapped(isForced: false, journalEntryType: journalEntryType, journalEntryData: journalEntryData, primaryKey: nil)
+            }
+            return
+        case .JournalEntriesFixing, .AdjustingEntriesFixing:
+            // ユーザーが入力した仕訳の内容を取得する
+            if let journalEntryData = getInputJournalEntryData() {
+                presenter.inputButtonTapped(isForced: false, journalEntryType: journalEntryType, journalEntryData: journalEntryData, primaryKey: primaryKey)
+            }
+            return
+        case .JournalEntriesPackageFixing:
+            // 仕訳一括編集 仕訳帳画面からの遷移の場合
+            let journalEntryData = buttonTappedForJournalEntriesPackageFixing()
+            presenter.inputButtonTapped(isForced: false, journalEntryType: journalEntryType, journalEntryData: journalEntryData, primaryKey: nil)
+            return
+        case .SettingsJournalEntries, .SettingsJournalEntriesFixing:
+            // 継承したクラスで処理を行う
+            break
         }
     }
     
@@ -854,64 +877,6 @@ class JournalEntryViewController: UIViewController {
         )
         
         return dBJournalEntry
-    }
-    
-    // 決算整理仕訳　の処理
-    func buttonTappedForAdjustingAndClosingEntries() -> JournalEntryData? {
-        // データベース　仕訳データを追加
-        // ユーザーが入力した仕訳の内容を取得する
-        if let journalEntryData = getInputJournalEntryData() {
-            
-            return journalEntryData
-        }
-        
-        return nil
-    }
-    
-    // 仕訳編集/決算整理仕訳編集　の処理
-    func buttonTappedForJournalEntriesFixing() -> (JournalEntryData?, Int) {
-        // データベース　仕訳データを追加
-        // ユーザーが入力した仕訳の内容を取得する
-        if let journalEntryData = getInputJournalEntryData() {
-            
-            return (journalEntryData, primaryKey)
-        }
-        
-        return (nil, primaryKey)
-    }
-    
-    // 仕訳　の処理
-    func buttonTappedForJournalEntries() -> JournalEntryData? {
-        // データベース　仕訳データを追加
-        // ユーザーが入力した仕訳の内容を取得する
-        if let journalEntryData = getInputJournalEntryData() {
-            // イベントログ
-            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                AnalyticsParameterContentType: Constant.JOURNALS,
-                AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
-            ])
-            
-            return journalEntryData
-        }
-        
-        return nil
-    }
-    
-    // タブバーの仕訳タブからの遷移の場合
-    func buttonTappedForJournalEntriesOnTabBar() -> JournalEntryData? {
-        // データベース　仕訳データを追加
-        // ユーザーが入力した仕訳の内容を取得する
-        if let journalEntryData = getInputJournalEntryData() {
-            // イベントログ
-            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                AnalyticsParameterContentType: Constant.JOURNALENTRY,
-                AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
-            ])
-            
-            return journalEntryData
-        }
-        
-        return nil
     }
     
     // ユーザーが入力した仕訳の内容を取得する
@@ -1773,6 +1738,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             present(viewController, animated: true, completion: nil)
         }
     }
+    
     // ダイアログ　オフライン
     func showDialogForOfline() {
         // フィードバック
@@ -1780,7 +1746,11 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             generator.notificationOccurred(.error)
         }
         // ネットワークなし
-        let alertController = UIAlertController(title: "インターネット未接続", message: "オフラインでは利用できません。\n\nスタンダードプランに\nアップグレードしていただくと、\nオフラインでも利用可能となります。", preferredStyle: .alert)
+        let alertController = UIAlertController(
+            title: "インターネット未接続",
+            message: "オフラインでは利用できません。\n\nスタンダードプランに\nアップグレードしていただくと、\nオフラインでも利用可能となります。",
+            preferredStyle: .alert
+        )
         
         // 選択肢の作成と追加
         // titleに選択肢のテキストを、styleに.defaultを
@@ -1806,16 +1776,27 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             message: "日付と借方勘定科目、貸方勘定科目、金額が同じ内容の仕訳がすでに存在します。そのまま仕訳を入力しますか？",
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { _ in
-            print("OK アクションをタップした時の処理")
-            
-            self.presenter.okButtonTappedDialogForSameJournalEntry(journalEntryType: journalEntryType, journalEntryData: journalEntryData)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-            print("Cancel アクションをタップした時の処理")
-        }))
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .destructive,
+                handler: { _ in
+                    print("OK アクションをタップした時の処理")
+
+                    self.presenter.inputButtonTapped(isForced: true, journalEntryType: journalEntryType, journalEntryData: journalEntryData, primaryKey: nil)
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: "Cancel",
+                style: .cancel,
+                handler: { _ in
+                    print("Cancel アクションをタップした時の処理")
+                }
+            )
+        )
         self.present(alert, animated: true, completion: nil)
-        
     }
     
     // ダイアログ　ほんとうに変更しますか？
@@ -1826,16 +1807,27 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             message: "ほんとうに変更しますか？\n日付: \(journalEntryData.date ?? "")\n借方勘定: \(journalEntryData.debit_category ?? "")\n貸方勘定: \(journalEntryData.credit_category ?? "")\n金額: \(journalEntryData.credit_amount?.description ?? "")\n小書き: \(journalEntryData.smallWritting ?? "")",
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { _ in
-            print("OK アクションをタップした時の処理")
-            
-            self.presenter.okButtonTappedDialogForFinal(journalEntryData: journalEntryData)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-            print("Cancel アクションをタップした時の処理")
-        }))
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .destructive,
+                handler: { _ in
+                    print("OK アクションをタップした時の処理")
+                    
+                    self.presenter.inputButtonTapped(isForced: true, journalEntryType: self.journalEntryType, journalEntryData: journalEntryData, primaryKey: nil)
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: "Cancel",
+                style: .cancel,
+                handler: { _ in
+                    print("Cancel アクションをタップした時の処理")
+                }
+            )
+        )
         self.present(alert, animated: true, completion: nil)
-        
     }
     
     // ダイアログ　リワード広告　仕訳を入力する（広告動画を見る）/　広告を非表示（アップグレード）
@@ -1873,6 +1865,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             })
         }
     }
+    
     // アップグレード画面を表示
     func showUpgradeScreen() {
         DispatchQueue.main.async {
@@ -1913,11 +1906,6 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
                 presentingViewController.reloadData()
             })
-            // イベントログ
-            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                AnalyticsParameterContentType: Constant.WORKSHEET,
-                AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
-            ])
         }
         // タブバーの仕訳タブから入力の場合
         else {
@@ -1931,13 +1919,9 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                     self.dismiss(animated: true)
                 }
             }
-            // イベントログ
-            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                AnalyticsParameterContentType: Constant.JOURNALENTRY,
-                AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
-            ])
         }
     }
+    
     // 勘定画面・仕訳帳画面へ戻る
     func goBackToJournalsScreen(number: Int) {
         // 勘定画面へ戻る
