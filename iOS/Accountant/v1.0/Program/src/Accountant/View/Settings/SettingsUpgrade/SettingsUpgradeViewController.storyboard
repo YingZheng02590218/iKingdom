@@ -308,10 +308,9 @@
                                                         <rect key="frame" x="0.0" y="862" width="394" height="0.0"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLp-G7-a0z">
-                                                                <rect key="frame" x="142" y="0.0" width="110" height="0.0"/>
+                                                                <rect key="frame" x="10" y="0.0" width="80" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                 <color key="tintColor" name="AccentColor"/>
-                                                                <inset key="contentEdgeInsets" minX="15" minY="5" maxX="15" maxY="5"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                                 <state key="normal" title="利用規約">
                                                                     <color key="titleColor" name="AccentColor"/>
@@ -329,23 +328,10 @@
                                                                     <action selector="termsButtonTapped:" destination="qJT-bY-pn8" eventType="touchUpInside" id="V45-6b-AK3"/>
                                                                 </connections>
                                                             </button>
-                                                        </subviews>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstItem="gLp-G7-a0z" firstAttribute="centerY" secondItem="bfM-Jz-gBx" secondAttribute="centerY" id="ISs-eU-4fe"/>
-                                                            <constraint firstItem="gLp-G7-a0z" firstAttribute="height" secondItem="bfM-Jz-gBx" secondAttribute="height" id="J8E-jw-JUb"/>
-                                                            <constraint firstAttribute="height" constant="50" id="KqH-OK-Huv"/>
-                                                            <constraint firstItem="gLp-G7-a0z" firstAttribute="centerX" secondItem="bfM-Jz-gBx" secondAttribute="centerX" id="LMp-U8-IYU"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sit-5H-0p3">
-                                                        <rect key="frame" x="0.0" y="862" width="394" height="0.0"/>
-                                                        <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="INg-SQ-hQP">
-                                                                <rect key="frame" x="93.5" y="0.0" width="207.5" height="0.0"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="INg-SQ-hQP">
+                                                                <rect key="frame" x="93" y="0.0" width="207.5" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                 <color key="tintColor" name="AccentColor"/>
-                                                                <inset key="contentEdgeInsets" minX="15" minY="5" maxX="15" maxY="5"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                                 <state key="normal" title="プライバシーポリシー ">
                                                                     <color key="titleColor" name="AccentColor"/>
@@ -366,9 +352,19 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="INg-SQ-hQP" firstAttribute="centerY" secondItem="Sit-5H-0p3" secondAttribute="centerY" id="3t2-Wt-HbM"/>
-                                                            <constraint firstItem="INg-SQ-hQP" firstAttribute="height" secondItem="Sit-5H-0p3" secondAttribute="height" id="fAU-lm-JaV"/>
-                                                            <constraint firstItem="INg-SQ-hQP" firstAttribute="centerX" secondItem="Sit-5H-0p3" secondAttribute="centerX" id="gEF-T7-Pxf"/>
+                                                            <constraint firstItem="gLp-G7-a0z" firstAttribute="leading" secondItem="bfM-Jz-gBx" secondAttribute="leading" constant="10" id="BhV-Gx-q6l"/>
+                                                            <constraint firstItem="INg-SQ-hQP" firstAttribute="centerY" secondItem="bfM-Jz-gBx" secondAttribute="centerY" id="CO6-Ah-eqV"/>
+                                                            <constraint firstItem="gLp-G7-a0z" firstAttribute="centerY" secondItem="bfM-Jz-gBx" secondAttribute="centerY" id="ISs-eU-4fe"/>
+                                                            <constraint firstItem="gLp-G7-a0z" firstAttribute="height" secondItem="bfM-Jz-gBx" secondAttribute="height" id="J8E-jw-JUb"/>
+                                                            <constraint firstItem="INg-SQ-hQP" firstAttribute="height" secondItem="bfM-Jz-gBx" secondAttribute="height" id="KQs-PK-5fz"/>
+                                                            <constraint firstAttribute="height" constant="50" id="KqH-OK-Huv"/>
+                                                            <constraint firstItem="INg-SQ-hQP" firstAttribute="leading" secondItem="gLp-G7-a0z" secondAttribute="trailing" constant="10" id="eI9-gE-LMV"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sit-5H-0p3">
+                                                        <rect key="frame" x="0.0" y="862" width="394" height="0.0"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="uF1-4J-kcR"/>
                                                         </constraints>
                                                     </view>
