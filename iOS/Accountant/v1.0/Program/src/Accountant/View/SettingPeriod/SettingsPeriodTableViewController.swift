@@ -346,6 +346,8 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
                 // リロード
                 self.tableView.reloadData() // 年度を選択時に会計期間画面を更新する
             }
+            // 月次推移表を更新する　true: リロードする
+            Constant.needToReload = true
         }
     }
     // ダイアログ
