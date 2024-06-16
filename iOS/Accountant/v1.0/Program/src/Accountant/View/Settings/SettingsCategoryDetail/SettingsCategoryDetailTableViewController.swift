@@ -11,12 +11,20 @@ import GoogleMobileAds // マネタイズ対応
 import UIKit
 
 // 勘定科目詳細クラス
-class SettingsCategoryDetailTableViewController: UITableViewController {
-    
-    // 入力ボタン
-    @IBOutlet private var inputButton: EMTNeumorphicButton! // 入力ボタン
+class SettingsCategoryDetailTableViewController: UIViewController {
     
     var gADBannerView: GADBannerView!
+    
+    @IBOutlet var backgroundView: UIView!
+    @IBOutlet var tableView: UITableView!
+    // 入力ボタン
+    @IBOutlet private var inputButton: EMTNeumorphicButton! // 入力ボタン
+    /// モーダル上部に設置されるインジケータ
+    private lazy var indicatorView: SemiModalIndicatorView = {
+        let indicator = SemiModalIndicatorView()
+        indicator.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(indicatorDidTap(_:))))
+        return indicator
+    }()
     
     // MARK: - var let
     
@@ -70,13 +78,18 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
         // editButtonItem.tintColor = .accentColor
         // navigationItem.rightBarButtonItem = editButtonItem
         
+        // largeTitle表示
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .accentColor
+        
         tableView.separatorColor = .accentColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // TODO: 表示科目を変更後に勘定科目詳細画面を更新する
-        tableView.reloadData()
+        //        // TODO: 表示科目を変更後に勘定科目詳細画面を更新する
+        //        tableView.reloadData()
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
@@ -121,15 +134,16 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
         createButtons()
         setupInputButton()
     }
-    
-    // MARK: - Table view data source
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
+}
+
+// MARK: - Table view data source
+extension SettingsCategoryDetailTableViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 3
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             // 大区分
@@ -156,7 +170,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
         }
     }
     // セクションヘッダーのテキスト決める
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
             if addAccount { // 勘定科目追加の場合
@@ -183,7 +197,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
         }
     }
     // セクションフッターのテキスト決める
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 2:
             // 編集モードの場合
@@ -198,7 +212,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
             if addAccount { // 勘定科目追加の場合
@@ -225,7 +239,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? SettingAccountDetailTableViewCell else {
             return UITableViewCell()
         }
@@ -440,19 +454,19 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
     }
     
     // 編集機能
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         .none
     }
     // インデント
-    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         false
     }
     
     // セルが選択された時に呼び出される　// すべての影響範囲に修正が必要
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
     
-    override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+    func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
@@ -478,6 +492,22 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
         inputButton.neumorphicLayer?.edged = Constant.edged
         inputButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         inputButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+        
+        // タイプ判定
+        if addAccount {
+            if let backgroundView = backgroundView {
+                // 中央上部に配置する
+                indicatorView.frame = CGRect(x: 0, y: 0, width: 40, height: 5)
+                backgroundView.addSubview(indicatorView)
+                indicatorView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    indicatorView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+                    indicatorView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5),
+                    indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
+                    indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
+                ])
+            }
+        }
     }
     
     func setupInputButton() {
@@ -693,6 +723,12 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
         }
         
         return true // OK
+    }
+    
+    // インジケータ タップ
+    @objc
+    private func indicatorDidTap(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: navigation
