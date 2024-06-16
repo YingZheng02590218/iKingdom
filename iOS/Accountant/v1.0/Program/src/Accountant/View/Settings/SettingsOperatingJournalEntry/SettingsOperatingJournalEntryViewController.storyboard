@@ -27,7 +27,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="長押しすると編集ができます。" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lJj-Ho-CQv">
-                                <rect key="frame" x="0.0" y="842" width="414" height="20"/>
+                                <rect key="frame" x="10" y="832" width="228.5" height="20"/>
                                 <color key="backgroundColor" name="BaseColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="nxz-Yz-kFf"/>
@@ -92,7 +92,7 @@
                         <viewLayoutGuide key="safeArea" id="KN3-ez-inu"/>
                         <color key="backgroundColor" name="BaseColor"/>
                         <constraints>
-                            <constraint firstItem="lJj-Ho-CQv" firstAttribute="leading" secondItem="KN3-ez-inu" secondAttribute="leading" id="136-Xv-VWG"/>
+                            <constraint firstItem="lJj-Ho-CQv" firstAttribute="leading" secondItem="HtZ-IJ-Vrf" secondAttribute="leading" constant="10" id="136-Xv-VWG"/>
                             <constraint firstItem="e4Q-98-al7" firstAttribute="trailing" secondItem="KN3-ez-inu" secondAttribute="trailing" constant="-27" id="4Xr-oX-aTD"/>
                             <constraint firstItem="KN3-ez-inu" firstAttribute="bottom" secondItem="q0Y-TI-3e1" secondAttribute="bottom" constant="27" id="Fwp-FQ-DKg"/>
                             <constraint firstItem="HtZ-IJ-Vrf" firstAttribute="leading" secondItem="KN3-ez-inu" secondAttribute="leading" id="XaI-XH-vyv"/>
@@ -100,9 +100,8 @@
                             <constraint firstItem="q0Y-TI-3e1" firstAttribute="centerX" secondItem="5Ua-Ra-N1O" secondAttribute="centerX" id="dSx-ZB-cHU"/>
                             <constraint firstItem="KN3-ez-inu" firstAttribute="trailing" secondItem="HtZ-IJ-Vrf" secondAttribute="trailing" id="ecW-6v-2g3"/>
                             <constraint firstItem="e4Q-98-al7" firstAttribute="bottom" secondItem="KN3-ez-inu" secondAttribute="bottom" constant="-27" id="pko-6K-gSw"/>
-                            <constraint firstItem="lJj-Ho-CQv" firstAttribute="bottom" secondItem="KN3-ez-inu" secondAttribute="bottom" id="pqK-Lh-aP0"/>
+                            <constraint firstItem="lJj-Ho-CQv" firstAttribute="bottom" secondItem="HtZ-IJ-Vrf" secondAttribute="bottom" constant="-10" id="pqK-Lh-aP0"/>
                             <constraint firstItem="HtZ-IJ-Vrf" firstAttribute="top" secondItem="KN3-ez-inu" secondAttribute="top" id="vWQ-HN-W06"/>
-                            <constraint firstItem="lJj-Ho-CQv" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KN3-ez-inu" secondAttribute="trailing" id="zxx-Uj-c5g"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dvD-GS-fFa">
