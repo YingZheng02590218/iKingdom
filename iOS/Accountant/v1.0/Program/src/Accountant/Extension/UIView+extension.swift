@@ -182,7 +182,7 @@ extension UIView {
             swipeLabel.backgroundColor = .systemRed
             swipeLabel.textColor = .white
             // セルに背景色をつける。削除ボタンを隠すため
-            cell.backgroundColor = UIColor.mainColor2
+            cell.backgroundColor = UIColor.paperColor
             // TableViewを取得
             if let superview = cell.superview {
                 superview.addSubview(swipeLabel)
