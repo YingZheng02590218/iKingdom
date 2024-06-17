@@ -12,10 +12,17 @@ import UIKit
 // グループ詳細
 class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
     
+    @IBOutlet var backgroundView: UIView!
     @IBOutlet var textField: UITextField!
     @IBOutlet var textFieldCounterLabel: UILabel!
     @IBOutlet var inputButton: EMTNeumorphicButton!
     @IBOutlet var textFieldView: EMTNeumorphicView!
+    /// モーダル上部に設置されるインジケータ
+    private lazy var indicatorView: SemiModalIndicatorView = {
+        let indicator = SemiModalIndicatorView()
+        indicator.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(indicatorDidTap(_:))))
+        return indicator
+    }()
     // エラーメッセージ
     var errorMessage: String?
     // 編集　グループ一覧画面で選択されたセルの位置
@@ -145,6 +152,25 @@ class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
         inputButton.neumorphicLayer?.edged = Constant.edged
         inputButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         inputButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+        
+        // タイプ判定
+        if let tappedIndexPath = tappedIndexPath {
+            // 更新
+        } else {
+            // 登録
+            if let backgroundView = backgroundView {
+                // 中央上部に配置する
+                indicatorView.frame = CGRect(x: 0, y: 0, width: 40, height: 5)
+                backgroundView.addSubview(indicatorView)
+                indicatorView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    indicatorView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+                    indicatorView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5),
+                    indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
+                    indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
+                ])
+            }
+        }
     }
     
     // MARK: キーボード
@@ -281,6 +307,12 @@ class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
                 completion()
             }
         }
+    }
+    
+    // インジケータ タップ
+    @objc
+    private func indicatorDidTap(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

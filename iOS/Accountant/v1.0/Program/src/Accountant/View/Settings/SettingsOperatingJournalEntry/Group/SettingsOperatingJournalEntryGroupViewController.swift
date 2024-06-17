@@ -14,7 +14,7 @@ class SettingsOperatingJournalEntryGroupViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     // 編集機能
     var tappedIndexPath: IndexPath?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,7 +24,7 @@ class SettingsOperatingJournalEntryGroupViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .accentColor
-
+        
         setTableView()
         setLongPressRecognizer()
     }
@@ -55,7 +55,7 @@ class SettingsOperatingJournalEntryGroupViewController: UIViewController {
         // tableViewにrecognizerを設定
         tableView.addGestureRecognizer(longPressRecognizer)
     }
-
+    
     // 削除機能 アラートのポップアップを表示
     private func showPopover(indexPath: IndexPath) {
         let alert = UIAlertController(title: "削除", message: "グループ名を削除しますか？", preferredStyle: .alert)
@@ -96,48 +96,45 @@ class SettingsOperatingJournalEntryGroupViewController: UIViewController {
         }
         completion() //　ここでコールバックする（呼び出し元に処理を戻す）
     }
-            
+    
+    @IBAction func addBarButtonItemTapped(_ sender: Any) {
+        DispatchQueue.main.async {
+            if let viewController = UIStoryboard(
+                name: String(describing: SettingsOperatingJournalEntryGroupDetailViewController.self),
+                bundle: nil
+            ).instantiateInitialViewController() as? SettingsOperatingJournalEntryGroupDetailViewController {
+                // ナビゲーションバーを表示させる
+                let navigation = UINavigationController(rootViewController: viewController)
+                self.present(navigation, animated: true, completion: nil)
+            }
+        }
+    }
+    
     // MARK: - Navigation
     
     func setupCellLongPressed(indexPath: IndexPath) {
         // 別の画面に遷移
         performSegue(withIdentifier: "longTapped", sender: nil)
     }
-
+    
     // 追加機能　画面遷移の準備の前に入力検証
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         // 画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
-        if identifier == "longTapped" { // segueがタップ
-            // 編集中ではない場合
-            if !tableView.isEditing { // ロングタップの場合はセルの位置情報を代入しているのでnilではない
-                if let _ = self.tappedIndexPath { // 代入に成功したら、ロングタップだと判断できる
-                    return true // true: 画面遷移させる
-                }
-            }
-        } else if identifier == "buttonTapped" { // segueがタップ
+        if let _ = self.tappedIndexPath { // 代入に成功したら、ロングタップだと判断できる
             return true // true: 画面遷移させる
         }
         return false // false:画面遷移させない
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // segue.destinationの型はUIViewController
-        print(segue.destination)
-        if let navigationController = segue.destination as? UINavigationController,
-           let controller = navigationController.topViewController as? SettingsOperatingJournalEntryGroupDetailViewController {
+        if let controller = segue.destination as? SettingsOperatingJournalEntryGroupDetailViewController {
             // 遷移先のコントローラに値を渡す
-            if segue.identifier == "longTapped" {
-                // 編集中ではない場合
-                if !tableView.isEditing {
-                    if let tappedIndexPath = tappedIndexPath { // nil:ロングタップではない
-                        controller.tappedIndexPath = tappedIndexPath // アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
-                        self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする
-                    }
-                }
+            if let tappedIndexPath = tappedIndexPath { // nil:ロングタップではない
+                controller.tappedIndexPath = tappedIndexPath // アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
+                self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする
             }
         }
     }
-
 }
 
 extension SettingsOperatingJournalEntryGroupViewController: UIGestureRecognizerDelegate {
@@ -167,7 +164,7 @@ extension SettingsOperatingJournalEntryGroupViewController: UIGestureRecognizerD
             }
         }
     }
-
+    
 }
 
 extension SettingsOperatingJournalEntryGroupViewController: UITableViewDelegate {
