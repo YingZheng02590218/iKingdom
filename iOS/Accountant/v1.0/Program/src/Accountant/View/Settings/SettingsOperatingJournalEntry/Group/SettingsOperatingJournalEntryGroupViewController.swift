@@ -32,7 +32,6 @@ class SettingsOperatingJournalEntryGroupViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        tableView.reloadData()
     }
     
     // MARK: - Setting
@@ -96,13 +95,15 @@ class SettingsOperatingJournalEntryGroupViewController: UIViewController {
         }
         completion() //　ここでコールバックする（呼び出し元に処理を戻す）
     }
-    
+        
     @IBAction func addBarButtonItemTapped(_ sender: Any) {
         DispatchQueue.main.async {
             if let viewController = UIStoryboard(
                 name: String(describing: SettingsOperatingJournalEntryGroupDetailViewController.self),
                 bundle: nil
             ).instantiateInitialViewController() as? SettingsOperatingJournalEntryGroupDetailViewController {
+                // delegateを委任
+                viewController.presentationController?.delegate = self
                 // ナビゲーションバーを表示させる
                 let navigation = UINavigationController(rootViewController: viewController)
                 self.present(navigation, animated: true, completion: nil)
@@ -224,5 +225,13 @@ extension SettingsOperatingJournalEntryGroupViewController: UITableViewDataSourc
             configuration.performsFirstActionWithFullSwipe = false
             return configuration
         }
+    }
+}
+
+extension SettingsOperatingJournalEntryGroupViewController: UIAdaptivePresentationControllerDelegate {
+    
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        
+        tableView.reloadData()
     }
 }

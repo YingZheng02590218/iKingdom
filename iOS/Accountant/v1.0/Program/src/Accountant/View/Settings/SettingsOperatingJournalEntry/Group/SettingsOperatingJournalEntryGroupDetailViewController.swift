@@ -84,6 +84,15 @@ class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
             textField.text = objects[tappedIndexPath.row].groupName
         }
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // dismiss前にpresentationControllerDidDismiss(_:)を呼び出す
+        if let presentationController = presentationController {
+            presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
+        }
+    }
     // ダークモード　切り替え時に色が更新されない場合の対策
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
