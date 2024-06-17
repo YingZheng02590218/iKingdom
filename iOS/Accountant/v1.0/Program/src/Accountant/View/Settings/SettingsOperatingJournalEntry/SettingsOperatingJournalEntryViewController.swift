@@ -18,6 +18,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
     // 仕訳画面表示ボタン
     @IBOutlet private var addButton: UIButton!
     
+    @IBOutlet var label: UILabel!
     // 仕訳編集　編集の対象となる仕訳の連番
     var primaryKey: Int?
     // まとめて編集機能　選択したよく使う仕訳の連番
@@ -81,6 +82,8 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
                 }
             }
         }
+        // フェードイン・アウトメソッド
+        label.animateViewFadeOut()
     }
     
     override func viewDidLayoutSubviews() {

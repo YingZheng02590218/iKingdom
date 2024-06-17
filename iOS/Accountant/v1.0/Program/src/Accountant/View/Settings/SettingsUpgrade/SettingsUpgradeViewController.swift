@@ -29,7 +29,8 @@ class SettingsUpgradeViewController: UIViewController {
     @IBOutlet private var contentView: UIView!
     @IBOutlet private var headerView: UIView!
     var posX: CGFloat = 0
-    
+    // 枠線
+    @IBOutlet var stackView: UIStackView!
     // サブスクリプション プラン名
     @IBOutlet var titleLabel: UILabel!
     // 広告なし
@@ -127,14 +128,14 @@ class SettingsUpgradeViewController: UIViewController {
     // ニューモフィズム　ボタンとビューのデザインを指定する
     private func createEMTNeumorphicView() {
         // 購入
-        button.setTitleColor(.accentColor, for: .normal)
+        button.setTitleColor(.baseColor, for: .normal)
         button.neumorphicLayer?.cornerRadius = 15
-        button.setTitleColor(.accentColor, for: .selected)
+        button.setTitleColor(.baseColor, for: .selected)
         button.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         button.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         button.neumorphicLayer?.edged = Constant.edged
         button.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        button.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+        button.neumorphicLayer?.elementBackgroundColor = UIColor.accentColor.cgColor
         // 復元
         restoreButton.setTitleColor(.accentColor, for: .normal)
         restoreButton.neumorphicLayer?.cornerRadius = 15
@@ -169,6 +170,8 @@ class SettingsUpgradeViewController: UIViewController {
                 ])
             }
         }
+        // 枠線のカラーを更新
+        stackView.layer.borderColor = UIColor.accentColor.cgColor
     }
     // ラベル
     func setupExplainLabel() {
@@ -194,7 +197,7 @@ class SettingsUpgradeViewController: UIViewController {
             self.button.imageView?.tintColor = .green
         } else {
             self.button.setImage(UIImage(systemName: "checkmark.seal", withConfiguration: UIImage.SymbolConfiguration(scale: .large))?.withRenderingMode(.alwaysTemplate), for: .normal)
-            self.button.imageView?.tintColor = .mainColor
+            self.button.imageView?.tintColor = .baseColor
         }
         // 購入
         buyLabel.text = language == "ja-JP" ? "今すぐ購入する" : "Purchase"

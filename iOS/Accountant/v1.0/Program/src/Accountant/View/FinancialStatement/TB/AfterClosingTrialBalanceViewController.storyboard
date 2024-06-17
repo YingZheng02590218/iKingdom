@@ -31,7 +31,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="400" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="Fc2-HD-pSV" userLabel="company_name">
-                                                                <rect key="frame" x="0.0" y="30" width="400" height="30"/>
+                                                                <rect key="frame" x="0.0" y="35" width="400" height="30"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
                                                                 <color key="textColor" name="PaperTextColor"/>
@@ -45,7 +45,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="5dR-qc-gzB" userLabel="closingDate">
-                                                                <rect key="frame" x="0.0" y="30" width="400" height="30"/>
+                                                                <rect key="frame" x="0.0" y="35" width="400" height="30"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
                                                                 <color key="textColor" name="PaperTextColor"/>
@@ -59,12 +59,12 @@
                                                             <constraint firstItem="5dR-qc-gzB" firstAttribute="leading" secondItem="wqe-TZ-AuG" secondAttribute="leading" id="EaI-bZ-0Js"/>
                                                             <constraint firstItem="aHQ-AM-Ixh" firstAttribute="top" secondItem="wqe-TZ-AuG" secondAttribute="top" id="EzB-aG-kYP"/>
                                                             <constraint firstItem="5dR-qc-gzB" firstAttribute="width" secondItem="wqe-TZ-AuG" secondAttribute="width" id="GRi-eW-aVt"/>
-                                                            <constraint firstAttribute="bottom" secondItem="Fc2-HD-pSV" secondAttribute="bottom" id="HQ8-PJ-uqr"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Fc2-HD-pSV" secondAttribute="bottom" constant="-5" id="HQ8-PJ-uqr"/>
                                                             <constraint firstItem="5dR-qc-gzB" firstAttribute="height" secondItem="wqe-TZ-AuG" secondAttribute="height" multiplier="0.5" id="I5r-pP-W4O"/>
                                                             <constraint firstItem="Fc2-HD-pSV" firstAttribute="width" secondItem="wqe-TZ-AuG" secondAttribute="width" id="LBC-Gy-lMq"/>
                                                             <constraint firstAttribute="bottom" secondItem="aHQ-AM-Ixh" secondAttribute="bottom" id="Nfa-bS-8lk"/>
                                                             <constraint firstItem="Fc2-HD-pSV" firstAttribute="height" secondItem="wqe-TZ-AuG" secondAttribute="height" multiplier="0.5" id="TRf-nm-sb7"/>
-                                                            <constraint firstAttribute="bottom" secondItem="5dR-qc-gzB" secondAttribute="bottom" id="TcZ-WT-1ZG"/>
+                                                            <constraint firstAttribute="bottom" secondItem="5dR-qc-gzB" secondAttribute="bottom" constant="-5" id="TcZ-WT-1ZG"/>
                                                             <constraint firstAttribute="trailing" secondItem="5dR-qc-gzB" secondAttribute="trailing" id="cc0-ot-57d"/>
                                                             <constraint firstItem="aHQ-AM-Ixh" firstAttribute="leading" secondItem="wqe-TZ-AuG" secondAttribute="leading" id="eX2-Ur-Zxl"/>
                                                             <constraint firstItem="Fc2-HD-pSV" firstAttribute="leading" secondItem="wqe-TZ-AuG" secondAttribute="leading" id="xzc-SF-r6b"/>

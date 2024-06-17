@@ -34,6 +34,18 @@ class SplashViewController: UIViewController {
         
         presenter.viewDidLoad()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // ロゴに影をつける
+        logoLabel.clipsToBounds = false
+        logoLabel.layer.shadowColor = UIColor.textShadowColor.cgColor // 影の色
+        logoLabel.layer.shadowOffset = CGSize(width: 1.0, height: 1.5) // 影の位置
+        logoLabel.layer.shadowOpacity = 1.0 // 影の透明度
+        logoLabel.layer.shadowRadius = 5.0 // 影の広がり
+    }
+    
     // ロゴをアニメーションさせる
     func showAnimation() {
         // 少し縮小するアニメーション

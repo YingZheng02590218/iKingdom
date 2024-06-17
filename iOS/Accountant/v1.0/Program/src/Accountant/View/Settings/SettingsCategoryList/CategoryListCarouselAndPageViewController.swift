@@ -40,13 +40,17 @@ class CategoryListCarouselAndPageViewController: CarouselAndPageViewController {
         }
     }
     // 画面遷移の準備　勘定科目画面
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // セグエで場合分け
-        if segue.identifier == "segue_add_account"{ // 新規で設定勘定科目を追加する場合　addButtonを押下
-            // segue.destinationの型はUIViewController
-            if let tableViewControllerSettingsCategoryDetail = segue.destination as? SettingsCategoryDetailTableViewController {
+    @IBAction func addBarButtonItemTapped(_ sender: Any) {
+        DispatchQueue.main.async {
+            if let viewController = UIStoryboard(
+                name: String(describing: SettingsCategoryDetailTableViewController.self),
+                bundle: nil
+            ).instantiateInitialViewController() as? SettingsCategoryDetailTableViewController {
                 // 遷移先のコントローラに値を渡す
-                tableViewControllerSettingsCategoryDetail.addAccount = true // セルに表示した勘定科目の連番を取得
+                viewController.addAccount = true // セルに表示した勘定科目の連番を取得
+                // ナビゲーションバーを表示させる
+                let navigation = UINavigationController(rootViewController: viewController)
+                self.present(navigation, animated: true, completion: nil)
             }
         }
     }

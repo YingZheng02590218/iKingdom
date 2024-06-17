@@ -358,6 +358,10 @@
 		F98289942974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289922974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift */; };
 		F98289B82978E0E800F8F1B8 /* AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289B72978E0E800F8F1B8 /* AppVersion.swift */; };
 		F98289B92978E0E800F8F1B8 /* AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289B72978E0E800F8F1B8 /* AppVersion.swift */; };
+		F98459CF2C1A91FB003D42A0 /* PopUpDialogViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F98459CD2C1A91FB003D42A0 /* PopUpDialogViewController.storyboard */; };
+		F98459D02C1A91FB003D42A0 /* PopUpDialogViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F98459CD2C1A91FB003D42A0 /* PopUpDialogViewController.storyboard */; };
+		F98459D12C1A91FB003D42A0 /* PopUpDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98459CE2C1A91FB003D42A0 /* PopUpDialogViewController.swift */; };
+		F98459D22C1A91FB003D42A0 /* PopUpDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98459CE2C1A91FB003D42A0 /* PopUpDialogViewController.swift */; };
 		F9860FB9285AB805008D0714 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9860FB8285AB805008D0714 /* Network.swift */; };
 		F9860FBA285AB805008D0714 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9860FB8285AB805008D0714 /* Network.swift */; };
 		F986CC192945BA9A005A2138 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F986CC162945BA9A005A2138 /* SplashViewController.swift */; };
@@ -452,6 +456,8 @@
 		F9B209F127A4377000F7EA8D /* BSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9B209EF27A4377000F7EA8D /* BSViewController.xib */; };
 		F9B209F427A4EF7C00F7EA8D /* BSTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209F227A4EF7C00F7EA8D /* BSTableViewCell.swift */; };
 		F9B209F527A4EF7C00F7EA8D /* BSTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9B209F327A4EF7C00F7EA8D /* BSTableViewCell.xib */; };
+		F9B63F712C19A0B300380695 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B63F702C19A0AB00380695 /* UserData.swift */; };
+		F9B63F722C19A0B300380695 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B63F702C19A0AB00380695 /* UserData.swift */; };
 		F9B78D33293628550051C027 /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B78D32293628550051C027 /* UIView+extension.swift */; };
 		F9B78D34293628550051C027 /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B78D32293628550051C027 /* UIView+extension.swift */; };
 		F9B95221283CE60200138D07 /* UITraitCollection+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */; };
@@ -1096,6 +1102,8 @@
 		F982898F2973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningBalanceTableViewCell.swift; sourceTree = "<group>"; };
 		F98289922974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseOpeningBalanceAccount.swift; sourceTree = "<group>"; };
 		F98289B72978E0E800F8F1B8 /* AppVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersion.swift; sourceTree = "<group>"; };
+		F98459CD2C1A91FB003D42A0 /* PopUpDialogViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PopUpDialogViewController.storyboard; sourceTree = "<group>"; };
+		F98459CE2C1A91FB003D42A0 /* PopUpDialogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpDialogViewController.swift; sourceTree = "<group>"; };
 		F9860FB8285AB805008D0714 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		F986CC162945BA9A005A2138 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F986CC1D29474392005A2138 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -1172,6 +1180,7 @@
 		F9B209EF27A4377000F7EA8D /* BSViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BSViewController.xib; sourceTree = "<group>"; };
 		F9B209F227A4EF7C00F7EA8D /* BSTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTableViewCell.swift; sourceTree = "<group>"; };
 		F9B209F327A4EF7C00F7EA8D /* BSTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BSTableViewCell.xib; sourceTree = "<group>"; };
+		F9B63F702C19A0AB00380695 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		F9B778E625A09D0000300B7A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F9B78D32293628550051C027 /* UIView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension.swift"; sourceTree = "<group>"; };
 		F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITraitCollection+extension.swift"; sourceTree = "<group>"; };
@@ -1718,6 +1727,7 @@
 			children = (
 				F94EDD92237AEB3A0074D812 /* AppDelegate.swift */,
 				F9AD64D92912961900B9F50B /* Constant.swift */,
+				F9B63F702C19A0AB00380695 /* UserData.swift */,
 				F9B209E6279D034500F7EA8D /* Model */,
 				F9B209EA279D0AF700F7EA8D /* View */,
 				F9B209EB279D38A900F7EA8D /* Presenter */,
@@ -1878,6 +1888,15 @@
 			path = PLAccount;
 			sourceTree = "<group>";
 		};
+		F98459D32C1A920B003D42A0 /* Dialog */ = {
+			isa = PBXGroup;
+			children = (
+				F98459CE2C1A91FB003D42A0 /* PopUpDialogViewController.swift */,
+				F98459CD2C1A91FB003D42A0 /* PopUpDialogViewController.storyboard */,
+			);
+			path = Dialog;
+			sourceTree = "<group>";
+		};
 		F9860FBB285B3826008D0714 /* PassCodeLock */ = {
 			isa = PBXGroup;
 			children = (
@@ -1991,6 +2010,7 @@
 				F9F4608024D1ED15008FE62B /* PickerTextField.swift */,
 				F9C2BC21277DEE80006334D0 /* ClassicCalculator */,
 				F99C6B9C280DAFBA00E99080 /* PeriodYear */,
+				F98459D32C1A920B003D42A0 /* Dialog */,
 			);
 			path = JournalEntry;
 			sourceTree = "<group>";
@@ -2647,6 +2667,7 @@
 				F90A23822B6BCA1F009E35C0 /* AccountItem6.png in Resources */,
 				F928F93A29A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib in Resources */,
 				F90A236F2B6BC31B009E35C0 /* AccountItem1.png in Resources */,
+				F98459CF2C1A91FB003D42A0 /* PopUpDialogViewController.storyboard in Resources */,
 				F907D0B72A98A57100A701C3 /* Journal_Entry.html in Resources */,
 				F90CED2E2B8F5029005FFE99 /* GeneralLedger3.png in Resources */,
 				F90A23D62B6D0D17009E35C0 /* Opening_Journal_Entry.html in Resources */,
@@ -2815,6 +2836,7 @@
 				F90A23832B6BCA1F009E35C0 /* AccountItem6.png in Resources */,
 				F928F93B29A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib in Resources */,
 				F90A23702B6BC31B009E35C0 /* AccountItem1.png in Resources */,
+				F98459D02C1A91FB003D42A0 /* PopUpDialogViewController.storyboard in Resources */,
 				F907D0B82A98A57100A701C3 /* Journal_Entry.html in Resources */,
 				F90CED2F2B8F5029005FFE99 /* GeneralLedger3.png in Resources */,
 				F90A23D72B6D0D17009E35C0 /* Opening_Journal_Entry.html in Resources */,
@@ -3126,6 +3148,7 @@
 				F91878C62581431100D2E793 /* DataBaseSettingsOperating.swift in Sources */,
 				F982898A2973E8B900F8F1B8 /* OpeningBalanceModel.swift in Sources */,
 				F9DB32FC297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */,
+				F9B63F712C19A0B300380695 /* UserData.swift in Sources */,
 				F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */,
 				F90742D62A0DC3B400480551 /* PaciolistWidget.intentdefinition in Sources */,
 				F9BDCBBA27A96A8E00BD8770 /* JournalsPresenter.swift in Sources */,
@@ -3329,6 +3352,7 @@
 				F9482EB9282FDD91008B82E1 /* CategoryListModel.swift in Sources */,
 				F99EDE0D246C00B100334FF4 /* DataBaseManagerJournalEntry.swift in Sources */,
 				F9D08D9125444E8800CE3CB2 /* SettingsCategoryDetailTableViewController.swift in Sources */,
+				F98459D12C1A91FB003D42A0 /* PopUpDialogViewController.swift in Sources */,
 				F929C0242478361F0034FAAF /* DatabaseManagerSettingsTaxonomyAccount.swift in Sources */,
 				F96B62272595FE77000FC05F /* SettingsHelpViewController.swift in Sources */,
 				F9D224C924893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift in Sources */,
@@ -3381,6 +3405,7 @@
 				F9ECC3822A5F008300C3576A /* CountAnimateLabel.swift in Sources */,
 				F9EC668F27B90BC60003FBB6 /* DataBaseSettingsOperating.swift in Sources */,
 				F982898B2973E8B900F8F1B8 /* OpeningBalanceModel.swift in Sources */,
+				F9B63F722C19A0B300380695 /* UserData.swift in Sources */,
 				F9DB32FD297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */,
 				F9EC669027B90BC60003FBB6 /* DataBaseTaxonomy.swift in Sources */,
 				F9EC669127B90BC60003FBB6 /* JournalsPresenter.swift in Sources */,
@@ -3584,6 +3609,7 @@
 				F9482EBA282FDD91008B82E1 /* CategoryListModel.swift in Sources */,
 				F9EC66FD27B90BC60003FBB6 /* DataBaseManagerJournalEntry.swift in Sources */,
 				F9EC66FE27B90BC60003FBB6 /* SettingsCategoryDetailTableViewController.swift in Sources */,
+				F98459D22C1A91FB003D42A0 /* PopUpDialogViewController.swift in Sources */,
 				F9EC66FF27B90BC60003FBB6 /* DatabaseManagerSettingsTaxonomyAccount.swift in Sources */,
 				F9EC670027B90BC60003FBB6 /* SettingsHelpViewController.swift in Sources */,
 				F9EC670127B90BC60003FBB6 /* DataBaseAccountingBooksShelf.swift in Sources */,
