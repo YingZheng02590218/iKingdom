@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift 
 
-// 表示科目クラス
+// 表示科目クラス　廃止
 class DataBaseTaxonomy: RObject {
     convenience init(
         fiscalYear: Int,

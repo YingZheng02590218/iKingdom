@@ -38,7 +38,7 @@
                                 <rect key="frame" x="10" y="92" width="394" height="770"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" systemColor="linkColor"/>
-                                <string key="text">1. 概要
+                                <mutableString key="text">1. 概要
     ・ このアプリについて
 
 
@@ -56,7 +56,6 @@
         ・ 準備する資料
         ・ 勘定科目を確認する
         ・ 勘定科目を新規に登録する
-        ・ 勘定科目を修正する
         ・ 勘定科目を削除する
     3. 開始残高を設定しよう
     4. 環境設定を確認・変更しよう
@@ -95,7 +94,7 @@
 
 
 
-</string>
+</mutableString>
                                 <color key="textColor" name="TextColor"/>
                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -140,7 +139,7 @@
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

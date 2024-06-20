@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 6,
+            schemaVersion: 7,
             
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
@@ -131,6 +131,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     // 貸借対照表クラス　DataBaseBalanceSheet
                     // @objc dynamic var Capital_total: Int64 = 0  // 資本
                 }
+                // スキーマバージョン
+                if oldSchemaVersion < 7 {
+                    // 設定表示科目クラス　廃止
+                    migration.deleteData(forType: DataBaseSettingsTaxonomy.className())
+                    // 表示科目クラス　廃止
+                    migration.deleteData(forType: DataBaseTaxonomy.className())
+                    // カラムを削除
+                    // 貸借対照表クラス　DataBaseBalanceSheet
+                    // let dataBaseTaxonomy = List<DataBaseTaxonomy>() // 表示科目
+                    // 設定勘定科目クラス DataBaseSettingsTaxonomyAccount
+                    // @objc dynamic var numberOfTaxonomy: String = "" // タクソノミ表示科目クラス　の連番
+                }
             }
         )
         // Tell Realm to use this new configuration object for the default Realm
@@ -144,7 +156,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // // マネタイズ対応　Use Firebase library to configure APIs
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-
+        
         // プッシュ通知のパーミッションを初めて取得した直後のapplication(_:didRegisterForRemoteNotificationsWithDeviceToken:)では、FCMトークンがまだ生成されておらず、FIRInstanceID.instanceID().token()の値がnilになることがある
         // なので、オブザーバを利用して確実に取得するのがオススメらしい (addRefreshFcmTokenNotificationObserver())
         NotificationCenter.default.addObserver(
@@ -309,12 +321,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         userDefaults.register(defaults: firstLunch)
         // 動作確認用
         // userDefaults.set(true, forKey: firstLunchKey)
-        // 設定表示科目　初期化
-        firstLunchKey = "settings_taxonomy"
-        firstLunch = [firstLunchKey: true]
-        userDefaults.register(defaults: firstLunch)
-        // 動作確認用
-        // userDefaults.set(true, forKey: firstLunchKey)
         // サンプル仕訳データ
         firstLunchKey = "sample_JournalEntry"
         firstLunch = [firstLunchKey: true]
@@ -396,6 +402,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // アプリ起動回数をインクリメントする
         userDefaults.removeObject(forKey: "startUpCount")
+        // 設定表示科目　初期化
+        userDefaults.removeObject(forKey: "settings_taxonomy")
     }
     
     // MARK: - アップグレード機能

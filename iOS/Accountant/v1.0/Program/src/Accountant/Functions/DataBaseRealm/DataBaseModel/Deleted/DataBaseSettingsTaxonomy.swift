@@ -20,7 +20,7 @@ import RealmSwift
 //    @objc dynamic var switching: Bool = false      //有効無効
 // }
 
-// 設定表示科目クラス
+// 設定表示科目クラス　廃止
 class DataBaseSettingsTaxonomy: RObject {
     convenience init(
         category0: String,

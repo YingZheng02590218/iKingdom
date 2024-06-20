@@ -99,11 +99,6 @@ class SettingsHelpViewController: UIViewController {
         )
         attributedString.addAttribute(
             .link,
-            value: HelpDetailKind.Link6.rawValue,
-            range: NSString(string: baseString!).range(of: HelpDetailKind.Link6.title)
-        )
-        attributedString.addAttribute(
-            .link,
             value: HelpDetailKind.Link61.rawValue,
             range: NSString(string: baseString!).range(of: HelpDetailKind.Link61.title)
         )

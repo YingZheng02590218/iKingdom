@@ -13,7 +13,7 @@ class Initial {
     
     /**
      * 初期化　初期化メソッド
-     * 設定勘定科目、会計帳簿棚、表示科目を初期化する。
+     * 設定勘定科目、会計帳簿棚を初期化する。
      */
     func initialize(onProgress: @escaping (Int) -> Void, completion: @escaping () -> Void) {
         onProgress(0)
@@ -24,40 +24,25 @@ class Initial {
             self.initialiseMasterData {
                 print("設定勘定科目　初期化", Date())
                 onProgress(60)
-                print("設定表示科目　初期化", Date())
-                // 設定画面　設定表示科目　初期化
-                self.initializeSettingsTaxonomyFromMasterData {
-                    print("設定表示科目　初期化", Date())
-                    onProgress(70)
-                    print("設定表示科目　初期化", Date())
-                    // 設定勘定科目　初期化　勘定科目のスイッチを設定する
-                    self.initializeSettingsTaxonomy {
-                        print("設定表示科目　初期化", Date())
-                        onProgress(80)
-                        print("会計帳簿棚　初期化", Date())
-                        // 設定画面　会計帳簿棚　初期化
-                        self.initializeAccountingBooksShelf {
-                            print("会計帳簿棚　初期化", Date())
-                            onProgress(90)
-                            print("表示科目　初期化", Date())
-                            // 表示科目　初期化
-                            self.initializeTaxonomy {
-                                print("表示科目　初期化", Date())
-                                onProgress(100)
-                                // 設定操作　初期化
-                                self.initializeSettingsOperating {
-                                    // 設定会計期間　決算日　初期化
-                                    self.initializePeriod {
-                                        // よく使う仕訳のサンプルデータを作成する
-                                        self.addSampleJournalEntry()
-                                        // 旧 損益振替仕訳(決算整理仕訳クラス)、資本振替仕訳(決算整理仕訳クラス)を削除する
-                                        self.deleteOldTransferEntry()
-                                        
-                                        Thread.sleep(forTimeInterval: 1.5)
-                                        completion()
-                                    }
-                                }
-                            }
+                onProgress(70)
+                onProgress(80)
+                print("会計帳簿棚　初期化", Date())
+                // 設定画面　会計帳簿棚　初期化
+                self.initializeAccountingBooksShelf {
+                    print("会計帳簿棚　初期化", Date())
+                    onProgress(90)
+                    onProgress(100)
+                    // 設定操作　初期化
+                    self.initializeSettingsOperating {
+                        // 設定会計期間　決算日　初期化
+                        self.initializePeriod {
+                            // よく使う仕訳のサンプルデータを作成する
+                            self.addSampleJournalEntry()
+                            // 旧 損益振替仕訳(決算整理仕訳クラス)、資本振替仕訳(決算整理仕訳クラス)を削除する
+                            self.deleteOldTransferEntry()
+                            
+                            Thread.sleep(forTimeInterval: 1.5)
+                            completion()
                         }
                     }
                 }
@@ -88,45 +73,6 @@ class Initial {
             }
         } else {
             // 設定勘定科目　初期化 済み
-        }
-        completion()
-    }
-    
-    
-    /**
-     * 初期化　初期化メソッド
-     * 設定表示科目を初期化する。
-     */
-    func initializeSettingsTaxonomyFromMasterData(completion: @escaping () -> Void) {
-        // 設定表示科目　初期化　初回起動時
-        if UserDefaults.standard.bool(forKey: "settings_taxonomy") {
-            // 設定勘定科目　初期化 失敗している
-            if DataBaseManagerSettingsTaxonomy.shared.checkInitialising() {
-                // フラグを倒す 設定表示科目　初期化
-                let userDefaults = UserDefaults.standard
-                let firstLunchKey = "settings_taxonomy"
-                userDefaults.set(false, forKey: firstLunchKey)
-                userDefaults.synchronize()
-            } else {
-                // すでに存在するオブジェクトを全て削除する v2.0.2で初期化処理が失敗している場合に対処する処理
-                DataBaseManagerSettingsTaxonomy.shared.deleteAllOfSettingsTaxonomy()
-                let masterData = MasterData()
-                masterData.readMasterDataFromCSVOfTaxonomy()
-            }
-        } else {
-            // 設定表示科目　初期化 済み
-        }
-        completion()
-    }
-    
-    // 設定勘定科目　初期化　勘定科目のスイッチを設定する
-    func initializeSettingsTaxonomy(completion: @escaping () -> Void) {
-        // 法人/個人フラグ
-        if UserDefaults.standard.bool(forKey: "corporation_switch") {
-            // 設定勘定科目　初期化　勘定科目のスイッチを設定する　表示科目が選択されていなければOFFにする
-            DatabaseManagerSettingsTaxonomyAccount.shared.initializeSettingsTaxonomyAccount()
-            // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
-            DataBaseManagerSettingsTaxonomy.shared.initializeSettingsTaxonomy()
         }
         completion()
     }
@@ -187,7 +133,6 @@ class Initial {
                 rank0: "5",
                 rank1: "10",
                 rank2: "",
-                numberOfTaxonomy: "",
                 category: "元入金",
                 switching: true
             )
@@ -198,7 +143,6 @@ class Initial {
                 rank0: "5",
                 rank1: "10",
                 rank2: "",
-                numberOfTaxonomy: "",
                 category: "事業主貸",
                 switching: true
             )
@@ -209,7 +153,6 @@ class Initial {
                 rank0: "5",
                 rank1: "10",
                 rank2: "",
-                numberOfTaxonomy: "",
                 category: "事業主借",
                 switching: true
             )
@@ -256,21 +199,6 @@ class Initial {
         if !DataBaseManagerFinancialStatements.shared.checkInitialising(dataBase: DataBaseFinancialStatements(), fiscalYear: fiscalYear) {
             DataBaseManagerFinancialStatements.shared.addFinancialStatements(number: number)
         }
-    }
-    
-    /**
-     * 初期化　初期化メソッド
-     * 表示科目を初期化する。
-     */
-    func initializeTaxonomy(completion: @escaping () -> Void) {
-        // 表示科目
-        let isInvalidated = DataBaseManagerTaxonomy.shared.deleteTaxonomyAll()
-        if isInvalidated {
-            DataBaseManagerTaxonomy.shared.addTaxonomyAll()
-        } else {
-            print("deleteTaxonomyAll 失敗")
-        }
-        completion()
     }
     
     /**
