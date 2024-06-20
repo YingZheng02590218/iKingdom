@@ -94,8 +94,6 @@
 		F90A237D2B6BC7FB009E35C0 /* AccountItem4.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A237B2B6BC7FB009E35C0 /* AccountItem4.png */; };
 		F90A23862B6BCBDF009E35C0 /* AccountItem7.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23842B6BCBDF009E35C0 /* AccountItem7.png */; };
 		F90A23872B6BCBDF009E35C0 /* AccountItem7.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23842B6BCBDF009E35C0 /* AccountItem7.png */; };
-		F90A23882B6BCBDF009E35C0 /* AccountItem8.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23852B6BCBDF009E35C0 /* AccountItem8.png */; };
-		F90A23892B6BCBDF009E35C0 /* AccountItem8.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23852B6BCBDF009E35C0 /* AccountItem8.png */; };
 		F90A239B2B6BD1AB009E35C0 /* AccountItem13.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23992B6BD1AB009E35C0 /* AccountItem13.png */; };
 		F90A239C2B6BD1AB009E35C0 /* AccountItem13.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23992B6BD1AB009E35C0 /* AccountItem13.png */; };
 		F90A239D2B6BD1AB009E35C0 /* AccountItem14.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A239A2B6BD1AB009E35C0 /* AccountItem14.png */; };
@@ -140,6 +138,8 @@
 		F90A23E62B6D0F93009E35C0 /* OpeningJournalEntry5.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23DC2B6D0F93009E35C0 /* OpeningJournalEntry5.png */; };
 		F90A23E82B6D1225009E35C0 /* OpeningJournalEntry6.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23E72B6D1225009E35C0 /* OpeningJournalEntry6.png */; };
 		F90A23E92B6D1225009E35C0 /* OpeningJournalEntry6.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23E72B6D1225009E35C0 /* OpeningJournalEntry6.png */; };
+		F90CC5D22C240C720092C2D4 /* AccountItem8.png in Resources */ = {isa = PBXBuildFile; fileRef = F90CC5D12C240C720092C2D4 /* AccountItem8.png */; };
+		F90CC5D32C240C720092C2D4 /* AccountItem8.png in Resources */ = {isa = PBXBuildFile; fileRef = F90CC5D12C240C720092C2D4 /* AccountItem8.png */; };
 		F90CED282B8F4D76005FFE99 /* GeneralLedger5.png in Resources */ = {isa = PBXBuildFile; fileRef = F90CED272B8F4D76005FFE99 /* GeneralLedger5.png */; };
 		F90CED292B8F4D76005FFE99 /* GeneralLedger5.png in Resources */ = {isa = PBXBuildFile; fileRef = F90CED272B8F4D76005FFE99 /* GeneralLedger5.png */; };
 		F90CED2B2B8F4E00005FFE99 /* GeneralLedger4.png in Resources */ = {isa = PBXBuildFile; fileRef = F90CED2A2B8F4E00005FFE99 /* GeneralLedger4.png */; };
@@ -883,7 +883,6 @@
 		F90A236E2B6BC31B009E35C0 /* AccountItem2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem2.png; sourceTree = "<group>"; };
 		F90A237B2B6BC7FB009E35C0 /* AccountItem4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem4.png; sourceTree = "<group>"; };
 		F90A23842B6BCBDF009E35C0 /* AccountItem7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem7.png; sourceTree = "<group>"; };
-		F90A23852B6BCBDF009E35C0 /* AccountItem8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem8.png; sourceTree = "<group>"; };
 		F90A23992B6BD1AB009E35C0 /* AccountItem13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem13.png; sourceTree = "<group>"; };
 		F90A239A2B6BD1AB009E35C0 /* AccountItem14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem14.png; sourceTree = "<group>"; };
 		F90A239F2B6BD216009E35C0 /* AccountItem15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem15.png; sourceTree = "<group>"; };
@@ -906,6 +905,7 @@
 		F90A23DB2B6D0F93009E35C0 /* OpeningJournalEntry4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OpeningJournalEntry4.png; sourceTree = "<group>"; };
 		F90A23DC2B6D0F93009E35C0 /* OpeningJournalEntry5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OpeningJournalEntry5.png; sourceTree = "<group>"; };
 		F90A23E72B6D1225009E35C0 /* OpeningJournalEntry6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OpeningJournalEntry6.png; sourceTree = "<group>"; };
+		F90CC5D12C240C720092C2D4 /* AccountItem8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem8.png; sourceTree = "<group>"; };
 		F90CED272B8F4D76005FFE99 /* GeneralLedger5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeneralLedger5.png; sourceTree = "<group>"; };
 		F90CED2A2B8F4E00005FFE99 /* GeneralLedger4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeneralLedger4.png; sourceTree = "<group>"; };
 		F90CED2D2B8F5029005FFE99 /* GeneralLedger3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeneralLedger3.png; sourceTree = "<group>"; };
@@ -1399,7 +1399,7 @@
 				F90A236D2B6BC31B009E35C0 /* AccountItem3.png */,
 				F90A237B2B6BC7FB009E35C0 /* AccountItem4.png */,
 				F90A23842B6BCBDF009E35C0 /* AccountItem7.png */,
-				F90A23852B6BCBDF009E35C0 /* AccountItem8.png */,
+				F90CC5D12C240C720092C2D4 /* AccountItem8.png */,
 				F90A23992B6BD1AB009E35C0 /* AccountItem13.png */,
 				F90A239A2B6BD1AB009E35C0 /* AccountItem14.png */,
 				F90A239F2B6BD216009E35C0 /* AccountItem15.png */,
@@ -2571,6 +2571,7 @@
 				F9D15FB6296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
 				F940E4B22A8E22CC008AEAFC /* explain_backup.html in Resources */,
 				F90A23732B6BC31B009E35C0 /* AccountItem2.png in Resources */,
+				F90CC5D22C240C720092C2D4 /* AccountItem8.png in Resources */,
 				F907D09C2A9757E200A701C3 /* Set_Up_Basic_Info2.html in Resources */,
 				F90A23522B6BB8C4009E35C0 /* BasicInfo1.png in Resources */,
 				F907D09F2A9758E600A701C3 /* Set_Up_Basic_Info3.html in Resources */,
@@ -2588,7 +2589,6 @@
 				F906C4EF263B1B65006C6233 /* ListCollectionViewCell.xib in Resources */,
 				F90A23642B6BBC58009E35C0 /* BasicInfo7.png in Resources */,
 				F99BAEBA261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard in Resources */,
-				F90A23882B6BCBDF009E35C0 /* AccountItem8.png in Resources */,
 				F9E0FE86266BA6230024FE40 /* PDFMakerViewController.storyboard in Resources */,
 				F90A23E82B6D1225009E35C0 /* OpeningJournalEntry6.png in Resources */,
 				F90A23A32B6CFA96009E35C0 /* Configuration1.png in Resources */,
@@ -2728,6 +2728,7 @@
 				F9D15FB7296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
 				F940E4B32A8E22CC008AEAFC /* explain_backup.html in Resources */,
 				F90A23742B6BC31B009E35C0 /* AccountItem2.png in Resources */,
+				F90CC5D32C240C720092C2D4 /* AccountItem8.png in Resources */,
 				F907D09D2A9757E200A701C3 /* Set_Up_Basic_Info2.html in Resources */,
 				F90A23532B6BB8C4009E35C0 /* BasicInfo1.png in Resources */,
 				F907D0A02A9758E600A701C3 /* Set_Up_Basic_Info3.html in Resources */,
@@ -2745,7 +2746,6 @@
 				F9EC672327B90BC60003FBB6 /* ListCollectionViewCell.xib in Resources */,
 				F90A23652B6BBC58009E35C0 /* BasicInfo7.png in Resources */,
 				F9EC672427B90BC60003FBB6 /* GeneralLedgerTableViewController.storyboard in Resources */,
-				F90A23892B6BCBDF009E35C0 /* AccountItem8.png in Resources */,
 				F9EC672527B90BC60003FBB6 /* PDFMakerViewController.storyboard in Resources */,
 				F90A23E92B6D1225009E35C0 /* OpeningJournalEntry6.png in Resources */,
 				F90A23A42B6CFA96009E35C0 /* Configuration1.png in Resources */,
