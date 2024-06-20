@@ -9,14 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--SettingsTaxonomyListTableViewController-->
-        <scene sceneID="os0-fV-5GU">
-            <objects>
-                <viewControllerPlaceholder storyboardName="SettingsTaxonomyListTableViewController" id="B4C-gl-Hho" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="k6a-Zf-2zP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6583" y="5940"/>
-        </scene>
         <!--勘定科目詳細-->
         <scene sceneID="4QF-ss-icR">
             <objects>
@@ -111,7 +103,6 @@
                                             <outlet property="accountDetailAccountTextField" destination="WjQ-se-JvF" id="mEd-Yv-vgz"/>
                                             <outlet property="accountDetailBigTextField" destination="C2u-RG-7MR" id="xgY-d7-1Qd"/>
                                             <outlet property="label" destination="uNV-5s-kxc" id="cS8-gq-n4l"/>
-                                            <segue destination="B4C-gl-Hho" kind="presentation" id="fp9-dT-3ub"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

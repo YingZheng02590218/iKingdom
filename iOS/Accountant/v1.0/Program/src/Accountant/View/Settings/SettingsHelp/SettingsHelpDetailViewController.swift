@@ -164,22 +164,6 @@ class SettingsHelpDetailViewController: UIViewController {
                 print(path)
                 changeImageThird(path: path)
             }
-            
-            // 勘定科目体系の登録 表示科目別に勘定科目を表示 ①
-            if let path = Bundle.main.url(forResource: "AccountItem1", withExtension: "png") {
-                print(path)
-                changeImageForth(path: path)
-            }
-            // 勘定科目体系の登録　表示科目別に勘定科目を表示 ②
-            if let path = Bundle.main.url(forResource: "AccountItem5", withExtension: "png") {
-                print(path)
-                changeImageFifth(path: path)
-            }
-            // 勘定科目体系の登録　表示科目別に勘定科目を表示 ③
-            if let path = Bundle.main.url(forResource: "AccountItem6", withExtension: "png") {
-                print(path)
-                changeImageSixth(path: path)
-            }
         case .Link52:
             break
         case .Link53:
@@ -204,37 +188,6 @@ class SettingsHelpDetailViewController: UIViewController {
                 changeImageForth(path: path)
             }
             // 勘定科目の編集しよう
-        case .Link6:
-            // 勘定科目体系の登録 修正をする ①
-            if let path = Bundle.main.url(forResource: "AccountItem1", withExtension: "png") {
-                print(path)
-                changeImage(path: path)
-            }
-            // 勘定科目体系の登録 修正をする ②
-            if let path = Bundle.main.url(forResource: "AccountItem2", withExtension: "png") {
-                print(path)
-                changeImageSecond(path: path)
-            }
-            // 勘定科目体系の登録 修正をする ③
-            if let path = Bundle.main.url(forResource: "AccountItem9", withExtension: "png") {
-                print(path)
-                changeImageThird(path: path)
-            }
-            // 勘定科目体系の登録 修正をする ④
-            if let path = Bundle.main.url(forResource: "AccountItem10", withExtension: "png") {
-                print(path)
-                changeImageForth(path: path)
-            }
-            // 勘定科目体系の登録 修正をする ⑤
-            if let path = Bundle.main.url(forResource: "AccountItem11", withExtension: "png") {
-                print(path)
-                changeImageFifth(path: path)
-            }
-            // 勘定科目体系の登録 修正をする ⑥
-            if let path = Bundle.main.url(forResource: "AccountItem12", withExtension: "png") {
-                print(path)
-                changeImageSixth(path: path)
-            }
         case .Link61:
             // 勘定科目体系の登録 削除をする ①
             if let path = Bundle.main.url(forResource: "AccountItem1", withExtension: "png") {
@@ -504,7 +457,6 @@ enum HelpDetailKind: String {
     case Link52
     case Link53
     // 勘定科目の編集しよう
-    case Link6
     case Link61
     // 開始残高を設定しよう
     case Link3
@@ -543,8 +495,6 @@ enum HelpDetailKind: String {
             return "Set_Up_Account3"
         case .Link53:
             return "Set_Up_Account4"
-        case .Link6:
-            return "Set_Up_Account_Edit"
         case .Link61:
             return "Set_Up_Account_Edit2"
         case .Link3:
@@ -587,8 +537,7 @@ enum HelpDetailKind: String {
             return "勘定科目体系の図"
         case .Link53:
             return "勘定科目を新規に登録する"
-        case .Link6:
-            return "勘定科目を修正する"
+
         case .Link61:
             return "勘定科目を削除する"
         case .Link3:

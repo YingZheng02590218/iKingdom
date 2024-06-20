@@ -11,7 +11,7 @@ import Foundation
 class UserData {
     
     // MARK: - Keys
-
+    
     enum UserDefaultsKeys: String {
         // 仕訳帳
         case firstLunchJournals = "firstLunch_Journals"
@@ -19,8 +19,6 @@ class UserData {
         case firstLunchJournalEntry = "firstLunch_JournalEntry"
         // 設定勘定科目　初期化
         case settingsTaxonomyAccount = "settings_taxonomy_account"
-        // 設定表示科目　初期化
-        case settingsTaxonomy = "settings_taxonomy"
         // サンプル仕訳データ
         case sampleJournalEntry = "sample_JournalEntry"
         // 精算表
@@ -47,10 +45,13 @@ class UserData {
         case biometricsSwitch = "biometrics_switch"
         // 生体認証パスコードロック
         case biometrics = "biometrics"
-        // アプリ起動回数をインクリメントする
-        case startUpCount = "startUpCount"
         // リワード広告　報酬
         case rewardAdCoinCount = "reward_ad_coin＿count"
+        
+        // アプリ起動回数をインクリメントする
+        case startUpCount = "startUpCount"
+        // 設定表示科目　初期化
+        case settingsTaxonomy = "settings_taxonomy"
     }
     
     // MARK: - Data

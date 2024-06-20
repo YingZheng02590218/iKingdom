@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OEE-gO-qNO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OEE-gO-qNO">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -20,49 +20,16 @@
                         <color key="backgroundColor" name="BaseColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="categories" id="9N0-0b-jiO">
-                                <rect key="frame" x="0.0" y="49.5" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9N0-0b-jiO" id="47V-iJ-tbW">
-                                    <rect key="frame" x="0.0" y="0.0" width="385.5" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383.5" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" name="MainColor2"/>
                                 <connections>
                                     <segue destination="le0-yC-HVc" kind="show" id="pqv-Zy-Mss"/>
                                 </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" tag="2" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="categoriesBSandPL" id="msc-um-zbf" userLabel="categoriesBSandPL">
-                                <rect key="frame" x="0.0" y="93" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="msc-um-zbf" id="h6l-qV-Dag">
-                                    <rect key="frame" x="0.0" y="0.0" width="385.5" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" name="MainColor2"/>
-                                <connections>
-                                    <segue destination="eB0-WZ-jtL" kind="show" id="K3G-c7-bs0"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" tag="3" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BSandPL" id="QMC-57-qmn">
-                                <rect key="frame" x="0.0" y="136.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QMC-57-qmn" id="js1-gW-aNC">
-                                    <rect key="frame" x="0.0" y="0.0" width="385.5" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" name="MainColor2"/>
-                                <connections>
-                                    <segue destination="vsF-TL-2s7" kind="show" id="OO8-rV-lsJ"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="groups" id="Dyg-y5-Yq1">
-                                <rect key="frame" x="0.0" y="180" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dyg-y5-Yq1" id="8ZD-0m-Ugi">
-                                    <rect key="frame" x="0.0" y="0.0" width="385.5" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" name="MainColor2"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -85,26 +52,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w2f-xg-xWq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4349" y="4053"/>
-        </scene>
-        <!--SettingsTaxonomyAccountByTaxonomyListTableViewController-->
-        <scene sceneID="pl5-94-TCS">
-            <objects>
-                <viewControllerPlaceholder storyboardName="SettingsTaxonomyAccountByTaxonomyListTableViewController" id="eB0-WZ-jtL" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Y6Z-Ae-Rod"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mme-Lv-sY1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4218" y="4085"/>
-        </scene>
-        <!--SettingsTaxonomyListTableViewController-->
-        <scene sceneID="vNQ-XL-oue">
-            <objects>
-                <viewControllerPlaceholder storyboardName="SettingsTaxonomyListTableViewController" id="vsF-TL-2s7" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Odp-iw-xVd"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MYb-DX-w3d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4308" y="4117"/>
         </scene>
         <!--Annotation View Controller Settings Category-->
         <scene sceneID="xWL-ph-rR8">
@@ -144,7 +91,7 @@
             <objects>
                 <navigationController id="OEE-gO-qNO" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="12n-0Y-LYM">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" name="TextColor"/>

@@ -11,12 +11,12 @@ import RealmSwift
 
 // 決算書クラス
 class DataBaseManagerFinancialStatements: DataBaseManager {
-
+    
     public static let shared = DataBaseManagerFinancialStatements()
-
+    
     override private init() {
     }
-
+    
     // MARK: - CRUD
     
     // MARK: Create
@@ -36,7 +36,7 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
             FixedLiabilities_total: 0,
             Liability_total: 0,
             CapitalStock_total: 0,
-            OtherCapitalSurpluses_total: 0, 
+            OtherCapitalSurpluses_total: 0,
             Capital_total: 0,
             Equity_total: 0
         )
@@ -117,21 +117,6 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
                 number = compoundTrialBalance.save()
                 number = afterClosingTrialBalance.save()
                 number = dataBaseFinancialStatements.save() //　自動採番
-                // オブジェクトを作成して追加
-                // 設定画面の勘定科目一覧にある勘定を取得する
-                let objects = DataBaseManagerSettingsTaxonomy.shared.getAllSettingsTaxonomy()
-                // オブジェクトを作成 表示科目
-                for i in 0..<objects.count {
-                    let dataBaseTaxonomy = DataBaseTaxonomy(
-                        fiscalYear: object.fiscalYear,
-                        accountName: objects[i].category,
-                        total: 0,
-                        numberOfTaxonomy: objects[i].number // 設定表示科目の連番を保持する　マイグレーション
-                    )
-                    let number = dataBaseTaxonomy.save() //　自動採番
-                    print(number)
-                    balanceSheet.dataBaseTaxonomy.append(dataBaseTaxonomy)   // 表示科目を作成して貸借対照表に追加する
-                }
                 // 年度　の数だけ増える
                 object.dataBaseFinancialStatements = dataBaseFinancialStatements // 会計帳簿に財務諸表を追加する
             }
@@ -160,9 +145,9 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
         } catch {
             print("エラーが発生しました")
         }
-
+        
     }
-
+    
     // MARK: Read
     
     /**
@@ -195,10 +180,8 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
         guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseFinancialStatements.self, key: number) else { return false }
         do {
             try DataBaseManager.realm.write {
-                // 表示科目を削除
+                // 貸借対照表、損益計算書、CF計算書、精算表、試算表を削除
                 if let balanceSheet = object.balanceSheet {
-                    DataBaseManager.realm.delete(balanceSheet.dataBaseTaxonomy)
-                    // 貸借対照表、損益計算書、CF計算書、精算表、試算表を削除
                     DataBaseManager.realm.delete(balanceSheet)
                 }
                 if let profitAndLossStatement = object.profitAndLossStatement {

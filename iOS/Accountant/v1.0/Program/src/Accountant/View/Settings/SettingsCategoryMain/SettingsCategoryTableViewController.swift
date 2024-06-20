@@ -241,7 +241,7 @@ class SettingsCategoryTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        3
+        2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -249,11 +249,7 @@ class SettingsCategoryTableViewController: UITableViewController {
         case 0:
             return 1
         case 1:
-            // 法人/個人フラグ
-            return UserDefaults.standard.bool(forKey: "corporation_switch") ? 2 : 1
-        case 2:
-            // 法人/個人フラグ
-            return UserDefaults.standard.bool(forKey: "corporation_switch") ? 1 : 0
+            return 1
         default:
             return 0
         }
@@ -265,9 +261,6 @@ class SettingsCategoryTableViewController: UITableViewController {
             return nil
         case 1:
             return "勘定科目"
-        case 2:
-            // 法人/個人フラグ
-            return UserDefaults.standard.bool(forKey: "corporation_switch") ? "表示科目" : nil
         default:
             return nil
         }
@@ -276,13 +269,9 @@ class SettingsCategoryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
-            // 法人/個人フラグ
-            return UserDefaults.standard.bool(forKey: "corporation_switch") ? "法人：資本振替仕訳は「繰越利益」勘定を使用し、財務諸表に「表示科目」を表示します。" : "個人事業主：資本振替仕訳は「元入金」勘定を使用し、財務諸表に「勘定科目」を表示します。"
+            return "法人：資本振替仕訳は「繰越利益」勘定を使用します。\n個人事業主：資本振替仕訳は「元入金」勘定を使用します。"
         case 1:
             return "使用する勘定科目を設定することができます。"
-        case 2:
-            // 法人/個人フラグ
-            return UserDefaults.standard.bool(forKey: "corporation_switch") ? "決算書上に表示される表示科目を参照することができます。" : nil
         default:
             return nil
         }
@@ -307,31 +296,9 @@ class SettingsCategoryTableViewController: UITableViewController {
             // セルの選択不可にする
             cell.selectionStyle = .none
         } else if indexPath.section == 1 {
-            switch indexPath.row {
-            case 0:
-                cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
-                cell.textLabel?.text = "勘定科目一覧"
-                cell.textLabel?.textColor = .textColor
-            case 1:
-                cell = tableView.dequeueReusableCell(withIdentifier: "categoriesBSandPL", for: indexPath)
-                cell.textLabel?.text = "表示科目別勘定科目一覧"
-                cell.textLabel?.textColor = .textColor
-            default:
-                cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
-                cell.textLabel?.text = ""
-                cell.textLabel?.textColor = .textColor
-            }
-        } else {
-            switch indexPath.row {
-            case 0:
-                cell = tableView.dequeueReusableCell(withIdentifier: "BSandPL", for: indexPath)
-                cell.textLabel?.text = "表示科目一覧"
-                cell.textLabel?.textColor = .textColor
-            default:
-                cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
-                cell.textLabel?.textColor = .textColor
-                cell.textLabel?.text = ""
-            }
+            cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
+            cell.textLabel?.text = "勘定科目一覧"
+            cell.textLabel?.textColor = .textColor
         }
         if indexPath.section != 0 {
             // Accessory Color
