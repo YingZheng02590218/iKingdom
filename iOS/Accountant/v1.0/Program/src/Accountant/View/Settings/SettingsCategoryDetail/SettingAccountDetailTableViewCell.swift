@@ -12,7 +12,7 @@ protocol TableViewCellDelegate {
     func selectedRankAction(big: String, mid: String, bigNum: String, midNum: String)
     func selectedAccountAction(accountname: String?)
 }
-// 勘定科目詳細セル　大区分　中区分 勘定科目名 表示科目名
+// 勘定科目詳細セル　大区分　中区分 勘定科目名
 class SettingAccountDetailTableViewCell: UITableViewCell {
     
     @IBOutlet var accountDetailBigTextField: AccountDetailPickerTextField!
@@ -36,7 +36,7 @@ class SettingAccountDetailTableViewCell: UITableViewCell {
             accountDetailAccountTextField.delegate = self
             // テキストの入力位置を指すライン、これはカーソルではなくキャレット(caret)と呼ぶそうです。
             accountDetailAccountTextField.tintColor = UIColor.accentColor
-
+            
             let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
             //　toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3) // RGBで指定する alpha 0透明　1不透明
             toolbar.isTranslucent = true
@@ -66,11 +66,6 @@ class SettingAccountDetailTableViewCell: UITableViewCell {
         // 勘定科目名
         if let accountDetailAccountTextField = accountDetailAccountTextField {
             accountDetailAccountTextField.isHidden = true
-        }
-        // 表示科目
-        if let label = label {
-            label.text = ""
-            label.isHidden = true
         }
         accessoryType = .none
         // セルの選択

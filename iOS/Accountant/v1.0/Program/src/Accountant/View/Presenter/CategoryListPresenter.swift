@@ -12,13 +12,11 @@ import RealmSwift
 /// GUIアーキテクチャ　MVP
 protocol CategoryListPresenterInput {
     
-//    var dataBaseSettingsTaxonomyAccount: Results<DataBaseSettingsTaxonomyAccount> { get }
-
     func numberOfsections() -> Int
     func numberOfobjects(section: Int) -> Int
     func objects(forRow row: Int, section: Int) -> DataBaseSettingsTaxonomyAccount
     func titleForHeaderInSection(section: Int) -> String
-
+    
     func viewDidLoad()
     func viewWillAppear()
     
@@ -61,8 +59,6 @@ final class CategoryListPresenter: CategoryListPresenterInput {
     private var objects20: Results<DataBaseSettingsTaxonomyAccount>
     private var objects21: Results<DataBaseSettingsTaxonomyAccount>
     private var objects22: Results<DataBaseSettingsTaxonomyAccount>
-    
-//    internal var dataBaseSettingsTaxonomyAccount: Results<DataBaseSettingsTaxonomyAccount>
     
     private weak var view: CategoryListPresenterOutput!
     private var model: CategoryListModelInput
@@ -107,8 +103,6 @@ final class CategoryListPresenter: CategoryListPresenterInput {
         objects21 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 10, rank1: 18)
         
         objects22 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 11, rank1: nil)
-        
-//        dataBaseSettingsTaxonomyAccount = model.getSettingsSwitchingOn(rank0: index)
     }
     
     func numberOfsections() -> Int {
@@ -379,7 +373,7 @@ final class CategoryListPresenter: CategoryListPresenterInput {
             return objects22[row]
         }
     }
-
+    
     func objects(section: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
         
         switch index {
@@ -458,7 +452,7 @@ final class CategoryListPresenter: CategoryListPresenterInput {
             return objects22
         }
     }
-
+    
     func viewDidLoad() {
         
         view.setupViewForViewDidLoad()
@@ -470,7 +464,7 @@ final class CategoryListPresenter: CategoryListPresenterInput {
     }
     // 削除　設定勘定科目
     func deleteSettingsTaxonomyAccount(indexPath: IndexPath) {
-
+        
         let result = model.deleteSettingsTaxonomyAccount(number: self.objects(forRow: indexPath.row, section: indexPath.section).number)
         if result == true {
             view.reloadData()
@@ -484,8 +478,6 @@ final class CategoryListPresenter: CategoryListPresenterInput {
     func changeSwitch(tag: Int, isOn: Bool) {
         // 引数：連番、トグルスイッチ.有効無効
         model.updateSettingsCategorySwitching(tag: tag, isOn: isOn)
-        // 表示科目のスイッチを設定する　勘定科目がひとつもなければOFFにする
-        DataBaseManagerSettingsTaxonomy.shared.updateSettingsCategoryBSAndPLSwitching(number: tag)
     }
     
     // 採番　設定勘定科目 並び替えの順序のためのシリアルナンバーを更新する
@@ -523,7 +515,7 @@ final class CategoryListPresenter: CategoryListPresenterInput {
 struct SeializingObject: CustomStringConvertible {
     let number: Int
     let serialNumber: Int
-
+    
     var description: String {
         return "Object(number: \(number), serialNumber: \(serialNumber))"
     }

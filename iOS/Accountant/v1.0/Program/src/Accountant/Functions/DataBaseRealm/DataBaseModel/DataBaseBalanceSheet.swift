@@ -70,8 +70,6 @@ class DataBaseBalanceSheet: RObject {
     @objc dynamic var Capital_total: Int64 = 0           // 資本
     // 大分類　合計
     @objc dynamic var Equity_total: Int64 = 0                 // 純資産
-
-    let dataBaseTaxonomy = List<DataBaseTaxonomy>()           // 表示科目　使用していない　2020/10/09 損益計算書には表示科目の属性がない 2020/11/12 使用する
 }
 
 // 月次貸借対照表クラス ＊リレーションは使用しない

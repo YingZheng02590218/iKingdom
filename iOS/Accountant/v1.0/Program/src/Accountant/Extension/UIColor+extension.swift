@@ -88,5 +88,8 @@ extension UIColor {
     class var textColor: UIColor {
         UIColor(named: "TextColor") ?? .white
     }
-
+    
+    class var textShadowColor: UIColor {
+        UIColor(named: "TextShadowColor") ?? .white
+    }
 }

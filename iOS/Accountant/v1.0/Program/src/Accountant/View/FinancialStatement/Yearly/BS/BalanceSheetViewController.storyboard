@@ -30,7 +30,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="400" height="70"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="JG1-bC-3dC" userLabel="company_name">
-                                                                <rect key="frame" x="0.0" y="35" width="400" height="35"/>
+                                                                <rect key="frame" x="0.0" y="40" width="400" height="35"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
@@ -46,7 +46,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="Bgw-9O-MJe" userLabel="closingDate">
-                                                                <rect key="frame" x="0.0" y="35" width="400" height="35"/>
+                                                                <rect key="frame" x="0.0" y="40" width="400" height="35"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
@@ -66,8 +66,8 @@
                                                             <constraint firstItem="JG1-bC-3dC" firstAttribute="height" secondItem="ss2-yA-jXP" secondAttribute="height" multiplier="0.5" id="XW5-BM-BxK"/>
                                                             <constraint firstAttribute="trailing" secondItem="JG1-bC-3dC" secondAttribute="trailing" id="d69-6i-aDg"/>
                                                             <constraint firstItem="9cU-5i-CTf" firstAttribute="leading" secondItem="ss2-yA-jXP" secondAttribute="leading" id="rss-3I-qjJ"/>
-                                                            <constraint firstAttribute="bottom" secondItem="Bgw-9O-MJe" secondAttribute="bottom" id="u4Q-a0-gly"/>
-                                                            <constraint firstAttribute="bottom" secondItem="JG1-bC-3dC" secondAttribute="bottom" id="uac-vz-Bai"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Bgw-9O-MJe" secondAttribute="bottom" constant="-5" id="u4Q-a0-gly"/>
+                                                            <constraint firstAttribute="bottom" secondItem="JG1-bC-3dC" secondAttribute="bottom" constant="-5" id="uac-vz-Bai"/>
                                                         </constraints>
                                                     </view>
                                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R7V-gY-Lo4" userLabel="ViewLower">

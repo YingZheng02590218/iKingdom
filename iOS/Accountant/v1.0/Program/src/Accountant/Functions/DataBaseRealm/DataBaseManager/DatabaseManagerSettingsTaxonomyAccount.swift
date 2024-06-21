@@ -22,13 +22,12 @@ class DatabaseManagerSettingsTaxonomyAccount {
     // MARK: Create
     
     // 追加　設定勘定科目　新規作成　（元入金、事業主貸、事業主借、新規の勘定科目を作成時に使用している）
-    func addSettingsTaxonomyAccount(rank0: String, rank1: String, rank2: String, numberOfTaxonomy: String, category: String, switching: Bool) -> Int {
+    func addSettingsTaxonomyAccount(rank0: String, rank1: String, rank2: String, category: String, switching: Bool) -> Int {
         // オブジェクトを作成
         let dataBaseSettingsTaxonomyAccount = DataBaseSettingsTaxonomyAccount(
             Rank0: rank0,
             Rank1: rank1,
             Rank2: rank2,
-            numberOfTaxonomy: numberOfTaxonomy,
             category: category,
             AdjustingAndClosingEntries: false, // 決算整理仕訳　使用していない2020/10/07
             switching: switching
@@ -104,12 +103,6 @@ class DatabaseManagerSettingsTaxonomyAccount {
         //　objects = objects.sorted(byKeyPath: "serialNumber", ascending: true) // 不要
         return objects
     }
-    // 取得 全ての勘定科目
-    func getSettingsTaxonomyAccountAll() -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomyAccount.self)
-        objects = objects.sorted(byKeyPath: "number", ascending: true)
-        return objects
-    }
     // 取得 設定勘定科目 BSとPLで切り分ける　スイッチON
     func getSettingsSwitchingOnBSorPL(BSorPL: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
@@ -126,41 +119,10 @@ class DatabaseManagerSettingsTaxonomyAccount {
         }
         return objects
     }
-    // 取得 設定勘定科目連番　から　表示科目別に勘定科目を取得
-    func getSettingsTaxonomyAccountInTaxonomy(number: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        // 設定勘定科目連番から設定勘定科目を取得
-        let object = DataBaseManager.realm.object(ofType: DataBaseSettingsTaxonomyAccount.self, forPrimaryKey: number)
-        // 勘定科目モデルの階層と同じ勘定科目モデルを取得
-        let objects = getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: object!.numberOfTaxonomy)
-            .filter("switching == \(true)") // 勘定科目がONだけに絞る
-        print(number, objects)
-        return objects
-    }
-    // 取得 勘定科目の勘定科目名から表示科目連番を取得
-    func getNumberOfTaxonomy(category: String) -> Int {
-        let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
-            NSPredicate(format: "category LIKE %@", NSString(string: category)) // 勘定科目を絞る
-        ])
-        return Int(objects[0].numberOfTaxonomy) ?? 0
-    }
-    // 取得 勘定科目連番から表示科目連番を取得
-    func getNumberOfTaxonomy(number: Int) -> Int {
-        // 勘定科目モデルを取得
-        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsTaxonomyAccount.self, key: number) else { return 0 }
-        return Int(object.numberOfTaxonomy) ?? 0
-    }
     // 取得 勘定科目の連番から設定勘定科目を取得
     func getSettingsTaxonomyAccount(number: Int) -> DataBaseSettingsTaxonomyAccount? {
         guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsTaxonomyAccount.self, key: number) else { return nil }
         return object
-    }
-    // 取得 設定表示科目連番から表示科目別に設定勘定科目を取得
-    func getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: String) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
-            NSPredicate(format: "numberOfTaxonomy LIKE %@", NSString(string: numberOfTaxonomy)) // 表示科目別に絞る
-        ])
-        objects = objects.sorted(byKeyPath: "number", ascending: true)
-        return objects
     }
     // 取得　設定勘定科目　五大区分
     func getAccountsInBig5(big5: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
@@ -249,34 +211,6 @@ class DatabaseManagerSettingsTaxonomyAccount {
     
     // MARK: Update
     
-    // 初期化
-    func initializeSettingsTaxonomyAccount() {
-        // 勘定科目のスイッチを設定する　表示科目科目が選択されていなければOFFにする
-        let objects = getSettingsTaxonomyAccountAll() // 設定勘定科目を全て取得
-        for i in 0..<objects.count {
-            if objects[i].switching == true { // 設定勘定科目 スイッチ
-                if objects[i].numberOfTaxonomy.isEmpty { // 表示科目に紐付けしていない場合
-                    // 勘定クラス　勘定ないの仕訳を取得
-                    let objectss = DataBaseManagerJournalEntry.shared.getAllJournalEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
-                    let objectsss = DataBaseManagerAdjustingEntry.shared.getAllAdjustingEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
-                    if !objectss.isEmpty || !objectsss.isEmpty {
-                        updateSettingsCategorySwitching(tag: objects[i].number, isOn: true)
-                    } else {
-                        updateSettingsCategorySwitching(tag: objects[i].number, isOn: false)
-                    }
-                }
-            } else if objects[i].switching == false { // 表示科目科目が選択されていて仕訳データがあればONにする
-                if !objects[i].numberOfTaxonomy.isEmpty { // 表示科目に紐付けしている場合
-                    // 勘定クラス　勘定ないの仕訳を取得
-                    let objectss = DataBaseManagerJournalEntry.shared.getAllJournalEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
-                    let objectsss = DataBaseManagerAdjustingEntry.shared.getAllAdjustingEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
-                    if !objectss.isEmpty || !objectsss.isEmpty {
-                        updateSettingsCategorySwitching(tag: objects[i].number, isOn: true)
-                    }
-                }
-            }
-        }
-    }
     // 更新　スイッチの切り替え
     func updateSettingsCategorySwitching(tag: Int, isOn: Bool) {
         do {
@@ -295,18 +229,6 @@ class DatabaseManagerSettingsTaxonomyAccount {
             // (2)書き込みトランザクション内でデータを更新する
             try DataBaseManager.realm.write {
                 let value: [String: Any] = ["number": number, "category": accountName] // 勘定科目名
-                DataBaseManager.realm.create(DataBaseSettingsTaxonomyAccount.self, value: value, update: .modified) // 一部上書き更新
-            }
-        } catch {
-            print("エラーが発生しました")
-        }
-    }
-    // 更新　設定勘定科目　設定勘定科目連番から、紐づける表示科目を変更
-    func updateTaxonomyOfSettingsTaxonomyAccount(number: Int, numberOfTaxonomy: String) {
-        do {
-            // (2)書き込みトランザクション内でデータを更新する
-            try DataBaseManager.realm.write {
-                let value: [String: Any] = ["number": number, "numberOfTaxonomy": numberOfTaxonomy]
                 DataBaseManager.realm.create(DataBaseSettingsTaxonomyAccount.self, value: value, update: .modified) // 一部上書き更新
             }
         } catch {
@@ -333,10 +255,9 @@ class DatabaseManagerSettingsTaxonomyAccount {
     
     // MARK: Delete
     
-    // 削除 勘定科目
+    // 削除 設定勘定科目
     func deleteAllOfSettingsTaxonomyAccount() {
         let objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomyAccount.self)
-        // 表示科目　オブジェクトを削除
         for object in objects {
             do {
                 try DataBaseManager.realm.write {

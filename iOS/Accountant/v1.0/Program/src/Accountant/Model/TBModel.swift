@@ -232,11 +232,6 @@ class TBModel: TBModelInput {
         }
         // 月次資本振替仕訳、資本金勘定の月次残高振替仕訳 を行う
         monthlyTransferJournals()
-        // 法人/個人フラグ
-        if UserDefaults.standard.bool(forKey: "corporation_switch") {
-            // 設定表示科目　初期化 毎回行うと時間がかかる
-            DataBaseManagerTaxonomy.shared.initializeTaxonomy()
-        }
     }
     
     // 集計処理
@@ -272,22 +267,6 @@ class TBModel: TBModelInput {
         calculateAccountMonthlyTotal(accountName: accountRight)
         // 月次資本振替仕訳、資本金勘定の月次残高振替仕訳 を行う
         monthlyTransferJournals()
-        // 法人/個人フラグ
-        if UserDefaults.standard.bool(forKey: "corporation_switch") {
-            // 設定表示科目　初期化 毎回行うと時間がかかる
-            DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
-                numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: accountLeft)
-            ) // 勘定科目の名称から、紐づけられた設定表示科目の連番を取得する
-            DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
-                numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: accountRight)
-            )
-            DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
-                numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(
-                    category: "繰越利益"
-                )
-            )
-            // 表示科目　貸借対照表の大区分と中区分の合計額と、表示科目の集計額を集計 は、BS画面のwillAppear()で行う
-        }
     }
     // 設定　決算整理仕訳と決算整理後　勘定クラス　個別の勘定別　決算整理仕訳データを追加後に、呼び出される
     /// 実行タイミング
@@ -307,22 +286,6 @@ class TBModel: TBModelInput {
         calculateAccountMonthlyTotal(accountName: accountRight)
         // 月次資本振替仕訳、資本金勘定の月次残高振替仕訳 を行う
         monthlyTransferJournals()
-        // 法人/個人フラグ
-        if UserDefaults.standard.bool(forKey: "corporation_switch") {
-            // 設定表示科目　初期化 毎回行うと時間がかかる
-            DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
-                numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: accountLeft)
-            ) // 勘定科目の名称から、紐づけられた設定表示科目の連番を取得する
-            DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
-                numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: accountRight)
-            )
-            DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
-                numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(
-                    category: "繰越利益"
-                )
-            )
-            // 表示科目　貸借対照表の大区分と中区分の合計額と、表示科目の集計額を集計 は、BS画面のwillAppear()で行う
-        }
     }
     
     // MARK: - 帳簿締切

@@ -208,7 +208,7 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
         }
     }
     
-    // 会計処理　転記、合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))、表示科目
+    // 会計処理　転記、合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))
     func initializeJournals(completion: (Bool) -> Void) {
         // 転記　仕訳から勘定への関連を付け直す
         DataBaseManagerJournals.shared.reconnectJournalEntryToAccounts()

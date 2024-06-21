@@ -417,7 +417,7 @@ struct HTMLhelperBS {
                 </tr>
     """
     }
-    // レコードごとに1回コール 段落2　有形固定資産、無形固定資産、投資その他の資産に属する表示科目
+    // レコードごとに1回コール 段落2　有形固定資産、無形固定資産、投資その他の資産に属する科目
     func getSingleRowIndent2space(title: String, amount: String) -> String {
          """
                 <tr>

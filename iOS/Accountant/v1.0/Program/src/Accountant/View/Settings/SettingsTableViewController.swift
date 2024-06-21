@@ -17,6 +17,7 @@ import WidgetKit
 // 設定クラス
 class SettingsTableViewController: UIViewController {
     
+    @IBOutlet var logoLabel: UILabel!
     @IBOutlet var versionLabel: UILabel!
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var scrollView: UIScrollView!
@@ -113,6 +114,13 @@ class SettingsTableViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        // ロゴに影をつける
+        logoLabel.clipsToBounds = false
+        logoLabel.layer.shadowColor = UIColor.textShadowColor.cgColor // 影の色
+        logoLabel.layer.shadowOffset = CGSize(width: 1.0, height: 1.5) // 影の位置
+        logoLabel.layer.shadowOpacity = 1.0 // 影の透明度
+        logoLabel.layer.shadowRadius = 5.0 // 影の広がり
     }
     
     // Push通知の権限ダイアログを表示させる
@@ -451,9 +459,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.centerLabel.text = "アップグレード"
                 cell.centerLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
                 cell.centerLabel.textColor = .mainColor2
-                cell.leftImageView.image = UIImage(named: "military_tech-military_tech_symbol")?.withRenderingMode(.alwaysTemplate)
+                cell.leftImageView.image = UIImage(named: "baseline_workspace_premium_black_36pt")?.withRenderingMode(.alwaysTemplate)
                 // アイコン画像の色を指定する
-                cell.leftImageView.tintColor = .mainColor2
+                cell.leftImageView.tintColor = .baseColor
                 // 背景色
                 cell.backgroundColor = .accentColor
                 // セルの選択を可にする
@@ -546,7 +554,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 }
                 let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                 // 生体認証パスコードロック　設定スイッチ
-                switchView.onTintColor = .accentColor
+                switchView.onTintColor = .accentBlue
                 switchView.isOn = UserDefaults.standard.bool(forKey: "biometrics_switch")
                 switchView.tag = indexPath.row
                 switchView.addTarget(self, action: #selector(switchTriggered), for: .valueChanged)
@@ -566,7 +574,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 }
                 let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                 // ローカル通知　設定スイッチ
-                switchView.onTintColor = .accentColor
+                switchView.onTintColor = .accentBlue
                 switchView.isOn = UserDefaults.standard.bool(forKey: "local_notification_switch")
                 switchView.tag = indexPath.row
                 switchView.addTarget(self, action: #selector(localNotificationSettingSwitchTriggered), for: .valueChanged)

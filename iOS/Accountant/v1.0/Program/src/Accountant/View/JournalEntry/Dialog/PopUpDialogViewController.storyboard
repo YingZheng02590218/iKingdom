@@ -9,29 +9,29 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Pop Up View Controller-->
+        <!--Pop Up Dialog View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="PopUpViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="Y6W-OH-hqX" customClass="PopUpViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PopUpDialogViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="Y6W-OH-hqX" customClass="PopUpDialogViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7kZ-pz-DPb">
-                                <rect key="frame" x="20.5" y="122.5" width="373" height="651"/>
+                                <rect key="frame" x="57" y="348" width="300" height="200"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YOr-cJ-tIg">
-                                        <rect key="frame" x="0.0" y="0.0" width="373" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タイトル" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3l-GM-89V">
                                                 <rect key="frame" x="10" y="18" width="82" height="24"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" name="TextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmn-UT-cdz">
-                                                <rect key="frame" x="346" y="19" width="17" height="22"/>
+                                                <rect key="frame" x="273" y="19" width="17" height="22"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" name="MainColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -39,7 +39,7 @@
                                                     <color key="titleColor" name="MainColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="closeButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="jZc-Wl-3ZL"/>
+                                                    <action selector="closeButtonTpped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hjU-Zd-i5a"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -53,31 +53,55 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FcO-up-AzF">
-                                        <rect key="frame" x="0.0" y="60" width="373" height="526"/>
+                                        <rect key="frame" x="0.0" y="60" width="300" height="0.0"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="hBh-e1-HW2"/>
+                                        </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Xq-OI-USk">
-                                        <rect key="frame" x="0.0" y="586" width="373" height="65"/>
+                                        <rect key="frame" x="0.0" y="60" width="300" height="140"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4J-2e-Enf">
-                                                <rect key="frame" x="19" y="16.5" width="335" height="32.5"/>
-                                                <color key="tintColor" name="AccentColor"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ZM-vA-gT0">
+                                                <rect key="frame" x="15" y="10.5" width="270" height="49"/>
+                                                <color key="tintColor" name="TextColor"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="閉じる">
-                                                    <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="広告動画を見る" subtitle="（仕訳を入力できる回数を付与）" titleAlignment="center">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
+                                                    <fontDescription key="subtitleFontDescription" type="system" pointSize="13"/>
                                                 </buttonConfiguration>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" name="MainColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="closeButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="qpG-NV-bSc"/>
+                                                    <action selector="watchAdButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="XYK-QI-WXl"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4J-2e-Enf">
+                                                <rect key="frame" x="15" y="80.5" width="270" height="49"/>
+                                                <color key="backgroundColor" name="AccentColor"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <color key="tintColor" name="BaseColor"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="広告を表示しない"/>
+                                                <connections>
+                                                    <action selector="upgradeButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Nhy-fM-tNx"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="b4J-2e-Enf" firstAttribute="centerX" secondItem="3Xq-OI-USk" secondAttribute="centerX" id="4jO-JG-y6K"/>
-                                            <constraint firstItem="b4J-2e-Enf" firstAttribute="centerY" secondItem="3Xq-OI-USk" secondAttribute="centerY" id="A1H-M2-e6e"/>
-                                            <constraint firstAttribute="height" constant="65" id="BGZ-eA-gff"/>
-                                            <constraint firstItem="b4J-2e-Enf" firstAttribute="height" secondItem="3Xq-OI-USk" secondAttribute="height" multiplier="0.5" id="Lk0-0L-feR"/>
+                                            <constraint firstItem="b4J-2e-Enf" firstAttribute="centerY" secondItem="3Xq-OI-USk" secondAttribute="centerY" multiplier="1.5" id="A1H-M2-e6e"/>
+                                            <constraint firstAttribute="height" constant="140" id="BGZ-eA-gff"/>
+                                            <constraint firstItem="b4J-2e-Enf" firstAttribute="height" secondItem="3Xq-OI-USk" secondAttribute="height" multiplier="0.35" id="Lk0-0L-feR"/>
+                                            <constraint firstItem="8ZM-vA-gT0" firstAttribute="height" secondItem="3Xq-OI-USk" secondAttribute="height" multiplier="0.35" id="S6H-99-MXa"/>
+                                            <constraint firstItem="8ZM-vA-gT0" firstAttribute="centerX" secondItem="3Xq-OI-USk" secondAttribute="centerX" id="Sat-FE-6eg"/>
                                             <constraint firstItem="b4J-2e-Enf" firstAttribute="width" secondItem="3Xq-OI-USk" secondAttribute="width" multiplier="0.9" id="i9B-tS-2cP"/>
+                                            <constraint firstItem="8ZM-vA-gT0" firstAttribute="centerY" secondItem="3Xq-OI-USk" secondAttribute="centerY" multiplier="0.5" id="u0N-ac-4Hz"/>
+                                            <constraint firstItem="8ZM-vA-gT0" firstAttribute="width" secondItem="3Xq-OI-USk" secondAttribute="width" multiplier="0.9" id="wHA-p2-36M"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -89,9 +113,11 @@
                                     <constraint firstItem="YOr-cJ-tIg" firstAttribute="top" secondItem="7kZ-pz-DPb" secondAttribute="top" id="KNs-fa-BsH"/>
                                     <constraint firstAttribute="trailing" secondItem="YOr-cJ-tIg" secondAttribute="trailing" id="KQ9-SU-w06"/>
                                     <constraint firstItem="FcO-up-AzF" firstAttribute="leading" secondItem="7kZ-pz-DPb" secondAttribute="leading" id="Nv4-bK-Ow0"/>
+                                    <constraint firstAttribute="width" constant="300" id="WCd-rg-HeD"/>
                                     <constraint firstAttribute="trailing" secondItem="FcO-up-AzF" secondAttribute="trailing" id="YdH-KJ-qlW"/>
                                     <constraint firstItem="FcO-up-AzF" firstAttribute="top" secondItem="YOr-cJ-tIg" secondAttribute="bottom" id="b6J-yN-62E"/>
                                     <constraint firstItem="YOr-cJ-tIg" firstAttribute="leading" secondItem="7kZ-pz-DPb" secondAttribute="leading" id="jOo-kN-ZiW"/>
+                                    <constraint firstAttribute="height" constant="200" id="p2u-U4-d98"/>
                                     <constraint firstAttribute="bottom" secondItem="3Xq-OI-USk" secondAttribute="bottom" id="vwu-3m-vDJ"/>
                                 </constraints>
                             </view>
@@ -99,8 +125,6 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="7kZ-pz-DPb" firstAttribute="height" secondItem="vDu-zF-Fre" secondAttribute="height" multiplier="0.8" id="5nv-SX-hwe"/>
-                            <constraint firstItem="7kZ-pz-DPb" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="0.9" id="Rut-75-BF2"/>
                             <constraint firstItem="7kZ-pz-DPb" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="rhl-VD-Dmk"/>
                             <constraint firstItem="7kZ-pz-DPb" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="rkh-xV-JdT"/>
                         </constraints>
@@ -108,10 +132,12 @@
                     <connections>
                         <outlet property="baseView" destination="7kZ-pz-DPb" id="CzA-f3-q96"/>
                         <outlet property="bodyView" destination="FcO-up-AzF" id="p0c-TN-Sh8"/>
-                        <outlet property="button" destination="b4J-2e-Enf" id="JNd-Hh-pI4"/>
+                        <outlet property="closeButton" destination="dmn-UT-cdz" id="WPN-Gi-4bS"/>
                         <outlet property="footerView" destination="3Xq-OI-USk" id="Wt2-Ox-4db"/>
                         <outlet property="headerView" destination="YOr-cJ-tIg" id="KdW-Ar-wfs"/>
                         <outlet property="titleLabel" destination="c3l-GM-89V" id="Fr7-eE-qhD"/>
+                        <outlet property="upgradeButton" destination="b4J-2e-Enf" id="mdW-7m-rPK"/>
+                        <outlet property="watchAdButton" destination="8ZM-vA-gT0" id="47a-jZ-gKp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -129,6 +155,9 @@
         </namedColor>
         <namedColor name="MainColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="0.48500001430511475" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextColor">
+            <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

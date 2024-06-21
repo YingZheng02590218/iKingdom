@@ -11,12 +11,20 @@ import GoogleMobileAds // マネタイズ対応
 import UIKit
 
 // 勘定科目詳細クラス
-class SettingsCategoryDetailTableViewController: UITableViewController {
-    
-    // 入力ボタン
-    @IBOutlet private var inputButton: EMTNeumorphicButton! // 入力ボタン
+class SettingsCategoryDetailTableViewController: UIViewController {
     
     var gADBannerView: GADBannerView!
+    
+    @IBOutlet var backgroundView: UIView!
+    @IBOutlet var tableView: UITableView!
+    // 入力ボタン
+    @IBOutlet private var inputButton: EMTNeumorphicButton! // 入力ボタン
+    /// モーダル上部に設置されるインジケータ
+    private lazy var indicatorView: SemiModalIndicatorView = {
+        let indicator = SemiModalIndicatorView()
+        indicator.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(indicatorDidTap(_:))))
+        return indicator
+    }()
     
     // MARK: - var let
     
@@ -45,11 +53,8 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
     var taxonomyname = ""
     
     var numberOfAccount: Int = 0 // 勘定科目番号
-    var numberOfTaxonomy: Int? // 表示科目番号
     
     var addAccount = false // 勘定科目　詳細　設定画面からの遷移で勘定科目追加の場合はtrue
-    // 画面遷移の準備　表示科目一覧画面へ
-    var tappedIndexPath: IndexPath?
     // フィードバック
     private let feedbackGeneratorHeavy: Any? = {
         if #available(iOS 10.0, *) {
@@ -70,13 +75,16 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
         // editButtonItem.tintColor = .accentColor
         // navigationItem.rightBarButtonItem = editButtonItem
         
+        // largeTitle表示
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .accentColor
+        
         tableView.separatorColor = .accentColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // TODO: 表示科目を変更後に勘定科目詳細画面を更新する
-        tableView.reloadData()
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
@@ -121,15 +129,16 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
         createButtons()
         setupInputButton()
     }
-    
-    // MARK: - Table view data source
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
+}
+
+// MARK: - Table view data source
+extension SettingsCategoryDetailTableViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return 2
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             // 大区分
@@ -142,21 +151,12 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
             } else {
                 return 1
             }
-        case 2:
-            // 表示科目
-            // 編集モードの場合
-            if tableView.isEditing {
-                return 0
-            } else {
-                // 法人/個人フラグ
-                return UserDefaults.standard.bool(forKey: "corporation_switch") ? 1 : 0
-            }
         default:
             return 0
         }
     }
     // セクションヘッダーのテキスト決める
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
             if addAccount { // 勘定科目追加の場合
@@ -170,35 +170,19 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
             } else {
                 return tableView.isEditing ? "勘定科目 変更" : nil // 編集モードの場合
             }
-        case 2:
-            // 編集モードの場合
-            if tableView.isEditing {
-                return nil
-            } else {
-                // 法人/個人フラグ
-                return UserDefaults.standard.bool(forKey: "corporation_switch") ? "表示科目" : nil
-            }
         default:
             return nil
         }
     }
     // セクションフッターのテキスト決める
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
-        case 2:
-            // 編集モードの場合
-            if tableView.isEditing {
-                return nil
-            } else {
-                // 法人/個人フラグ
-                return UserDefaults.standard.bool(forKey: "corporation_switch") ? "勘定科目を、決算書上に表記される表示科目に紐付けてください。" : nil
-            }
         default:
             return nil
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
             if addAccount { // 勘定科目追加の場合
@@ -212,20 +196,12 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
             } else {
                 return tableView.isEditing ? 44 : 0 // 編集モードの場合
             }
-        case 2:
-            // 編集モードの場合
-            if tableView.isEditing {
-                return 0
-            } else {
-                // 法人/個人フラグ
-                return UserDefaults.standard.bool(forKey: "corporation_switch") ? 44 : 0
-            }
         default:
             return 0
         }
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? SettingAccountDetailTableViewCell else {
             return UITableViewCell()
         }
@@ -239,15 +215,10 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
             accountDetailAccountTextField.isHidden = true
             accountDetailAccountTextField.isEnabled = false
         }
-        // 表示科目
-        if let label = cell.label {
-            label.text = ""
-            label.isHidden = true
-        }
         cell.accessoryType = .none
         // セルの選択
         cell.selectionStyle = .none
-        cell.label.text = "-"
+        cell.label.text = ""
         cell.label.textColor = .textColor
         cell.accessoryView = nil
         
@@ -255,7 +226,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
             // 新規追加　以外
             cell.label.isHidden = false
             cell.label.isEnabled = true
-            // 勘定科目の連番から勘定科目を取得　紐づけた表示科目の連番を知るため
+            // 勘定科目の連番から勘定科目を取得
             if let object = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(number: numberOfAccount) { // 勘定科目
                 switch indexPath.row {
                 case 0:
@@ -403,56 +374,24 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
             default:
                 break
             }
-        } else {
-            // タクソノミ　表示科目
-            cell.label.isHidden = false
-            cell.label.isEnabled = true
-            // セルの選択
-            cell.selectionStyle = .default
-            cell.textLabel?.text = "表示科目名"
-            cell.textLabel?.textColor = .lightGray
-            cell.textLabel?.font = .systemFont(ofSize: 14)
-            // 表示科目名
-            if let numberOfTaxonomy = self.numberOfTaxonomy, numberOfTaxonomy != 0,
-               // 設定表示科目
-               let object = DataBaseManagerSettingsTaxonomy.shared.getSettingsTaxonomy(numberOfTaxonomy: numberOfTaxonomy) {
-                // 新規登録で選択した表示科目
-                cell.label.text = "\(object.number), \(object.category)"
-            } else
-            // 設定勘定科目　勘定科目の連番から設定勘定科目を取得　紐づけた表示科目の連番を知るため
-            if let object = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(number: numberOfAccount),
-               let numberOfTaxonomy = Int(object.numberOfTaxonomy),
-               // 設定表示科目
-               let object = DataBaseManagerSettingsTaxonomy.shared.getSettingsTaxonomy(numberOfTaxonomy: numberOfTaxonomy) {
-                // 新規登録以外
-                cell.label.text = "\(object.number), \(object.category)"
-            } else {
-                cell.label.text = "表示科目を選択してください"
-                cell.label.textColor = .lightGray
-            }
-            // Accessory Color
-            let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
-            let disclosureView = UIImageView(image: disclosureImage)
-            disclosureView.tintColor = UIColor.accentColor
-            cell.accessoryView = disclosureView
         }
         return cell
     }
     
     // 編集機能
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         .none
     }
     // インデント
-    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         false
     }
     
     // セルが選択された時に呼び出される　// すべての影響範囲に修正が必要
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
     
-    override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+    func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
@@ -478,6 +417,22 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
         inputButton.neumorphicLayer?.edged = Constant.edged
         inputButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         inputButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+        
+        // タイプ判定
+        if addAccount {
+            if let backgroundView = backgroundView {
+                // 中央上部に配置する
+                indicatorView.frame = CGRect(x: 0, y: 0, width: 40, height: 5)
+                backgroundView.addSubview(indicatorView)
+                indicatorView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    indicatorView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+                    indicatorView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5),
+                    indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
+                    indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
+                ])
+            }
+        }
     }
     
     func setupInputButton() {
@@ -545,16 +500,10 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
                                let presentingViewController = categoryListCarouselAndPageViewController.pageViewController.viewControllers?.first as? CategoryListTableViewController {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                     self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                                        // 表示科目が紐付けされていない場合
-                                        var numberOfTaxonomyString = ""
-                                        if let numberOfTaxonomy = self.numberOfTaxonomy {
-                                            numberOfTaxonomyString = String(numberOfTaxonomy)
-                                        }
                                         newnumber = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
                                             rank0: self.bigNum,
                                             rank1: self.midNum,
                                             rank2: self.smallNum,
-                                            numberOfTaxonomy: numberOfTaxonomyString,
                                             category: self.accountname,
                                             switching: true
                                         )
@@ -585,16 +534,10 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
                                let presentingViewController = categoryListCarouselAndPageViewController.pageViewController.viewControllers?.first as? CategoryListTableViewController {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                     self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                                        // 表示科目が紐付けされていない場合
-                                        var numberOfTaxonomyString = ""
-                                        if let numberOfTaxonomy = self.numberOfTaxonomy {
-                                            numberOfTaxonomyString = String(numberOfTaxonomy)
-                                        }
                                         newnumber = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
                                             rank0: self.bigNum,
                                             rank1: self.midNum,
                                             rank2: self.smallNum,
-                                            numberOfTaxonomy: numberOfTaxonomyString,
                                             category: self.accountname,
                                             switching: true
                                         )
@@ -674,101 +617,20 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
             return false // NG
         }
         
-        // 法人/個人フラグ 法人の場合　チェックする
-        if UserDefaults.standard.bool(forKey: "corporation_switch") {
-            // 編集モードの場合
-            if tableView.isEditing {
-                // バリデーションをおこなわない
-            } else {
-                guard taxonomyname != "表示科目を選択してください" && taxonomyname != "" else {
-                    let alert = UIAlertController(title: "表示科目名", message: "入力してください", preferredStyle: .alert)
-                    self.present(alert, animated: true) { () -> Void in
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            self.dismiss(animated: true, completion: nil)
-                        }
-                    }
-                    return false // NG
-                }
-            }
-        }
-        
         return true // OK
+    }
+    
+    // インジケータ タップ
+    @objc
+    private func indicatorDidTap(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: navigation
     
     // 追加・編集機能　画面遷移の準備の前に入力検証
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        // 画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
-        if let indexPath: IndexPath = self.tableView.indexPathForSelectedRow {
-            if IndexPath(row: 0, section: 2) != indexPath { // 表示科目名以外は遷移しない
-                return false // false:画面遷移させない
-            }
-        }
-        return true
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // 選択されたセルを取得
-        if let indexPath: IndexPath = self.tableView.indexPathForSelectedRow { // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
-            // セルの選択を解除
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
-        
-        switch segue.identifier {
-            // 設定勘定科目
-        case "segue_TaxonomyList": // “セグウェイにつけた名称”:
-            // segue.destinationの型はUIViewController
-            if let viewControllerGeneralLedgerAccount = segue.destination as? SettingsTaxonomyListTableViewController {
-                viewControllerGeneralLedgerAccount.howToUse = true // 勘定科目　詳細　設定画面からの遷移の場合はtrue
-                if addAccount { // 新規で設定勘定科目を追加する場合　addButtonを押下
-                    viewControllerGeneralLedgerAccount.addAccount = true // 新規で設定勘定科目を追加する場合　addButtonを押下
-                } else {
-                    // 勘定科目を編集する場合　勘定科目の連番から勘定科目を取得　大区分を知るため
-                    if let dataBaseSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(number: numberOfAccount) {
-                        bigNum = dataBaseSettingsTaxonomyAccount.Rank0 // 大区分
-                    }
-                }
-                // 遷移先のコントローラに値を渡す
-                viewControllerGeneralLedgerAccount.numberOfTaxonomyAccount = numberOfAccount // 設定勘定科目連番　を渡す
-                switch bigNum { // object?.rank0 {
-                case "0", "1", "2", "3", "4", "5":
-                    viewControllerGeneralLedgerAccount.segmentedControl.selectedSegmentIndex = 0 // セグメントスイッチにBSを設定
-                    // 遷移先のコントローラー.条件用の属性 = “条件”
-                case "6", "7", "8", "9", "10", "11":
-                    viewControllerGeneralLedgerAccount.segmentedControl.selectedSegmentIndex = 1 // セグメントスイッチにPLを設定
-                default:
-                    break
-                }
-            }
-        default:
-            break
-        }
-    }
-    // 勘定科目に紐づけられた表示科目を変更する　設定勘定科目連番、表示科目連番
-    func changeTaxonomyOfTaxonomyAccount(number: Int, numberOfTaxonomy: Int) -> Int {
-        var newnumber = 0
-        // 変更
-        DatabaseManagerSettingsTaxonomyAccount.shared.updateTaxonomyOfSettingsTaxonomyAccount(number: number, numberOfTaxonomy: String(numberOfTaxonomy))
-        newnumber = number
-        return newnumber
-    }
-    
-    func showNumberOfTaxonomy() {
-        // 表示科目名
-        if let numberOfTaxonomy = self.numberOfTaxonomy,
-           self.numberOfTaxonomy != 0 { // 表示科目が選択されて、表示科目番号が詳細画面に戻ってきた場合
-            guard let taxonomyCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as? SettingAccountDetailTableViewCell else {
-                return
-            }
-            if let dataBaseSettingsTaxonomy = DataBaseManagerSettingsTaxonomy.shared.getSettingsTaxonomy(
-                numberOfTaxonomy: numberOfTaxonomy
-            ) {
-                taxonomyname = "\(dataBaseSettingsTaxonomy.number), \(dataBaseSettingsTaxonomy.category)"
-                taxonomyCell.label.text = "\(dataBaseSettingsTaxonomy.number), \(dataBaseSettingsTaxonomy.category)"
-                taxonomyCell.label.textColor = .textColor
-            }
-        }
+        return false // false:画面遷移させない
     }
 }
 extension SettingsCategoryDetailTableViewController: TableViewCellDelegate {

@@ -5,5 +5,5 @@
   Created by Hisashi Ishihara on 2021/04/29.
   Copyright © 2021 Hisashi Ishihara. All rights reserved.
 */
-NSUserTrackingUsageDescription = "この識別子は、パーソナライズされた広告を配信するために使用されます。";
+NSUserTrackingUsageDescription = "\nアプリ品質の向上・サービス改善のためにトラッキングの『許可』をお願いします。\n\nあなたが興味や関心のない広告が配信されにくくなります。\n\n個人情報へのアクセスはありません。\n\nトラッキングの許可/拒否は設定画面からいつでも変更が可能です。";
 NSFaceIDUsageDescription = "ロックを解除するために、認証を使用します。";
