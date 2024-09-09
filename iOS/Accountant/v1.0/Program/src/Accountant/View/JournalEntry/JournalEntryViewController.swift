@@ -2615,13 +2615,13 @@ extension JournalEntryViewController: UICollectionViewDelegateFlowLayout {
         // Labelの文字数に合わせてセルの幅を決める
         let size: CGSize = objects[indexPath.row].nickname.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15.0)])
         // 横画面で、collectionViewの高さから計算した高さがマイナスになる場合の対策
-        let height = (collectionView.bounds.size.height / 2) - 10
+        let height = (collectionView.bounds.size.height / 2) - 0
         return CGSize(width: size.width + 20.0, height: height < 0 ? 0 : height)
     }
     // 余白の調整（UIImageを拡大、縮小している）
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         // top:ナビゲーションバーの高さ分上に移動
-        return UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+        return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     }
     
 }
