@@ -61,7 +61,7 @@
                                                         <color key="shadowColor" name="MainColor"/>
                                                         <size key="shadowOffset" width="1" height="1"/>
                                                     </label>
-                                                    <textField opaque="NO" tag="555" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="仕訳の概要を入力してください" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CGJ-wO-Vaf">
+                                                    <textField opaque="NO" tag="222222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="仕訳の概要を入力してください" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CGJ-wO-Vaf">
                                                         <rect key="frame" x="0.0" y="42" width="280" height="58"/>
                                                         <color key="backgroundColor" name="MainColor2"/>
                                                         <constraints>
@@ -280,7 +280,7 @@
                                                         <color key="shadowColor" name="MainColor"/>
                                                         <size key="shadowOffset" width="1" height="1"/>
                                                     </label>
-                                                    <textField opaque="NO" tag="555" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="取引内容" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QrX-gP-fQs">
+                                                    <textField opaque="NO" tag="212121" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="取引内容" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QrX-gP-fQs">
                                                         <rect key="frame" x="0.0" y="42" width="280" height="58"/>
                                                         <color key="backgroundColor" name="MainColor2"/>
                                                         <constraints>
@@ -552,7 +552,7 @@
         <image name="close-close_symbol" width="12" height="12"/>
         <image name="delete-delete_symbol" width="14" height="16"/>
         <namedColor name="BaseColor">
-            <color red="0.87800002098083496" green="0.89800000190734863" blue="0.92500001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ButtonTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

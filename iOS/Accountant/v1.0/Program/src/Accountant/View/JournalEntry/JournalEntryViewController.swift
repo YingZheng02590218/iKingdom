@@ -24,40 +24,1181 @@ class JournalEntryViewController: UIViewController {
     @IBOutlet var labelTitle: UILabel!
     // 仕訳/決算整理仕訳　切り替え
     @IBOutlet var segmentedControl: UISegmentedControl!
-    // よく使う仕訳　エリア　カルーセル
+    // 単一仕訳/複合仕訳　切り替え
+    @IBOutlet var compoundJournalEntrySegmentedControl: UISegmentedControl!
+    
+    // MARK: よく使う仕訳
+    // よく使う仕訳　エリア
+    @IBOutlet var journalEntryTemplateView: UIView!
+    // よく使う仕訳　カルーセル
     @IBOutlet private var tableView: UITableView!
     // カルーセル　true: リロードする
     static var viewReload = false
+    
+    // MARK: デイトピッカー
+    // デイトピッカー　日付
+    @IBOutlet private var datePicker: UIDatePicker!
+    @IBOutlet private var datePickerView: EMTNeumorphicView!
+    @IBOutlet private var maskDatePickerButton: UIButton!
+    // デイトピッカーのマスク
+    var isMaskedDatePicker = false // マスクフラグ
+    
+    // MARK: ボタン
     // ボタン　アウトレットコレクション
     @IBOutlet var arrayHugo: [EMTNeumorphicButton]!
     @IBOutlet var buttonRight: EMTNeumorphicButton!
     @IBOutlet private var buttonLeft: EMTNeumorphicButton!
     @IBOutlet var inputButton: EMTNeumorphicButton!
     @IBOutlet private var cancelButton: EMTNeumorphicButton!
-    // デイトピッカー　日付
-    @IBOutlet private var datePicker: UIDatePicker!
     // 仕訳画面表示ボタン
     @IBOutlet private var addButton: UIButton!
     
-    var isMaskedDatePicker = false // マスクフラグ
-    
-    @IBOutlet private var datePickerView: EMTNeumorphicView!
-    @IBOutlet private var maskDatePickerButton: UIButton!
-    // テキストフィールド　勘定科目、金額
-    @IBOutlet var textFieldCategoryDebit: PickerTextField!
-    @IBOutlet var textFieldCategoryCredit: PickerTextField!
-    @IBOutlet var textFieldAmountDebit: UITextField!
-    @IBOutlet var textFieldAmountCredit: UITextField!
+    // MARK: テキストフィールド
     @IBOutlet var textFieldView: EMTNeumorphicView!
+    // 勘定科目エリア　余白
+    @IBOutlet var spaceView: UIView!
+    // テキストフィールド　勘定科目、金額　単一仕訳
+    @IBOutlet var textFieldCategoryDebit: PickerTextField! {
+        didSet {
+            textFieldCategoryDebit.delegate = self
+            textFieldCategoryDebit.textAlignment = .left
+            textFieldCategoryDebit.layer.borderWidth = 0.5
+            textFieldCategoryDebit.setup()
+            textFieldCategoryDebit.updateUI()
+        }
+    }
+    @IBOutlet var textFieldAmountDebit: UITextField! {
+        didSet {
+            textFieldAmountDebit.delegate = self
+            textFieldAmountDebit.textAlignment = .left
+            textFieldAmountDebit.layer.borderWidth = 0.5
+        }
+    }
+    @IBOutlet var textFieldCategoryCredit: PickerTextField! {
+        didSet {
+            textFieldCategoryCredit.delegate = self
+            textFieldCategoryCredit.textAlignment = .right
+            textFieldCategoryCredit.layer.borderWidth = 0.5
+            textFieldCategoryCredit.setup()
+            textFieldCategoryCredit.updateUI()
+        }
+    }
+    @IBOutlet var textFieldAmountCredit: UITextField! {
+        didSet {
+            textFieldAmountCredit.delegate = self
+            textFieldAmountCredit.textAlignment = .right
+            textFieldAmountCredit.layer.borderWidth = 0.5
+        }
+    }
+    // テキストフィールド　勘定科目、金額　複合仕訳
+    @IBOutlet var viewDebit1: UIView!
+    @IBOutlet var textFieldCategoryDebit1: PickerTextField! {
+        didSet {
+            textFieldCategoryDebit1.delegate = self
+            textFieldCategoryDebit1.textAlignment = .left
+            textFieldCategoryDebit1.layer.borderWidth = 0.5
+            textFieldCategoryDebit1.setup()
+            textFieldCategoryDebit1.updateUI()
+        }
+    }
+    @IBOutlet var textFieldAmountDebit1: UITextField! {
+        didSet {
+            textFieldAmountDebit1.delegate = self
+            textFieldAmountDebit1.textAlignment = .left
+            textFieldAmountDebit1.layer.borderWidth = 0.5
+        }
+    }
+    @IBOutlet var viewCredit1: UIView!
+    @IBOutlet var textFieldCategoryCredit1: PickerTextField! {
+        didSet {
+            textFieldCategoryCredit1.delegate = self
+            textFieldCategoryCredit1.textAlignment = .right
+            textFieldCategoryCredit1.layer.borderWidth = 0.5
+            textFieldCategoryCredit1.setup()
+            textFieldCategoryCredit1.updateUI()
+        }
+    }
+    @IBOutlet var textFieldAmountCredit1: UITextField! {
+        didSet {
+            textFieldAmountCredit1.delegate = self
+            textFieldAmountCredit1.textAlignment = .right
+            textFieldAmountCredit1.layer.borderWidth = 0.5
+        }
+    }
+    
+    @IBOutlet var viewDebit2: UIView!
+    @IBOutlet var textFieldCategoryDebit2: PickerTextField! {
+        didSet {
+            textFieldCategoryDebit2.delegate = self
+            textFieldCategoryDebit2.textAlignment = .left
+            textFieldCategoryDebit2.layer.borderWidth = 0.5
+            textFieldCategoryDebit2.setup()
+            textFieldCategoryDebit2.updateUI()
+        }
+    }
+    @IBOutlet var textFieldAmountDebit2: UITextField! {
+        didSet {
+            textFieldAmountDebit2.delegate = self
+            textFieldAmountDebit2.textAlignment = .left
+            textFieldAmountDebit2.layer.borderWidth = 0.5
+        }
+    }
+    @IBOutlet var viewCredit2: UIView!
+    @IBOutlet var textFieldCategoryCredit2: PickerTextField! {
+        didSet {
+            textFieldCategoryCredit2.delegate = self
+            textFieldCategoryCredit2.textAlignment = .right
+            textFieldCategoryCredit2.layer.borderWidth = 0.5
+            textFieldCategoryCredit2.setup()
+            textFieldCategoryCredit2.updateUI()
+        }
+    }
+    @IBOutlet var textFieldAmountCredit2: UITextField! {
+        didSet {
+            textFieldAmountCredit2.delegate = self
+            textFieldAmountCredit2.textAlignment = .right
+            textFieldAmountCredit2.layer.borderWidth = 0.5
+        }
+    }
+    
+    @IBOutlet var viewDebit3: UIView!
+    @IBOutlet var textFieldCategoryDebit3: PickerTextField! {
+        didSet {
+            textFieldCategoryDebit3.delegate = self
+            textFieldCategoryDebit3.textAlignment = .left
+            textFieldCategoryDebit3.layer.borderWidth = 0.5
+            textFieldCategoryDebit3.setup()
+            textFieldCategoryDebit3.updateUI()
+        }
+    }
+    @IBOutlet var textFieldAmountDebit3: UITextField! {
+        didSet {
+            textFieldAmountDebit3.delegate = self
+            textFieldAmountDebit3.textAlignment = .left
+            textFieldAmountDebit3.layer.borderWidth = 0.5
+        }
+    }
+    @IBOutlet var viewCredit3: UIView!
+    @IBOutlet var textFieldCategoryCredit3: PickerTextField! {
+        didSet {
+            textFieldCategoryCredit3.delegate = self
+            textFieldCategoryCredit3.textAlignment = .right
+            textFieldCategoryCredit3.layer.borderWidth = 0.5
+            textFieldCategoryCredit3.setup()
+            textFieldCategoryCredit3.updateUI()
+        }
+    }
+    @IBOutlet var textFieldAmountCredit3: UITextField! {
+        didSet {
+            textFieldAmountCredit3.delegate = self
+            textFieldAmountCredit3.textAlignment = .right
+            textFieldAmountCredit3.layer.borderWidth = 0.5
+        }
+    }
+    
+    @IBOutlet var viewDebit4: UIView!
+    @IBOutlet var textFieldCategoryDebit4: PickerTextField! {
+        didSet {
+            textFieldCategoryDebit4.delegate = self
+            textFieldCategoryDebit4.textAlignment = .left
+            textFieldCategoryDebit4.layer.borderWidth = 0.5
+            textFieldCategoryDebit4.setup()
+            textFieldCategoryDebit4.updateUI()
+        }
+    }
+    @IBOutlet var textFieldAmountDebit4: UITextField! {
+        didSet {
+            textFieldAmountDebit4.delegate = self
+            textFieldAmountDebit4.textAlignment = .left
+            textFieldAmountDebit4.layer.borderWidth = 0.5
+        }
+    }
+    @IBOutlet var viewCredit4: UIView!
+    @IBOutlet var textFieldCategoryCredit4: PickerTextField! {
+        didSet {
+            textFieldCategoryCredit4.delegate = self
+            textFieldCategoryCredit4.textAlignment = .right
+            textFieldCategoryCredit4.layer.borderWidth = 0.5
+            textFieldCategoryCredit4.setup()
+            textFieldCategoryCredit4.updateUI()
+        }
+    }
+    @IBOutlet var textFieldAmountCredit4: UITextField! {
+        didSet {
+            textFieldAmountCredit4.delegate = self
+            textFieldAmountCredit4.textAlignment = .right
+            textFieldAmountCredit4.layer.borderWidth = 0.5
+        }
+    }
     // テキストフィールド　小書き
     @IBOutlet var textFieldSmallWritting: UITextField!
     @IBOutlet var smallWrittingTextFieldView: EMTNeumorphicView!
     // 小書き　カウンタ
     @IBOutlet var smallWritingCounterLabel: UILabel!
+    
+    // MARK: - 複合仕訳
+    
+    // MARK: 金額
+    // 借方
+    var debitAmountTotal: Int {
+        var total = 0
+        if let debitAmount = debit.amount {
+            total += debitAmount
+        }
+        for i in debitElements {
+            total += i.amount ?? 0
+        }
+        return total
+    }
+    // 貸方
+    var creditAmountTotal: Int {
+        var total = 0
+        if let creditAmount = credit.amount {
+            total += creditAmount
+        }
+        for i in creditElements {
+            total += i.amount ?? 0
+        }
+        return total
+    }
+    
+    // 貸借の金額を比較する　金額が少ない方に取引要素を追加する
+    func compareDebitAndCredit() {
+        // 借方
+        guard let debitAmount = debit.amount, debitAmount != 0 else {
+            return
+        }
+        // 貸方
+        guard let creditAmount = credit.amount, creditAmount != 0 else {
+            return
+        }
+        // 増設する勘定科目へ
+        if debitAmountTotal > creditAmountTotal {
+            // 相手勘定科目が1件の場合
+            if debitElements.isEmpty {
+                // 貸方
+                let creditElements = self.creditElements
+                if creditElements.filter({ $0.amount == nil || $0.amount == 0 }).isEmpty {
+                    DispatchQueue.main.async {
+                        // 貸方科目へ
+                        self.creditElements.append(AccountTitleAmount())
+                    }
+                }
+            } else {
+                // 借方0と貸方0の金額の大きさが逆転した場合、取引要素1〜4をリセットする
+                if debitAmount > creditAmount {
+                    debitElements = []
+                    DispatchQueue.main.async {
+                        // 貸方科目へ
+                        self.creditElements.append(AccountTitleAmount())
+                    }
+                }
+            }
+        } else if debitAmountTotal < creditAmountTotal {
+            // 相手勘定科目が1件の場合
+            if creditElements.isEmpty {
+                // 借方
+                let debitElements = self.debitElements
+                if debitElements.filter({ $0.amount == nil || $0.amount == 0 }).isEmpty {
+                    DispatchQueue.main.async {
+                        // 借方科目へ
+                        self.debitElements.append(AccountTitleAmount())
+                    }
+                }
+            } else {
+                // 借方0と貸方0の金額の大きさが逆転した場合、取引要素1〜4をリセットする
+                if debitAmount < creditAmount {
+                    creditElements = []
+                    DispatchQueue.main.async {
+                        // 借方科目へ
+                        self.debitElements.append(AccountTitleAmount())
+                    }
+                }
+            }
+        } else {
+            // 貸借一致
+            // 相手勘定科目が1件の場合
+            if creditElements.isEmpty {
+                DispatchQueue.main.async {
+                    // 借方
+                    var debitElements = self.debitElements
+                    debitElements.removeAll(where: { $0.amount == nil || $0.amount == 0 })
+                    self.debitElements = debitElements
+                }
+            }
+            // 相手勘定科目が1件の場合
+            if debitElements.isEmpty {
+                DispatchQueue.main.async {
+                    // 貸方
+                    var creditElements = self.creditElements
+                    creditElements.removeAll(where: { $0.amount == nil || $0.amount == 0 })
+                    self.creditElements = creditElements
+                }
+            }
+            
+            if smallWritting == nil {
+                // 小書きへ
+                textFieldSmallWritting.becomeFirstResponder()
+            }
+        }
+    }
+    
+    // 借方0〜4、貸方0〜4、貸借の科目を比較する　同じ勘定科目の場合は赤い枠線を表示させる　未入力は表示させない
+    func compareCategoryDebitAndCredit() {
+        // 存在確認　同じ勘定科目名が存在するかどうかを確認する
+        let allDebitElements: [AccountTitleAmount] = [debit] + debitElements
+        print("借方", allDebitElements)
+        // 存在確認　同じ勘定科目名が存在するかどうかを確認する
+        let allCreditElements: [AccountTitleAmount] = [credit] + creditElements
+        print("貸方", allCreditElements)
+        
+        if allDebitElements.filter({ $0.title == debit.title }).count > 1 ||
+            !allCreditElements.filter({ $0.title == debit.title }).isEmpty {
+            // テキストフィールドの枠線を赤色とする。
+            textFieldCategoryDebit.layer.borderColor = UIColor.red.cgColor
+            textFieldCategoryDebit.layer.borderWidth = 1.0
+            textFieldCategoryDebit.layer.cornerRadius = 5
+        } else {
+            // テキストフィールドの枠線を非表示とする。
+            textFieldCategoryDebit.layer.borderColor = UIColor.lightGray.cgColor
+            textFieldCategoryDebit.layer.borderWidth = 0.0
+        }
+        if let textFieldCategoryDebit1 = textFieldCategoryDebit1 {
+            if allDebitElements.filter({ $0.title == debitElements[safe: 0]?.title }).count > 1 ||
+                !allCreditElements.filter({ $0.title == debitElements[safe: 0]?.title }).isEmpty {
+                // テキストフィールドの枠線を赤色とする。
+                textFieldCategoryDebit1.layer.borderColor = UIColor.red.cgColor
+                textFieldCategoryDebit1.layer.borderWidth = 1.0
+                textFieldCategoryDebit1.layer.cornerRadius = 5
+            } else {
+                // テキストフィールドの枠線を非表示とする。
+                textFieldCategoryDebit1.layer.borderColor = UIColor.lightGray.cgColor
+                textFieldCategoryDebit1.layer.borderWidth = 0.0
+            }
+        }
+        if let textFieldCategoryDebit2 = textFieldCategoryDebit2 {
+            if allDebitElements.filter({ $0.title == debitElements[safe: 1]?.title }).count > 1 ||
+                !allCreditElements.filter({ $0.title == debitElements[safe: 1]?.title }).isEmpty {
+                // テキストフィールドの枠線を赤色とする。
+                textFieldCategoryDebit2.layer.borderColor = UIColor.red.cgColor
+                textFieldCategoryDebit2.layer.borderWidth = 1.0
+                textFieldCategoryDebit2.layer.cornerRadius = 5
+            } else {
+                // テキストフィールドの枠線を非表示とする。
+                textFieldCategoryDebit2.layer.borderColor = UIColor.lightGray.cgColor
+                textFieldCategoryDebit2.layer.borderWidth = 0.0
+            }
+        }
+        if let textFieldCategoryDebit3 = textFieldCategoryDebit3 {
+            if allDebitElements.filter({ $0.title == debitElements[safe: 2]?.title }).count > 1 ||
+                !allCreditElements.filter({ $0.title == debitElements[safe: 2]?.title }).isEmpty {
+                // テキストフィールドの枠線を赤色とする。
+                textFieldCategoryDebit3.layer.borderColor = UIColor.red.cgColor
+                textFieldCategoryDebit3.layer.borderWidth = 1.0
+                textFieldCategoryDebit3.layer.cornerRadius = 5
+            } else {
+                // テキストフィールドの枠線を非表示とする。
+                textFieldCategoryDebit3.layer.borderColor = UIColor.lightGray.cgColor
+                textFieldCategoryDebit3.layer.borderWidth = 0.0
+            }
+        }
+        if let textFieldCategoryDebit4 = textFieldCategoryDebit4 {
+            if allDebitElements.filter({ $0.title == debitElements[safe: 3]?.title }).count > 1 ||
+                !allCreditElements.filter({ $0.title == debitElements[safe: 3]?.title }).isEmpty {
+                // テキストフィールドの枠線を赤色とする。
+                textFieldCategoryDebit4.layer.borderColor = UIColor.red.cgColor
+                textFieldCategoryDebit4.layer.borderWidth = 1.0
+                textFieldCategoryDebit4.layer.cornerRadius = 5
+            } else {
+                // テキストフィールドの枠線を非表示とする。
+                textFieldCategoryDebit4.layer.borderColor = UIColor.lightGray.cgColor
+                textFieldCategoryDebit4.layer.borderWidth = 0.0
+            }
+        }
+        
+        
+        if allCreditElements.filter({ $0.title == credit.title }).count > 1 ||
+            !allDebitElements.filter({ $0.title == credit.title }).isEmpty {
+            // テキストフィールドの枠線を赤色とする。
+            textFieldCategoryCredit.layer.borderColor = UIColor.red.cgColor
+            textFieldCategoryCredit.layer.borderWidth = 1.0
+            textFieldCategoryCredit.layer.cornerRadius = 5
+        } else {
+            // テキストフィールドの枠線を非表示とする。
+            textFieldCategoryCredit.layer.borderColor = UIColor.lightGray.cgColor
+            textFieldCategoryCredit.layer.borderWidth = 0.0
+        }
+        if let textFieldCategoryCredit1 = textFieldCategoryCredit1 {
+            if allCreditElements.filter({ $0.title == creditElements[safe: 0]?.title }).count > 1 ||
+                !allDebitElements.filter({ $0.title == creditElements[safe: 0]?.title }).isEmpty {
+                // テキストフィールドの枠線を赤色とする。
+                textFieldCategoryCredit1.layer.borderColor = UIColor.red.cgColor
+                textFieldCategoryCredit1.layer.borderWidth = 1.0
+                textFieldCategoryCredit1.layer.cornerRadius = 5
+            } else {
+                // テキストフィールドの枠線を非表示とする。
+                textFieldCategoryCredit1.layer.borderColor = UIColor.lightGray.cgColor
+                textFieldCategoryCredit1.layer.borderWidth = 0.0
+            }
+        }
+        if let textFieldCategoryCredit2 = textFieldCategoryCredit2 {
+            if allCreditElements.filter({ $0.title == creditElements[safe: 1]?.title }).count > 1 ||
+                !allDebitElements.filter({ $0.title == creditElements[safe: 1]?.title }).isEmpty  {
+                // テキストフィールドの枠線を赤色とする。
+                textFieldCategoryCredit2.layer.borderColor = UIColor.red.cgColor
+                textFieldCategoryCredit2.layer.borderWidth = 1.0
+                textFieldCategoryCredit2.layer.cornerRadius = 5
+            } else {
+                // テキストフィールドの枠線を非表示とする。
+                textFieldCategoryCredit2.layer.borderColor = UIColor.lightGray.cgColor
+                textFieldCategoryCredit2.layer.borderWidth = 0.0
+            }
+        }
+        if let textFieldCategoryCredit3 = textFieldCategoryCredit3 {
+            if allCreditElements.filter({ $0.title == creditElements[safe: 2]?.title }).count > 1 ||
+                !allDebitElements.filter({ $0.title == creditElements[safe: 2]?.title }).isEmpty  {
+                // テキストフィールドの枠線を赤色とする。
+                textFieldCategoryCredit3.layer.borderColor = UIColor.red.cgColor
+                textFieldCategoryCredit3.layer.borderWidth = 1.0
+                textFieldCategoryCredit3.layer.cornerRadius = 5
+            } else {
+                // テキストフィールドの枠線を非表示とする。
+                textFieldCategoryCredit3.layer.borderColor = UIColor.lightGray.cgColor
+                textFieldCategoryCredit3.layer.borderWidth = 0.0
+            }
+        }
+        if let textFieldCategoryCredit4 = textFieldCategoryCredit4 {
+            if allCreditElements.filter({ $0.title == creditElements[safe: 3]?.title }).count > 1 ||
+                !allDebitElements.filter({ $0.title == creditElements[safe: 3]?.title }).isEmpty  {
+                // テキストフィールドの枠線を赤色とする。
+                textFieldCategoryCredit4.layer.borderColor = UIColor.red.cgColor
+                textFieldCategoryCredit4.layer.borderWidth = 1.0
+                textFieldCategoryCredit4.layer.cornerRadius = 5
+            } else {
+                // テキストフィールドの枠線を非表示とする。
+                textFieldCategoryCredit4.layer.borderColor = UIColor.lightGray.cgColor
+                textFieldCategoryCredit4.layer.borderWidth = 0.0
+            }
+        }
+        // 貸借の金額を比較する　不一致の場合は赤い枠線を表示させる
+        compareAmountDebitAndCredit()
+    }
+    
+    // 貸借の金額を比較する　不一致の場合は赤い枠線を表示させる
+    func compareAmountDebitAndCredit() {
+        var debitAmountTotal = 0
+        var creditAmountTotal = 0
+        // 借方
+        guard let debitAmount = debit.amount else {
+            return
+        }
+        debitAmountTotal += debitAmount
+        for i in debitElements {
+            debitAmountTotal += i.amount ?? 0
+        }
+        // 貸方
+        guard let creditAmount = credit.amount else {
+            return
+        }
+        creditAmountTotal += creditAmount
+        for i in creditElements {
+            creditAmountTotal += i.amount ?? 0
+        }
+        // 増設する勘定科目へ
+        print(debitAmountTotal, creditAmountTotal)
+        if debitAmountTotal == creditAmountTotal {
+            // 貸借一致
+            // テキストフィールドの枠線を非表示とする。
+            textFieldAmountCredit.layer.borderColor = UIColor.lightGray.cgColor
+            textFieldAmountCredit.layer.borderWidth = 0.0
+            // テキストフィールドの枠線を非表示とする。
+            textFieldAmountDebit.layer.borderColor = UIColor.lightGray.cgColor
+            textFieldAmountDebit.layer.borderWidth = 0.0
+        } else {
+            // 相手勘定科目が1件の場合
+            if debitElements.isEmpty {
+                // 借方科目へ
+                // テキストフィールドの枠線を赤色とする。
+                textFieldAmountDebit.layer.borderColor = UIColor.red.cgColor
+                textFieldAmountDebit.layer.borderWidth = 1.0
+                textFieldAmountDebit.layer.cornerRadius = 5
+            } else {
+                // テキストフィールドの枠線を非表示とする。
+                textFieldAmountDebit.layer.borderColor = UIColor.lightGray.cgColor
+                textFieldAmountDebit.layer.borderWidth = 0.0
+            }
+            if creditElements.isEmpty {
+                // 貸方科目へ
+                // テキストフィールドの枠線を赤色とする。
+                textFieldAmountCredit.layer.borderColor = UIColor.red.cgColor
+                textFieldAmountCredit.layer.borderWidth = 1.0
+                textFieldAmountCredit.layer.cornerRadius = 5
+            } else {
+                // テキストフィールドの枠線を非表示とする。
+                textFieldAmountCredit.layer.borderColor = UIColor.lightGray.cgColor
+                textFieldAmountCredit.layer.borderWidth = 0.0
+            }
+        }
+    }
+    
+    // MARK: 取引要素（勘定科目、金額）借方0〜4、貸方0〜4、小書き
+    
+    // 借方 取引要素
+    var debit = AccountTitleAmount() {
+        willSet(value) {
+            if value.title == nil && value.amount == nil {
+                // 借方
+                textFieldCategoryDebit.text = nil
+                textFieldAmountDebit.text = nil
+            } else {
+                // 借方
+                textFieldCategoryDebit.text = value.title
+                textFieldAmountDebit.text = StringUtility.shared.addComma(string: value.amount?.description ?? "")
+                if value.amount != debit.amount {
+                    if journalEntryType != .CompoundJournalEntry {
+                        DispatchQueue.main.async {
+                            // 相手勘定の金額へ同じ金額を設定する
+                            self.credit.amount = value.amount
+                        }
+                    }
+                }
+                // 仕訳、決算整理仕訳 編集とよう使う仕訳以外
+                guard journalEntryType == .CompoundJournalEntry ||
+                        journalEntryType == .JournalEntry ||
+                        journalEntryType == .AdjustingAndClosingEntry ||
+                        journalEntryType == .JournalEntries ||
+                        journalEntryType == .AdjustingAndClosingEntries else {
+                    return
+                }
+                // 借方科目　未入力の場合
+                guard value.title != nil else {
+                    DispatchQueue.main.async {
+                        if !(self.textFieldCategoryDebit.isEditing || self.textFieldCategoryCredit.isEditing) {
+                            // 借方科目へ
+                            self.textFieldCategoryDebit.becomeFirstResponder()
+                        }
+                    }
+                    return
+                }
+                // 借方科目 入力済みの場合
+                guard !(value.amount == nil && value.title != "") else {
+                    DispatchQueue.main.async {
+                        if !(self.textFieldCategoryDebit.isEditing || self.textFieldCategoryCredit.isEditing) {
+                            // 借方金額へ
+                            self.textFieldAmountDebit.becomeFirstResponder()
+                        }
+                    }
+                    return
+                }
+                // 金額が入力された場合
+                guard value.amount == debit.amount else {
+                    // 貸方へ
+                    if credit.title == nil || credit.title == "" {
+                        DispatchQueue.main.async {
+                            if !(self.textFieldCategoryDebit.isEditing || self.textFieldCategoryCredit.isEditing) {
+                                // 貸方科目へ
+                                self.textFieldCategoryCredit.becomeFirstResponder()
+                            }
+                        }
+                    } else {
+                        // 貸方科目 入力済みの場合
+                        if credit.amount == nil && credit.title != "" {
+                            DispatchQueue.main.async {
+                                if !(self.textFieldCategoryDebit.isEditing || self.textFieldCategoryCredit.isEditing) {
+                                    // 貸方金額へ
+                                    self.textFieldAmountCredit.becomeFirstResponder()
+                                }
+                            }
+                        } else {
+                            // 仕訳タイプ判定
+                            if journalEntryType == .CompoundJournalEntry { // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+                                DispatchQueue.main.async {
+                                    // 貸借の金額を比較する　金額が少ない方に取引要素を追加する
+                                    self.compareDebitAndCredit()
+                                }
+                            } else if journalEntryType == .JournalEntry ||
+                                        journalEntryType == .AdjustingAndClosingEntry ||
+                                        journalEntryType == .JournalEntries ||
+                                        journalEntryType == .AdjustingAndClosingEntries {
+                                if value.title != "" && smallWritting == nil { // 勘定科目ピッカーでキャンセルボタンを押下された場合は、カーソル移動させない
+                                    DispatchQueue.main.async {
+                                        // 小書きへ
+                                        self.textFieldSmallWritting.becomeFirstResponder()
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return
+                }
+                // 仕訳タイプ判定
+                if journalEntryType == .CompoundJournalEntry { // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+                    // 勘定科目ピッカーのキャンセルボタンをタップされた場合
+                    DispatchQueue.main.async {
+                        // 貸借の金額を比較する　金額が少ない方に取引要素を追加する
+                        self.compareDebitAndCredit()
+                    }
+                } else if journalEntryType == .JournalEntry ||
+                            journalEntryType == .AdjustingAndClosingEntry ||
+                            journalEntryType == .JournalEntries ||
+                            journalEntryType == .AdjustingAndClosingEntries {
+                    // 貸方へ
+                    if credit.title == nil /*|| credit.title == ""*/ { // 一度、カーソルを当てた場合は、カーソル移動させない
+                        // 勘定科目ピッカーのキャンセルボタンをタップされた場合
+                        DispatchQueue.main.async {
+                            if !(self.textFieldCategoryDebit.isEditing || self.textFieldCategoryCredit.isEditing) {
+                                // 貸方科目へ
+                                self.textFieldCategoryCredit.becomeFirstResponder()
+                            }
+                        }
+                    } else {
+                        // 勘定科目ピッカーのキャンセルボタンをタップされた場合
+                        if credit.amount == nil && credit.title != "" {
+                            DispatchQueue.main.async {
+                                if !(self.textFieldCategoryDebit.isEditing || self.textFieldCategoryCredit.isEditing) {
+                                    // 貸方金額へ
+                                    self.textFieldAmountCredit.becomeFirstResponder()
+                                }
+                            }
+                        } else {
+                            if value.title != "" && smallWritting == nil { // 勘定科目ピッカーでキャンセルボタンを押下された場合は、カーソル移動させない
+                                DispatchQueue.main.async {
+                                    // 小書きへ
+                                    self.textFieldSmallWritting.becomeFirstResponder()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        didSet {
+            // 仕訳タイプ判定
+            if journalEntryType == .CompoundJournalEntry || // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+                journalEntryType == .JournalEntry ||
+                journalEntryType == .AdjustingAndClosingEntry ||
+                journalEntryType == .JournalEntries || // 仕訳 仕訳帳画面からの遷移の場合
+                journalEntryType == .AdjustingAndClosingEntries || // 決算整理仕訳 精算表画面からの遷移の場合
+                journalEntryType == .JournalEntriesFixing || // 仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
+                journalEntryType == .AdjustingEntriesFixing || // 決算整理仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
+                journalEntryType == .JournalEntriesPackageFixing || // 仕訳一括編集 仕訳帳画面からの遷移の場合
+                journalEntryType == .SettingsJournalEntries || // よく使う仕訳 追加
+                journalEntryType == .SettingsJournalEntriesFixing { // よく使う仕訳 更新
+                DispatchQueue.main.async {
+                    // 借方0〜4、貸方0〜4、貸借の科目を比較する　同じ勘定科目の場合は赤い枠線を表示させる　未入力は表示させない
+                    self.compareCategoryDebitAndCredit()
+                }
+            }
+        }
+    }
+    
+    // 貸方 取引要素
+    var credit = AccountTitleAmount() {
+        willSet(value) {
+            if value.title == nil && value.amount == nil {
+                // 貸方
+                textFieldCategoryCredit.text = nil
+                textFieldAmountCredit.text = nil
+            } else {
+                // 貸方
+                textFieldCategoryCredit.text = value.title
+                textFieldAmountCredit.text = StringUtility.shared.addComma(string: value.amount?.description ?? "")
+                if value.amount != credit.amount {
+                    if journalEntryType != .CompoundJournalEntry {
+                        DispatchQueue.main.async {
+                            // 相手勘定の金額へ同じ金額を設定する
+                            self.debit.amount = value.amount
+                        }
+                    }
+                }
+                // 仕訳、決算整理仕訳 編集とよう使う仕訳以外
+                guard journalEntryType == .CompoundJournalEntry ||
+                        journalEntryType == .JournalEntry ||
+                        journalEntryType == .AdjustingAndClosingEntry ||
+                        journalEntryType == .JournalEntries ||
+                        journalEntryType == .AdjustingAndClosingEntries else {
+                    return
+                }
+                // 貸方科目　未入力の場合
+                guard value.title != nil else {
+                    DispatchQueue.main.async {
+                        if !(self.textFieldCategoryDebit.isEditing || self.textFieldCategoryCredit.isEditing) {
+                            // 貸方科目へ
+                            self.textFieldCategoryCredit.becomeFirstResponder()
+                        }
+                    }
+                    return
+                }
+                // 貸方科目 入力済みの場合
+                guard !(value.amount == nil && value.title != "") else {
+                    DispatchQueue.main.async {
+                        if !(self.textFieldCategoryDebit.isEditing || self.textFieldCategoryCredit.isEditing) {
+                            // 貸方金額へ
+                            self.textFieldAmountCredit.becomeFirstResponder()
+                        }
+                    }
+                    return
+                }
+                // 金額が入力された場合
+                guard value.amount == credit.amount else {
+                    // 借方へ
+                    if debit.title == nil || debit.title == "" {
+                        DispatchQueue.main.async {
+                            if !(self.textFieldCategoryDebit.isEditing || self.textFieldCategoryCredit.isEditing) {
+                                // 借方科目へ
+                                self.textFieldCategoryDebit.becomeFirstResponder()
+                            }
+                        }
+                    } else {
+                        // 借方科目 入力済みの場合
+                        if debit.amount == nil && debit.title != "" {
+                            DispatchQueue.main.async {
+                                if !(self.textFieldCategoryDebit.isEditing || self.textFieldCategoryCredit.isEditing) {
+                                    // 借方金額へ
+                                    self.textFieldAmountDebit.becomeFirstResponder()
+                                }
+                            }
+                        } else {
+                            // 仕訳タイプ判定
+                            if journalEntryType == .CompoundJournalEntry { // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+                                DispatchQueue.main.async {
+                                    // 貸借の金額を比較する　金額が少ない方に取引要素を追加する
+                                    self.compareDebitAndCredit()
+                                }
+                            } else if journalEntryType == .JournalEntry ||
+                                        journalEntryType == .AdjustingAndClosingEntry ||
+                                        journalEntryType == .JournalEntries ||
+                                        journalEntryType == .AdjustingAndClosingEntries {
+                                if value.title != "" && smallWritting == nil { // 勘定科目ピッカーでキャンセルボタンを押下された場合は、カーソル移動させない
+                                    DispatchQueue.main.async {
+                                        // 小書きへ
+                                        self.textFieldSmallWritting.becomeFirstResponder()
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return
+                }
+                // 仕訳タイプ判定
+                if journalEntryType == .CompoundJournalEntry { // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+                    // 勘定科目ピッカーのキャンセルボタンをタップされた場合
+                    DispatchQueue.main.async {
+                        // 貸借の金額を比較する　金額が少ない方に取引要素を追加する
+                        self.compareDebitAndCredit()
+                    }
+                } else if journalEntryType == .JournalEntry ||
+                            journalEntryType == .AdjustingAndClosingEntry ||
+                            journalEntryType == .JournalEntries ||
+                            journalEntryType == .AdjustingAndClosingEntries {
+                    // 借方へ
+                    if debit.title == nil /*|| debit.title == ""*/ { // 一度、カーソルを当てた場合は、カーソル移動させない
+                        // 勘定科目ピッカーのキャンセルボタンをタップされた場合
+                        DispatchQueue.main.async {
+                            if !(self.textFieldCategoryDebit.isEditing || self.textFieldCategoryCredit.isEditing) {
+                                // 借方科目へ
+                                self.textFieldCategoryDebit.becomeFirstResponder()
+                            }
+                        }
+                    } else {
+                        // 勘定科目ピッカーのキャンセルボタンをタップされた場合
+                        if debit.amount == nil && debit.title != "" {
+                            DispatchQueue.main.async {
+                                if !(self.textFieldCategoryDebit.isEditing || self.textFieldCategoryCredit.isEditing) {
+                                    // 借方金額へ
+                                    self.textFieldAmountDebit.becomeFirstResponder()
+                                }
+                            }
+                        } else {
+                            if value.title != "" && smallWritting == nil { // 勘定科目ピッカーでキャンセルボタンを押下された場合は、カーソル移動させない
+                                DispatchQueue.main.async {
+                                    // 小書きへ
+                                    self.textFieldSmallWritting.becomeFirstResponder()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        didSet {
+            // 仕訳タイプ判定
+            if journalEntryType == .CompoundJournalEntry || // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+                journalEntryType == .JournalEntry ||
+                journalEntryType == .AdjustingAndClosingEntry ||
+                journalEntryType == .JournalEntries || // 仕訳 仕訳帳画面からの遷移の場合
+                journalEntryType == .AdjustingAndClosingEntries || // 決算整理仕訳 精算表画面からの遷移の場合
+                journalEntryType == .JournalEntriesFixing || // 仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
+                journalEntryType == .AdjustingEntriesFixing || // 決算整理仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
+                journalEntryType == .JournalEntriesPackageFixing || // 仕訳一括編集 仕訳帳画面からの遷移の場合
+                journalEntryType == .SettingsJournalEntries || // よく使う仕訳 追加
+                journalEntryType == .SettingsJournalEntriesFixing { // よく使う仕訳 更新
+                DispatchQueue.main.async {
+                    // 借方0〜4、貸方0〜4、貸借の科目を比較する　同じ勘定科目の場合は赤い枠線を表示させる　未入力は表示させない
+                    self.compareCategoryDebitAndCredit()
+                }
+            }
+        }
+    }
+    
+    // 借方 取引要素 複合仕訳
+    var debitElements: [AccountTitleAmount] = [] {
+        willSet(value) {
+            if value.count >= 1 {
+                // 借方科目
+                textFieldCategoryDebit1.text = value[0].title
+                textFieldAmountDebit1.text = StringUtility.shared.addComma(string: value[0].amount?.description ?? "")
+                guard value[0].amount == debitElements[safe: 0]?.amount else {
+                    DispatchQueue.main.async {
+                        // 貸借の金額を比較する　金額が少ない方に取引要素を追加する
+                        self.compareDebitAndCredit()
+                    }
+                    return
+                }
+                guard value[0].title != nil else {
+                    // 借方科目へ
+                    textFieldCategoryDebit1.becomeFirstResponder()
+                    return
+                }
+                // NOTE: 貸借一致したとき、非表示にした入力欄の金額へフォーカスが当たってしまうので、電卓が表示されてしまうため早期リターンする
+                // 借方科目 入力済みの場合
+                guard !(value[0].amount == nil && value[0].title != "") else {
+                    // 借方金額へ
+                    textFieldAmountDebit1.becomeFirstResponder()
+                    return
+                }
+            } else {
+                // 勘定科目
+                textFieldCategoryDebit1.text = nil
+                textFieldAmountDebit1.text = nil
+            }
+            if value.count >= 2 {
+                // 借方科目
+                textFieldCategoryDebit2.text = value[1].title
+                textFieldAmountDebit2.text = StringUtility.shared.addComma(string: value[1].amount?.description ?? "")
+                guard value[1].amount == debitElements[safe: 1]?.amount else {
+                    DispatchQueue.main.async {
+                        // 貸借の金額を比較する　金額が少ない方に取引要素を追加する
+                        self.compareDebitAndCredit()
+                    }
+                    return
+                }
+                guard value[1].title != nil else {
+                    // 借方科目へ
+                    textFieldCategoryDebit2.becomeFirstResponder()
+                    return
+                }
+                // 借方科目 入力済みの場合
+                guard !(value[1].amount == nil && value[1].title != "") else {
+                    // 借方金額へ
+                    textFieldAmountDebit2.becomeFirstResponder()
+                    return
+                }
+            } else {
+                // 勘定科目
+                textFieldCategoryDebit2.text = nil
+                textFieldAmountDebit2.text = nil
+            }
+            if value.count >= 3 {
+                // 借方科目
+                textFieldCategoryDebit3.text = value[2].title
+                textFieldAmountDebit3.text = StringUtility.shared.addComma(string: value[2].amount?.description ?? "")
+                guard value[2].amount == debitElements[safe: 2]?.amount else {
+                    DispatchQueue.main.async {
+                        // 貸借の金額を比較する　金額が少ない方に取引要素を追加する
+                        self.compareDebitAndCredit()
+                    }
+                    return
+                }
+                guard value[2].title != nil else {
+                    // 借方科目へ
+                    textFieldCategoryDebit3.becomeFirstResponder()
+                    return
+                }
+                // 借方科目 入力済みの場合
+                guard !(value[2].amount == nil && value[2].title != "") else {
+                    // 借方金額へ
+                    textFieldAmountDebit3.becomeFirstResponder()
+                    return
+                }
+            } else {
+                // 勘定科目
+                textFieldCategoryDebit3.text = nil
+                textFieldAmountDebit3.text = nil
+            }
+            if value.count >= 4 {
+                // 借方科目
+                textFieldCategoryDebit4.text = value[3].title
+                textFieldAmountDebit4.text = StringUtility.shared.addComma(string: value[3].amount?.description ?? "")
+                guard value[3].amount == debitElements[safe: 3]?.amount else {
+                    DispatchQueue.main.async {
+                        // 貸借の金額を比較する　金額が少ない方に取引要素を追加する
+                        self.compareDebitAndCredit()
+                    }
+                    return
+                }
+                guard value[3].title != nil else {
+                    // 借方科目へ
+                    textFieldCategoryDebit4.becomeFirstResponder()
+                    return
+                }
+                // 借方科目 入力済みの場合
+                guard !(value[3].amount == nil && value[3].title != "") else {
+                    // 借方金額へ
+                    textFieldAmountDebit4.becomeFirstResponder()
+                    return
+                }
+            } else {
+                // 勘定科目
+                textFieldCategoryDebit4.text = nil
+                textFieldAmountDebit4.text = nil
+            }
+        }
+        didSet(value) {
+            // UIを追加する
+            switch debitElements.count {
+            case 0:
+                viewDebit1.isHidden = true
+                viewDebit2.isHidden = true
+                viewDebit3.isHidden = true
+                viewDebit4.isHidden = true
+            case 1:
+                viewDebit1.isHidden = false
+                viewCredit1.isHidden = true
+                viewDebit2.isHidden = true
+                viewCredit2.isHidden = true
+                viewDebit3.isHidden = true
+                viewCredit3.isHidden = true
+                viewDebit4.isHidden = true
+                viewCredit4.isHidden = true
+            case 2:
+                viewDebit2.isHidden = false
+                viewCredit2.isHidden = true
+                viewDebit3.isHidden = true
+                viewCredit3.isHidden = true
+                viewDebit4.isHidden = true
+                viewCredit4.isHidden = true
+            case 3:
+                viewDebit3.isHidden = false
+                viewCredit3.isHidden = true
+                viewDebit4.isHidden = true
+                viewCredit4.isHidden = true
+            case 4:
+                viewDebit4.isHidden = false
+                viewCredit4.isHidden = true
+            default:
+                break
+            }
+            DispatchQueue.main.async {
+                // 借方0〜4、貸方0〜4、貸借の科目を比較する　同じ勘定科目の場合は赤い枠線を表示させる　未入力は表示させない
+                self.compareCategoryDebitAndCredit()
+            }
+        }
+    }
+    
+    // 貸方　取引要素 複合仕訳
+    var creditElements: [AccountTitleAmount] = [] {
+        willSet(value) {
+            if value.count >= 1 {
+                // 貸方科目
+                textFieldCategoryCredit1.text = value[0].title
+                textFieldAmountCredit1.text = StringUtility.shared.addComma(string: value[0].amount?.description ?? "")
+                guard value[0].amount == creditElements[safe: 0]?.amount else {
+                    DispatchQueue.main.async {
+                        // 貸借の金額を比較する　金額が少ない方に取引要素を追加する
+                        self.compareDebitAndCredit()
+                    }
+                    return
+                }
+                guard value[0].title != nil else {
+                    // 貸方科目へ
+                    textFieldCategoryCredit1.becomeFirstResponder()
+                    return
+                }
+                // NOTE: 貸借一致したとき、非表示にした入力欄の金額へフォーカスが当たってしまうので、電卓が表示されてしまうため早期リターンする
+                // 借方科目 入力済みの場合
+                guard !(value[0].amount == nil && value[0].title != "") else {
+                    // 貸方金額へ
+                    textFieldAmountCredit1.becomeFirstResponder()
+                    return
+                }
+            } else {
+                // 勘定科目
+                textFieldCategoryCredit1.text = nil
+                textFieldAmountCredit1.text = nil
+            }
+            if value.count >= 2 {
+                // 貸方科目
+                textFieldCategoryCredit2.text = value[1].title
+                textFieldAmountCredit2.text = StringUtility.shared.addComma(string: value[1].amount?.description ?? "")
+                guard value[1].amount == creditElements[safe: 1]?.amount else {
+                    DispatchQueue.main.async {
+                        // 貸借の金額を比較する　金額が少ない方に取引要素を追加する
+                        self.compareDebitAndCredit()
+                    }
+                    return
+                }
+                guard value[1].title != nil else {
+                    // 貸方科目へ
+                    textFieldCategoryCredit2.becomeFirstResponder()
+                    return
+                }
+                // 借方科目 入力済みの場合
+                guard !(value[1].amount == nil && value[1].title != "") else {
+                    // 貸方金額へ
+                    textFieldAmountCredit2.becomeFirstResponder()
+                    return
+                }
+            } else {
+                // 勘定科目
+                textFieldCategoryCredit2.text = nil
+                textFieldAmountCredit2.text = nil
+            }
+            if value.count >= 3 {
+                // 貸方科目
+                textFieldCategoryCredit3.text = value[2].title
+                textFieldAmountCredit3.text = StringUtility.shared.addComma(string: value[2].amount?.description ?? "")
+                guard value[2].amount == creditElements[safe: 2]?.amount else {
+                    DispatchQueue.main.async {
+                        // 貸借の金額を比較する　金額が少ない方に取引要素を追加する
+                        self.compareDebitAndCredit()
+                    }
+                    return
+                }
+                guard value[2].title != nil else {
+                    // 貸方科目へ
+                    textFieldCategoryCredit3.becomeFirstResponder()
+                    return
+                }
+                // 借方科目 入力済みの場合
+                guard !(value[2].amount == nil && value[2].title != "") else {
+                    // 貸方金額へ
+                    textFieldAmountCredit3.becomeFirstResponder()
+                    return
+                }
+            } else {
+                // 勘定科目
+                textFieldCategoryCredit3.text = nil
+                textFieldAmountCredit3.text = nil
+            }
+            if value.count >= 4 {
+                // 貸方科目
+                textFieldCategoryCredit4.text = value[3].title
+                textFieldAmountCredit4.text = StringUtility.shared.addComma(string: value[3].amount?.description ?? "")
+                guard value[3].amount == creditElements[safe: 3]?.amount else {
+                    DispatchQueue.main.async {
+                        // 貸借の金額を比較する　金額が少ない方に取引要素を追加する
+                        self.compareDebitAndCredit()
+                    }
+                    return
+                }
+                guard value[3].title != nil else {
+                    // 貸方科目へ
+                    textFieldCategoryCredit4.becomeFirstResponder()
+                    return
+                }
+                // 借方科目 入力済みの場合
+                guard !(value[3].amount == nil && value[3].title != "") else {
+                    // 貸方金額へ
+                    textFieldAmountCredit4.becomeFirstResponder()
+                    return
+                }
+            } else {
+                // 勘定科目
+                textFieldCategoryCredit4.text = nil
+                textFieldAmountCredit4.text = nil
+            }
+        }
+        didSet(value) {
+            // UIを追加する
+            switch creditElements.count {
+            case 0:
+                viewCredit1.isHidden = true
+                viewCredit2.isHidden = true
+                viewCredit3.isHidden = true
+                viewCredit4.isHidden = true
+            case 1:
+                viewDebit1.isHidden = true
+                viewCredit1.isHidden = false
+                viewDebit2.isHidden = true
+                viewCredit2.isHidden = true
+                viewDebit3.isHidden = true
+                viewCredit3.isHidden = true
+                viewDebit4.isHidden = true
+                viewCredit4.isHidden = true
+            case 2:
+                viewDebit2.isHidden = true
+                viewCredit2.isHidden = false
+                viewDebit3.isHidden = true
+                viewCredit3.isHidden = true
+                viewDebit4.isHidden = true
+                viewCredit4.isHidden = true
+            case 3:
+                viewDebit3.isHidden = true
+                viewCredit3.isHidden = false
+                viewDebit4.isHidden = true
+                viewCredit4.isHidden = true
+            case 4:
+                viewDebit4.isHidden = true
+                viewCredit4.isHidden = false
+            default:
+                break
+            }
+            DispatchQueue.main.async {
+                // 借方0〜4、貸方0〜4、貸借の科目を比較する　同じ勘定科目の場合は赤い枠線を表示させる　未入力は表示させない
+                self.compareCategoryDebitAndCredit()
+            }
+        }
+    }
+    // 小書き
+    var smallWritting: String? {
+        didSet {
+            textFieldSmallWritting.text = smallWritting
+            // 小書き　文字数カウンタ
+            let maxLength = EditableType.smallWriting.maxLength
+            smallWritingCounterLabel.font = .boldSystemFont(ofSize: 15)
+            smallWritingCounterLabel.text = "\(maxLength - (smallWritting?.count ?? 0))/\(maxLength)  "
+            if smallWritting?.count ?? 0 > maxLength {
+                smallWritingCounterLabel.textColor = .systemPink
+            } else {
+                smallWritingCounterLabel.textColor = smallWritting?.count ?? 0 >= maxLength - 3 ? .systemYellow : .systemGreen
+            }
+            if smallWritting?.count ?? 0 == maxLength {
+                // フィードバック
+                if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+                    generator.notificationOccurred(.error)
+                }
+            }
+        }
+    }
     // 小書き　エラーメッセージ
     var errorMessage: String?
     // テキストフィールド　勘定科目、小書きのキーボードが表示中フラグ
     var isShown = false
+    // テキストフィールドのタグ
+    var tag: Int = 0
+    private var timer: Timer? // Timerを保持する変数
+    // 仕訳タイプ(仕訳 or 決算整理仕訳 or 編集)
+    var journalEntryType: JournalEntryType = .Undecided {
+        didSet {
+            if journalEntryType != .Undecided {
+                DispatchQueue.main.async {
+                    self.updateUI()
+                }
+            } else {
+                // .Undecided
+            }
+        }
+    } // Journal Entries、Adjusting and Closing Entries, JournalEntriesPackageFixing
+    // 仕訳編集　仕訳帳画面で選択されたセルの位置　仕訳か決算整理仕訳かの判定に使用する
+    var tappedIndexPath = IndexPath(row: 0, section: 0)
+    // 仕訳編集　編集の対象となる仕訳の連番
+    var primaryKey: Int = 0
+    // グループ
+    var groupObjects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
+    // 和暦対応　西暦に固定する
+    let calendar = Calendar(identifier: .gregorian)
+    
     /// モーダル上部に設置されるインジケータ
     private lazy var indicatorView: SemiModalIndicatorView = {
         let indicator = SemiModalIndicatorView()
@@ -94,19 +1235,6 @@ class JournalEntryViewController: UIViewController {
             return nil
         }
     }()
-    private var timer: Timer? // Timerを保持する変数
-    
-    // 仕訳タイプ(仕訳 or 決算整理仕訳 or 編集)
-    var journalEntryType: JournalEntryType = .JournalEntry // Journal Entries、Adjusting and Closing Entries, JournalEntriesPackageFixing
-    
-    // 仕訳編集　仕訳帳画面で選択されたセルの位置　仕訳か決算整理仕訳かの判定に使用する
-    var tappedIndexPath = IndexPath(row: 0, section: 0)
-    // 仕訳編集　編集の対象となる仕訳の連番
-    var primaryKey: Int = 0
-    // グループ
-    var groupObjects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
-    // 和暦対応　西暦に固定する
-    let calendar = Calendar(identifier: .gregorian)
     
     /// GUIアーキテクチャ　MVP
     private var presenter: JournalEntryPresenterInput!
@@ -171,61 +1299,6 @@ class JournalEntryViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
     }
     
-    // 金額　電卓画面で入力した値を表示させる
-    func setAmountValue(numbersOnDisplay: Int) {
-        // 金額を入力後に、電卓画面から仕訳画面へ遷移した場合
-        textFieldAmountDebit.text = StringUtility.shared.addComma(string: numbersOnDisplay.description)
-        textFieldAmountCredit.text = StringUtility.shared.addComma(string: numbersOnDisplay.description)
-        // TextField 貸方金額　入力後
-        if textFieldAmountDebit.text == "0"{
-            textFieldAmountDebit.text = ""
-            textFieldAmountCredit.text = ""
-        }
-        if textFieldAmountCredit.text == "0"{
-            textFieldAmountCredit.text = ""
-            textFieldAmountDebit.text = ""
-        }
-        // 仕訳一括編集ではない場合 よく使う仕訳ではない場合
-        if journalEntryType != .JournalEntriesPackageFixing  && // 仕訳一括編集 仕訳帳画面からの遷移の場合
-            journalEntryType != .SettingsJournalEntries  && // よく使う仕訳 追加
-            journalEntryType != .SettingsJournalEntriesFixing { // よく使う仕訳 更新
-            
-            if textFieldSmallWritting.text == "" {
-                textFieldSmallWritting.becomeFirstResponder() // カーソルを移す
-            }
-        }
-    }
-    // よく使う仕訳　エリア カルーセルをリロードする
-    func reloadCarousel() {
-        if JournalEntryViewController.viewReload {
-            DispatchQueue.main.async { [self] in
-                // データベース　よく使う仕訳
-                if let text = textFieldCategoryDebit.text {
-                    let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
-                        account: text
-                    )
-                    if objects.isEmpty {
-                        // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
-                        textFieldCategoryDebit.text = nil
-                    }
-                }
-                if let text = textFieldCategoryCredit.text {
-                    let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
-                        account: text
-                    )
-                    if objects.isEmpty {
-                        // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
-                        textFieldCategoryCredit.text = nil
-                    }
-                }
-                // よく使う仕訳　エリア
-                tableView.reloadData()
-                
-                JournalEntryViewController.viewReload = false
-            }
-        }
-    }
-    
     // MARK: - チュートリアル対応 コーチマーク型
     
     // チュートリアル対応 コーチマーク型
@@ -260,6 +1333,77 @@ class JournalEntryViewController: UIViewController {
     }
     
     // MARK: - Setting
+    
+    // 金額　電卓画面で入力した値を表示させる
+    func setAmountValue(numbersOnDisplay: Int, tag: Int) {
+        // 仕訳タイプ判定
+        if journalEntryType == .CompoundJournalEntry { // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+            switch tag {
+            case 333:
+                debit.amount = numbersOnDisplay
+            case 444:
+                credit.amount = numbersOnDisplay
+            case 777:
+                debitElements[0].amount = numbersOnDisplay
+            case 888:
+                creditElements[0].amount = numbersOnDisplay
+            case 111_111:
+                debitElements[1].amount = numbersOnDisplay
+            case 121_212:
+                creditElements[1].amount = numbersOnDisplay
+            case 151_515:
+                debitElements[2].amount = numbersOnDisplay
+            case 161_616:
+                creditElements[2].amount = numbersOnDisplay
+            case 191_919:
+                debitElements[3].amount = numbersOnDisplay
+            case 202_020:
+                creditElements[3].amount = numbersOnDisplay
+            default:
+                break
+            }
+        } else {
+            switch tag {
+            case 333:
+                debit.amount = numbersOnDisplay
+            case 444:
+                credit.amount = numbersOnDisplay
+            default:
+                break
+            }
+        }
+    }
+    
+    // よく使う仕訳　エリア カルーセルをリロードする
+    func reloadCarousel() {
+        if JournalEntryViewController.viewReload {
+            DispatchQueue.main.async { [self] in
+                // データベース　よく使う仕訳
+                if let text = debit.title {
+                    let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+                        account: text
+                    )
+                    if objects.isEmpty {
+                        // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
+                        debit.title = nil
+                    }
+                }
+                if let text = credit.title {
+                    let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+                        account: text
+                    )
+                    if objects.isEmpty {
+                        // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
+                        credit.title = nil
+                    }
+                }
+                // よく使う仕訳　エリア
+                tableView.reloadData()
+                
+                JournalEntryViewController.viewReload = false
+            }
+        }
+    }
     
     // MARK: UIDatePicker
     // デートピッカー作成
@@ -481,24 +1625,21 @@ class JournalEntryViewController: UIViewController {
             addButton.layer.shadowOpacity = 1.0
         }
         
-        // 仕訳タイプ判定
-        if journalEntryType != .JournalEntry && journalEntryType != .AdjustingAndClosingEntry {
-            // 仕訳 タブバーの仕訳タブからの遷移の場合
-            if let backgroundView = backgroundView {
-                // 中央上部に配置する
-                indicatorView.frame = CGRect(x: 0, y: 0, width: 40, height: 5)
-                backgroundView.addSubview(indicatorView)
-                indicatorView.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    indicatorView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-                    indicatorView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5),
-                    indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
-                    indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
-                ])
-            }
+        // 仕訳 タブバーの仕訳タブからの遷移の場合
+        if let backgroundView = backgroundView {
+            // 中央上部に配置する
+            indicatorView.frame = CGRect(x: 0, y: 0, width: 40, height: 5)
+            backgroundView.addSubview(indicatorView)
+            indicatorView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                indicatorView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+                indicatorView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 5),
+                indicatorView.widthAnchor.constraint(equalToConstant: indicatorView.frame.width),
+                indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
+            ])
         }
     }
-    
+    // 入力数カウンタラベル
     func updateCoinCountLabel() {
         if journalEntryType != .SettingsJournalEntries  && // よく使う仕訳 追加
             journalEntryType != .SettingsJournalEntriesFixing { // よく使う仕訳 更新
@@ -522,34 +1663,7 @@ class JournalEntryViewController: UIViewController {
         }
     }
     
-    // MARK: PickerTextField
-    // TextField作成　勘定科目
-    func createTextFieldForCategory() {
-        textFieldCategoryDebit.delegate = self
-        textFieldCategoryCredit.delegate = self
-        
-        textFieldCategoryDebit.textAlignment = .left
-        textFieldCategoryCredit.textAlignment = .right
-        
-        textFieldCategoryDebit.layer.borderWidth = 0.5
-        textFieldCategoryCredit.layer.borderWidth = 0.5
-        
-        textFieldCategoryDebit.setup()
-        textFieldCategoryCredit.setup()
-    }
-    
     // MARK: UITextField
-    // TextField作成 金額
-    func createTextFieldForAmount() {
-        textFieldAmountDebit.delegate = self
-        textFieldAmountCredit.delegate = self
-        
-        textFieldAmountDebit.textAlignment = .left
-        textFieldAmountCredit.textAlignment = .right
-        
-        textFieldAmountDebit.layer.borderWidth = 0.5
-        textFieldAmountCredit.layer.borderWidth = 0.5
-    }
     // TextField作成 小書き
     func createTextFieldForSmallwritting() {
         textFieldSmallWritting.delegate = self
@@ -583,19 +1697,6 @@ class JournalEntryViewController: UIViewController {
         // 最大文字数
         textFieldSmallWritting.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
     }
-    // 初期値を再設定
-    func setInitialData() {
-        if textFieldAmountDebit.text == "" {
-            if textFieldAmountCredit.text != "" || textFieldAmountCredit.text != "" {
-                textFieldAmountDebit.text = textFieldAmountCredit.text
-            }
-        }
-        if textFieldAmountCredit.text == "" {
-            if textFieldAmountDebit.text != "" || textFieldAmountDebit.text != "" {
-                textFieldAmountCredit.text = textFieldAmountDebit.text
-            }
-        }
-    }
     
     // MARK: - Action
     
@@ -608,15 +1709,41 @@ class JournalEntryViewController: UIViewController {
         if segmentedControl.selectedSegmentIndex == 0 {
             // 仕訳タイプ判定
             journalEntryType = .JournalEntry // 仕訳 タブバーの仕訳タブからの遷移の場合
-            labelTitle.text = ""
-            self.navigationItem.title = "仕訳"
         } else {
             journalEntryType = .AdjustingAndClosingEntry // 決算整理仕訳 タブバーの仕訳タブからの遷移の場合
-            labelTitle.text = ""
-            self.navigationItem.title = "決算整理仕訳"
         }
-        // デイトピッカー作成
-        createDatePicker()
+    }
+    
+    // 単一仕訳/複合仕訳　切り替え
+    @IBAction func compoundJournalEntrySegmentedControl(_ sender: Any) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
+        // 単一仕訳/複合仕訳　切り替え
+        let userDefaults = UserDefaults.standard
+        let firstLunchKey = "compound_journal_entry"
+        if compoundJournalEntrySegmentedControl.selectedSegmentIndex == 0 {
+            userDefaults.set(false, forKey: firstLunchKey)
+            userDefaults.synchronize()
+        } else {
+            userDefaults.set(true, forKey: firstLunchKey)
+            userDefaults.synchronize()
+        }
+        // 単一仕訳/複合仕訳　切り替え
+        if compoundJournalEntrySegmentedControl.selectedSegmentIndex == 0 {
+            // 仕訳タイプ判定
+            journalEntryType = .JournalEntry // 仕訳 タブバーの仕訳タブからの遷移の場合
+            // NOTE: 入力を終了してから、取引要素をクリアしないと、入力値を代入しようとしてIndex out of rangeとなる。
+            self.view.endEditing(true)
+            // 取引要素　借方 貸方　クリア
+            creditElements = []
+            debitElements = []
+        } else {
+            // 仕訳タイプ判定
+            journalEntryType = .CompoundJournalEntry // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+            self.view.endEditing(true)
+        }
     }
     
     // MARK: UIButton
@@ -624,6 +1751,7 @@ class JournalEntryViewController: UIViewController {
     @IBAction func maskDatePickerButtonTapped(_ sender: Any) {
         // マスクを取る
         maskDatePickerButton.isHidden = true
+        // デイトピッカーのマスク
         isMaskedDatePicker = true
     }
     
@@ -672,10 +1800,6 @@ class JournalEntryViewController: UIViewController {
             datePicker.date = modifiedDate
         }
     }
-    
-    // MARK: UITextField
-    @IBAction private func textFieldCategoryDebit(_ sender: UITextField) {}
-    @IBAction private func textFieldCategoryCredit(_ sender: UITextField) {}
     
     // MARK: キーボード
     // UIKeyboardWillShow通知を受けて、実行される関数
@@ -749,8 +1873,6 @@ class JournalEntryViewController: UIViewController {
     }
     // TextField キーボード以外の部分をタッチ　 TextFieldをタップしても呼ばれない
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {// この後に TapGestureRecognizer が呼ばれている
-        // 初期値を再設定
-        setInitialData()
         // touchesBeganメソッドをオーバーライドします。
         self.view.endEditing(true)
     }
@@ -800,22 +1922,30 @@ class JournalEntryViewController: UIViewController {
         case .JournalEntry, .AdjustingAndClosingEntry, .JournalEntries, .AdjustingAndClosingEntries:
             // ユーザーが入力した仕訳の内容を取得する
             if let journalEntryData = getInputJournalEntryData() {
-                presenter.inputButtonTapped(isForced: false, journalEntryType: journalEntryType, journalEntryData: journalEntryData, primaryKey: nil)
+                presenter.inputButtonTapped(isForced: false, journalEntryType: journalEntryType, journalEntryData: journalEntryData, journalEntryDatas: nil, primaryKey: nil)
             }
             return
         case .JournalEntriesFixing, .AdjustingEntriesFixing:
             // ユーザーが入力した仕訳の内容を取得する
             if let journalEntryData = getInputJournalEntryData() {
-                presenter.inputButtonTapped(isForced: false, journalEntryType: journalEntryType, journalEntryData: journalEntryData, primaryKey: primaryKey)
+                presenter.inputButtonTapped(isForced: false, journalEntryType: journalEntryType, journalEntryData: journalEntryData, journalEntryDatas: nil, primaryKey: primaryKey)
             }
             return
         case .JournalEntriesPackageFixing:
             // 仕訳一括編集 仕訳帳画面からの遷移の場合
             let journalEntryData = buttonTappedForJournalEntriesPackageFixing()
-            presenter.inputButtonTapped(isForced: false, journalEntryType: journalEntryType, journalEntryData: journalEntryData, primaryKey: nil)
+            presenter.inputButtonTapped(isForced: false, journalEntryType: journalEntryType, journalEntryData: journalEntryData, journalEntryDatas: nil, primaryKey: nil)
             return
         case .SettingsJournalEntries, .SettingsJournalEntriesFixing:
             // 継承したクラスで処理を行う
+            break
+        case .CompoundJournalEntry: // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+            // ユーザーが入力した仕訳の内容を取得する 複合仕訳
+            if let journalEntryDatas = getInputJournalEntryDatas() {
+                presenter.inputButtonTapped(isForced: false, journalEntryType: journalEntryType, journalEntryData: nil, journalEntryDatas: journalEntryDatas, primaryKey: nil)
+            }
+            return
+        case .Undecided:
             break
         }
     }
@@ -831,7 +1961,7 @@ class JournalEntryViewController: UIViewController {
             datePicker = nil
         }
         var textFieldCategoryDebit: String?
-        if let text = self.textFieldCategoryDebit.text {
+        if let text = debit.title {
             if !text.isEmpty {
                 textFieldCategoryDebit = text
             }
@@ -839,7 +1969,7 @@ class JournalEntryViewController: UIViewController {
             textFieldCategoryDebit = nil
         }
         var textFieldCategoryCredit: String?
-        if let text = self.textFieldCategoryCredit.text {
+        if let text = credit.title {
             if !text.isEmpty {
                 textFieldCategoryCredit = text
             }
@@ -847,19 +1977,19 @@ class JournalEntryViewController: UIViewController {
             textFieldCategoryCredit = nil
         }
         var textFieldAmountDebit: Int64?
-        if let text = self.textFieldAmountDebit.text {
-            textFieldAmountDebit = Int64(StringUtility.shared.removeComma(string: text))
+        if let text = debit.amount {
+            textFieldAmountDebit = Int64(text)
         } else {
             textFieldAmountDebit = nil
         }
         var textFieldAmountCredit: Int64?
-        if let text = self.textFieldAmountCredit.text {
-            textFieldAmountCredit = Int64(StringUtility.shared.removeComma(string: text))
+        if let text = credit.amount {
+            textFieldAmountCredit = Int64(text)
         } else {
             textFieldAmountCredit = nil
         }
         var textFieldSmallWritting: String?
-        if let text = self.textFieldSmallWritting.text {
+        if let text = smallWritting {
             if !text.isEmpty {
                 textFieldSmallWritting = text
             }
@@ -883,15 +2013,16 @@ class JournalEntryViewController: UIViewController {
     func getInputJournalEntryData() -> JournalEntryData? {
         // データベース　仕訳データを追加
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
-        if let textFieldCategoryDebit = textFieldCategoryDebit.text,
-           let textFieldAmountDebit = textFieldAmountDebit.text,
-           let textFieldCategoryCredit = textFieldCategoryCredit.text,
-           let textFieldAmountCredit = textFieldAmountCredit.text,
-           let textFieldAmountDebitInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountDebit)),
-           let textFieldAmountCreditInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountCredit)),
-           let textFieldSmallWritting = textFieldSmallWritting.text {
+        if let textFieldCategoryDebit = debit.title,
+           let textFieldAmountDebit = debit.amount,
+           let textFieldCategoryCredit = credit.title,
+           let textFieldAmountCredit = credit.amount {
+            let textFieldSmallWritting = smallWritting
             // 先頭を0埋めする
             let date = "\(datePicker.date.year)" + "/" + "\(String(format: "%02d", datePicker.date.month))" + "/" + "\(String(format: "%02d", datePicker.date.day))"
+            let textFieldAmountDebitInt64 = Int64(textFieldAmountDebit)
+            let textFieldAmountCreditInt64 = Int64(textFieldAmountCredit)
+            
             let dBJournalEntry = JournalEntryData(
                 date: date,
                 debit_category: textFieldCategoryDebit,
@@ -907,6 +2038,118 @@ class JournalEntryViewController: UIViewController {
         return nil
     }
     
+    // ユーザーが入力した仕訳の内容を取得する 複合仕訳
+    func getInputJournalEntryDatas() -> [JournalEntryData]? {
+        var datas: [JournalEntryData] = []
+        // 借方
+        guard let debitAmount = debit.amount else {
+            return nil
+        }
+        // 貸方
+        guard let creditAmount = credit.amount else {
+            return nil
+        }
+        // 借方金額が大きい
+        if debitAmount > creditAmount {
+            if let textFieldCategoryDebit = debit.title,
+               let textFieldAmountDebit = credit.amount, // 金額が小さい方に合わせる
+               let textFieldCategoryCredit = credit.title,
+               let textFieldAmountCredit = credit.amount {
+                let textFieldSmallWritting = smallWritting
+                // 先頭を0埋めする
+                let date = "\(datePicker.date.year)" + "/" + "\(String(format: "%02d", datePicker.date.month))" + "/" + "\(String(format: "%02d", datePicker.date.day))"
+                let textFieldAmountDebitInt64 = Int64(textFieldAmountDebit)
+                let textFieldAmountCreditInt64 = Int64(textFieldAmountCredit)
+                
+                let dBJournalEntry = JournalEntryData(
+                    date: date,
+                    debit_category: textFieldCategoryDebit,
+                    debit_amount: textFieldAmountDebitInt64,
+                    credit_category: textFieldCategoryCredit,
+                    credit_amount: textFieldAmountCreditInt64,
+                    smallWritting: textFieldSmallWritting
+                )
+                
+                datas.append(dBJournalEntry)
+            }
+            for i in creditElements {
+                //                creditAmountTotal += i.amount ?? 0
+                if let textFieldCategoryDebit = debit.title,
+                   let textFieldAmountDebit = i.amount, // 金額が小さい方に合わせる
+                   let textFieldCategoryCredit = i.title,
+                   let textFieldAmountCredit = i.amount {
+                    let textFieldSmallWritting = smallWritting
+                    // 先頭を0埋めする
+                    let date = "\(datePicker.date.year)" + "/" + "\(String(format: "%02d", datePicker.date.month))" + "/" + "\(String(format: "%02d", datePicker.date.day))"
+                    let textFieldAmountDebitInt64 = Int64(textFieldAmountDebit)
+                    let textFieldAmountCreditInt64 = Int64(textFieldAmountCredit)
+                    
+                    let dBJournalEntry = JournalEntryData(
+                        date: date,
+                        debit_category: textFieldCategoryDebit,
+                        debit_amount: textFieldAmountDebitInt64,
+                        credit_category: textFieldCategoryCredit,
+                        credit_amount: textFieldAmountCreditInt64,
+                        smallWritting: textFieldSmallWritting
+                    )
+                    
+                    datas.append(dBJournalEntry)
+                }
+            }
+        }
+        // 貸方金額が大きい
+        if debitAmount < creditAmount {
+            if let textFieldCategoryDebit = debit.title,
+               let textFieldAmountDebit = debit.amount,
+               let textFieldCategoryCredit = credit.title,
+               let textFieldAmountCredit = debit.amount { // 金額が小さい方に合わせる
+                let textFieldSmallWritting = smallWritting
+                // 先頭を0埋めする
+                let date = "\(datePicker.date.year)" + "/" + "\(String(format: "%02d", datePicker.date.month))" + "/" + "\(String(format: "%02d", datePicker.date.day))"
+                let textFieldAmountDebitInt64 = Int64(textFieldAmountDebit)
+                let textFieldAmountCreditInt64 = Int64(textFieldAmountCredit)
+                
+                let dBJournalEntry = JournalEntryData(
+                    date: date,
+                    debit_category: textFieldCategoryDebit,
+                    debit_amount: textFieldAmountDebitInt64,
+                    credit_category: textFieldCategoryCredit,
+                    credit_amount: textFieldAmountCreditInt64,
+                    smallWritting: textFieldSmallWritting
+                )
+                
+                datas.append(dBJournalEntry)
+            }
+            for i in debitElements {
+                //                debitAmountTotal += i.amount ?? 0
+                if let textFieldCategoryDebit = i.title,
+                   let textFieldAmountDebit = i.amount,
+                   let textFieldCategoryCredit = credit.title,
+                   let textFieldAmountCredit = i.amount { // 金額が小さい方に合わせる
+                    let textFieldSmallWritting = smallWritting
+                    // 先頭を0埋めする
+                    let date = "\(datePicker.date.year)" + "/" + "\(String(format: "%02d", datePicker.date.month))" + "/" + "\(String(format: "%02d", datePicker.date.day))"
+                    let textFieldAmountDebitInt64 = Int64(textFieldAmountDebit)
+                    let textFieldAmountCreditInt64 = Int64(textFieldAmountCredit)
+                    
+                    let dBJournalEntry = JournalEntryData(
+                        date: date,
+                        debit_category: textFieldCategoryDebit,
+                        debit_amount: textFieldAmountDebitInt64,
+                        credit_category: textFieldCategoryCredit,
+                        credit_amount: textFieldAmountCreditInt64,
+                        smallWritting: textFieldSmallWritting
+                    )
+                    
+                    datas.append(dBJournalEntry)
+                }
+            }
+        }
+        
+        return datas
+    }
+    
+    // MARK: バリデーション
     // 入力チェック 仕訳一括編集
     func textInputCheckForJournalEntriesPackageFixing() -> Bool {
         // 入力値を取得する
@@ -924,7 +2167,7 @@ class JournalEntryViewController: UIViewController {
         }
         
         // 小書き　バリデーションチェック
-        switch ErrorValidation().validateSmallWriting(text: textFieldSmallWritting.text ?? "") {
+        switch ErrorValidation().validateSmallWriting(text: smallWritting ?? "") {
         case .success, .unvalidated:
             errorMessage = nil
         case .failure(let message):
@@ -941,8 +2184,8 @@ class JournalEntryViewController: UIViewController {
     
     // 入力チェック
     func textInputCheck() -> Bool {
-        // バリデーション 借方勘定科目
-        guard textInputCheck(text: textFieldCategoryDebit.text, editableType: .categoryDebit, completion: {
+        // バリデーション 借方勘定科目 入力チェック
+        guard textInputCheck(text: debit.title, editableType: .categoryDebit, completion: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 // 未入力のTextFieldのキーボードを自動的に表示する
                 self.textFieldCategoryDebit.becomeFirstResponder()
@@ -950,27 +2193,18 @@ class JournalEntryViewController: UIViewController {
         }) else {
             return false // NG
         }
+        // バリデーション 貸方勘定科目 入力チェック
+        guard textInputCheck(text: credit.title, editableType: .categoryCredit, completion: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                // 未入力のTextFieldのキーボードを自動的に表示する
+                self.textFieldCategoryCredit.becomeFirstResponder()
+            }
+        }) else {
+            return false // NG
+        }
         
-        // バリデーション 貸方勘定科目
-        guard textInputCheck(text: textFieldCategoryCredit.text, editableType: .categoryCredit, completion: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                // 未入力のTextFieldのキーボードを自動的に表示する
-                self.textFieldCategoryCredit.becomeFirstResponder()
-            }
-        }) else {
-            return false // NG
-        }
-        // バリデーション 勘定科目
-        guard textInputCheck(creditText: textFieldCategoryCredit.text, debitText: textFieldCategoryDebit.text, completion: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                // 未入力のTextFieldのキーボードを自動的に表示する
-                self.textFieldCategoryCredit.becomeFirstResponder()
-            }
-        }) else {
-            return false // NG
-        }
-        // バリデーション 金額
-        guard textInputCheck(text: textFieldAmountDebit.text, editableType: .amount, completion: {
+        // バリデーション 金額 入力チェック
+        guard textInputCheck(amount: debit.amount, editableType: .amount, completion: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 // 未入力のTextFieldのキーボードを自動的に表示する
                 self.textFieldAmountDebit.becomeFirstResponder()
@@ -978,9 +2212,8 @@ class JournalEntryViewController: UIViewController {
         }) else {
             return false // NG
         }
-        
-        // バリデーション 金額
-        guard textInputCheck(text: textFieldAmountCredit.text, editableType: .amount, completion: {
+        // バリデーション 金額 入力チェック
+        guard textInputCheck(amount: credit.amount, editableType: .amount, completion: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 // 未入力のTextFieldのキーボードを自動的に表示する
                 self.textFieldAmountCredit.becomeFirstResponder()
@@ -988,9 +2221,87 @@ class JournalEntryViewController: UIViewController {
         }) else {
             return false // NG
         }
+        if journalEntryType == .CompoundJournalEntry { // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+            // バリデーション 勘定科目 入力チェック
+            for i in 0..<debitElements.count {
+                // バリデーション 借方勘定科目　1〜4 入力チェック
+                guard textInputCheck(text: debitElements[i].title, editableType: .categoryDebit, completion: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        // 未入力のTextFieldのキーボードを自動的に表示する
+                        switch i {
+                        case 0:
+                            self.textFieldCategoryDebit1.becomeFirstResponder()
+                        case 1:
+                            self.textFieldCategoryDebit2.becomeFirstResponder()
+                        case 2:
+                            self.textFieldCategoryDebit3.becomeFirstResponder()
+                        case 3:
+                            self.textFieldCategoryDebit4.becomeFirstResponder()
+                        default:
+                            break
+                        }
+                    }
+                }) else {
+                    return false // NG
+                }
+            }
+            for i in 0..<creditElements.count {
+                // バリデーション 貸方勘定科目　1〜4 入力チェック
+                guard textInputCheck(text: creditElements[i].title, editableType: .categoryCredit, completion: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        // 未入力のTextFieldのキーボードを自動的に表示する
+                        switch i {
+                        case 0:
+                            self.textFieldCategoryCredit1.becomeFirstResponder()
+                        case 1:
+                            self.textFieldCategoryCredit2.becomeFirstResponder()
+                        case 2:
+                            self.textFieldCategoryCredit3.becomeFirstResponder()
+                        case 3:
+                            self.textFieldCategoryCredit4.becomeFirstResponder()
+                        default:
+                            break
+                        }
+                    }
+                }) else {
+                    return false // NG
+                }
+            }
+            // バリデーション 勘定科目　重複 複合仕訳
+            guard textInputCheckDuplicated(debit: debit, debitElements: debitElements, credit: credit, creditElements: creditElements, completion: {
+                
+            }) else {
+                return false // NG
+            }
+            // バリデーション 金額 貸借一致
+            guard textInputCheck(creditAmount: creditAmountTotal, debitAmount: debitAmountTotal, completion: {
+                
+            }) else {
+                return false // NG
+            }
+        } else {
+            // バリデーション 勘定科目　重複　貸借 単一仕訳
+            guard textInputCheck(creditText: credit.title, debitText: debit.title, completion: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    // 未入力のTextFieldのキーボードを自動的に表示する
+                    self.textFieldCategoryCredit.becomeFirstResponder()
+                }
+            }) else {
+                return false // NG
+            }
+            // バリデーション 金額 貸借一致
+            guard textInputCheck(creditAmount: credit.amount, debitAmount: debit.amount, completion: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    // 未入力のTextFieldのキーボードを自動的に表示する
+                    self.textFieldAmountCredit.becomeFirstResponder()
+                }
+            }) else {
+                return false // NG
+            }
+        }
         
         // 小書き　バリデーションチェック
-        switch ErrorValidation().validateSmallWriting(text: textFieldSmallWritting.text ?? "") {
+        switch ErrorValidation().validateSmallWriting(text: smallWritting ?? "") {
         case .success, .unvalidated:
             errorMessage = nil
         case .failure(let message):
@@ -1004,10 +2315,10 @@ class JournalEntryViewController: UIViewController {
         
         return true // OK
     }
-    // バリデーション 勘定科目、金額
-    func textInputCheck(text: String?, editableType: EditableType, completion: @escaping () -> Void) -> Bool {
+    // バリデーション 勘定科目、金額 入力チェック
+    func textInputCheck(text: String? = nil, amount: Int? = nil, editableType: EditableType, completion: @escaping () -> Void) -> Bool {
         // バリデーションチェック
-        switch ErrorValidation().validateEmpty(text: text, editableType: editableType) {
+        switch ErrorValidation().validateEmpty(text: text, amount: amount, editableType: editableType) {
         case .success, .unvalidated:
             errorMessage = nil
         case .failure(let message):
@@ -1020,10 +2331,42 @@ class JournalEntryViewController: UIViewController {
         
         return true // OK
     }
-    // バリデーション 勘定科目
+    // バリデーション 勘定科目　重複　貸借 単一仕訳
     func textInputCheck(creditText: String?, debitText: String?, completion: @escaping () -> Void) -> Bool {
-        // バリデーションチェック
+        // バリデーション 勘定科目
         switch ErrorValidation().validate(creditText: creditText, debitText: debitText) {
+        case .success, .unvalidated:
+            errorMessage = nil
+        case .failure(let message):
+            errorMessage = message
+            showErrorMessage(completion: {
+                completion()
+            })
+            return false // NG
+        }
+        
+        return true // OK
+    }
+    // バリデーション 勘定科目　重複 複合仕訳
+    func textInputCheckDuplicated(debit: AccountTitleAmount, debitElements: [AccountTitleAmount], credit: AccountTitleAmount, creditElements: [AccountTitleAmount], completion: @escaping () -> Void) -> Bool {
+        // バリデーション 勘定科目 重複　複合仕訳
+        switch ErrorValidation().validateDuplicated(debit: debit, debitElements: debitElements, credit: credit, creditElements: creditElements) {
+        case .success, .unvalidated:
+            errorMessage = nil
+        case .failure(let message):
+            errorMessage = message
+            showErrorMessage(completion: {
+                completion()
+            })
+            return false // NG
+        }
+        
+        return true // OK
+    }
+    // バリデーション 金額　貸借一致
+    func textInputCheck(creditAmount: Int?, debitAmount: Int?, completion: @escaping () -> Void) -> Bool {
+        // バリデーションチェック
+        switch ErrorValidation().validate(creditAmount: creditAmount, debitAmount: debitAmount) {
         case .success, .unvalidated:
             errorMessage = nil
         case .failure(let message):
@@ -1089,7 +2432,7 @@ class JournalEntryViewController: UIViewController {
     // リワード　報酬を獲得
     fileprivate func earnCoins(_ coins: NSInteger) {
         UserData.rewardAdCoinCount += coins
-        
+        // 入力数カウンタラベル
         updateCoinCountLabel()
     }
     
@@ -1109,13 +2452,19 @@ class JournalEntryViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             sender.isSelected = !sender.isSelected
         }
-        textFieldCategoryDebit.text = ""
-        textFieldCategoryCredit.text = ""
-        textFieldAmountDebit.text = ""
-        textFieldAmountCredit.text = ""
-        textFieldSmallWritting.text = ""
+        // 取引要素　借方 貸方　クリア
+        debit = AccountTitleAmount()
+        credit = AccountTitleAmount()
+        // 仕訳タイプ判定
+        if journalEntryType == .CompoundJournalEntry { // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+            creditElements = []
+            debitElements = []
+        }
+        // 取引要素 小書き
+        smallWritting = nil
         // 終了させる　仕訳帳画面か精算表画面へ戻る
-        if journalEntryType != .JournalEntry && // 仕訳 タブバーの仕訳タブからの遷移の場合
+        if journalEntryType != .CompoundJournalEntry && // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+            journalEntryType != .JournalEntry && // 仕訳 タブバーの仕訳タブからの遷移の場合
             journalEntryType != .AdjustingAndClosingEntry { // 決算整理仕訳 タブバーの仕訳タブからの遷移の場合
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.dismiss(animated: true, completion: nil)
@@ -1155,6 +2504,11 @@ class JournalEntryViewController: UIViewController {
                 // 仕訳画面で入力された仕訳の内容
                 controller.journalEntryData = journalEntryData
             }
+        }
+        // テキストフィールドのタグ
+        if let controller = segue.destination as? ClassicCalculatorViewController {
+            
+            controller.tag = tag
         }
     }
     
@@ -1329,11 +2683,16 @@ extension JournalEntryViewController: UICollectionViewDelegate {
         let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
             group: collectionView.tag // グループ　その他 collectionView.tag == 0
         )
-        textFieldCategoryDebit.text = objects[indexPath.row].debit_category
-        textFieldAmountDebit.text = StringUtility.shared.addComma(string: objects[indexPath.row].debit_amount.description)
-        textFieldCategoryCredit.text = objects[indexPath.row].credit_category
-        textFieldAmountCredit.text = StringUtility.shared.addComma(string: objects[indexPath.row].credit_amount.description)
-        textFieldSmallWritting.text = objects[indexPath.row].smallWritting
+        DispatchQueue.main.async {
+            self.debit = AccountTitleAmount(title: objects[indexPath.row].debit_category, amount: Int(objects[indexPath.row].debit_amount)) // Down cast
+            DispatchQueue.main.async {
+                self.credit = AccountTitleAmount(title: objects[indexPath.row].credit_category, amount: Int(objects[indexPath.row].credit_amount)) // Down cast
+                DispatchQueue.main.async {
+                    self.view.endEditing(true)
+                }
+            }
+        }
+        smallWritting = objects[indexPath.row].smallWritting
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -1361,7 +2720,11 @@ extension JournalEntryViewController: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         // 借方金額　貸方金額、小書き
-        if textField == textFieldAmountDebit || textField == textFieldAmountCredit {
+        if textField == textFieldAmountDebit || textField == textFieldAmountCredit ||
+            textField == textFieldAmountDebit1 || textField == textFieldAmountCredit1 ||
+            textField == textFieldAmountDebit2 || textField == textFieldAmountCredit2 ||
+            textField == textFieldAmountDebit3 || textField == textFieldAmountCredit3 ||
+            textField == textFieldAmountDebit4 || textField == textFieldAmountCredit4 {
             // 借方勘定科目、貸方勘定科目、小書きのキーボードが表示中に、電卓を表示させないようにする
             if isShown {
                 // フォーカスを、貸方勘定科目から、金額へ移す際に、キーボードを閉じる
@@ -1378,19 +2741,42 @@ extension JournalEntryViewController: UITextFieldDelegate {
     // 入力開始 テキストフィールがタップされ、入力可能になったあと
     func textFieldDidBeginEditing(_ textField: UITextField) {
         // フォーカス　効果　ドロップシャドウをかける
-        textField.layer.shadowOpacity = 1.4
-        textField.layer.shadowRadius = 4
+        textField.layer.shadowOpacity = 1.0
+        textField.layer.shadowRadius = 6
         textField.layer.shadowColor = UIColor.calculatorDisplay.cgColor
-        textField.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        textField.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         
         // 2列目のComponentをリロードする
         if textField == textFieldCategoryDebit {
             textFieldCategoryDebit.reloadComponent()
         } else if textField == textFieldCategoryCredit {
             textFieldCategoryCredit.reloadComponent()
+        } else if textField == textFieldCategoryDebit1 {
+            textFieldCategoryDebit1.reloadComponent()
+        } else if textField == textFieldCategoryCredit1 {
+            textFieldCategoryCredit1.reloadComponent()
+        } else if textField == textFieldCategoryDebit2 {
+            textFieldCategoryDebit2.reloadComponent()
+        } else if textField == textFieldCategoryCredit2 {
+            textFieldCategoryCredit2.reloadComponent()
+        } else if textField == textFieldCategoryDebit3 {
+            textFieldCategoryDebit3.reloadComponent()
+        } else if textField == textFieldCategoryCredit3 {
+            textFieldCategoryCredit3.reloadComponent()
+        } else if textField == textFieldCategoryDebit4 {
+            textFieldCategoryDebit4.reloadComponent()
+        } else if textField == textFieldCategoryCredit4 {
+            textFieldCategoryCredit4.reloadComponent()
         }
+        
         // 借方金額　貸方金額
-        if textField == textFieldAmountDebit || textField == textFieldAmountCredit {
+        if textField == textFieldAmountDebit || textField == textFieldAmountCredit ||
+            textField == textFieldAmountDebit1 || textField == textFieldAmountCredit1 ||
+            textField == textFieldAmountDebit2 || textField == textFieldAmountCredit2 ||
+            textField == textFieldAmountDebit3 || textField == textFieldAmountCredit3 ||
+            textField == textFieldAmountDebit4 || textField == textFieldAmountCredit4 {
+            // テキストフィールドのタグ
+            tag = textField.tag
             // 電卓画面へ遷移させるために要る
             self.view.endEditing(true)
         }
@@ -1409,7 +2795,11 @@ extension JournalEntryViewController: UITextFieldDelegate {
         var resultForCharacter = false
         var resultForLength = false
         // 入力チェック　数字のみに制限
-        if textField == textFieldAmountDebit || textField == textFieldAmountCredit { // 借方金額仮　貸方金額
+        if textField == textFieldAmountDebit || textField == textFieldAmountCredit ||
+            textField == textFieldAmountDebit1 || textField == textFieldAmountCredit1 ||
+            textField == textFieldAmountDebit2 || textField == textFieldAmountCredit2 ||
+            textField == textFieldAmountDebit3 || textField == textFieldAmountCredit3 ||
+            textField == textFieldAmountDebit4 || textField == textFieldAmountCredit4 { // 借方金額仮　貸方金額
             //            let allowedCharacters = CharacterSet(charactersIn: ",0123456789")// Here change this characters based on your requirement
             //            let characterSet = CharacterSet(charactersIn: string)
             //            // 指定したスーパーセットの文字セットでないならfalseを返す
@@ -1423,17 +2813,18 @@ extension JournalEntryViewController: UITextFieldDelegate {
         // 入力チェック　文字数最大数を設定
         var maxLength: Int = 0 // 文字数最大値を定義
         switch textField.tag {
-        case 333, 444: // 金額の文字数 + カンマの数 (100万円の位まで入力可能とする)
+            // 金額の文字数 + カンマの数 (100万円の位まで入力可能とする)
+        case 333, 444, 777, 888, 111_111, 121_212, 151_515, 161_616, 191_919, 202_020:
             maxLength = 7 + 2
-        case 555: // 小書きの文字数
+        case 212121: // 小書きの文字数
             maxLength = EditableType.smallWriting.maxLength
-        case 888: // ニックネームの文字数
+        case 222222: // ニックネームの文字数
             maxLength = EditableType.nickname.maxLength
         default:
             break
         }
         // textField内の文字数
-        let textFieldTextCount = textField.text?.count ?? 0    // todo
+        let textFieldTextCount = textField.text?.count ?? 0
         // 入力された文字数
         let stringCount = string.count
         // 最大文字数以上ならfalseを返す
@@ -1480,64 +2871,41 @@ extension JournalEntryViewController: UITextFieldDelegate {
         textField.layer.shadowColor = UIColor.clear.cgColor
         
         if textField.tag == 111 { // 借方勘定科目
-            if textFieldCategoryDebit.text == "" {
-                // 未入力
-            } else if textFieldCategoryCredit.text == textFieldCategoryDebit.text { // 貸方と同じ勘定科目の場合
-                // 同じ勘定科目を指定できるように変更
-                // textFieldCategoryDebit.text = ""
-            } else {
-                // 仕訳一括編集ではない場合 よく使う仕訳ではない場合
-                if journalEntryType != .JournalEntriesPackageFixing && // 仕訳一括編集 仕訳帳画面からの遷移の場合
-                    journalEntryType != .SettingsJournalEntries  && // よく使う仕訳 追加
-                    journalEntryType != .SettingsJournalEntriesFixing { // よく使う仕訳 更新
-                    if textFieldCategoryCredit.text == "" {
-                        textFieldCategoryCredit.becomeFirstResponder()
-                    }
-                }
-            }
+            debit.title = textField.text
         } else if textField.tag == 222 { // 貸方勘定科目
-            if textFieldCategoryCredit.text == "" {
-                // 未入力
-            } else if textFieldCategoryCredit.text == textFieldCategoryDebit.text { // 借方と同じ勘定科目の場合
-                // 同じ勘定科目を指定できるように変更
-                // textFieldCategoryCredit.text = ""
-            } else {
-                // TextField_amount_credit.becomeFirstResponder() //貸方金額は不使用のため
-                // 仕訳一括編集ではない場合 よく使う仕訳ではない場合
-                if journalEntryType != .JournalEntriesPackageFixing && // 仕訳一括編集 仕訳帳画面からの遷移の場合
-                    journalEntryType != .SettingsJournalEntries && // よく使う仕訳 追加
-                    journalEntryType != .SettingsJournalEntriesFixing { // よく使う仕訳 更新
-                    
-                    if textFieldAmountDebit.text == "" {
-                        textFieldAmountDebit.becomeFirstResponder() // カーソルを金額へ移す
-                    }
-                }
-            }
+            credit.title = textField.text
+        } else if textField.tag == 555 { // 借方勘定科目
+            debitElements[0].title = textField.text
+        } else if textField.tag == 666 { // 貸方勘定科目
+            creditElements[0].title = textField.text
+        } else if textField.tag == 999 { // 借方勘定科目
+            debitElements[1].title = textField.text
+        } else if textField.tag == 101010 { // 貸方勘定科目
+            creditElements[1].title = textField.text
+        } else if textField.tag == 131313 { // 借方勘定科目
+            debitElements[2].title = textField.text
+        } else if textField.tag == 141414 { // 貸方勘定科目
+            creditElements[2].title = textField.text
+        } else if textField.tag == 171717 { // 借方勘定科目
+            debitElements[3].title = textField.text
+        } else if textField.tag == 181818 { // 貸方勘定科目
+            creditElements[3].title = textField.text
         }
     }
     // TextFieldに入力され値が変化した時の処理の関数
     @objc
-    func textFieldDidChange(_ sender: UITextField) {
-        if let text = sender.text {
+    func textFieldDidChange(_ textField: UITextField) {
+        if let text = textField.text {
             // カンマを追加する
-            if sender == textFieldAmountDebit || sender == textFieldAmountCredit { // 借方金額仮　貸方金額
-                sender.text = StringUtility.shared.addComma(string: text.description)
-            } else if sender == textFieldSmallWritting {
-                // 小書き　文字数カウンタ
-                let maxLength = EditableType.smallWriting.maxLength
-                smallWritingCounterLabel.font = .boldSystemFont(ofSize: 15)
-                smallWritingCounterLabel.text = "\(maxLength - text.count)/\(maxLength)  "
-                if text.count > maxLength {
-                    smallWritingCounterLabel.textColor = .systemPink
-                } else {
-                    smallWritingCounterLabel.textColor = text.count >= maxLength - 3 ? .systemYellow : .systemGreen
-                }
-                if text.count == maxLength {
-                    // フィードバック
-                    if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
-                        generator.notificationOccurred(.error)
-                    }
-                }
+            if textField == textFieldAmountDebit || textField == textFieldAmountCredit ||
+                textField == textFieldAmountDebit1 || textField == textFieldAmountCredit1 ||
+                textField == textFieldAmountDebit2 || textField == textFieldAmountCredit2 ||
+                textField == textFieldAmountDebit3 || textField == textFieldAmountCredit3 ||
+                textField == textFieldAmountDebit4 || textField == textFieldAmountCredit4 { // 借方金額仮　貸方金額
+                // 通らない
+            } else if textField == textFieldSmallWritting {
+                // 小書き
+                smallWritting = text.description
             }
             // print("\(String(describing: sender.text))") // カンマを追加する前にシスアウトすると、カンマが上位のくらいから3桁ごとに自動的に追加される。
         }
@@ -1556,8 +2924,6 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         // よく使う仕訳　エリア
         initTable()
         // UIパーツを作成
-        createTextFieldForCategory()
-        createTextFieldForAmount()
         createTextFieldForSmallwritting()
     }
     
@@ -1607,12 +2973,62 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         }
     }
     
+    // MARK: UI更新
+    
     func updateUI() {
-        // 勘定科目
-        textFieldCategoryDebit.updateUI()
-        textFieldCategoryCredit.updateUI()
         // 仕訳タイプ判定
-        if journalEntryType == .JournalEntry { // 仕訳 タブバーの仕訳タブからの遷移の場合
+        if journalEntryType != .CompoundJournalEntry && journalEntryType != .JournalEntry && journalEntryType != .AdjustingAndClosingEntry {
+            indicatorView.isHidden = false
+        } else {
+            indicatorView.isHidden = true
+        }
+        // 仕訳タイプ判定
+        if journalEntryType == .JournalEntry || journalEntryType == .AdjustingAndClosingEntry {
+            // 単一仕訳/複合仕訳　切り替え
+            compoundJournalEntrySegmentedControl.selectedSegmentIndex = UserDefaults.standard.bool(forKey: "compound_journal_entry") ? 1 : 0
+            // 単一仕訳/複合仕訳　切り替え
+            if compoundJournalEntrySegmentedControl.selectedSegmentIndex == 0 {
+                // 仕訳 タブバーの仕訳タブからの遷移の場合
+            } else {
+                journalEntryType = .CompoundJournalEntry // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+            }
+        }
+        // 仕訳タイプ判定
+        if journalEntryType == .CompoundJournalEntry { // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+            // タブバーの仕訳タブからの遷移の場合 表示させる
+            compoundJournalEntrySegmentedControl.isHidden = false
+            // 仕訳/決算整理仕訳　切り替え
+            segmentedControl.isHidden = false
+            // 仕訳に固定する
+            segmentedControl.selectedSegmentIndex = 0
+            segmentedControl.isEnabled = false
+            // よく使う仕訳　エリア
+            tableView.isHidden = true
+            // よく使う仕訳　エリア
+            journalEntryTemplateView.isHidden = true
+            // 仕訳画面表示ボタン
+            addButton.isHidden = true
+            // 勘定科目エリア　余白
+            spaceView.isHidden = false
+            self.navigationItem.title = "仕訳"
+            labelTitle.text = ""
+            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+        } else if journalEntryType == .JournalEntry { // 仕訳 タブバーの仕訳タブからの遷移の場合
+            // タブバーの仕訳タブからの遷移の場合 表示させる
+            compoundJournalEntrySegmentedControl.isHidden = false
+            // 仕訳/決算整理仕訳　切り替え
+            segmentedControl.isHidden = false
+            // 仕訳に固定を解除する
+            segmentedControl.isEnabled = true
+            segmentedControl.isHidden = false
+            // よく使う仕訳　エリア
+            tableView.isHidden = false
+            // よく使う仕訳　エリア
+            journalEntryTemplateView.isHidden = false
+            // 仕訳画面表示ボタン
+            addButton.isHidden = false
+            // 勘定科目エリア　余白
+            spaceView.isHidden = true
             self.navigationItem.title = "仕訳"
             labelTitle.text = ""
             // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
@@ -1620,12 +3036,30 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             reloadCarousel()
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
         } else if journalEntryType == .AdjustingAndClosingEntry {
+            // タブバーの仕訳タブからの遷移の場合 表示させる
+            compoundJournalEntrySegmentedControl.isHidden = false
+            // 仕訳/決算整理仕訳　切り替え
+            segmentedControl.isHidden = false
+            // よく使う仕訳　エリア
+            tableView.isHidden = false
+            // よく使う仕訳　エリア
+            journalEntryTemplateView.isHidden = false
+            // 仕訳画面表示ボタン
+            addButton.isHidden = false
+            // 勘定科目エリア　余白
+            spaceView.isHidden = true
             self.navigationItem.title = "決算整理仕訳"
             labelTitle.text = ""
             // カルーセルをリロードする
             reloadCarousel()
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
         } else if journalEntryType == .JournalEntries { // 仕訳 仕訳帳画面からの遷移の場合
+            // タブバーの仕訳タブからの遷移以外の場合 表示させない
+            compoundJournalEntrySegmentedControl.isHidden = true
+            // 仕訳/決算整理仕訳　切り替え
+            segmentedControl.isHidden = true
+            // よく使う仕訳　エリア
+            tableView.isHidden = false
             self.navigationItem.title = "仕訳"
             labelTitle.text = ""
             // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
@@ -1633,12 +3067,22 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             reloadCarousel()
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
         } else if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳 精算表画面からの遷移の場合
+            // タブバーの仕訳タブからの遷移以外の場合 表示させない
+            compoundJournalEntrySegmentedControl.isHidden = true
+            // 仕訳/決算整理仕訳　切り替え
+            segmentedControl.isHidden = true
+            // よく使う仕訳　エリア
+            tableView.isHidden = false
             self.navigationItem.title = "決算整理仕訳"
             labelTitle.text = ""
             // カルーセルをリロードする
             reloadCarousel()
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
         } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
+            // タブバーの仕訳タブからの遷移以外の場合 表示させない
+            compoundJournalEntrySegmentedControl.isHidden = true
+            // 仕訳/決算整理仕訳　切り替え
+            segmentedControl.isHidden = true
             // よく使う仕訳　エリア
             tableView.isHidden = true
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
@@ -1649,14 +3093,23 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                let date = DateManager.shared.dateFormatterStringToDate.date(from: dataBaseJournalEntry.date),
                let date = DateManager.shared.dateFormatterPicker.date(from: "\(date.month)/\(date.day)/\(date.year)") {
                 datePicker.date = date // 注意：カンマの後にスペースがないとnilになる
-                textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
-                textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
-                textFieldAmountDebit.text = StringUtility.shared.addComma(string: dataBaseJournalEntry.debit_amount.description)
-                textFieldAmountCredit.text = StringUtility.shared.addComma(string: dataBaseJournalEntry.credit_amount.description)
-                textFieldSmallWritting.text = dataBaseJournalEntry.smallWritting
+                DispatchQueue.main.async {
+                    self.debit = AccountTitleAmount(title: dataBaseJournalEntry.debit_category, amount: Int(dataBaseJournalEntry.debit_amount))
+                    DispatchQueue.main.async {
+                        self.credit = AccountTitleAmount(title: dataBaseJournalEntry.credit_category, amount: Int(dataBaseJournalEntry.credit_amount))
+                        DispatchQueue.main.async {
+                            self.view.endEditing(true)
+                        }
+                    }
+                }
+                smallWritting = dataBaseJournalEntry.smallWritting
             }
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
         } else if journalEntryType == .AdjustingEntriesFixing { // 決算整理仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
+            // タブバーの仕訳タブからの遷移以外の場合 表示させない
+            compoundJournalEntrySegmentedControl.isHidden = true
+            // 仕訳/決算整理仕訳　切り替え
+            segmentedControl.isHidden = true
             // よく使う仕訳　エリア
             tableView.isHidden = true
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
@@ -1667,19 +3120,29 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                let date = DateManager.shared.dateFormatterStringToDate.date(from: dataBaseJournalEntry.date),
                let date = DateManager.shared.dateFormatterPicker.date(from: "\(date.month)/\(date.day)/\(date.year)") {
                 datePicker.date = date // 注意：カンマの後にスペースがないとnilになる
-                textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
-                textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
-                textFieldAmountDebit.text = StringUtility.shared.addComma(string: dataBaseJournalEntry.debit_amount.description)
-                textFieldAmountCredit.text = StringUtility.shared.addComma(string: dataBaseJournalEntry.credit_amount.description)
-                textFieldSmallWritting.text = dataBaseJournalEntry.smallWritting
+                DispatchQueue.main.async {
+                    self.debit = AccountTitleAmount(title: dataBaseJournalEntry.debit_category, amount: Int(dataBaseJournalEntry.debit_amount))
+                    DispatchQueue.main.async {
+                        self.credit = AccountTitleAmount(title: dataBaseJournalEntry.credit_category, amount: Int(dataBaseJournalEntry.credit_amount))
+                        DispatchQueue.main.async {
+                            self.view.endEditing(true)
+                        }
+                    }
+                }
+                smallWritting = dataBaseJournalEntry.smallWritting
             }
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
         } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集 仕訳帳画面からの遷移の場合
+            // タブバーの仕訳タブからの遷移以外の場合 表示させない
+            compoundJournalEntrySegmentedControl.isHidden = true
+            // 仕訳/決算整理仕訳　切り替え
+            segmentedControl.isHidden = true
             labelTitle.text = "仕訳 まとめて編集"
             // よく使う仕訳　エリア
             tableView.isHidden = true
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
             maskDatePickerButton.isHidden = false
+            // デイトピッカーのマスク
             isMaskedDatePicker = false
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
         }
@@ -1687,7 +3150,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             // セットアップ AdMob
             await setupAdMob()
         }
-        
+        // 入力数カウンタラベル
         updateCoinCountLabel()
     }
     
@@ -1739,6 +3202,8 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         }
     }
     
+    // MARK: ダイアログ
+    
     // ダイアログ　オフライン
     func showDialogForOfline() {
         // フィードバック
@@ -1782,8 +3247,8 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                 style: .destructive,
                 handler: { _ in
                     print("OK アクションをタップした時の処理")
-
-                    self.presenter.inputButtonTapped(isForced: true, journalEntryType: journalEntryType, journalEntryData: journalEntryData, primaryKey: nil)
+                    
+                    self.presenter.inputButtonTapped(isForced: true, journalEntryType: journalEntryType, journalEntryData: journalEntryData, journalEntryDatas: nil, primaryKey: nil)
                 }
             )
         )
@@ -1814,7 +3279,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                 handler: { _ in
                     print("OK アクションをタップした時の処理")
                     
-                    self.presenter.inputButtonTapped(isForced: true, journalEntryType: self.journalEntryType, journalEntryData: journalEntryData, primaryKey: nil)
+                    self.presenter.inputButtonTapped(isForced: true, journalEntryType: self.journalEntryType, journalEntryData: journalEntryData, journalEntryDatas: nil, primaryKey: nil)
                 }
             )
         )
@@ -1851,6 +3316,24 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         }
     }
     
+    // ダイアログ 記帳しました
+    func showDialogForSucceed() {
+        // 入力中のキーボード　小書き不要の場合に、入力ボタンを押下された場合 フォーカスされている状態を外す
+        self.textFieldSmallWritting.resignFirstResponder()
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
+            generator.notificationOccurred(.success)
+        }
+        let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
+        self.present(alert, animated: true) { () -> Void in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.dismiss(animated: true)
+            }
+        }
+    }
+    
+    // MARK: 画面遷移
+    
     // 画面を閉じる　仕訳帳へ編集した仕訳データを渡す
     func closeScreen(journalEntryData: JournalEntryData) {
         if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
@@ -1876,22 +3359,6 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                 // ナビゲーションバーを表示させる
                 let navigation = UINavigationController(rootViewController: viewController)
                 self.present(navigation, animated: true, completion: nil)
-            }
-        }
-    }
-    
-    // ダイアログ 記帳しました
-    func showDialogForSucceed() {
-        // 入力中のキーボード　小書き不要の場合に、入力ボタンを押下された場合 フォーカスされている状態を外す
-        self.textFieldSmallWritting.resignFirstResponder()
-        // フィードバック
-        if #available(iOS 10.0, *), let generator = feedbackGeneratorNotification as? UINotificationFeedbackGenerator {
-            generator.notificationOccurred(.success)
-        }
-        let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
-        self.present(alert, animated: true) { () -> Void in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.dismiss(animated: true)
             }
         }
     }
@@ -1964,6 +3431,8 @@ enum JournalEntryType {
     case JournalEntry
     // 決算整理仕訳 タブバーの仕訳タブからの遷移の場合
     case AdjustingAndClosingEntry
+    // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+    case CompoundJournalEntry
     
     // MARK: 仕訳帳画面
     // 仕訳 仕訳帳画面からの遷移の場合
@@ -1988,4 +3457,13 @@ enum JournalEntryType {
     case SettingsJournalEntries
     // よく使う仕訳 更新
     case SettingsJournalEntriesFixing
+    
+    // 未決定
+    case Undecided
+}
+
+// 取引要素
+struct AccountTitleAmount {
+    var title: String?
+    var amount: Int?
 }

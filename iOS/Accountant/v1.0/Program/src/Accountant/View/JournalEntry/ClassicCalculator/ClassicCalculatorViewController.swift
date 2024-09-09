@@ -62,6 +62,8 @@ class ClassicCalculatorViewController: UIViewController {
     var box2: Int = DecimalNumbers.zero.rawValue
     /// 計算結果
     var numbersOnDisplay: Int = DecimalNumbers.zero.rawValue
+    // テキストフィールドのタグ
+    var tag: Int = 0
     // フィードバック
     private let feedbackGeneratorMedium: Any? = {
         if #available(iOS 10.0, *) {
@@ -399,7 +401,7 @@ class ClassicCalculatorViewController: UIViewController {
             // viewWillAppearを呼び出す　更新のため
             self.dismiss(animated: true, completion: { [presentingViewController2] () -> Void in
                 // ViewController(電卓画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
-                presentingViewController2.setAmountValue(numbersOnDisplay: self.numbersOnDisplay)
+                presentingViewController2.setAmountValue(numbersOnDisplay: self.numbersOnDisplay, tag: self.tag)
             })
             return
         }
@@ -409,7 +411,7 @@ class ClassicCalculatorViewController: UIViewController {
             // viewWillAppearを呼び出す　更新のため
             self.dismiss(animated: true, completion: { [presentingViewController2] () -> Void in
                 // ViewController(電卓画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
-                presentingViewController2.setAmountValue(numbersOnDisplay: self.numbersOnDisplay)
+                presentingViewController2.setAmountValue(numbersOnDisplay: self.numbersOnDisplay, tag: self.tag)
             })
             return
         }
@@ -423,7 +425,7 @@ class ClassicCalculatorViewController: UIViewController {
             // viewWillAppearを呼び出す　更新のため
             self.dismiss(animated: true, completion: { [presentingViewController2] () -> Void in
                 // ViewController(電卓画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
-                presentingViewController2.setAmountValue(numbersOnDisplay: self.numbersOnDisplay)
+                presentingViewController2.setAmountValue(numbersOnDisplay: self.numbersOnDisplay, tag: self.tag)
             })
             return
         }

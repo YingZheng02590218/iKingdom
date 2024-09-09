@@ -207,17 +207,17 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             generator.impactOccurred()
         }
         sender.animateView()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             // 別の画面に遷移 仕訳画面
             if let viewController = UIStoryboard(
                 name: "JournalEntryViewController",
                 bundle: nil
             ).instantiateInitialViewController() as? JournalEntryViewController {
-                viewController.journalEntryType = .JournalEntries // セルに表示した仕訳タイプを取得
-                viewController.segmentedControl.isHidden = true
                 // ナビゲーションバーを表示させる
                 let navigation = UINavigationController(rootViewController: viewController)
-                self.present(navigation, animated: true, completion: nil)
+                self.present(navigation, animated: true, completion: {
+                    viewController.journalEntryType = .JournalEntries // セルに表示した仕訳タイプを取得
+                })
             }
         }
     }
@@ -312,9 +312,9 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                         print("選択されたセル", self.indexPaths)
                         // 仕訳編集画面を表示して、一括変更したい内容に修正させる
                         if let viewController = UIStoryboard(name: "JournalEntryViewController", bundle: nil).instantiateInitialViewController() as? JournalEntryViewController {
-                            viewController.journalEntryType = .JournalEntriesPackageFixing // セルに表示した仕訳タイプを取得
-                            
-                            self.present(viewController, animated: true, completion: nil)
+                            self.present(viewController, animated: true, completion: {
+                                viewController.journalEntryType = .JournalEntriesPackageFixing // セルに表示した仕訳タイプを取得
+                            })
                         }
                     }
                 )
