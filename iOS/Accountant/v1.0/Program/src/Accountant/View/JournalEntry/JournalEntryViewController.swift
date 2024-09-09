@@ -281,7 +281,9 @@ class JournalEntryViewController: UIViewController {
                 if creditElements.filter({ $0.amount == nil || $0.amount == 0 }).isEmpty {
                     DispatchQueue.main.async {
                         // 貸方科目へ
-                        self.creditElements.append(AccountTitleAmount())
+                        if self.creditElements.count < 4 {
+                            self.creditElements.append(AccountTitleAmount())
+                        }
                     }
                 }
             } else {
@@ -290,7 +292,9 @@ class JournalEntryViewController: UIViewController {
                     debitElements = []
                     DispatchQueue.main.async {
                         // 貸方科目へ
-                        self.creditElements.append(AccountTitleAmount())
+                        if self.creditElements.count < 4 {
+                            self.creditElements.append(AccountTitleAmount())
+                        }
                     }
                 }
             }
@@ -302,7 +306,9 @@ class JournalEntryViewController: UIViewController {
                 if debitElements.filter({ $0.amount == nil || $0.amount == 0 }).isEmpty {
                     DispatchQueue.main.async {
                         // 借方科目へ
-                        self.debitElements.append(AccountTitleAmount())
+                        if self.debitElements.count < 4 {
+                            self.debitElements.append(AccountTitleAmount())
+                        }
                     }
                 }
             } else {
@@ -311,7 +317,9 @@ class JournalEntryViewController: UIViewController {
                     creditElements = []
                     DispatchQueue.main.async {
                         // 借方科目へ
-                        self.debitElements.append(AccountTitleAmount())
+                        if self.debitElements.count < 4 {
+                            self.debitElements.append(AccountTitleAmount())
+                        }
                     }
                 }
             }
@@ -1205,6 +1213,9 @@ class JournalEntryViewController: UIViewController {
         indicator.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(indicatorDidTap(_:))))
         return indicator
     }()
+    // インジゲーター
+    var activityIndicatorView = UIActivityIndicatorView()
+    let backView = UIView()
     // フィードバック
     let feedbackGeneratorMedium: Any? = {
         if #available(iOS 10.0, *) {
@@ -3152,6 +3163,77 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         }
         // 入力数カウンタラベル
         updateCoinCountLabel()
+    }
+    
+    // MARK: インジゲーター
+    // インジゲーターを開始
+    func showActivityIndicatorView() {
+        DispatchQueue.main.async {
+            self.editButtonItem.isEnabled = false // 編集ボタン
+            self.segmentedControl.isEnabled = false
+            self.compoundJournalEntrySegmentedControl.isEnabled = false
+            // 仕訳画面表示ボタン
+            self.addButton.isEnabled = false
+            
+            // タブの無効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = false
+                    }
+                }
+            }
+            // 背景になるView
+            self.backView.backgroundColor = .mainColor
+            // 表示位置を設定（画面中央）
+            self.activityIndicatorView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            // インジケーターのスタイルを指定（白色＆大きいサイズ）
+            self.activityIndicatorView.style = UIActivityIndicatorView.Style.large
+            
+            self.activityIndicatorView.color = UIColor.mainColor
+            // インジケーターを View に追加
+            self.backView.addSubview(self.activityIndicatorView)
+            // インジケーターを表示＆アニメーション開始
+            self.activityIndicatorView.startAnimating()
+            
+            // tabBarControllerのViewを使う
+            guard let tabBarView = self.tabBarController?.view else {
+                return
+            }
+            // 背景をNavigationControllerのViewに貼り付け
+            tabBarView.addSubview(self.backView)
+            
+            // サイズ合わせはAutoLayoutで
+            self.backView.translatesAutoresizingMaskIntoConstraints = false
+            self.backView.topAnchor.constraint(equalTo: tabBarView.topAnchor).isActive = true
+            self.backView.bottomAnchor.constraint(equalTo: tabBarView.bottomAnchor).isActive = true
+            self.backView.leftAnchor.constraint(equalTo: tabBarView.leftAnchor).isActive = true
+            self.backView.rightAnchor.constraint(equalTo: tabBarView.rightAnchor).isActive = true
+        }
+    }
+    // インジケーターを終了
+    func finishActivityIndicatorView() {
+        // 非同期処理などが終了したらメインスレッドでアニメーション終了
+        DispatchQueue.main.async {
+            // 非同期処理などを実行（今回は2秒間待つだけ）
+            Thread.sleep(forTimeInterval: 1.0)
+            self.editButtonItem.isEnabled = true // 編集ボタン
+            self.segmentedControl.isEnabled = true
+            self.compoundJournalEntrySegmentedControl.isEnabled = true
+            // 仕訳画面表示ボタン
+            self.addButton.isEnabled = true
+            // アニメーション終了
+            self.activityIndicatorView.stopAnimating()
+            // タブの有効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = true
+                    }
+                }
+            }
+            self.backView.removeFromSuperview()
+        }
     }
     
     // MARK: - チュートリアル対応 ウォークスルー型
