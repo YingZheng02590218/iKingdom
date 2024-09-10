@@ -29,7 +29,7 @@ enum ErrorValidationState: Hashable {
 
 // バリデーションチェック　バリデーション状態を返却する
 struct ErrorValidation {
-    
+    // バリデーションチェック　小書き
     func validateSmallWriting(text: String) -> ErrorValidationState {
         let editableType = EditableType.smallWriting
         // 最大長
@@ -80,18 +80,19 @@ struct ErrorValidation {
         return .success
     }
     // バリデーション 勘定科目、金額
-    func validateEmpty(text: String?, editableType: EditableType) -> ErrorValidationState {
-        // 必須
-        guard let text = text, !text.isEmpty else {
-            return .failure(
-                message: ErrorValidationType.required(
-                    name: editableType.rawValue
-                ).errorText
-            )
-        }
+    func validateEmpty(text: String?, amount: Int?, editableType: EditableType) -> ErrorValidationState {
         // 必須　金額
         if editableType == .amount {
-            guard "0" != text else {
+            guard  let amount = amount, 0 != amount else {
+                return .failure(
+                    message: ErrorValidationType.required(
+                        name: editableType.rawValue
+                    ).errorText
+                )
+            }
+        } else {
+            // 必須
+            guard let text = text, !text.isEmpty else {
                 return .failure(
                     message: ErrorValidationType.required(
                         name: editableType.rawValue
@@ -107,6 +108,92 @@ struct ErrorValidation {
         guard creditText != debitText else {
             return .failure(
                 message: ErrorValidationType.requiredDifferentCategory.errorText
+            )
+        }
+        return .success
+    }
+    // バリデーション 勘定科目 重複　複合仕訳
+    func validateDuplicated(debit: AccountTitleAmount, debitElements: [AccountTitleAmount], credit: AccountTitleAmount, creditElements: [AccountTitleAmount]) -> ErrorValidationState {
+        // 存在確認　同じ勘定科目名が存在するかどうかを確認する
+        let allDebitElements: [AccountTitleAmount] = [debit] + debitElements
+        print("借方", allDebitElements)
+        // 存在確認　同じ勘定科目名が存在するかどうかを確認する
+        let allCreditElements: [AccountTitleAmount] = [credit] + creditElements
+        print("貸方", allCreditElements)
+        
+        // 借方
+        guard !(allDebitElements.filter({ $0.title == debit.title }).count > 1 ||
+            !allCreditElements.filter({ $0.title == debit.title }).isEmpty) else {
+            return .failure(
+                message: ErrorValidationType.requiredDifferentCategories.errorText
+            )
+        }
+        guard !(allDebitElements.filter({ $0.title == debitElements[safe: 0]?.title }).count > 1 ||
+            !allCreditElements.filter({ $0.title == debitElements[safe: 0]?.title }).isEmpty) else {
+            return .failure(
+                message: ErrorValidationType.requiredDifferentCategories.errorText
+            )
+        }
+        guard !(allDebitElements.filter({ $0.title == debitElements[safe: 1]?.title }).count > 1 ||
+            !allCreditElements.filter({ $0.title == debitElements[safe: 1]?.title }).isEmpty) else {
+            return .failure(
+                message: ErrorValidationType.requiredDifferentCategories.errorText
+            )
+        }
+        guard !(allDebitElements.filter({ $0.title == debitElements[safe: 2]?.title }).count > 1 ||
+            !allCreditElements.filter({ $0.title == debitElements[safe: 2]?.title }).isEmpty) else {
+            return .failure(
+                message: ErrorValidationType.requiredDifferentCategories.errorText
+            )
+        }
+        guard !(allDebitElements.filter({ $0.title == debitElements[safe: 3]?.title }).count > 1 ||
+            !allCreditElements.filter({ $0.title == debitElements[safe: 3]?.title }).isEmpty) else {
+            return .failure(
+                message: ErrorValidationType.requiredDifferentCategories.errorText
+            )
+        }
+        
+        // 貸方
+        guard !(allCreditElements.filter({ $0.title == credit.title }).count > 1 ||
+            !allDebitElements.filter({ $0.title == credit.title }).isEmpty) else {
+            return .failure(
+                message: ErrorValidationType.requiredDifferentCategories.errorText
+            )
+        }
+        guard !(allCreditElements.filter({ $0.title == creditElements[safe: 0]?.title }).count > 1 ||
+            !allDebitElements.filter({ $0.title == creditElements[safe: 0]?.title }).isEmpty) else {
+            return .failure(
+                message: ErrorValidationType.requiredDifferentCategories.errorText
+            )
+        }
+        guard !(allCreditElements.filter({ $0.title == creditElements[safe: 1]?.title }).count > 1 ||
+            !allDebitElements.filter({ $0.title == creditElements[safe: 1]?.title }).isEmpty) else {
+            return .failure(
+                message: ErrorValidationType.requiredDifferentCategories.errorText
+            )
+        }
+        guard !(allCreditElements.filter({ $0.title == creditElements[safe: 2]?.title }).count > 1 ||
+            !allDebitElements.filter({ $0.title == creditElements[safe: 2]?.title }).isEmpty) else {
+            return .failure(
+                message: ErrorValidationType.requiredDifferentCategories.errorText
+            )
+        }
+        // 通らない
+        guard !(allCreditElements.filter({ $0.title == creditElements[safe: 3]?.title }).count > 1 ||
+            !allDebitElements.filter({ $0.title == creditElements[safe: 3]?.title }).isEmpty) else {
+            return .failure(
+                message: ErrorValidationType.requiredDifferentCategories.errorText
+            )
+        }
+
+        return .success
+    }
+    // バリデーション 金額　貸借一致
+    func validate(creditAmount: Int?, debitAmount: Int?) -> ErrorValidationState {
+        // 貸方と同じ勘定科目の場合
+        guard creditAmount == debitAmount else {
+            return .failure(
+                message: ErrorValidationType.requiredDifferentAmount.errorText
             )
         }
         return .success

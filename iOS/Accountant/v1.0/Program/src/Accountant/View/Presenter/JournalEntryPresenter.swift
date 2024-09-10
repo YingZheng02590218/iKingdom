@@ -21,7 +21,7 @@ protocol JournalEntryPresenterInput {
     // チュートリアル対応 コーチマーク型
     func showAnnotation()
     // 入力ボタン
-    func inputButtonTapped(isForced: Bool, journalEntryType: JournalEntryType, journalEntryData: JournalEntryData, primaryKey: Int?)
+    func inputButtonTapped(isForced: Bool, journalEntryType: JournalEntryType, journalEntryData: JournalEntryData?, journalEntryDatas: [JournalEntryData]?, primaryKey: Int?)
     // OKボタン ダイアログ　オフライン
     func okButtonTappedDialogForOfline()
     // アップグレード画面を表示
@@ -33,6 +33,10 @@ protocol JournalEntryPresenterOutput: AnyObject {
     func setupUI()
     
     func updateUI()
+    
+    func showActivityIndicatorView()
+    
+    func finishActivityIndicatorView()
     // 生体認証パスコードロック画面へ遷移させる
     func showPassCodeLock()
     // チュートリアル対応 ウォークスルー型
@@ -134,7 +138,8 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
     func inputButtonTapped(
         isForced: Bool = false,
         journalEntryType: JournalEntryType,
-        journalEntryData: JournalEntryData,
+        journalEntryData: JournalEntryData? = nil,
+        journalEntryDatas: [JournalEntryData]? = nil,
         primaryKey: Int? = nil
     ) {
         if isForced {
@@ -151,8 +156,10 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
                 // 仕訳が50件以上入力済みの場合は毎回広告を表示する　マネタイズ対応
                 let results = DataBaseManagerJournalEntry.shared.getJournalEntryCount()
                 if results.count > Constant.SHOW_REWARD_AD_COUNT {
+                    
+                    let count = journalEntryType == .CompoundJournalEntry ? journalEntryDatas?.count ?? 0 : 1
                     // リワード　報酬を消費
-                    guard spendCoin() else {
+                    guard spendCoin(count: count) else {
                         // ダイアログ　リワード広告　仕訳を入力する（広告動画を見る）/　広告を非表示（アップグレード）
                         view.showDialogForRewardAd()
                         return
@@ -167,87 +174,190 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
         case .JournalEntry:
             // 仕訳 タブバーの仕訳タブからの遷移の場合
             // 仕訳
-            model.addJournalEntry(isForced: isForced, journalEntryData: journalEntryData) { _ in
-                // ダイアログ 記帳しました
-                view.showDialogForSucceed()
-                // イベントログ
-                Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                    AnalyticsParameterContentType: Constant.JOURNALENTRY,
-                    AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
-                ])
-            } errorHandler: { numbers in
-                print("仕訳　日付と借方勘定科目、貸方勘定科目、金額が同一の仕訳", numbers)
-                // ダイアログ　日付と借方勘定科目、貸方勘定科目、金額が同一
-                view.showDialogForSameJournalEntry(journalEntryType: journalEntryType, journalEntryData: journalEntryData)
+            if let journalEntryData = journalEntryData {
+                // インジゲーターを開始
+                view.showActivityIndicatorView()
+                DispatchQueue.global(qos: .default).async {
+                    self.model.addJournalEntry(isForced: isForced, journalEntryData: journalEntryData) { _ in
+                        // 重要: 仕訳データを参照する際、メインスレッドで行う
+                        DispatchQueue.main.async {
+                            // インジケーターを終了
+                            self.view.finishActivityIndicatorView()
+                            // ダイアログ 記帳しました
+                            self.view.showDialogForSucceed()
+                        }
+                        // イベントログ
+                        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                            AnalyticsParameterContentType: Constant.JOURNALENTRY,
+                            AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
+                        ])
+                    } errorHandler: { numbers in
+                        // 重要: 仕訳データを参照する際、メインスレッドで行う
+                        DispatchQueue.main.async {
+                            // インジケーターを終了
+                            self.view.finishActivityIndicatorView()
+                            print("仕訳　日付と借方勘定科目、貸方勘定科目、金額が同一の仕訳", numbers)
+                            // ダイアログ　日付と借方勘定科目、貸方勘定科目、金額が同一
+                            self.view.showDialogForSameJournalEntry(journalEntryType: journalEntryType, journalEntryData: journalEntryData)
+                        }
+                    }
+                }
             }
         case .AdjustingAndClosingEntry:
             // 決算整理仕訳 タブバーの仕訳タブからの遷移の場合
             // 決算整理仕訳
-            model.addAdjustingJournalEntry(journalEntryData: journalEntryData) { _ in
-                // 決算整理仕訳後に遷移元画面へ戻る
-                view.goBackToPreviousScreen()
-                // イベントログ
-                Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                    AnalyticsParameterContentType: Constant.JOURNALENTRY,
-                    AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
-                ])
+            if let journalEntryData = journalEntryData {
+                // インジゲーターを開始
+                view.showActivityIndicatorView()
+                DispatchQueue.global(qos: .default).async {
+                    self.model.addAdjustingJournalEntry(journalEntryData: journalEntryData) { _ in
+                        // 重要: 仕訳データを参照する際、メインスレッドで行う
+                        DispatchQueue.main.async {
+                            // インジケーターを終了
+                            self.view.finishActivityIndicatorView()
+                            // 決算整理仕訳後に遷移元画面へ戻る
+                            self.view.goBackToPreviousScreen()
+                        }
+                        // イベントログ
+                        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                            AnalyticsParameterContentType: Constant.JOURNALENTRY,
+                            AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
+                        ])
+                    }
+                }
             }
         case .JournalEntries:
             // 仕訳 仕訳帳画面からの遷移の場合
             // 仕訳
-            model.addJournalEntry(isForced: isForced, journalEntryData: journalEntryData) { number in
-                // 仕訳帳画面へ戻る
-                view.goBackToJournalsScreenJournalEntry(number: number)
-                // イベントログ
-                Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                    AnalyticsParameterContentType: Constant.JOURNALS,
-                    AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
-                ])
-            } errorHandler: { numbers in
-                print("仕訳　日付と借方勘定科目、貸方勘定科目、金額が同一の仕訳", numbers)
-                // ダイアログ　日付と借方勘定科目、貸方勘定科目、金額が同一
-                view.showDialogForSameJournalEntry(journalEntryType: journalEntryType, journalEntryData: journalEntryData)
+            if let journalEntryData = journalEntryData {
+                // インジゲーターを開始
+                view.showActivityIndicatorView()
+                DispatchQueue.global(qos: .default).async {
+                    self.model.addJournalEntry(isForced: isForced, journalEntryData: journalEntryData) { number in
+                        // 重要: 仕訳データを参照する際、メインスレッドで行う
+                        DispatchQueue.main.async {
+                            // インジケーターを終了
+                            self.view.finishActivityIndicatorView()
+                            // 仕訳帳画面へ戻る
+                            self.view.goBackToJournalsScreenJournalEntry(number: number)
+                        }
+                        // イベントログ
+                        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                            AnalyticsParameterContentType: Constant.JOURNALS,
+                            AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
+                        ])
+                    } errorHandler: { numbers in
+                        // 重要: 仕訳データを参照する際、メインスレッドで行う
+                        DispatchQueue.main.async {
+                            // インジケーターを終了
+                            self.view.finishActivityIndicatorView()
+                            print("仕訳　日付と借方勘定科目、貸方勘定科目、金額が同一の仕訳", numbers)
+                            // ダイアログ　日付と借方勘定科目、貸方勘定科目、金額が同一
+                            self.view.showDialogForSameJournalEntry(journalEntryType: journalEntryType, journalEntryData: journalEntryData)
+                        }
+                    }
+                }
             }
         case .AdjustingAndClosingEntries:
             // 決算整理仕訳 精算表画面からの遷移の場合
             // 決算整理仕訳
-            model.addAdjustingJournalEntry(journalEntryData: journalEntryData) { _ in
-                // 決算整理仕訳後に遷移元画面へ戻る
-                view.goBackToPreviousScreen()
-                // イベントログ
-                Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                    AnalyticsParameterContentType: Constant.WORKSHEET,
-                    AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
-                ])
+            if let journalEntryData = journalEntryData {
+                // インジゲーターを開始
+                view.showActivityIndicatorView()
+                DispatchQueue.global(qos: .default).async {
+                    self.model.addAdjustingJournalEntry(journalEntryData: journalEntryData) { _ in
+                        // 重要: 仕訳データを参照する際、メインスレッドで行う
+                        DispatchQueue.main.async {
+                            // インジケーターを終了
+                            self.view.finishActivityIndicatorView()
+                            // 決算整理仕訳後に遷移元画面へ戻る
+                            self.view.goBackToPreviousScreen()
+                        }
+                        // イベントログ
+                        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                            AnalyticsParameterContentType: Constant.WORKSHEET,
+                            AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
+                        ])
+                    }
+                }
             }
         case .JournalEntriesFixing:
             // 仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
             if let primaryKey = primaryKey {
                 // 仕訳 更新
-                model.updateJournalEntry(journalEntryData: journalEntryData, primaryKey: primaryKey) { number in
-                    // 勘定画面・仕訳帳画面へ戻る
-                    view.goBackToJournalsScreen(number: number)
+                if let journalEntryData = journalEntryData {
+                    // インジゲーターを開始
+                    view.showActivityIndicatorView()
+                    DispatchQueue.global(qos: .default).async {
+                        self.model.updateJournalEntry(journalEntryData: journalEntryData, primaryKey: primaryKey) { number in
+                            // 重要: 仕訳データを参照する際、メインスレッドで行う
+                            DispatchQueue.main.async {
+                                // インジケーターを終了
+                                self.view.finishActivityIndicatorView()
+                                // 勘定画面・仕訳帳画面へ戻る
+                                self.view.goBackToJournalsScreen(number: number)
+                            }
+                        }
+                    }
                 }
             }
         case .AdjustingEntriesFixing:
             // 決算整理仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
             if let primaryKey = primaryKey {
                 // 決算整理仕訳 更新
-                model.updateAdjustingJournalEntry(journalEntryData: journalEntryData, primaryKey: primaryKey) { number in
-                    // 勘定画面・仕訳帳画面へ戻る
-                    view.goBackToJournalsScreen(number: number)
+                if let journalEntryData = journalEntryData {
+                    // インジゲーターを開始
+                    view.showActivityIndicatorView()
+                    DispatchQueue.global(qos: .default).async {
+                        self.model.updateAdjustingJournalEntry(journalEntryData: journalEntryData, primaryKey: primaryKey) { number in
+                            // 重要: 仕訳データを参照する際、メインスレッドで行う
+                            DispatchQueue.main.async {
+                                // インジケーターを終了
+                                self.view.finishActivityIndicatorView()
+                                // 勘定画面・仕訳帳画面へ戻る
+                                self.view.goBackToJournalsScreen(number: number)
+                            }
+                        }
+                    }
                 }
             }
         case .JournalEntriesPackageFixing:
             // 仕訳一括編集 仕訳帳画面からの遷移の場合
-            if isForced {
-                // 画面を閉じる　仕訳帳へ編集した仕訳データを渡す
-                view.closeScreen(journalEntryData: journalEntryData)
-            } else {
-                // ダイアログ　ほんとうに変更しますか？
-                view.showDialogForFinal(journalEntryData: journalEntryData)
+            if let journalEntryData = journalEntryData {
+                if isForced {
+                    // 画面を閉じる　仕訳帳へ編集した仕訳データを渡す
+                    view.closeScreen(journalEntryData: journalEntryData)
+                } else {
+                    // ダイアログ　ほんとうに変更しますか？
+                    view.showDialogForFinal(journalEntryData: journalEntryData)
+                }
             }
         case .SettingsJournalEntries, .SettingsJournalEntriesFixing:
+            break
+        case .CompoundJournalEntry:
+            // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+            // 仕訳
+            if let journalEntryDatas = journalEntryDatas {
+                // インジゲーターを開始
+                view.showActivityIndicatorView()
+                DispatchQueue.global(qos: .default).async {
+                    self.model.addJournalEntry(journalEntryDatas: journalEntryDatas) {
+                        // 重要: 仕訳データを参照する際、メインスレッドで行う
+                        DispatchQueue.main.async {
+                            // インジケーターを終了
+                            self.view.finishActivityIndicatorView()
+                            // ダイアログ 記帳しました
+                            self.view.showDialogForSucceed()
+                        }
+                        // イベントログ
+                        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                            AnalyticsParameterContentType: Constant.JOURNALENTRY,
+                            AnalyticsParameterItemID: Constant.ADDCOMPOUNDJOURNALENTRY
+                        ])
+                    }
+                }
+            }
+        case .Undecided:
             break
         }
         // 月次推移表を更新する　true: リロードする
@@ -265,9 +375,9 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
     }
     
     // リワード　報酬を消費
-    func spendCoin() -> Bool {
-        if UserData.rewardAdCoinCount >= 1 {
-            UserData.rewardAdCoinCount -= 1
+    func spendCoin(count: Int) -> Bool {
+        if UserData.rewardAdCoinCount >= count {
+            UserData.rewardAdCoinCount -= count
             return true
         }
         return false
