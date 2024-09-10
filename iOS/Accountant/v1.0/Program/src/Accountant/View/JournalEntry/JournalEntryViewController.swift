@@ -2156,6 +2156,30 @@ class JournalEntryViewController: UIViewController {
                 }
             }
         }
+        // 貸借一致　単一仕訳
+        if debitAmount == creditAmount {
+            if let textFieldCategoryDebit = debit.title,
+               let textFieldAmountDebit = debit.amount,
+               let textFieldCategoryCredit = credit.title,
+               let textFieldAmountCredit = credit.amount {
+                let textFieldSmallWritting = smallWritting
+                // 先頭を0埋めする
+                let date = "\(datePicker.date.year)" + "/" + "\(String(format: "%02d", datePicker.date.month))" + "/" + "\(String(format: "%02d", datePicker.date.day))"
+                let textFieldAmountDebitInt64 = Int64(textFieldAmountDebit)
+                let textFieldAmountCreditInt64 = Int64(textFieldAmountCredit)
+                
+                let dBJournalEntry = JournalEntryData(
+                    date: date,
+                    debit_category: textFieldCategoryDebit,
+                    debit_amount: textFieldAmountDebitInt64,
+                    credit_category: textFieldCategoryCredit,
+                    credit_amount: textFieldAmountCreditInt64,
+                    smallWritting: textFieldSmallWritting
+                )
+                
+                datas.append(dBJournalEntry)
+            }
+        }
         
         return datas
     }
@@ -3071,6 +3095,8 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             segmentedControl.isHidden = true
             // よく使う仕訳　エリア
             tableView.isHidden = false
+            // 勘定科目エリア　余白
+            spaceView.isHidden = true
             self.navigationItem.title = "仕訳"
             labelTitle.text = ""
             // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
@@ -3084,6 +3110,8 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             segmentedControl.isHidden = true
             // よく使う仕訳　エリア
             tableView.isHidden = false
+            // 勘定科目エリア　余白
+            spaceView.isHidden = true
             self.navigationItem.title = "決算整理仕訳"
             labelTitle.text = ""
             // カルーセルをリロードする
@@ -3096,6 +3124,8 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             segmentedControl.isHidden = true
             // よく使う仕訳　エリア
             tableView.isHidden = true
+            // 勘定科目エリア　余白
+            spaceView.isHidden = true
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
             // 通常仕訳
             labelTitle.text = "仕訳 編集"
@@ -3123,6 +3153,8 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             segmentedControl.isHidden = true
             // よく使う仕訳　エリア
             tableView.isHidden = true
+            // 勘定科目エリア　余白
+            spaceView.isHidden = true
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
             // 決算整理仕訳
             labelTitle.text = "決算整理仕訳 編集"
@@ -3148,6 +3180,8 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             compoundJournalEntrySegmentedControl.isHidden = true
             // 仕訳/決算整理仕訳　切り替え
             segmentedControl.isHidden = true
+            // 勘定科目エリア　余白
+            spaceView.isHidden = true
             labelTitle.text = "仕訳 まとめて編集"
             // よく使う仕訳　エリア
             tableView.isHidden = true
