@@ -82,10 +82,7 @@ class MonthlyProfitAndLossStatementViewController: UIViewController {
         
         titleLabel.text = "損益計算書"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 21)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        
         // 月次推移表を更新する　true: リロードする 仕訳入力時にフラグを立てる。フラグが立っていれば下記の処理を実行する
         if Constant.needToReload {
             // ローディング処理
@@ -121,6 +118,10 @@ class MonthlyProfitAndLossStatementViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         spreadsheetView.flashScrollIndicators()
         
