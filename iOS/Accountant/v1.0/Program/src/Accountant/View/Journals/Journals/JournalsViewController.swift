@@ -162,13 +162,13 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         // PDF 会計期間　メニュー
         // 月別の月末日を取得 12ヶ月分
         let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
-        let action = UIAction(title: "\(lastDays[0].year)") { action in
+        let action = UIAction(title: "\(lastDays[0].year)") { _ in
             print("\(lastDays[0].year)", "clicked")
             self.presenter.pdfBarButtonItemTapped(yearMonth: nil)
         }
         var children: [UIAction] = [action]
         for i in 0..<lastDays.count {
-            let action = UIAction(title: "\(lastDays[i].year)" + "/" + String(format: "%02d", lastDays[i].month)) { action in
+            let action = UIAction(title: "\(lastDays[i].year)" + "/" + String(format: "%02d", lastDays[i].month)) { _ in
                 print("\(lastDays[i].year)" + "/" + String(format: "%02d", lastDays[i].month), "clicked")
                 self.presenter.pdfBarButtonItemTapped(yearMonth: "\(lastDays[i].year)" + "/" + "\(String(format: "%02d", lastDays[i].month))")
             }
