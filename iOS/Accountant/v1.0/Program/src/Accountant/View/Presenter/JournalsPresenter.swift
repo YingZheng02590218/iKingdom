@@ -18,16 +18,12 @@ protocol JournalsPresenterInput {
     
     var numberOfobjects: Int { get }
     var numberOfobjectsss: Int { get }
-    var numberOfDataBaseTransferEntries: Int { get }
-    var numberOfDataBaseCapitalTransferJournalEntry: Int { get }
     
     func objects(forRow row: Int) -> DataBaseJournalEntry
     func objectsss(forRow row: Int) -> DataBaseAdjustingEntry
-    func dataBaseTransferEntries(forRow row: Int) -> DataBaseTransferEntry
-    func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry?
     
     var filePath: URL? { get }
-
+    
     func viewDidLoad()
     func viewWillAppear()
     func viewWillDisappear()
@@ -35,7 +31,7 @@ protocol JournalsPresenterInput {
     
     func refreshTable(isEditing: Bool)
     func cellLongPressed(indexPath: IndexPath)
-    func pdfBarButtonItemTapped()
+    func pdfBarButtonItemTapped(yearMonth: String?)
     func csvBarButtonItemTapped()
     func deleteJournalEntry(number: Int) -> Bool
     func deleteAdjustingJournalEntry(number: Int) -> Bool
@@ -69,10 +65,6 @@ final class JournalsPresenter: JournalsPresenterInput {
     private var objects: Results<DataBaseJournalEntry>
     // 決算整理仕訳
     private var objectsss: Results<DataBaseAdjustingEntry>
-    // 損益振替仕訳
-    private var dataBaseTransferEntries: Results<DataBaseTransferEntry>
-    // 資本振替仕訳
-    private var dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
     
     // PDF,CSVファイルのパス
     var filePath: URL?
@@ -85,13 +77,9 @@ final class JournalsPresenter: JournalsPresenterInput {
         self.model = model
         
         // 通常仕訳　全
-        objects = model.getJournalEntriesInJournals()
+        objects = model.getJournalEntriesInJournals(yearMonth: nil)
         // 決算整理仕訳
-        objectsss = model.getJournalAdjustingEntry()
-        // 損益振替仕訳
-        dataBaseTransferEntries = model.getTransferEntryInAccount()
-        // 資本振替仕訳
-        dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
+        objectsss = model.getJournalAdjustingEntry(yearMonth: nil)
     }
     
     // MARK: - Life cycle
@@ -108,13 +96,9 @@ final class JournalsPresenter: JournalsPresenterInput {
         DispatchQueue.main.async {
             // 会計年度を切り替えした場合、仕訳帳をリロードして選択された年度のデータを表示する
             // 通常仕訳　全
-            self.objects = self.model.getJournalEntriesInJournals()
+            self.objects = self.model.getJournalEntriesInJournals(yearMonth: nil)
             // 決算整理仕訳
-            self.objectsss = self.model.getJournalAdjustingEntry()
-            // 損益振替仕訳
-            self.dataBaseTransferEntries = self.model.getTransferEntryInAccount()
-            // 資本振替仕訳
-            self.dataBaseCapitalTransferJournalEntry = self.model.getCapitalTransferJournalEntryInAccount()
+            self.objectsss = self.model.getJournalAdjustingEntry(yearMonth: nil)
         }
         self.view.setupViewForViewWillAppear()
     }
@@ -145,38 +129,6 @@ final class JournalsPresenter: JournalsPresenterInput {
         objectsss[row]
     }
     
-    var numberOfDataBaseTransferEntries: Int {
-        let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
-        if let englishFromOfClosingTheLedger0 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger0 {
-            // 損益振替仕訳
-            if englishFromOfClosingTheLedger0 {
-                return dataBaseTransferEntries.count
-            } else {
-                return 0
-            }
-        }
-        return 0
-    }
-    
-    func dataBaseTransferEntries(forRow row: Int) -> DataBaseTransferEntry {
-        dataBaseTransferEntries[row]
-    }
-    
-    var numberOfDataBaseCapitalTransferJournalEntry: Int {
-        let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
-        if let englishFromOfClosingTheLedger1 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger1 {
-            // 資本振替仕訳
-            if englishFromOfClosingTheLedger1 {
-                return dataBaseCapitalTransferJournalEntry == nil ? 0 : 1
-            }
-        }
-        return 0
-    }
-    
-    func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry? {
-        dataBaseCapitalTransferJournalEntry
-    }
-    
     func refreshTable(isEditing: Bool) {
         if !isEditing {
             // インジゲーターを開始
@@ -188,13 +140,9 @@ final class JournalsPresenter: JournalsPresenterInput {
                     // 重要: 仕訳データを参照する際、メインスレッドで行う
                     DispatchQueue.main.async {
                         // 通常仕訳　全
-                        self.objects = self.model.getJournalEntriesInJournals()
+                        self.objects = self.model.getJournalEntriesInJournals(yearMonth: nil)
                         // 決算整理仕訳
-                        self.objectsss = self.model.getJournalAdjustingEntry()
-                        // 損益振替仕訳
-                        self.dataBaseTransferEntries = self.model.getTransferEntryInAccount()
-                        // 資本振替仕訳
-                        self.dataBaseCapitalTransferJournalEntry = self.model.getCapitalTransferJournalEntryInAccount()
+                        self.objectsss = self.model.getJournalAdjustingEntry(yearMonth: nil)
                         // 更新処理
                         self.view.reloadData(primaryKeys: nil, primaryKeysAdjusting: nil)
                         // インジケーターを終了
@@ -215,9 +163,9 @@ final class JournalsPresenter: JournalsPresenterInput {
         view.setupCellLongPressed(indexPath: indexPath)
     }
     // 印刷機能
-    func pdfBarButtonItemTapped() {
+    func pdfBarButtonItemTapped(yearMonth: String? = nil) {
         // 初期化 PDFメーカー
-        model.initializePdfMaker(completion: { filePath in
+        model.initializePdfMaker(yearMonth: yearMonth, completion: { filePath in
             
             self.filePath = filePath
             self.view.showPreview()
@@ -228,7 +176,7 @@ final class JournalsPresenter: JournalsPresenterInput {
     func csvBarButtonItemTapped() {
         // 初期化
         model.initializeCsvMaker(completion: { csvPath in
-                        
+            
             self.filePath = csvPath
             self.view.showPreview()
         })
@@ -237,13 +185,9 @@ final class JournalsPresenter: JournalsPresenterInput {
     func autoScroll(number: Int, tappedIndexPathSection: Int) {
         DispatchQueue.main.async {
             // 通常仕訳　全
-            self.objects = self.model.getJournalEntriesInJournals()
+            self.objects = self.model.getJournalEntriesInJournals(yearMonth: nil)
             // 決算整理仕訳
-            self.objectsss = self.model.getJournalAdjustingEntry()
-            // 損益振替仕訳
-            self.dataBaseTransferEntries = self.model.getTransferEntryInAccount()
-            // 資本振替仕訳
-            self.dataBaseCapitalTransferJournalEntry = self.model.getCapitalTransferJournalEntryInAccount()
+            self.objectsss = self.model.getJournalAdjustingEntry(yearMonth: nil)
             
             // オートスクロール
             self.view.autoScroll(number: number, tappedIndexPathSection: tappedIndexPathSection)
@@ -354,13 +298,9 @@ final class JournalsPresenter: JournalsPresenterInput {
             // 重要: 仕訳データを参照する際、メインスレッドで行う
             DispatchQueue.main.async {
                 // 通常仕訳　全
-                self.objects = self.model.getJournalEntriesInJournals()
+                self.objects = self.model.getJournalEntriesInJournals(yearMonth: nil)
                 // 決算整理仕訳
-                self.objectsss = self.model.getJournalAdjustingEntry()
-                // 損益振替仕訳
-                self.dataBaseTransferEntries = self.model.getTransferEntryInAccount()
-                // 資本振替仕訳
-                self.dataBaseCapitalTransferJournalEntry = self.model.getCapitalTransferJournalEntryInAccount()
+                self.objectsss = self.model.getJournalAdjustingEntry(yearMonth: nil)
                 
                 // view にリロードさせる
                 self.view.reloadData(primaryKeys: primaryKeys, primaryKeysAdjusting: primaryKeysAdjusting)

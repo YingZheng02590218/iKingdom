@@ -17,7 +17,7 @@ class PDFMaker {
     let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // 調整した　A4 210×297mm
     var fiscalYear = 0
 
-    func initialize(completion: (URL?) -> Void) {
+    func initialize(yearMonth: String? = nil, completion: (URL?) -> Void) {
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         fiscalYear = dataBaseAccountingBooks.fiscalYear
         // 初期化
@@ -49,16 +49,16 @@ class PDFMaker {
             print(error)
         }
         
-        let url = readDB()
+        let url = readDB(yearMonth: yearMonth)
         completion(url)
     }
     
     // PDFファイルを生成
-    func readDB() -> URL? {
+    func readDB(yearMonth: String? = nil) -> URL? {
         
         let dataBaseManager = JournalsModel()
-        let dataBaseJournalEntries = dataBaseManager.getJournalEntriesInJournals()
-        let dataBaseAdjustingEntries = dataBaseManager.getJournalAdjustingEntry()
+        let dataBaseJournalEntries = dataBaseManager.getJournalEntriesInJournals(yearMonth: yearMonth)
+        let dataBaseAdjustingEntries = dataBaseManager.getJournalAdjustingEntry(yearMonth: yearMonth)
 
         var htmlString = ""
         
