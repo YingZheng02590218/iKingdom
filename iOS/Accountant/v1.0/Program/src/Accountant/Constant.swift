@@ -54,6 +54,7 @@ enum Constant {
     static let WORKSHEET = "worksheet"        // 精算表画面
 
     // パラメータ FirebaseAnalytics.Param.ITEM_ID (String)
+    static let ADDCOMPOUNDJOURNALENTRY = "add_compound_journalentry"   // 通常仕訳 複合仕訳
     static let ADDJOURNALENTRY = "add_journalentry"                    // 通常仕訳
     static let ADDADJUSTINGJOURNALENTRY = "add_adjustingjournalentry" // 決算整理仕訳
     static let DELETEJOURNALENTRY = "delete_journalentry"                    // 通常仕訳

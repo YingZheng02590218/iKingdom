@@ -135,17 +135,18 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
             generator.impactOccurred()
         }
         sender.animateView()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             // 別の画面に遷移 仕訳画面
             if let viewController = UIStoryboard(
                 name: "JournalEntryViewController",
                 bundle: nil
             ).instantiateInitialViewController() as? JournalEntryViewController {
-                viewController.journalEntryType = .AdjustingAndClosingEntries // セルに表示した仕訳タイプを取得
-                viewController.segmentedControl.isHidden = true
                 // ナビゲーションバーを表示させる
                 let navigation = UINavigationController(rootViewController: viewController)
-                self.present(navigation, animated: true, completion: nil)
+                self.present(navigation, animated: true, completion: {
+                    viewController.journalEntryType = .AdjustingAndClosingEntries // セルに表示した仕訳タイプを取得
+                    viewController.segmentedControl.isHidden = true
+                })
             }
         }
     }

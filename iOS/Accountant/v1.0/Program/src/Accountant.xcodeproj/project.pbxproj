@@ -353,6 +353,8 @@
 		F9876D2926428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9876D2826428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift */; };
 		F98CD96C24DCB071001CBF94 /* CategoryListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C252476BCE6002A0F77 /* CategoryListTableViewCell.swift */; };
 		F98CD96D24DCB077001CBF94 /* CategoryListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */; };
+		F98D171C2C89DD830032A03C /* Array+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D171B2C89DD830032A03C /* Array+extension.swift */; };
+		F98D171D2C89DD830032A03C /* Array+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D171B2C89DD830032A03C /* Array+extension.swift */; };
 		F98D536A264FB49A00996653 /* WithLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D5368264FB49A00996653 /* WithLabelTableViewCell.swift */; };
 		F98D536B264FB49A00996653 /* WithLabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F98D5369264FB49A00996653 /* WithLabelTableViewCell.xib */; };
 		F98D8A5127A534BD009560AA /* Printout+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D8A5027A534BD009560AA /* Printout+Utility.swift */; };
@@ -1039,6 +1041,7 @@
 		F986CC162945BA9A005A2138 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F986CC1D29474392005A2138 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F9876D2826428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsOperatingJournalEntry.swift; sourceTree = "<group>"; };
+		F98D171B2C89DD830032A03C /* Array+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+extension.swift"; sourceTree = "<group>"; };
 		F98D5368264FB49A00996653 /* WithLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithLabelTableViewCell.swift; sourceTree = "<group>"; };
 		F98D5369264FB49A00996653 /* WithLabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithLabelTableViewCell.xib; sourceTree = "<group>"; };
 		F98D8A5027A534BD009560AA /* Printout+Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Printout+Utility.swift"; sourceTree = "<group>"; };
@@ -1961,6 +1964,7 @@
 				F9A6686C266247C7008E9137 /* UIColor+extension.swift */,
 				F909645529C32D8B00BB5298 /* Date+extension.swift */,
 				F9B78D32293628550051C027 /* UIView+extension.swift */,
+				F98D171B2C89DD830032A03C /* Array+extension.swift */,
 				F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */,
 				F98D8A5027A534BD009560AA /* Printout+Utility.swift */,
 				F9482EAC282F9E20008B82E1 /* String+extension.swift */,
@@ -3115,6 +3119,7 @@
 				F9D38E96259618DE00364B45 /* SettingsHelpDetailViewController.swift in Sources */,
 				F929C00B247708CF0034FAAF /* MasterData.swift in Sources */,
 				F9354DB424989BAA007DB098 /* DataBaseTrialBalance.swift in Sources */,
+				F98D171C2C89DD830032A03C /* Array+extension.swift in Sources */,
 				F9A69B6F258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift in Sources */,
 				F9E53C24247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift in Sources */,
 				F92F4EF4249CCD5B00D50767 /* TBViewController.swift in Sources */,
@@ -3356,6 +3361,7 @@
 				F9EC66D227B90BC60003FBB6 /* MasterData.swift in Sources */,
 				F9EC66D327B90BC60003FBB6 /* DataBaseTrialBalance.swift in Sources */,
 				F9EC66D427B90BC60003FBB6 /* SettingsTheDayOfReckoningTableViewController.swift in Sources */,
+				F98D171D2C89DD830032A03C /* Array+extension.swift in Sources */,
 				F9EC66D527B90BC60003FBB6 /* DataBaseManagerGeneralLedgerAccountBalance.swift in Sources */,
 				F9EC66D627B90BC60003FBB6 /* TBViewController.swift in Sources */,
 				F9EC66D727B90BC60003FBB6 /* SettingsTableViewController.swift in Sources */,
@@ -3692,7 +3698,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.5.0;
+				MARKETING_VERSION = 5.6.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3730,7 +3736,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.5.0;
+				MARKETING_VERSION = 5.6.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3904,7 +3910,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.5.0;
+				MARKETING_VERSION = 5.6.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3945,7 +3951,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.5.0;
+				MARKETING_VERSION = 5.6.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";

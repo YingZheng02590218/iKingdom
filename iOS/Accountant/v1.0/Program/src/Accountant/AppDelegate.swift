@@ -399,6 +399,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         userDefaults.register(defaults: firstLunch)
         // ロック中
         userDefaults.set(true, forKey: firstLunchKey)
+        // 単一仕訳/複合仕訳　切り替え
+        firstLunchKey = "compound_journal_entry"
+        firstLunch = [firstLunchKey: false]
+        userDefaults.register(defaults: firstLunch)
+        // 動作確認用
+        // userDefaults.set(true, forKey: firstLunchKey)
         
         // アプリ起動回数をインクリメントする
         userDefaults.removeObject(forKey: "startUpCount")

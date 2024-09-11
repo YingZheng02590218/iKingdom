@@ -189,11 +189,11 @@ private extension AnnotationViewControllerJournalEntry {
     func extractRightBarButtonConvertedFrames() -> (zero: CGRect, firstLeft: CGRect, firstRight: CGRect, secondLeft: CGRect, secondRight: CGRect, third: CGRect, forth: CGRect) {
         guard
             let zero        = viewController?.view.viewWithTag(1)?.viewWithTag(11)?.viewWithTag(111)?.viewWithTag(2_222) as? UIDatePicker,
-            let firstLeft   = viewController?.view.viewWithTag(1)?.viewWithTag(22)?.viewWithTag(3_333)?.viewWithTag(11_111)?.viewWithTag(111) as? PickerTextField,
-            let firstRight  = viewController?.view.viewWithTag(1)?.viewWithTag(22)?.viewWithTag(3_333)?.viewWithTag(11_111)?.viewWithTag(222) as? PickerTextField,
-            let secondLeft  = viewController?.view.viewWithTag(1)?.viewWithTag(22)?.viewWithTag(3_333)?.viewWithTag(22_222)?.viewWithTag(333) as? UITextField,
-            let secondRight = viewController?.view.viewWithTag(1)?.viewWithTag(22)?.viewWithTag(3_333)?.viewWithTag(22_222)?.viewWithTag(444) as? UITextField,
-            let third       = viewController?.view.viewWithTag(1)?.viewWithTag(33)?.viewWithTag(555) as? UITextField,
+            let firstLeft   = viewController?.view.viewWithTag(1)?.viewWithTag(22)?.viewWithTag(3_333)?.viewWithTag(0)?.viewWithTag(11_111)?.viewWithTag(111) as? PickerTextField,
+            let firstRight  = viewController?.view.viewWithTag(1)?.viewWithTag(22)?.viewWithTag(3_333)?.viewWithTag(0)?.viewWithTag(11_111)?.viewWithTag(222) as? PickerTextField,
+            let secondLeft  = viewController?.view.viewWithTag(1)?.viewWithTag(22)?.viewWithTag(3_333)?.viewWithTag(0)?.viewWithTag(22_222)?.viewWithTag(333) as? UITextField,
+            let secondRight = viewController?.view.viewWithTag(1)?.viewWithTag(22)?.viewWithTag(3_333)?.viewWithTag(0)?.viewWithTag(22_222)?.viewWithTag(444) as? UITextField,
+            let third       = viewController?.view.viewWithTag(1)?.viewWithTag(33)?.viewWithTag(212121) as? UITextField,
             let forth       = viewController?.view.viewWithTag(1)?.viewWithTag(44)?.viewWithTag(555)?.viewWithTag(444) as? UIButton
         else {
             fatalError("Unexpected extract view from UIBarButtonItem via value(forKey:)")
