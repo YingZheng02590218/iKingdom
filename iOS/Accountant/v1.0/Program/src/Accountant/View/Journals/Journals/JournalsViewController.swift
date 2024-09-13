@@ -159,6 +159,33 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             csvBarButtonItem.isEnabled = false
             navigationItem.leftBarButtonItem?.isEnabled = false // 編集ボタン
         }
+        // PDF 会計期間　メニュー
+        // 月別の月末日を取得 12ヶ月分
+        let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+        let action = UIAction(title: "\(lastDays[0].year)") { _ in
+            print("\(lastDays[0].year)", "clicked")
+            self.presenter.pdfBarButtonItemTapped(yearMonth: nil)
+        }
+        var children: [UIAction] = [action]
+        for i in 0..<lastDays.count {
+            let action = UIAction(title: "\(lastDays[i].year)" + "/" + String(format: "%02d", lastDays[i].month)) { _ in
+                print("\(lastDays[i].year)" + "/" + String(format: "%02d", lastDays[i].month), "clicked")
+                self.presenter.pdfBarButtonItemTapped(yearMonth: "\(lastDays[i].year)" + "/" + "\(String(format: "%02d", lastDays[i].month))")
+            }
+            children.append(action)
+        }
+        let menu = UIMenu(title: "会計の期間", image: nil, identifier: nil, options: [], children: children)
+        if #available(iOS 14.0, *) {
+            pdfBarButtonItem = UIBarButtonItem(
+                title: "",
+                image: UIImage(named: "picture_as_pdf-picture_as_pdf_symbol"),
+                primaryAction: nil,
+                menu: menu
+            )
+        } else {
+            // Fallback on earlier versions
+        }
+        navigationItem.rightBarButtonItems = [editButtonItem, pdfBarButtonItem, csvBarButtonItem]
     }
     
     // ボタンのデザインを指定する
@@ -359,7 +386,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         presenter.refreshTable(isEditing: tableView.isEditing)
     }
     // 編集機能　長押しした際に呼ばれるメソッド
-    @objc 
+    @objc
     private func cellLongPressed(recognizer: UILongPressGestureRecognizer) {
         // 編集中ではない場合
         if !tableView.isEditing {
@@ -444,7 +471,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
      */
     @IBAction func pdfBarButtonItemTapped(_ sender: UIBarButtonItem) {
         
-        presenter.pdfBarButtonItemTapped()
+        presenter.pdfBarButtonItemTapped(yearMonth: nil)
     }
     
     @IBAction func csvBarButtonItemTapped(_ sender: UIBarButtonItem) {

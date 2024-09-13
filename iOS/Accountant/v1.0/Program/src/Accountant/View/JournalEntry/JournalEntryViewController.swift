@@ -1189,12 +1189,12 @@ class JournalEntryViewController: UIViewController {
     // 仕訳タイプ(仕訳 or 決算整理仕訳 or 編集)
     var journalEntryType: JournalEntryType = .Undecided {
         didSet {
-            if journalEntryType != .Undecided {
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                if self.journalEntryType != .Undecided {
                     self.updateUI()
+                } else {
+                    // .Undecided
                 }
-            } else {
-                // .Undecided
             }
         }
     } // Journal Entries、Adjusting and Closing Entries, JournalEntriesPackageFixing
