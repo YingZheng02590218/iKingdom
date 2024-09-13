@@ -138,9 +138,11 @@ extension SplashViewController: SplashPresenterOutput {
                     tabBarController.modalPresentationStyle = .fullScreen
                     tabBarController.modalTransitionStyle = .crossDissolve
                     self.present(tabBarController, animated: true, completion: {
-                        if let navigationController = tabBarController.viewControllers?.first as? UINavigationController {
-                            let viewController = navigationController.topViewController as? JournalEntryViewController
-                            viewController?.journalEntryType = .JournalEntry
+                        DispatchQueue.main.async {
+                            if let navigationController = tabBarController.viewControllers?.first as? UINavigationController {
+                                let viewController = navigationController.topViewController as? JournalEntryViewController
+                                viewController?.journalEntryType = .JournalEntry
+                            }
                         }
                     })
                 }
