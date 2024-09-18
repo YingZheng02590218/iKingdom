@@ -13,11 +13,11 @@ import RealmSwift
 protocol JournalsModelInput {
     func initializeJournals(completion: (Bool) -> Void)
     
-    func getJournalEntriesInJournals() -> Results<DataBaseJournalEntry>
-    func getJournalAdjustingEntry() -> Results<DataBaseAdjustingEntry>
+    func getJournalEntriesInJournals(yearMonth: String?) -> Results<DataBaseJournalEntry>
+    func getJournalAdjustingEntry(yearMonth: String?) -> Results<DataBaseAdjustingEntry>
     func getTransferEntryInAccount() -> Results<DataBaseTransferEntry>
     func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry?
-
+    
     func updateJournalEntry(primaryKey: Int, fiscalYear: Int)
     func updateAdjustingJournalEntry(primaryKey: Int, fiscalYear: Int)
     func updateJournalEntry(
@@ -41,7 +41,7 @@ protocol JournalsModelInput {
         completion: (Int) -> Void
     )
     
-    func initializePdfMaker(completion: (URL?) -> Void)
+    func initializePdfMaker(yearMonth: String?, completion: (URL?) -> Void)
     func initializeCsvMaker(completion: (URL?) -> Void)
 }
 
@@ -51,9 +51,9 @@ class JournalsModel: JournalsModelInput {
     // 印刷機能
     let pDFMaker = PDFMaker()
     // 初期化 PDFメーカー
-    func initializePdfMaker(completion: (URL?) -> Void) {
+    func initializePdfMaker(yearMonth: String? = nil, completion: (URL?) -> Void) {
         
-        pDFMaker.initialize(completion: { filePath in
+        pDFMaker.initialize(yearMonth: yearMonth, completion: { filePath in
             completion(filePath)
         })
     }
@@ -81,11 +81,20 @@ class JournalsModel: JournalsModelInput {
      * @param -
      * @return 仕訳[ ]
      */
-    func getJournalEntriesInJournals() -> Results<DataBaseJournalEntry> {
-        
-        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let dataBaseJournalEntries = dataBaseAccountingBooks.dataBaseJournals!.dataBaseJournalEntries.sorted(byKeyPath: "date", ascending: true)
-        return dataBaseJournalEntries
+    func getJournalEntriesInJournals(yearMonth: String? = nil) -> Results<DataBaseJournalEntry> {
+        if let yearMonth = yearMonth {
+            let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+            let dataBaseJournalEntries = dataBaseAccountingBooks.dataBaseJournals!.dataBaseJournalEntries
+            // BEGINSWITH 先頭が指定した文字で始まるデータを検索
+                .filter("date BEGINSWITH '\(yearMonth ?? "")'")
+                .sorted(byKeyPath: "date", ascending: true)
+            return dataBaseJournalEntries
+        } else {
+            let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+            let dataBaseJournalEntries = dataBaseAccountingBooks.dataBaseJournals!.dataBaseJournalEntries
+                .sorted(byKeyPath: "date", ascending: true)
+            return dataBaseJournalEntries
+        }
     }
     
     /**
@@ -94,10 +103,20 @@ class JournalsModel: JournalsModelInput {
      * 日付を降順にソートする
      * @return 決算整理仕訳[ ]
      */
-    func getJournalAdjustingEntry() -> Results<DataBaseAdjustingEntry> {
-        let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let dataBaseAdjustingEntries = dataBaseAccountingBook.dataBaseJournals!.dataBaseAdjustingEntries.sorted(byKeyPath: "date", ascending: true)
-        return dataBaseAdjustingEntries
+    func getJournalAdjustingEntry(yearMonth: String? = nil) -> Results<DataBaseAdjustingEntry> {
+        if let yearMonth = yearMonth {
+            let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+            let dataBaseAdjustingEntries = dataBaseAccountingBook.dataBaseJournals!.dataBaseAdjustingEntries
+            // BEGINSWITH 先頭が指定した文字で始まるデータを検索
+                .filter("date BEGINSWITH '\(yearMonth ?? "")'")
+                .sorted(byKeyPath: "date", ascending: true)
+            return dataBaseAdjustingEntries
+        } else {
+            let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+            let dataBaseAdjustingEntries = dataBaseAccountingBook.dataBaseJournals!.dataBaseAdjustingEntries
+                .sorted(byKeyPath: "date", ascending: true)
+            return dataBaseAdjustingEntries
+        }
     }
     // 取得　損益振替仕訳　※仕訳帳にプロパティを用意せずに、損益勘定のプロパティを参照する。
     func getTransferEntryInAccount() -> Results<DataBaseTransferEntry> {
@@ -124,7 +143,7 @@ class JournalsModel: JournalsModelInput {
         databaseManager.calculateAmountOfAllAccount()   // 合計額を計算
         // ウィジェット　貸借対照表と損益計算書の、五大区分の合計額と当期純利益の額を再計算する
         DataBaseManagerBalanceSheetProfitAndLossStatement.shared.setupAmountForBsAndPL()
-
+        
         completion(true)
     }
     
@@ -372,5 +391,5 @@ class JournalsModel: JournalsModelInput {
     }
     
     // MARK: Delete
-
+    
 }

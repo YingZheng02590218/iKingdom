@@ -16,10 +16,12 @@ class PDFMaker {
     let hTMLhelper = HTMLhelper()
     let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // 調整した　A4 210×297mm
     var fiscalYear = 0
+    var yearMonth: String? = nil
 
-    func initialize(completion: (URL?) -> Void) {
+    func initialize(yearMonth: String? = nil, completion: (URL?) -> Void) {
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        fiscalYear = dataBaseAccountingBooks.fiscalYear
+        self.fiscalYear = dataBaseAccountingBooks.fiscalYear
+        self.yearMonth = yearMonth
         // 初期化
         PDFpath = nil
         guard let tempDirectory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else { return }
@@ -49,16 +51,16 @@ class PDFMaker {
             print(error)
         }
         
-        let url = readDB()
+        let url = readDB(yearMonth: yearMonth)
         completion(url)
     }
     
     // PDFファイルを生成
-    func readDB() -> URL? {
+    func readDB(yearMonth: String? = nil) -> URL? {
         
         let dataBaseManager = JournalsModel()
-        let dataBaseJournalEntries = dataBaseManager.getJournalEntriesInJournals()
-        let dataBaseAdjustingEntries = dataBaseManager.getJournalAdjustingEntry()
+        let dataBaseJournalEntries = dataBaseManager.getJournalEntriesInJournals(yearMonth: yearMonth)
+        let dataBaseAdjustingEntries = dataBaseManager.getJournalAdjustingEntry(yearMonth: yearMonth)
 
         var htmlString = ""
         
@@ -243,7 +245,7 @@ class PDFMaker {
             print("失敗した")
         }
         
-        let filePath = pDFsDirectory.appendingPathComponent("\(fiscalYear)-Journals" + ".pdf")
+        let filePath = pDFsDirectory.appendingPathComponent("\(yearMonth?.replacingOccurrences(of: "/", with: "-") ?? "\(fiscalYear)")-Journals" + ".pdf")
         do {
             try data.write(to: filePath)
             print(filePath)
