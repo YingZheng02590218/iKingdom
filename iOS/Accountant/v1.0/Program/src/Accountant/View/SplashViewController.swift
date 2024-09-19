@@ -141,7 +141,9 @@ extension SplashViewController: SplashPresenterOutput {
                         DispatchQueue.main.async {
                             if let navigationController = tabBarController.viewControllers?.first as? UINavigationController {
                                 let viewController = navigationController.topViewController as? JournalEntryViewController
-                                viewController?.journalEntryType = .JournalEntry
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    viewController?.journalEntryType = .JournalEntry
+                                }
                             }
                         }
                     })
