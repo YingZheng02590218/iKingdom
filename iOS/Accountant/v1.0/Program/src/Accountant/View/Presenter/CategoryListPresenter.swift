@@ -468,8 +468,6 @@ final class CategoryListPresenter: CategoryListPresenterInput {
         let result = model.deleteSettingsTaxonomyAccount(number: self.objects(forRow: indexPath.row, section: indexPath.section).number)
         if result == true {
             view.reloadData()
-            // 仕訳画面のカルーセルをリロードする
-            JournalEntryViewController.viewReload = true
         } else {
             print("削除失敗　設定勘定科目")
         }
