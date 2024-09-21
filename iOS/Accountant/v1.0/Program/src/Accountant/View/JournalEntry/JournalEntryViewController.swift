@@ -42,8 +42,6 @@ class JournalEntryViewController: UIViewController {
             }
         }
     }
-    // カルーセル　true: リロードする
-    static var viewReload = false
     
     // MARK: デイトピッカー
     // デイトピッカー　日付
@@ -1397,32 +1395,29 @@ class JournalEntryViewController: UIViewController {
     
     // よく使う仕訳　エリア カルーセルをリロードする
     func reloadCarousel() {
-        if JournalEntryViewController.viewReload {
-            DispatchQueue.main.async { [self] in
-                // データベース　よく使う仕訳
-                if let text = debit.title {
-                    let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
-                        account: text
-                    )
-                    if objects.isEmpty {
-                        // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
-                        debit.title = nil
-                    }
+        DispatchQueue.main.async { [self] in
+            // データベース　よく使う仕訳
+            if let text = debit.title {
+                let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+                    account: text
+                )
+                if objects.isEmpty {
+                    // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
+                    debit.title = nil
                 }
-                if let text = credit.title {
-                    let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
-                        account: text
-                    )
-                    if objects.isEmpty {
-                        // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
-                        credit.title = nil
-                    }
+            }
+            if let text = credit.title {
+                let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+                    account: text
+                )
+                if objects.isEmpty {
+                    // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
+                    credit.title = nil
                 }
-                if let tableView = tableView {
-                    // よく使う仕訳　エリア
-                    tableView.reloadData()
-                }
-                JournalEntryViewController.viewReload = false
+            }
+            if let tableView = tableView {
+                // よく使う仕訳　エリア
+                tableView.reloadData()
             }
         }
     }

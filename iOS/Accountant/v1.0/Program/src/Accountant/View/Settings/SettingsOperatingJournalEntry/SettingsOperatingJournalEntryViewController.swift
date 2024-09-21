@@ -24,7 +24,6 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
     // まとめて編集機能　選択したよく使う仕訳の連番
     var selectedItemNumners: [Int] = []
     
-    var viewReload = false // リロードするかどうか
     // グループ
     var groupObjects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
     // フィードバック
@@ -64,22 +63,14 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // よく使う仕訳を追加や削除して、よく使う仕訳画面に戻ってきてもリロードされない。reloadData()は、よく使う仕訳画面に戻ってきた時のみ実行するように修正
-        if viewReload {
-            DispatchQueue.main.async {
-                self.tableView.reloadData() // CollectionView を更新していたが、画面構成を変更したので、TableViewを更新する
-                self.viewReload = false
-                JournalEntryViewController.viewReload = true
-            }
+        // グループ一覧から遷移してきた場合
+        if self.isEditing { // 編集モードの場合
+            // 選択中のセルがリセットされるので、リロードしない
         } else {
-            // グループ一覧から遷移してきた場合
-            if self.isEditing { // 編集モードの場合
-                // 選択中のセルがリセットされるので、リロードしない
-            } else {
-                // グループ
-                groupObjects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+            // グループ
+            groupObjects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
         }
         // フェードイン・アウトメソッド
@@ -204,9 +195,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
         self.updateJournalEntry(selectedItemNumners: selectedItemNumners, groupNumber: groupNumber, completion: {
             // リロード
             DispatchQueue.main.async {
-                self.tableView.reloadData()
-                
-                JournalEntryViewController.viewReload = true
+                self.tableView.reloadData()                
             }
         })
     }
@@ -247,7 +236,6 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
                     print("OK アクションをタップした時の処理")
                     // データベース　よく使う仕訳を削除
                     if DataBaseManagerSettingsOperatingJournalEntry.shared.deleteJournalEntry(number: primaryKey) {
-                        self.viewReload = true
                         self.viewWillAppear(true)
                     }
                 }
