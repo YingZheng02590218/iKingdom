@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="26Q-bf-jqW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="26Q-bf-jqW">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,7 +18,7 @@
                         <color key="backgroundColor" name="BaseColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_generalLedger" id="7JM-sQ-uRI" customClass="GeneralLedgerTableViewCell" customModule="Paciolist" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="49.5" width="414" height="30"/>
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="30"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="bottom" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7JM-sQ-uRI" id="nn6-cQ-gbm">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
@@ -27,9 +27,6 @@
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" name="MainColor2"/>
-                                <connections>
-                                    <segue destination="IxZ-Ph-4sn" kind="show" identifier="identifier_generalLedger" id="4hx-Ft-77Q"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -42,16 +39,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T4x-BD-HgF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1407" y="2034"/>
-        </scene>
-        <!--GeneralLedgerAccountViewController-->
-        <scene sceneID="R1b-xV-s9i">
-            <objects>
-                <viewControllerPlaceholder storyboardName="GeneralLedgerAccountViewController" id="IxZ-Ph-4sn" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="776-ZU-Eva"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Dlh-Sr-Iqw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1407" y="2444"/>
         </scene>
     </scenes>
     <resources>
