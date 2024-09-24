@@ -960,6 +960,8 @@ extension BalanceSheetViewController: BalacneSheetPresenterOutput {
                 removeBannerViewToView(gADBannerView)
             }
         }
+        
+        tableView.reloadData()
     }
     
     func setupViewForViewWillDisappear() {

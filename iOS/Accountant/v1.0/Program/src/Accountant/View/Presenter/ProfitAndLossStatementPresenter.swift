@@ -72,6 +72,9 @@ final class ProfitAndLossStatementPresenter: ProfitAndLossStatementPresenterInpu
     }
     
     func viewWillAppear() {
+        // 損益計算書　初期化　再計算
+        profitAndLossStatementData = model.initializeBenefits()
+
         view.setupViewForViewWillAppear()
     }
     

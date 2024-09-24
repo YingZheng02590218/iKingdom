@@ -77,6 +77,7 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         presenter.viewWillAppear()
     }
     
@@ -88,6 +89,7 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         presenter.viewDidAppear()
     }
     
@@ -1108,6 +1110,8 @@ extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutpu
                 removeBannerViewToView(gADBannerView)
             }
         }
+        
+        reloadData()
     }
     
     func setupViewForViewWillDisappear() {
@@ -1115,6 +1119,41 @@ extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutpu
         if let gADBannerView = gADBannerView {
             // GADBannerView を外す
             removeBannerViewToView(gADBannerView)
+        }
+        print(self.presentingViewController)
+        // 仕訳画面 タブバー
+        if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
+           let navigationController = tabBarController.selectedViewController as? UINavigationController {
+            // 貸借対照表画面
+            if let presentingViewController = navigationController.topViewController as? BalanceSheetViewController {
+                // 画面を閉じる
+                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                    presentingViewController.viewWillAppear(true)
+                })
+            }
+            // 損益計算書画面
+            if let presentingViewController = navigationController.topViewController as? ProfitAndLossStatementViewController {
+                // 画面を閉じる
+                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                    presentingViewController.viewWillAppear(true)
+                })
+            }
+            // 試算表画面
+            if let presentingViewController = navigationController.topViewController as? TBViewController {
+                print(navigationController.topViewController)
+                print(navigationController.viewControllers)
+                // 画面を閉じる
+                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                    presentingViewController.viewWillAppear(true)
+                })
+            }
+            // 繰越試算表画面
+            if let presentingViewController = navigationController.topViewController as? AfterClosingTrialBalanceViewController {
+                // 画面を閉じる
+                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                    presentingViewController.viewWillAppear(true)
+                })
+            }
         }
     }
     

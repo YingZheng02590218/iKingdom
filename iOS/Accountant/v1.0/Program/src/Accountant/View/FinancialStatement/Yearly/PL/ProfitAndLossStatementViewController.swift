@@ -812,6 +812,8 @@ extension ProfitAndLossStatementViewController: ProfitAndLossStatementPresenterO
                 removeBannerViewToView(gADBannerView)
             }
         }
+        
+        tableView.reloadData()
     }
     
     func setupViewForViewWillDisappear() {

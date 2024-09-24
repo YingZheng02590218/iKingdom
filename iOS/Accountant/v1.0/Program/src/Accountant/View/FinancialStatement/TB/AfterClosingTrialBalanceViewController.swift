@@ -32,6 +32,7 @@ class AfterClosingTrialBalanceViewController: UIViewController {
     //    let DARKSHADOWOPACITY: Float = 0.5
     let ELEMENTDEPTH: CGFloat = 4
     //    let edged = false
+    var account = "" // 勘定名
 
     /// GUIアーキテクチャ　MVP
     private var presenter: AfterClosingTrialBalancePresenterInput!
@@ -160,6 +161,27 @@ extension AfterClosingTrialBalanceViewController: UITableViewDelegate, UITableVi
             return cell
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        account = presenter.objects(forRow: indexPath.row, section: indexPath.section).category
+
+        DispatchQueue.main.async {
+            if let viewController = UIStoryboard(
+                name: "GeneralLedgerAccountViewController",
+                bundle: nil
+            ).instantiateViewController(
+                withIdentifier: "GeneralLedgerAccountViewController"
+            ) as? GeneralLedgerAccountViewController {
+                // ナビゲーションバーを表示させる
+                let navigation = UINavigationController(rootViewController: viewController)
+                // 遷移先のコントローラに値を渡す
+                viewController.account = self.account // セルに表示した勘定名を取得
+                self.present(navigation, animated: true, completion: nil)
+            }
+        }
+        // セルの選択を解除
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension AfterClosingTrialBalanceViewController: AfterClosingTrialBalancePresenterOutput {
@@ -215,6 +237,8 @@ extension AfterClosingTrialBalanceViewController: AfterClosingTrialBalancePresen
                 removeBannerViewToView(gADBannerView)
             }
         }
+        
+        tableView.reloadData()
     }
 
     func setupViewForViewWillDisappear() {
