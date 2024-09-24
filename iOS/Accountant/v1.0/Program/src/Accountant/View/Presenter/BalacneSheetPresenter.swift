@@ -75,6 +75,9 @@ final class BalacneSheetPresenter: BalacneSheetPresenterInput {
     }
     
     func viewWillAppear() {
+        // 貸借対照表　計算
+        balanceSheetData = model.initializeBS()
+
         view.setupViewForViewWillAppear()
     }
     

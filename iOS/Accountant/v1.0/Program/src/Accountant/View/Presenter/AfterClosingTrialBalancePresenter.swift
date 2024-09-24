@@ -96,7 +96,6 @@ final class AfterClosingTrialBalancePresenter: AfterClosingTrialBalancePresenter
         objects11 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 11)
         objects12 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 12)
         objects13 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 19)
-
         // 財務諸表
         object = DataBaseManagerFinancialStatements.shared.getFinancialStatements()
     }
@@ -113,6 +112,29 @@ final class AfterClosingTrialBalancePresenter: AfterClosingTrialBalancePresenter
         company = DataBaseManagerAccountingBooksShelf.shared.getCompanyName()
         fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
         theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
+        // 設定勘定科目 貸借科目
+        dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsSwitchingOnBSorPL(BSorPL: 0) // 貸借対照表　資産 負債 純資産
+        objects0 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 0, rank1: 0)
+        objects1 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 0, rank1: 1)
+        objects2 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 0, rank1: 2)
+        
+        objects3 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 1, rank1: 3)
+        objects4 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 1, rank1: 4)
+        objects5 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 1, rank1: 5)
+        
+        objects6 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 2, rank1: 6)
+        
+        objects7 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 3, rank1: 7)
+        objects8 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 3, rank1: 8)
+        
+        objects9 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 4, rank1: 9)
+        
+        objects10 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 10)
+        objects11 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 11)
+        objects12 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 12)
+        objects13 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 19)
+        // 財務諸表
+        object = DataBaseManagerFinancialStatements.shared.getFinancialStatements()
         // 繰越試算表　再計算 合計額を計算
         model.calculateAmountOfBSAccounts(dataBaseSettingsTaxonomyAccounts: dataBaseSettingsTaxonomyAccounts)
         

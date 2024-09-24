@@ -47,7 +47,8 @@ class BalanceSheetViewController: UIViewController {
     //    let edged = false
     
     fileprivate let refreshControl = UIRefreshControl()
-    
+    var account = "" // 勘定名
+
     /// GUIアーキテクチャ　MVP
     private var presenter: BalacneSheetPresenterInput!
     func inject(presenter: BalacneSheetPresenterInput) {
@@ -506,7 +507,7 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BSTableViewCell", for: indexPath) as? BSTableViewCell else { 
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BSTableViewCell", for: indexPath) as? BSTableViewCell else {
             return UITableViewCell()
         }
         // タイトル
@@ -730,6 +731,169 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
         }
         return smallCategoryName
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section { // 5大区分、大区分
+        case 0: // MARK: - 資産の部
+            break
+            
+        case 1: // MARK: - "  流動資産"
+            switch indexPath.row {
+                // MARK: - "  当座資産"
+            case 0 ..< presenter.numberOfobjects(rank0: 0, rank1: 0):
+                // 勘定科目
+                account = presenter.objects(rank0: 0, rank1: 0, forRow: indexPath.row).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 0, rank1: 0, forRow: indexPath.row).category)
+                break
+                // MARK: - "  棚卸資産"
+            case presenter.numberOfobjects(rank0: 0, rank1: 0) ..< presenter.numberOfobjects(rank0: 0, rank1: 0) + presenter.numberOfobjects(rank0: 0, rank1: 1):
+                // 勘定科目
+                account = presenter.objects(rank0: 0, rank1: 1, forRow: indexPath.row - presenter.numberOfobjects(rank0: 0, rank1: 0)).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 0, rank1: 1, forRow: indexPath.row - presenter.numberOfobjects(rank0: 0, rank1: 0)).category)
+                break
+                // MARK: - "  その他の流動資産"
+            case presenter.numberOfobjects(rank0: 0, rank1: 0) + presenter.numberOfobjects(rank0: 0, rank1: 1) ..< presenter.numberOfobjects(rank0: 0, rank1: 0) + presenter.numberOfobjects(rank0: 0, rank1: 1) + presenter.numberOfobjects(rank0: 0, rank1: 2):
+                // 勘定科目
+                account = presenter.objects(rank0: 0, rank1: 2, forRow: indexPath.row - presenter.numberOfobjects(rank0: 0, rank1: 0) - presenter.numberOfobjects(rank0: 0, rank1: 1)).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 0, rank1: 2, forRow: indexPath.row - presenter.numberOfobjects(rank0: 0, rank1: 0) - presenter.numberOfobjects(rank0: 0, rank1: 1)).category)
+                break
+            default:
+                break
+            }
+            
+        case 2: // MARK: - "  固定資産"
+            switch indexPath.row {
+                // MARK: - 有形固定資産3
+            case 0 ..< presenter.numberOfobjects(rank0: 1, rank1: 0):
+                // 勘定科目
+                account = presenter.objects(rank0: 1, rank1: 0, forRow: indexPath.row).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 1, rank1: 0, forRow: indexPath.row).category)
+                break
+                // MARK: - 無形固定資産
+            case presenter.numberOfobjects(rank0: 1, rank1: 0) ..< presenter.numberOfobjects(rank0: 1, rank1: 0) + presenter.numberOfobjects(rank0: 1, rank1: 1):
+                // 勘定科目
+                account = presenter.objects(rank0: 1, rank1: 1, forRow: indexPath.row - presenter.numberOfobjects(rank0: 1, rank1: 0)).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 1, rank1: 1, forRow: indexPath.row - presenter.numberOfobjects(rank0: 1, rank1: 0)).category)
+                break
+                // MARK: - 投資その他資産　投資その他の資産
+            case presenter.numberOfobjects(rank0: 1, rank1: 0) + presenter.numberOfobjects(rank0: 1, rank1: 1) ..< presenter.numberOfobjects(rank0: 1, rank1: 0) + presenter.numberOfobjects(rank0: 1, rank1: 1) + presenter.numberOfobjects(rank0: 1, rank1: 2):
+                // 勘定科目
+                account = presenter.objects(rank0: 1, rank1: 2, forRow: indexPath.row - presenter.numberOfobjects(rank0: 1, rank1: 0) - presenter.numberOfobjects(rank0: 1, rank1: 1)).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 1, rank1: 2, forRow: indexPath.row - presenter.numberOfobjects(rank0: 1, rank1: 0) - presenter.numberOfobjects(rank0: 1, rank1: 1)).category)
+                break
+            default:
+                break
+            }
+            
+        case 3: // MARK: - "  繰越資産"
+            switch indexPath.row {
+                // MARK: - "  繰越資産"
+            case 0 ..< presenter.numberOfobjects(rank0: 2, rank1: 0):
+                // 勘定科目
+                account = presenter.objects(rank0: 2, rank1: 0, forRow: indexPath.row).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 2, rank1: 0, forRow: indexPath.row).category)
+                break
+            default:
+                break
+            }
+            
+        case 4: // 資産合計
+            break
+            
+        case 5: // MARK: - 負債の部
+            break
+            
+        case 6: // MARK: - "  流動負債"
+            
+            switch indexPath.row {
+            case 0 ..< presenter.numberOfobjects(rank0: 3, rank1: 0):
+                // 勘定科目
+                account = presenter.objects(rank0: 3, rank1: 0, forRow: indexPath.row).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 3, rank1: 0, forRow: indexPath.row).category)
+                break
+                
+            case presenter.numberOfobjects(rank0: 3, rank1: 0) ..< presenter.numberOfobjects(rank0: 3, rank1: 0) + presenter.numberOfobjects(rank0: 3, rank1: 1):
+                // 勘定科目
+                account = presenter.objects(rank0: 3, rank1: 1, forRow: indexPath.row - presenter.numberOfobjects(rank0: 3, rank1: 0)).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 3, rank1: 1, forRow: indexPath.row - presenter.numberOfobjects(rank0: 3, rank1: 0)).category)
+                break
+                
+            default:
+                break
+            }
+            
+        case 7: // MARK: - "  固定負債"
+            switch indexPath.row {
+                // MARK: - "  長期債務"
+            case 0 ..< presenter.numberOfobjects(rank0: 4, rank1: 0):
+                // 勘定科目
+                account = presenter.objects(rank0: 4, rank1: 0, forRow: indexPath.row).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 4, rank1: 0, forRow: indexPath.row).category)
+                break
+            default:
+                break
+            }
+            
+        case 8: // 負債合計
+            break
+            
+        case 9: // MARK: - 資本の部
+            switch indexPath.row {
+                // MARK: - 株主資本
+            case 0 ..< presenter.numberOfobjects(rank0: 5, rank1: 0):
+                // 勘定科目
+                account = presenter.objects(rank0: 5, rank1: 0, forRow: indexPath.row).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 5, rank1: 0, forRow: indexPath.row).category)
+                break
+                // MARK: - 評価・換算差額等
+            case presenter.numberOfobjects(rank0: 5, rank1: 0) ..< presenter.numberOfobjects(rank0: 5, rank1: 0) + presenter.numberOfobjects(rank0: 5, rank1: 1):
+                // 勘定科目
+                account = presenter.objects(rank0: 5, rank1: 1, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0)).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 5, rank1: 1, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0)).category)
+                break
+                // MARK: - 新株予約権
+            case presenter.numberOfobjects(rank0: 5, rank1: 0) + presenter.numberOfobjects(rank0: 5, rank1: 1) ..< presenter.numberOfobjects(rank0: 5, rank1: 0) + presenter.numberOfobjects(rank0: 5, rank1: 1) + presenter.numberOfobjects(rank0: 5, rank1: 2):
+                // 勘定科目
+                account = presenter.objects(rank0: 5, rank1: 2, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0) - presenter.numberOfobjects(rank0: 5, rank1: 1)).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 5, rank1: 2, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0) - presenter.numberOfobjects(rank0: 5, rank1: 1)).category)
+                break
+                // MARK: - 非支配株主持分
+            case presenter.numberOfobjects(rank0: 5, rank1: 0) + presenter.numberOfobjects(rank0: 5, rank1: 1) + presenter.numberOfobjects(rank0: 5, rank1: 2) ..< presenter.numberOfobjects(rank0: 5, rank1: 0) + presenter.numberOfobjects(rank0: 5, rank1: 1) + presenter.numberOfobjects(rank0: 5, rank1: 2) + presenter.numberOfobjects(rank0: 5, rank1: 3):
+                // 勘定科目
+                account = presenter.objects(rank0: 5, rank1: 3, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0) - presenter.numberOfobjects(rank0: 5, rank1: 1) - presenter.numberOfobjects(rank0: 5, rank1: 2)).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 5, rank1: 3, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0) - presenter.numberOfobjects(rank0: 5, rank1: 1) - presenter.numberOfobjects(rank0: 5, rank1: 2)).category)
+                break
+            default:
+                break
+            }
+            
+        case 10: // 純資産合計
+            break
+            
+        case 11: // 負債純資産合計
+            break
+            
+        default:
+            break
+        }
+        
+        DispatchQueue.main.async {
+            if let viewController = UIStoryboard(
+                name: "GeneralLedgerAccountViewController",
+                bundle: nil
+            ).instantiateViewController(
+                withIdentifier: "GeneralLedgerAccountViewController"
+            ) as? GeneralLedgerAccountViewController {
+                // ナビゲーションバーを表示させる
+                let navigation = UINavigationController(rootViewController: viewController)
+                // 遷移先のコントローラに値を渡す
+                viewController.account = self.account // セルに表示した勘定名を取得
+                self.present(navigation, animated: true, completion: nil)
+            }
+        }
+        // セルの選択を解除
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension BalanceSheetViewController: BalacneSheetPresenterOutput {
@@ -796,6 +960,8 @@ extension BalanceSheetViewController: BalacneSheetPresenterOutput {
                 removeBannerViewToView(gADBannerView)
             }
         }
+        
+        tableView.reloadData()
     }
     
     func setupViewForViewWillDisappear() {

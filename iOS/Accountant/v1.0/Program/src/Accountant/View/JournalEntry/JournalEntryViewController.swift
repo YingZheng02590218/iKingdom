@@ -3521,7 +3521,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
            let viewController = navigationController.topViewController as? GeneralLedgerAccountViewController {
             self.dismiss(animated: true, completion: { [viewController] () -> Void in
                 // 仕訳入力ボタンから勘定画面へ遷移して入力が終わったときに呼ばれる。通常仕訳:0 決算整理仕訳:1
-                viewController.reloadData()
+                viewController.viewWillAppear(true)
             })
         }
         // 仕訳帳画面へ戻る

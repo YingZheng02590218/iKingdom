@@ -14,7 +14,8 @@ class GeneralLedgerTableViewController: UITableViewController {
 
     // MARK: - var let
 
-    
+    var account = "" // 勘定名
+
     // MARK: - Life cycle
 
     override func viewDidLoad() {
@@ -115,31 +116,27 @@ class GeneralLedgerTableViewController: UITableViewController {
 
         return cell
     }
-//    var account :String = "" // 勘定名
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        // 選択されたセルを取得
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger", for: indexPath) as! GeneralLedgerTableViewCell
-//        account = String(cell.textLabel!.text!) // セルに表示した勘定名を取得
-//        // セルの選択を解除
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        // 別の画面に遷移
-//        performSegue(withIdentifier: "identifier_generalLedger", sender: nil)
-//    }
-    // 画面遷移の準備　勘定科目画面
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // 選択されたセルを取得
-        if let indexPath: IndexPath = self.tableView.indexPathForSelectedRow {
-            // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
-            let databaseManagerSettings = CategoryListModel() // データベースマネジャー
-            let objects = databaseManagerSettings.getSettingsSwitchingOn(rank0: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
-            // ③遷移先ViewCntrollerの取得
-            if let navigationController = segue.destination as? UINavigationController,
-               let viewControllerGeneralLedgerAccount = navigationController.topViewController as? GeneralLedgerAccountViewController {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let databaseManagerSettings = CategoryListModel() // データベースマネジャー
+        let objects = databaseManagerSettings.getSettingsSwitchingOn(rank0: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
+        account = objects[indexPath.row].category
+        
+        DispatchQueue.main.async {
+            if let viewController = UIStoryboard(
+                name: "GeneralLedgerAccountViewController",
+                bundle: nil
+            ).instantiateViewController(
+                withIdentifier: "GeneralLedgerAccountViewController"
+            ) as? GeneralLedgerAccountViewController {
+                // ナビゲーションバーを表示させる
+                let navigation = UINavigationController(rootViewController: viewController)
                 // 遷移先のコントローラに値を渡す
-                viewControllerGeneralLedgerAccount.account = "\(objects[indexPath.row].category as String)" // セルに表示した勘定名を取得
+                viewController.account = self.account // セルに表示した勘定名を取得
+                self.present(navigation, animated: true, completion: nil)
             }
-            // セルの選択を解除
-            tableView.deselectRow(at: indexPath, animated: true)
         }
+        // セルの選択を解除
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
