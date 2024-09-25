@@ -149,6 +149,62 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     
     func viewDidLoad() {
         
+        view.setupViewForViewDidLoad()
+    }
+    
+    func viewWillAppear() {
+        fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
+        // 開始仕訳
+        dataBaseOpeningJournalEntry = model.getOpeningJournalEntryInAccount(account: account)
+        // 通常仕訳　勘定別
+        databaseJournalEntries = model.getJournalEntryInAccount(account: account)
+        
+        // 月別の月末日を取得 12ヶ月分
+        let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+        for i in 0..<lastDays.count {
+            // 通常仕訳 勘定別に月別に取得
+            let dataBaseJournalEntries = model.getJournalEntryInAccountInMonth(
+                account: account,
+                yearMonth: "\(lastDays[i].year)" + "/" + "\(String(format: "%02d", lastDays[i].month))"
+            )
+            switch i {
+            case 0:
+                databaseJournalEntriesSection0 = dataBaseJournalEntries
+            case 1:
+                databaseJournalEntriesSection1 = dataBaseJournalEntries
+            case 2:
+                databaseJournalEntriesSection2 = dataBaseJournalEntries
+            case 3:
+                databaseJournalEntriesSection3 = dataBaseJournalEntries
+            case 4:
+                databaseJournalEntriesSection4 = dataBaseJournalEntries
+            case 5:
+                databaseJournalEntriesSection5 = dataBaseJournalEntries
+            case 6:
+                databaseJournalEntriesSection6 = dataBaseJournalEntries
+            case 7:
+                databaseJournalEntriesSection7 = dataBaseJournalEntries
+            case 8:
+                databaseJournalEntriesSection8 = dataBaseJournalEntries
+            case 9:
+                databaseJournalEntriesSection9 = dataBaseJournalEntries
+            case 10:
+                databaseJournalEntriesSection10 = dataBaseJournalEntries
+            case 11:
+                databaseJournalEntriesSection11 = dataBaseJournalEntries
+            case 12:
+                databaseJournalEntriesSection12 = dataBaseJournalEntries
+            default:
+                break
+            }
+        }
+        // 決算整理仕訳　勘定別
+        dataBaseAdjustingEntries = model.getAdjustingJournalEntryInAccount(account: account)
+        // 資本振替仕訳
+        dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount(account: account)
+        // 損益振替仕訳、残高振替仕訳
+        dataBaseTransferEntry = model.getTransferEntryInAccount(account: account)
+
         model.initialize(
             account: account,
             dataBaseOpeningJournalEntry: dataBaseOpeningJournalEntry,
@@ -156,13 +212,6 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
             dataBaseAdjustingEntries: dataBaseAdjustingEntries,
             dataBaseCapitalTransferJournalEntry: dataBaseCapitalTransferJournalEntry
         )
-        
-        view.setupViewForViewDidLoad()
-    }
-    
-    func viewWillAppear() {
-        
-        fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
         
         view.setupViewForViewWillAppear()
     }

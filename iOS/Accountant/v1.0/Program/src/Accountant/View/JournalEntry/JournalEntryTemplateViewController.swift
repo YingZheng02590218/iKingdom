@@ -280,7 +280,6 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
                 print(navigationController.viewControllers[1])
                 // 画面を閉じる
                 self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                    presentingViewController.viewReload = true
                     presentingViewController.viewWillAppear(true)
                 })
             } else {
@@ -292,8 +291,6 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
                     print(navigationController.viewControllers)
                     // 画面を閉じる
                     self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                        // よく使う仕訳　エリア カルーセルをリロードする
-                        JournalEntryViewController.viewReload = true
                         presentingViewController.viewWillAppear(true)
                     })
                 }
@@ -301,8 +298,6 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
                 if let presentingViewController = self.presentingViewController as? JournalEntryViewController {
                     // viewWillAppearを呼び出す　更新のため
                     self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                        // よく使う仕訳　エリア カルーセルをリロードする
-                        JournalEntryViewController.viewReload = true
                         presentingViewController.viewWillAppear(true)
                     })
                 }
@@ -311,8 +306,6 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
                    let presentingViewController = navigationController.topViewController as? JournalEntryViewController {
                     // 画面を閉じる
                     self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                        // よく使う仕訳　エリア カルーセルをリロードする
-                        JournalEntryViewController.viewReload = true
                         presentingViewController.viewWillAppear(true)
                     })
                 }
@@ -342,7 +335,6 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
             // 画面を閉じる
             self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                presentingViewController.viewReload = true
                 presentingViewController.viewWillAppear(true)
             })
         }
@@ -389,7 +381,6 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
                     // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
                     // 画面を閉じる
                     self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                        presentingViewController.viewReload = true
                         presentingViewController.viewWillAppear(true)
                     })
                 }

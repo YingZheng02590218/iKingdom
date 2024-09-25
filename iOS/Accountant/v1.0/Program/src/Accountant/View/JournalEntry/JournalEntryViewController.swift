@@ -31,9 +31,17 @@ class JournalEntryViewController: UIViewController {
     // よく使う仕訳　エリア
     @IBOutlet var journalEntryTemplateView: UIView!
     // よく使う仕訳　カルーセル
-    @IBOutlet private var tableView: UITableView!
-    // カルーセル　true: リロードする
-    static var viewReload = false
+    @IBOutlet private var tableView: UITableView! {
+        didSet {
+            // 仕訳テンプレート画面では使用しない
+            if let tableView = tableView {
+                tableView.delegate = self
+                tableView.dataSource = self
+                tableView.register(UINib(nibName: String(describing: CarouselTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: CarouselTableViewCell.self))
+                tableView.separatorColor = .accentColor
+            }
+        }
+    }
     
     // MARK: デイトピッカー
     // デイトピッカー　日付
@@ -1387,31 +1395,29 @@ class JournalEntryViewController: UIViewController {
     
     // よく使う仕訳　エリア カルーセルをリロードする
     func reloadCarousel() {
-        if JournalEntryViewController.viewReload {
-            DispatchQueue.main.async { [self] in
-                // データベース　よく使う仕訳
-                if let text = debit.title {
-                    let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
-                        account: text
-                    )
-                    if objects.isEmpty {
-                        // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
-                        debit.title = nil
-                    }
+        DispatchQueue.main.async { [self] in
+            // データベース　よく使う仕訳
+            if let text = debit.title {
+                let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+                    account: text
+                )
+                if objects.isEmpty {
+                    // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
+                    debit.title = nil
                 }
-                if let text = credit.title {
-                    let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
-                        account: text
-                    )
-                    if objects.isEmpty {
-                        // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
-                        credit.title = nil
-                    }
+            }
+            if let text = credit.title {
+                let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+                    account: text
+                )
+                if objects.isEmpty {
+                    // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
+                    credit.title = nil
                 }
+            }
+            if let tableView = tableView {
                 // よく使う仕訳　エリア
                 tableView.reloadData()
-                
-                JournalEntryViewController.viewReload = false
             }
         }
     }
@@ -2582,16 +2588,6 @@ extension JournalEntryViewController: GADFullScreenContentDelegate {
 
 extension JournalEntryViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func initTable() {
-        // 仕訳テンプレート画面では使用しない
-        if let tableView = tableView {
-            tableView.delegate = self
-            tableView.dataSource = self
-            tableView.register(UINib(nibName: String(describing: CarouselTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: CarouselTableViewCell.self))
-            tableView.separatorColor = .accentColor
-        }
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         1
     }
@@ -2956,8 +2952,6 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         navigationController?.navigationBar.tintColor = .accentColor
         // ニューモフィズム　ボタンとビューのデザインを指定する
         createEMTNeumorphicView()
-        // よく使う仕訳　エリア
-        initTable()
         // UIパーツを作成
         createTextFieldForSmallwritting()
     }
@@ -3056,20 +3050,33 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             // 仕訳に固定を解除する
             segmentedControl.isEnabled = true
             segmentedControl.isHidden = false
-            // よく使う仕訳　エリア
-            tableView.isHidden = false
-            // よく使う仕訳　エリア
-            journalEntryTemplateView.isHidden = false
-            // 仕訳画面表示ボタン
-            addButton.isHidden = false
-            // 勘定科目エリア　余白
-            spaceView.isHidden = true
+            // アプリ起動時に、アプリがバックグラウンドにいるとnilでクラッシュしてしまう対策
+            if let tableView = tableView {
+                // よく使う仕訳　エリア
+                tableView.isHidden = false
+            }
+            if let journalEntryTemplateView = journalEntryTemplateView {
+                // よく使う仕訳　エリア
+                journalEntryTemplateView.isHidden = false
+            }
+            if let addButton = addButton {
+                // 仕訳画面表示ボタン
+                addButton.isHidden = false
+            }
+            if let spaceView = spaceView {
+                // 勘定科目エリア　余白
+                spaceView.isHidden = true
+            }
             self.navigationItem.title = "仕訳"
-            labelTitle.text = ""
+            if let labelTitle = labelTitle {
+                labelTitle.text = ""
+            }
             // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
             // カルーセルをリロードする
             reloadCarousel()
-            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+            if let _ = datePicker {
+                createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+            }
         } else if journalEntryType == .AdjustingAndClosingEntry {
             // タブバーの仕訳タブからの遷移の場合 表示させる
             compoundJournalEntrySegmentedControl.isHidden = false
@@ -3195,8 +3202,10 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             // セットアップ AdMob
             await setupAdMob()
         }
-        // 入力数カウンタラベル
-        updateCoinCountLabel()
+        if let _ = coinCountLabel {
+            // 入力数カウンタラベル
+            updateCoinCountLabel()
+        }
     }
     
     // MARK: インジゲーター
@@ -3512,7 +3521,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
            let viewController = navigationController.topViewController as? GeneralLedgerAccountViewController {
             self.dismiss(animated: true, completion: { [viewController] () -> Void in
                 // 仕訳入力ボタンから勘定画面へ遷移して入力が終わったときに呼ばれる。通常仕訳:0 決算整理仕訳:1
-                viewController.reloadData()
+                viewController.viewWillAppear(true)
             })
         }
         // 仕訳帳画面へ戻る

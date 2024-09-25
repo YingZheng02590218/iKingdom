@@ -46,7 +46,8 @@ class ProfitAndLossStatementViewController: UIViewController {
     //    let edged = false
     
     fileprivate let refreshControl = UIRefreshControl()
-    
+    var account = "" // 勘定名
+
     /// GUIアーキテクチャ　MVP
     private var presenter: ProfitAndLossStatementPresenterInput!
     func inject(presenter: ProfitAndLossStatementPresenterInput) {
@@ -614,6 +615,135 @@ extension ProfitAndLossStatementViewController: UITableViewDelegate, UITableView
             return cell
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            // 売上高
+            switch indexPath.row {
+            case 0 ..< presenter.numberOfobjects(rank0: 6, rank1: 0):
+                // 勘定科目
+                account = presenter.objects(rank0: 6, rank1: 0, forRow: indexPath.row).category
+                print("PL", indexPath.row, "    " + presenter.objects(rank0: 6, rank1: 0, forRow: indexPath.row).category)
+                break
+            default:
+                break
+            }
+        case 1:
+            // 売上原価
+            switch indexPath.row {
+                // 売上原価
+            case 0 ..< presenter.numberOfobjects(rank0: 7, rank1: 0):
+                // 勘定科目
+                account = presenter.objects(rank0: 7, rank1: 0, forRow: indexPath.row).category
+                print("PL", indexPath.row, "    " + presenter.objects(rank0: 7, rank1: 0, forRow: indexPath.row).category)
+                break
+                // 製造原価
+            case presenter.numberOfobjects(rank0: 7, rank1: 0) ..< presenter.numberOfobjects(rank0: 7, rank1: 0) + presenter.numberOfobjects(rank0: 7, rank1: 1):
+                // 勘定科目
+                account = presenter.objects(rank0: 7, rank1: 1, forRow: indexPath.row - presenter.numberOfobjects(rank0: 7, rank1: 0)).category
+                print("PL", indexPath.row, "    " + presenter.objects(rank0: 7, rank1: 1, forRow: indexPath.row - presenter.numberOfobjects(rank0: 7, rank1: 0)).category)
+                break
+            default:
+                break
+            }
+        case 2:
+            break // 売上総利益
+        case 3:
+            // 販売費及び一般管理費
+            switch indexPath.row {
+            case 0 ..< presenter.numberOfobjects(rank0: 8, rank1: 0):
+                // 勘定科目
+                account = presenter.objects(rank0: 8, rank1: 0, forRow: indexPath.row).category
+                print("PL", indexPath.row, "    " + presenter.objects(rank0: 8, rank1: 0, forRow: indexPath.row).category)
+                break
+            default:
+                break
+            }
+        case 4:
+            break // 営業利益
+        case 5:
+            // 営業外収益
+            switch indexPath.row {
+            case 0 ..< presenter.numberOfobjects(rank0: 9, rank1: 0):
+                // 勘定科目
+                account = presenter.objects(rank0: 9, rank1: 0, forRow: indexPath.row).category
+                print("PL", indexPath.row, "    " + presenter.objects(rank0: 9, rank1: 0, forRow: indexPath.row).category)
+                break
+            default:
+                break
+            }
+        case 6:
+            // 営業外費用
+            switch indexPath.row {
+            case 0 ..< presenter.numberOfobjects(rank0: 9, rank1: 1):
+                // 勘定科目
+                account = presenter.objects(rank0: 9, rank1: 1, forRow: indexPath.row).category
+                print("PL", indexPath.row, "    " + presenter.objects(rank0: 9, rank1: 1, forRow: indexPath.row).category)
+                break
+            default:
+                break
+            }
+        case 7:
+            break // 経常利益
+        case 8:
+            // 特別利益
+            switch indexPath.row {
+            case 0 ..< presenter.numberOfobjects(rank0: 10, rank1: 0):
+                // 勘定科目
+                account = presenter.objects(rank0: 10, rank1: 0, forRow: indexPath.row).category
+                print("PL", indexPath.row, "    " + presenter.objects(rank0: 10, rank1: 0, forRow: indexPath.row).category)
+                break
+            default:
+                break
+            }
+        case 9:
+            // 特別損失
+            switch indexPath.row {
+            case 0 ..< presenter.numberOfobjects(rank0: 10, rank1: 1):
+                // 勘定科目
+                account = presenter.objects(rank0: 10, rank1: 1, forRow: indexPath.row).category
+                print("PL", indexPath.row, "    " + presenter.objects(rank0: 10, rank1: 1, forRow: indexPath.row).category)
+                break
+            default:
+                break
+            }
+        case 10:
+            break // 税引前当期純利益
+        case 11:
+            // 法人税、住民税及び事業税
+            switch indexPath.row {
+            case 0 ..< presenter.numberOfobjects(rank0: 11, rank1: 0):
+                // 勘定科目
+                account = presenter.objects(rank0: 11, rank1: 0, forRow: indexPath.row).category
+                print("PL", indexPath.row, "    " + presenter.objects(rank0: 11, rank1: 0, forRow: indexPath.row).category)
+                break
+            default:
+                break
+            }
+        case 12:
+            break // 当期純利益
+        default:
+            break
+        }
+        
+        DispatchQueue.main.async {
+            if let viewController = UIStoryboard(
+                name: "GeneralLedgerAccountViewController",
+                bundle: nil
+            ).instantiateViewController(
+                withIdentifier: "GeneralLedgerAccountViewController"
+            ) as? GeneralLedgerAccountViewController {
+                // ナビゲーションバーを表示させる
+                let navigation = UINavigationController(rootViewController: viewController)
+                // 遷移先のコントローラに値を渡す
+                viewController.account = self.account // セルに表示した勘定名を取得
+                self.present(navigation, animated: true, completion: nil)
+            }
+        }
+        // セルの選択を解除
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension ProfitAndLossStatementViewController: ProfitAndLossStatementPresenterOutput {
@@ -682,6 +812,8 @@ extension ProfitAndLossStatementViewController: ProfitAndLossStatementPresenterO
                 removeBannerViewToView(gADBannerView)
             }
         }
+        
+        tableView.reloadData()
     }
     
     func setupViewForViewWillDisappear() {
