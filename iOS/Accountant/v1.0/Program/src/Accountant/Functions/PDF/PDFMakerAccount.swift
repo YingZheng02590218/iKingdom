@@ -19,6 +19,7 @@ class PDFMakerAccount {
     // 勘定名
     var account: String = ""
     var fiscalYear = 0
+    var yearMonth: String? = nil
     // 通常仕訳 勘定別に月別に取得
     private var databaseJournalEntriesSection0: Results<DataBaseJournalEntry>?
     private var databaseJournalEntriesSection1: Results<DataBaseJournalEntry>?
@@ -34,9 +35,10 @@ class PDFMakerAccount {
     private var databaseJournalEntriesSection11: Results<DataBaseJournalEntry>?
     private var databaseJournalEntriesSection12: Results<DataBaseJournalEntry>?
     
-    func initialize(account: String, completion: (URL?) -> Void) {
+    func initialize(yearMonth: String? = nil, account: String, completion: (URL?) -> Void) {
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        fiscalYear = dataBaseAccountingBooks.fiscalYear
+        self.fiscalYear = dataBaseAccountingBooks.fiscalYear
+        self.yearMonth = yearMonth
         // 初期化
         self.account = account
         PDFpath = nil
@@ -68,12 +70,24 @@ class PDFMakerAccount {
             print(error)
         }
         
-        let url = readDB()
+        let url = readDB(yearMonth: yearMonth)
         completion(url)
     }
     
+    // 指定された年月に含まれるか判定する
+    func isInYearMonth(yearMonth: String?, date: String) -> Bool {
+        // 月別に絞り込む
+        if yearMonth == nil {
+            return true
+        }
+        if let yearMonth = yearMonth, date.contains(yearMonth) {
+            return true
+        }
+        return false
+    }
+    
     // PDFファイルを生成
-    func readDB() -> URL? {
+    func readDB(yearMonth: String? = nil) -> URL? {
         // 勘定のデータを取得する
         let generalLedgerAccountModel = GeneralLedgerAccountModel()
         // 開始仕訳
@@ -214,85 +228,87 @@ class PDFMakerAccount {
         
         // 開始仕訳
         if let dataBaseTransferEntry = generalLedgerAccountModel.getOpeningJournalEntryInAccount(account: account) {
-            
-            let fiscalYear = dataBaseTransferEntry.fiscalYear
-            if counter == 0 {
-                let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
-                htmlString.append(tableHeader)
-            }
-            // 日付
-            guard let date = DateManager.shared.dateFormatter.date(from: dataBaseTransferEntry.date) else {
-                return nil
-            }
-            
-            var debitCategory = ""
-            if dataBaseTransferEntry.debit_category == "資本金勘定" {
-                debitCategory = Constant.capitalAccountName
-            } else {
-                debitCategory = dataBaseTransferEntry.debit_category == "残高" ? "前期繰越" : dataBaseTransferEntry.debit_category
-            }
-            var creditCategory = ""
-            if dataBaseTransferEntry.credit_category == "資本金勘定" {
-                creditCategory = Constant.capitalAccountName
-            } else {
-                creditCategory = dataBaseTransferEntry.credit_category == "残高" ? "前期繰越" : dataBaseTransferEntry.credit_category
-            }
-            
-            let debitAmount = dataBaseTransferEntry.credit_amount
-            let creditAmount = dataBaseTransferEntry.debit_amount
-            _ = dataBaseTransferEntry.smallWritting
-            var correspondingAccounts: String = "" // 当勘定の相手勘定
-            if debitCategory == account {
-                correspondingAccounts = creditCategory
-            } else if creditCategory == account {
-                correspondingAccounts = debitCategory
-            }
-            let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
-            _ = dataBaseTransferEntry.balance_left
-            _ = dataBaseTransferEntry.balance_right
-            // 借又貸
-            var balanceDebitOrCredit: String = ""
-            if dataBaseTransferEntry.balance_left > dataBaseTransferEntry.balance_right {
-                balanceDebitOrCredit = "借"
-            } else if dataBaseTransferEntry.balance_left < dataBaseTransferEntry.balance_right {
-                balanceDebitOrCredit = "貸"
-            } else {
-                balanceDebitOrCredit = "-"
-            }
-            // 差引残高額
-            var balanceAmount: Int64 = 0
-            if dataBaseTransferEntry.balance_left > dataBaseTransferEntry.balance_right { // 借方と貸方を比較
-                balanceAmount = dataBaseTransferEntry.balance_left
-            } else if dataBaseTransferEntry.balance_right > dataBaseTransferEntry.balance_left {
-                balanceAmount = dataBaseTransferEntry.balance_right
-            } else {
-                balanceAmount = 0
-            }
-            let rowString = hTMLhelper.getSingleRow(
-                month: String(date.month),
-                day: String(date.day),
-                debitCategory: debitCategory,
-                debitAmount: debitAmount,
-                creditCategory: creditCategory,
-                creditAmount: creditAmount,
-                correspondingAccounts: correspondingAccounts,
-                numberOfAccount: numberOfAccount,
-                balanceAmount: balanceAmount,
-                balanceDebitOrCredit: balanceDebitOrCredit
-            )
-            htmlString.append(rowString)
-            
-            totalDebitAmount += dataBaseTransferEntry.debit_amount
-            totalCreditAmount += dataBaseTransferEntry.credit_amount
-            
-            if counter >= 29 {
-                let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
-                htmlString.append(tableFooter)
-            }
-            counter += 1
-            if counter >= 30 {
-                counter = 0
-                pageNumber += 1
+            // 指定された年月に含まれるか判定する
+            if isInYearMonth(yearMonth: yearMonth, date: dataBaseTransferEntry.date) {
+                let fiscalYear = dataBaseTransferEntry.fiscalYear
+                if counter == 0 {
+                    let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
+                    htmlString.append(tableHeader)
+                }
+                // 日付
+                guard let date = DateManager.shared.dateFormatter.date(from: dataBaseTransferEntry.date) else {
+                    return nil
+                }
+                
+                var debitCategory = ""
+                if dataBaseTransferEntry.debit_category == "資本金勘定" {
+                    debitCategory = Constant.capitalAccountName
+                } else {
+                    debitCategory = dataBaseTransferEntry.debit_category == "残高" ? "前期繰越" : dataBaseTransferEntry.debit_category
+                }
+                var creditCategory = ""
+                if dataBaseTransferEntry.credit_category == "資本金勘定" {
+                    creditCategory = Constant.capitalAccountName
+                } else {
+                    creditCategory = dataBaseTransferEntry.credit_category == "残高" ? "前期繰越" : dataBaseTransferEntry.credit_category
+                }
+                
+                let debitAmount = dataBaseTransferEntry.credit_amount
+                let creditAmount = dataBaseTransferEntry.debit_amount
+                _ = dataBaseTransferEntry.smallWritting
+                var correspondingAccounts: String = "" // 当勘定の相手勘定
+                if debitCategory == account {
+                    correspondingAccounts = creditCategory
+                } else if creditCategory == account {
+                    correspondingAccounts = debitCategory
+                }
+                let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
+                _ = dataBaseTransferEntry.balance_left
+                _ = dataBaseTransferEntry.balance_right
+                // 借又貸
+                var balanceDebitOrCredit: String = ""
+                if dataBaseTransferEntry.balance_left > dataBaseTransferEntry.balance_right {
+                    balanceDebitOrCredit = "借"
+                } else if dataBaseTransferEntry.balance_left < dataBaseTransferEntry.balance_right {
+                    balanceDebitOrCredit = "貸"
+                } else {
+                    balanceDebitOrCredit = "-"
+                }
+                // 差引残高額
+                var balanceAmount: Int64 = 0
+                if dataBaseTransferEntry.balance_left > dataBaseTransferEntry.balance_right { // 借方と貸方を比較
+                    balanceAmount = dataBaseTransferEntry.balance_left
+                } else if dataBaseTransferEntry.balance_right > dataBaseTransferEntry.balance_left {
+                    balanceAmount = dataBaseTransferEntry.balance_right
+                } else {
+                    balanceAmount = 0
+                }
+                let rowString = hTMLhelper.getSingleRow(
+                    month: String(date.month),
+                    day: String(date.day),
+                    debitCategory: debitCategory,
+                    debitAmount: debitAmount,
+                    creditCategory: creditCategory,
+                    creditAmount: creditAmount,
+                    correspondingAccounts: correspondingAccounts,
+                    numberOfAccount: numberOfAccount,
+                    balanceAmount: balanceAmount,
+                    balanceDebitOrCredit: balanceDebitOrCredit
+                )
+                htmlString.append(rowString)
+                
+                totalDebitAmount += dataBaseTransferEntry.debit_amount
+                totalCreditAmount += dataBaseTransferEntry.credit_amount
+                
+                if counter >= 29 {
+                    let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
+                    htmlString.append(tableFooter)
+                }
+                counter += 1
+                if counter >= 30 {
+                    counter = 0
+                    pageNumber += 1
+                }
             }
         }
         
@@ -349,61 +365,64 @@ class PDFMakerAccount {
                     account: account,
                     yearMonth: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))" // BEGINSWITH 前方一致
                    ) {
-                    // 先頭行
-                    let fiscalYear = dataBaseMonthlyTransferEntry.fiscalYear
-                    if counter == 0 {
-                        let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
-                        htmlString.append(tableHeader)
-                    }
-                    
-                    let debitCategory = dataBaseMonthlyTransferEntry.debit_category
-                    let debitAmount = dataBaseMonthlyTransferEntry.balance_left // 貸方勘定　＊引数の借方勘定を振替える
-                    let creditCategory = dataBaseMonthlyTransferEntry.credit_category
-                    let creditAmount = dataBaseMonthlyTransferEntry.balance_right // 借方勘定　＊引数の貸方勘定を振替える
-                    // 借又貸
-                    var balanceDebitOrCredit: String = ""
-                    if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right {
-                        balanceDebitOrCredit = "借"
-                    } else if dataBaseMonthlyTransferEntry.balance_left < dataBaseMonthlyTransferEntry.balance_right {
-                        balanceDebitOrCredit = "貸"
-                    } else {
-                        balanceDebitOrCredit = "-"
-                    }
-                    // 差引残高額
-                    var balanceAmount: Int64 = 0
-                    if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right { // 借方と貸方を比較
-                        balanceAmount = dataBaseMonthlyTransferEntry.balance_left
-                    } else if dataBaseMonthlyTransferEntry.balance_right > dataBaseMonthlyTransferEntry.balance_left {
-                        balanceAmount = dataBaseMonthlyTransferEntry.balance_right
-                    } else {
-                        balanceAmount = 0
-                    }
-                    
-                    let rowString = hTMLhelper.getSingleRow(
-                        month: String(nextFirstDays[index].month),
-                        day: String(nextFirstDays[index].day),
-                        debitCategory: "",
-                        debitAmount: debitAmount,
-                        creditCategory: "前月繰越",
-                        creditAmount: creditAmount,
-                        correspondingAccounts: "前月繰越",
-                        numberOfAccount: 0,
-                        balanceAmount: balanceAmount,
-                        balanceDebitOrCredit: balanceDebitOrCredit
-                    )
-                    htmlString.append(rowString)
-
-                    totalDebitAmount += dataBaseMonthlyTransferEntry.balance_left
-                    totalCreditAmount += dataBaseMonthlyTransferEntry.balance_right
-
-                    if counter >= 29 {
-                        let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
-                        htmlString.append(tableFooter)
-                    }
-                    counter += 1
-                    if counter >= 30 {
-                        counter = 0
-                        pageNumber += 1
+                    // 指定された年月に含まれるか判定する
+                    if isInYearMonth(yearMonth: yearMonth, date: "\(nextFirstDays[index].year)" + "/" + "\(String(format: "%02d", nextFirstDays[index].month))" + "/" + "\(String(format: "%02d", nextFirstDays[index].day))" ) { // MARK: 前月繰越 は前月繰越の金額を表示させて、日付を差し替えている
+                        // 先頭行
+                        let fiscalYear = dataBaseMonthlyTransferEntry.fiscalYear
+                        if counter == 0 {
+                            let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
+                            htmlString.append(tableHeader)
+                        }
+                        
+                        let debitCategory = dataBaseMonthlyTransferEntry.debit_category
+                        let debitAmount = dataBaseMonthlyTransferEntry.balance_left // 貸方勘定　＊引数の借方勘定を振替える
+                        let creditCategory = dataBaseMonthlyTransferEntry.credit_category
+                        let creditAmount = dataBaseMonthlyTransferEntry.balance_right // 借方勘定　＊引数の貸方勘定を振替える
+                        // 借又貸
+                        var balanceDebitOrCredit: String = ""
+                        if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right {
+                            balanceDebitOrCredit = "借"
+                        } else if dataBaseMonthlyTransferEntry.balance_left < dataBaseMonthlyTransferEntry.balance_right {
+                            balanceDebitOrCredit = "貸"
+                        } else {
+                            balanceDebitOrCredit = "-"
+                        }
+                        // 差引残高額
+                        var balanceAmount: Int64 = 0
+                        if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right { // 借方と貸方を比較
+                            balanceAmount = dataBaseMonthlyTransferEntry.balance_left
+                        } else if dataBaseMonthlyTransferEntry.balance_right > dataBaseMonthlyTransferEntry.balance_left {
+                            balanceAmount = dataBaseMonthlyTransferEntry.balance_right
+                        } else {
+                            balanceAmount = 0
+                        }
+                        
+                        let rowString = hTMLhelper.getSingleRow(
+                            month: String(nextFirstDays[index].month), // MARK: 前月繰越 は前月繰越の金額を表示させて、日付を差し替えている
+                            day: String(nextFirstDays[index].day), // MARK: 前月繰越 は前月繰越の金額を表示させて、日付を差し替えている
+                            debitCategory: "",
+                            debitAmount: debitAmount,
+                            creditCategory: "前月繰越",
+                            creditAmount: creditAmount,
+                            correspondingAccounts: "前月繰越",
+                            numberOfAccount: 0,
+                            balanceAmount: balanceAmount,
+                            balanceDebitOrCredit: balanceDebitOrCredit
+                        )
+                        htmlString.append(rowString)
+                        
+                        totalDebitAmount += dataBaseMonthlyTransferEntry.balance_left
+                        totalCreditAmount += dataBaseMonthlyTransferEntry.balance_right
+                        
+                        if counter >= 29 {
+                            let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
+                            htmlString.append(tableFooter)
+                        }
+                        counter += 1
+                        if counter >= 30 {
+                            counter = 0
+                            pageNumber += 1
+                        }
                     }
                 }
             }
@@ -413,74 +432,76 @@ class PDFMakerAccount {
             for i in 0..<numberOfDatabaseJournalEntries(forSection: x) {
                 // 通常仕訳　通常仕訳 勘定別
                 if let databaseJournalEntry = databaseJournalEntries(forSection: x, forRow: i) {
-                    
-                    let fiscalYear = databaseJournalEntry.fiscalYear
-                    if counter == 0 {
-                        let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
-                        htmlString.append(tableHeader)
-                    }
-                    // 日付
-                    guard let date = DateManager.shared.dateFormatter.date(from: databaseJournalEntry.date) else {
-                        return nil
-                    }
-                    
-                    let debitCategory = databaseJournalEntry.debit_category
-                    let debitAmount = databaseJournalEntry.debit_amount
-                    let creditCategory = databaseJournalEntry.credit_category
-                    let creditAmount = databaseJournalEntry.credit_amount
-                    _ = databaseJournalEntry.smallWritting
-                    var correspondingAccounts: String = "" // 当勘定の相手勘定
-                    if debitCategory == account {
-                        correspondingAccounts = creditCategory
-                    } else if creditCategory == account {
-                        correspondingAccounts = debitCategory
-                    }
-                    let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
-                    _ = databaseJournalEntry.balance_left
-                    _ = databaseJournalEntry.balance_right
-                    // 借又貸
-                    var balanceDebitOrCredit: String = ""
-                    if databaseJournalEntry.balance_left > databaseJournalEntry.balance_right {
-                        balanceDebitOrCredit = "借"
-                    } else if databaseJournalEntry.balance_left < databaseJournalEntry.balance_right {
-                        balanceDebitOrCredit = "貸"
-                    } else {
-                        balanceDebitOrCredit = "-"
-                    }
-                    // 差引残高額
-                    var balanceAmount: Int64 = 0
-                    if databaseJournalEntry.balance_left > databaseJournalEntry.balance_right { // 借方と貸方を比較
-                        balanceAmount = databaseJournalEntry.balance_left
-                    } else if databaseJournalEntry.balance_right > databaseJournalEntry.balance_left {
-                        balanceAmount = databaseJournalEntry.balance_right
-                    } else {
-                        balanceAmount = 0
-                    }
-                    let rowString = hTMLhelper.getSingleRow(
-                        month: String(date.month),
-                        day: String(date.day),
-                        debitCategory: debitCategory,
-                        debitAmount: debitAmount,
-                        creditCategory: creditCategory,
-                        creditAmount: creditAmount,
-                        correspondingAccounts: correspondingAccounts,
-                        numberOfAccount: numberOfAccount,
-                        balanceAmount: balanceAmount,
-                        balanceDebitOrCredit: balanceDebitOrCredit
-                    )
-                    htmlString.append(rowString)
-                    
-                    totalDebitAmount += databaseJournalEntry.debit_amount
-                    totalCreditAmount += databaseJournalEntry.credit_amount
-                    
-                    if counter >= 29 {
-                        let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
-                        htmlString.append(tableFooter)
-                    }
-                    counter += 1
-                    if counter >= 30 {
-                        counter = 0
-                        pageNumber += 1
+                    // 指定された年月に含まれるか判定する
+                    if isInYearMonth(yearMonth: yearMonth, date: databaseJournalEntry.date) {
+                        let fiscalYear = databaseJournalEntry.fiscalYear
+                        if counter == 0 {
+                            let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
+                            htmlString.append(tableHeader)
+                        }
+                        // 日付
+                        guard let date = DateManager.shared.dateFormatter.date(from: databaseJournalEntry.date) else {
+                            return nil
+                        }
+                        
+                        let debitCategory = databaseJournalEntry.debit_category
+                        let debitAmount = databaseJournalEntry.debit_amount
+                        let creditCategory = databaseJournalEntry.credit_category
+                        let creditAmount = databaseJournalEntry.credit_amount
+                        _ = databaseJournalEntry.smallWritting
+                        var correspondingAccounts: String = "" // 当勘定の相手勘定
+                        if debitCategory == account {
+                            correspondingAccounts = creditCategory
+                        } else if creditCategory == account {
+                            correspondingAccounts = debitCategory
+                        }
+                        let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
+                        _ = databaseJournalEntry.balance_left
+                        _ = databaseJournalEntry.balance_right
+                        // 借又貸
+                        var balanceDebitOrCredit: String = ""
+                        if databaseJournalEntry.balance_left > databaseJournalEntry.balance_right {
+                            balanceDebitOrCredit = "借"
+                        } else if databaseJournalEntry.balance_left < databaseJournalEntry.balance_right {
+                            balanceDebitOrCredit = "貸"
+                        } else {
+                            balanceDebitOrCredit = "-"
+                        }
+                        // 差引残高額
+                        var balanceAmount: Int64 = 0
+                        if databaseJournalEntry.balance_left > databaseJournalEntry.balance_right { // 借方と貸方を比較
+                            balanceAmount = databaseJournalEntry.balance_left
+                        } else if databaseJournalEntry.balance_right > databaseJournalEntry.balance_left {
+                            balanceAmount = databaseJournalEntry.balance_right
+                        } else {
+                            balanceAmount = 0
+                        }
+                        let rowString = hTMLhelper.getSingleRow(
+                            month: String(date.month),
+                            day: String(date.day),
+                            debitCategory: debitCategory,
+                            debitAmount: debitAmount,
+                            creditCategory: creditCategory,
+                            creditAmount: creditAmount,
+                            correspondingAccounts: correspondingAccounts,
+                            numberOfAccount: numberOfAccount,
+                            balanceAmount: balanceAmount,
+                            balanceDebitOrCredit: balanceDebitOrCredit
+                        )
+                        htmlString.append(rowString)
+                        
+                        totalDebitAmount += databaseJournalEntry.debit_amount
+                        totalCreditAmount += databaseJournalEntry.credit_amount
+                        
+                        if counter >= 29 {
+                            let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
+                            htmlString.append(tableFooter)
+                        }
+                        counter += 1
+                        if counter >= 30 {
+                            counter = 0
+                            pageNumber += 1
+                        }
                     }
                 }
             }
@@ -531,123 +552,126 @@ class PDFMakerAccount {
                     account: account,
                     yearMonth: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))" // BEGINSWITH 前方一致
                    ) {
-                    // 先頭行
-                    let fiscalYear = dataBaseMonthlyTransferEntry.fiscalYear
-                    if counter == 0 {
-                        let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
-                        htmlString.append(tableHeader)
-                    }
-                    // 日付
-                    guard let date = DateManager.shared.dateFormatter.date(from: dataBaseMonthlyTransferEntry.date) else {
-                        return nil
-                    }
-                    
-                    let debitCategory = dataBaseMonthlyTransferEntry.credit_category // 借方勘定　＊引数の貸方勘定を振替える
-                    let debitAmount = dataBaseMonthlyTransferEntry.balance_left // 貸方勘定　＊引数の借方勘定を振替える
-                    let creditCategory = dataBaseMonthlyTransferEntry.debit_category // 貸方勘定　＊引数の借方勘定を振替える
-                    let creditAmount = dataBaseMonthlyTransferEntry.balance_right // 借方勘定　＊引数の貸方勘定を振替える
-                    // 借又貸
-                    var balanceDebitOrCredit: String = ""
-                    if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right {
-                        balanceDebitOrCredit = "借"
-                    } else if dataBaseMonthlyTransferEntry.balance_left < dataBaseMonthlyTransferEntry.balance_right {
-                        balanceDebitOrCredit = "貸"
-                    } else {
-                        balanceDebitOrCredit = "-"
-                    }
-                    // 差引残高額
-                    var balanceAmount: Int64 = 0
-                    if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right { // 借方と貸方を比較
-                        balanceAmount = dataBaseMonthlyTransferEntry.balance_left
-                    } else if dataBaseMonthlyTransferEntry.balance_right > dataBaseMonthlyTransferEntry.balance_left {
-                        balanceAmount = dataBaseMonthlyTransferEntry.balance_right
-                    } else {
-                        balanceAmount = 0
-                    }
-                    
-                    // 次月繰越 合計
-                    let rowString = hTMLhelper.getFirstRow(
-                        month: String(date.month),
-                        day: String(date.day),
-                        debitCategory: "",
-                        debitAmount: dataBaseMonthlyTransferEntry.debit_amount,
-                        creditCategory: "合計",
-                        creditAmount: dataBaseMonthlyTransferEntry.credit_amount,
-                        numberOfAccount: 0,
-                        balanceAmount: nil,
-                        balanceDebitOrCredit: ""
-                    )
-                    htmlString.append(rowString)
-                    
-                    totalDebitAmount += dataBaseMonthlyTransferEntry.balance_left
-                    totalCreditAmount += dataBaseMonthlyTransferEntry.balance_right
-                    
-                    if counter >= 29 {
-                        let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
-                        htmlString.append(tableFooter)
-                    }
-                    counter += 1
-                    if counter >= 30 {
-                        counter = 0
-                        pageNumber += 1
-                    }
-                    
-                    // 次月繰越 次月繰越
-                    // 先頭行
-                    if counter == 0 {
-                        let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
-                        htmlString.append(tableHeader)
-                    }
-                    let secondRowString = hTMLhelper.getSecondRow(
-                        month: "",
-                        day: "",
-                        debitCategory: "",
-                        debitAmount: dataBaseMonthlyTransferEntry.balance_right, // 借方勘定　＊引数の貸方勘定を振替える
-                        creditCategory: "次月繰越",
-                        creditAmount: dataBaseMonthlyTransferEntry.balance_left, // 貸方勘定　＊引数の借方勘定を振替える
-                        numberOfAccount: 0,
-                        balanceAmount: nil,
-                        balanceDebitOrCredit: ""
-                    )
-                    htmlString.append(secondRowString)
-                    
-                    if counter >= 29 {
-                        let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
-                        htmlString.append(tableFooter)
-                    }
-                    counter += 1
-                    if counter >= 30 {
-                        counter = 0
-                        pageNumber += 1
-                    }
-
-                    // 次月繰越 貸借の合計
-                    // 先頭行
-                    if counter == 0 {
-                        let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
-                        htmlString.append(tableHeader)
-                    }
-                    let thirdRowString = hTMLhelper.getThirdRow(
-                        month: "",
-                        day: "",
-                        debitCategory: "",
-                        debitAmount: (dataBaseMonthlyTransferEntry.debit_amount + dataBaseMonthlyTransferEntry.balance_right), // 借方勘定　＊引数の貸方勘定を振替える
-                        creditCategory: "",
-                        creditAmount: (dataBaseMonthlyTransferEntry.credit_amount + dataBaseMonthlyTransferEntry.balance_left), // 貸方勘定　＊引数の借方勘定を振替える
-                        numberOfAccount: 0,
-                        balanceAmount: nil,
-                        balanceDebitOrCredit: ""
-                    )
-                    htmlString.append(thirdRowString)
-                    
-                    if counter >= 29 {
-                        let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
-                        htmlString.append(tableFooter)
-                    }
-                    counter += 1
-                    if counter >= 30 {
-                        counter = 0
-                        pageNumber += 1
+                    // 指定された年月に含まれるか判定する
+                    if isInYearMonth(yearMonth: yearMonth, date: dataBaseMonthlyTransferEntry.date) {
+                        // 先頭行
+                        let fiscalYear = dataBaseMonthlyTransferEntry.fiscalYear
+                        if counter == 0 {
+                            let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
+                            htmlString.append(tableHeader)
+                        }
+                        // 日付
+                        guard let date = DateManager.shared.dateFormatter.date(from: dataBaseMonthlyTransferEntry.date) else {
+                            return nil
+                        }
+                        
+                        let debitCategory = dataBaseMonthlyTransferEntry.credit_category // 借方勘定　＊引数の貸方勘定を振替える
+                        let debitAmount = dataBaseMonthlyTransferEntry.balance_left // 貸方勘定　＊引数の借方勘定を振替える
+                        let creditCategory = dataBaseMonthlyTransferEntry.debit_category // 貸方勘定　＊引数の借方勘定を振替える
+                        let creditAmount = dataBaseMonthlyTransferEntry.balance_right // 借方勘定　＊引数の貸方勘定を振替える
+                        // 借又貸
+                        var balanceDebitOrCredit: String = ""
+                        if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right {
+                            balanceDebitOrCredit = "借"
+                        } else if dataBaseMonthlyTransferEntry.balance_left < dataBaseMonthlyTransferEntry.balance_right {
+                            balanceDebitOrCredit = "貸"
+                        } else {
+                            balanceDebitOrCredit = "-"
+                        }
+                        // 差引残高額
+                        var balanceAmount: Int64 = 0
+                        if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right { // 借方と貸方を比較
+                            balanceAmount = dataBaseMonthlyTransferEntry.balance_left
+                        } else if dataBaseMonthlyTransferEntry.balance_right > dataBaseMonthlyTransferEntry.balance_left {
+                            balanceAmount = dataBaseMonthlyTransferEntry.balance_right
+                        } else {
+                            balanceAmount = 0
+                        }
+                        
+                        // 次月繰越 合計
+                        let rowString = hTMLhelper.getFirstRow(
+                            month: String(date.month),
+                            day: String(date.day),
+                            debitCategory: "",
+                            debitAmount: dataBaseMonthlyTransferEntry.debit_amount,
+                            creditCategory: "合計",
+                            creditAmount: dataBaseMonthlyTransferEntry.credit_amount,
+                            numberOfAccount: 0,
+                            balanceAmount: nil,
+                            balanceDebitOrCredit: ""
+                        )
+                        htmlString.append(rowString)
+                        
+                        totalDebitAmount += dataBaseMonthlyTransferEntry.balance_left
+                        totalCreditAmount += dataBaseMonthlyTransferEntry.balance_right
+                        
+                        if counter >= 29 {
+                            let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
+                            htmlString.append(tableFooter)
+                        }
+                        counter += 1
+                        if counter >= 30 {
+                            counter = 0
+                            pageNumber += 1
+                        }
+                        
+                        // 次月繰越 次月繰越
+                        // 先頭行
+                        if counter == 0 {
+                            let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
+                            htmlString.append(tableHeader)
+                        }
+                        let secondRowString = hTMLhelper.getSecondRow(
+                            month: "",
+                            day: "",
+                            debitCategory: "",
+                            debitAmount: dataBaseMonthlyTransferEntry.balance_right, // 借方勘定　＊引数の貸方勘定を振替える
+                            creditCategory: "次月繰越",
+                            creditAmount: dataBaseMonthlyTransferEntry.balance_left, // 貸方勘定　＊引数の借方勘定を振替える
+                            numberOfAccount: 0,
+                            balanceAmount: nil,
+                            balanceDebitOrCredit: ""
+                        )
+                        htmlString.append(secondRowString)
+                        
+                        if counter >= 29 {
+                            let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
+                            htmlString.append(tableFooter)
+                        }
+                        counter += 1
+                        if counter >= 30 {
+                            counter = 0
+                            pageNumber += 1
+                        }
+                        
+                        // 次月繰越 貸借の合計
+                        // 先頭行
+                        if counter == 0 {
+                            let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
+                            htmlString.append(tableHeader)
+                        }
+                        let thirdRowString = hTMLhelper.getThirdRow(
+                            month: "",
+                            day: "",
+                            debitCategory: "",
+                            debitAmount: (dataBaseMonthlyTransferEntry.debit_amount + dataBaseMonthlyTransferEntry.balance_right), // 借方勘定　＊引数の貸方勘定を振替える
+                            creditCategory: "",
+                            creditAmount: (dataBaseMonthlyTransferEntry.credit_amount + dataBaseMonthlyTransferEntry.balance_left), // 貸方勘定　＊引数の借方勘定を振替える
+                            numberOfAccount: 0,
+                            balanceAmount: nil,
+                            balanceDebitOrCredit: ""
+                        )
+                        htmlString.append(thirdRowString)
+                        
+                        if counter >= 29 {
+                            let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
+                            htmlString.append(tableFooter)
+                        }
+                        counter += 1
+                        if counter >= 30 {
+                            counter = 0
+                            pageNumber += 1
+                        }
                     }
                 }
             }
@@ -655,227 +679,233 @@ class PDFMakerAccount {
         
         // 決算整理仕訳
         for i in 0..<dataBaseAdjustingEntries.count {
-            
-            let fiscalYear = dataBaseAdjustingEntries[i].fiscalYear
-            if counter == 0 {
-                let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
-                htmlString.append(tableHeader)
-            }
-            // 日付
-            guard let date = DateManager.shared.dateFormatter.date(from: dataBaseAdjustingEntries[i].date) else {
-                return nil
-            }
-            
-            let debitCategory = dataBaseAdjustingEntries[i].debit_category
-            let debitAmount = dataBaseAdjustingEntries[i].debit_amount
-            let creditCategory = dataBaseAdjustingEntries[i].credit_category
-            let creditAmount = dataBaseAdjustingEntries[i].credit_amount
-            _ = dataBaseAdjustingEntries[i].smallWritting
-            var correspondingAccounts: String = "" // 当勘定の相手勘定
-            if debitCategory == account {
-                correspondingAccounts = creditCategory
-            } else if creditCategory == account {
-                correspondingAccounts = debitCategory
-            }
-            let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
-            _ = dataBaseAdjustingEntries[i].balance_left
-            _ = dataBaseAdjustingEntries[i].balance_right
-            // 借又貸
-            var balanceDebitOrCredit: String = ""
-            if dataBaseAdjustingEntries[i].balance_left > dataBaseAdjustingEntries[i].balance_right {
-                balanceDebitOrCredit = "借"
-            } else if dataBaseAdjustingEntries[i].balance_left < dataBaseAdjustingEntries[i].balance_right {
-                balanceDebitOrCredit = "貸"
-            } else {
-                balanceDebitOrCredit = "-"
-            }
-            // 差引残高額
-            var balanceAmount: Int64 = 0
-            if dataBaseAdjustingEntries[i].balance_left > dataBaseAdjustingEntries[i].balance_right { // 借方と貸方を比較
-                balanceAmount = dataBaseAdjustingEntries[i].balance_left
-            } else if dataBaseAdjustingEntries[i].balance_right > dataBaseAdjustingEntries[i].balance_left {
-                balanceAmount = dataBaseAdjustingEntries[i].balance_right
-            } else {
-                balanceAmount = 0
-            }
-            let rowString = hTMLhelper.getSingleRow(
-                month: String(date.month),
-                day: String(date.day),
-                debitCategory: debitCategory,
-                debitAmount: debitAmount,
-                creditCategory: creditCategory,
-                creditAmount: creditAmount,
-                correspondingAccounts: correspondingAccounts,
-                numberOfAccount: numberOfAccount,
-                balanceAmount: balanceAmount,
-                balanceDebitOrCredit: balanceDebitOrCredit
-            )
-            htmlString.append(rowString)
-            
-            totalDebitAmount += dataBaseAdjustingEntries[i].debit_amount
-            totalCreditAmount += dataBaseAdjustingEntries[i].credit_amount
-            
-            if counter >= 29 {
-                let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
-                htmlString.append(tableFooter)
-            }
-            counter += 1
-            if counter >= 30 {
-                counter = 0
-                pageNumber += 1
+            // 指定された年月に含まれるか判定する
+            if isInYearMonth(yearMonth: yearMonth, date: dataBaseAdjustingEntries[i].date) {
+                let fiscalYear = dataBaseAdjustingEntries[i].fiscalYear
+                if counter == 0 {
+                    let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
+                    htmlString.append(tableHeader)
+                }
+                // 日付
+                guard let date = DateManager.shared.dateFormatter.date(from: dataBaseAdjustingEntries[i].date) else {
+                    return nil
+                }
+                
+                let debitCategory = dataBaseAdjustingEntries[i].debit_category
+                let debitAmount = dataBaseAdjustingEntries[i].debit_amount
+                let creditCategory = dataBaseAdjustingEntries[i].credit_category
+                let creditAmount = dataBaseAdjustingEntries[i].credit_amount
+                _ = dataBaseAdjustingEntries[i].smallWritting
+                var correspondingAccounts: String = "" // 当勘定の相手勘定
+                if debitCategory == account {
+                    correspondingAccounts = creditCategory
+                } else if creditCategory == account {
+                    correspondingAccounts = debitCategory
+                }
+                let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
+                _ = dataBaseAdjustingEntries[i].balance_left
+                _ = dataBaseAdjustingEntries[i].balance_right
+                // 借又貸
+                var balanceDebitOrCredit: String = ""
+                if dataBaseAdjustingEntries[i].balance_left > dataBaseAdjustingEntries[i].balance_right {
+                    balanceDebitOrCredit = "借"
+                } else if dataBaseAdjustingEntries[i].balance_left < dataBaseAdjustingEntries[i].balance_right {
+                    balanceDebitOrCredit = "貸"
+                } else {
+                    balanceDebitOrCredit = "-"
+                }
+                // 差引残高額
+                var balanceAmount: Int64 = 0
+                if dataBaseAdjustingEntries[i].balance_left > dataBaseAdjustingEntries[i].balance_right { // 借方と貸方を比較
+                    balanceAmount = dataBaseAdjustingEntries[i].balance_left
+                } else if dataBaseAdjustingEntries[i].balance_right > dataBaseAdjustingEntries[i].balance_left {
+                    balanceAmount = dataBaseAdjustingEntries[i].balance_right
+                } else {
+                    balanceAmount = 0
+                }
+                let rowString = hTMLhelper.getSingleRow(
+                    month: String(date.month),
+                    day: String(date.day),
+                    debitCategory: debitCategory,
+                    debitAmount: debitAmount,
+                    creditCategory: creditCategory,
+                    creditAmount: creditAmount,
+                    correspondingAccounts: correspondingAccounts,
+                    numberOfAccount: numberOfAccount,
+                    balanceAmount: balanceAmount,
+                    balanceDebitOrCredit: balanceDebitOrCredit
+                )
+                htmlString.append(rowString)
+                
+                totalDebitAmount += dataBaseAdjustingEntries[i].debit_amount
+                totalCreditAmount += dataBaseAdjustingEntries[i].credit_amount
+                
+                if counter >= 29 {
+                    let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
+                    htmlString.append(tableFooter)
+                }
+                counter += 1
+                if counter >= 30 {
+                    counter = 0
+                    pageNumber += 1
+                }
             }
         }
         
         // 資本振替仕訳
         if let dataBaseCapitalTransferJournalEntry = dataBaseCapitalTransferJournalEntry {
-            
-            let fiscalYear = dataBaseCapitalTransferJournalEntry.fiscalYear
-            if counter == 0 {
-                let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
-                htmlString.append(tableHeader)
-            }
-            // 日付
-            guard let date = DateManager.shared.dateFormatter.date(from: dataBaseCapitalTransferJournalEntry.date) else {
-                return nil
-            }
-            
-            var debitCategory = ""
-            if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
-                debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
-            } else {
-                debitCategory = Constant.capitalAccountName
-            }
-            var creditCategory = ""
-            if dataBaseCapitalTransferJournalEntry.credit_category == "損益" { // 損益勘定の場合
-                creditCategory = dataBaseCapitalTransferJournalEntry.credit_category
-            } else {
-                creditCategory = Constant.capitalAccountName
-            }
-            
-            let debitAmount = dataBaseCapitalTransferJournalEntry.debit_amount
-            let creditAmount = dataBaseCapitalTransferJournalEntry.credit_amount
-            _ = dataBaseCapitalTransferJournalEntry.smallWritting
-            var correspondingAccounts: String = "" // 当勘定の相手勘定
-            if debitCategory == account {
-                correspondingAccounts = creditCategory
-            } else if creditCategory == account {
-                correspondingAccounts = debitCategory
-            }
-            let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
-            _ = dataBaseCapitalTransferJournalEntry.balance_left
-            _ = dataBaseCapitalTransferJournalEntry.balance_right
-            // 借又貸
-            var balanceDebitOrCredit: String = ""
-            if dataBaseCapitalTransferJournalEntry.balance_left > dataBaseCapitalTransferJournalEntry.balance_right {
-                balanceDebitOrCredit = "借"
-            } else if dataBaseCapitalTransferJournalEntry.balance_left < dataBaseCapitalTransferJournalEntry.balance_right {
-                balanceDebitOrCredit = "貸"
-            } else {
-                balanceDebitOrCredit = "-"
-            }
-            // 差引残高額
-            var balanceAmount: Int64 = 0
-            if dataBaseCapitalTransferJournalEntry.balance_left > dataBaseCapitalTransferJournalEntry.balance_right { // 借方と貸方を比較
-                balanceAmount = dataBaseCapitalTransferJournalEntry.balance_left
-            } else if dataBaseCapitalTransferJournalEntry.balance_right > dataBaseCapitalTransferJournalEntry.balance_left {
-                balanceAmount = dataBaseCapitalTransferJournalEntry.balance_right
-            } else {
-                balanceAmount = 0
-            }
-            let rowString = hTMLhelper.getSingleRow(
-                month: String(date.month),
-                day: String(date.day),
-                debitCategory: debitCategory,
-                debitAmount: debitAmount,
-                creditCategory: creditCategory,
-                creditAmount: creditAmount,
-                correspondingAccounts: correspondingAccounts,
-                numberOfAccount: numberOfAccount,
-                balanceAmount: balanceAmount,
-                balanceDebitOrCredit: balanceDebitOrCredit
-            )
-            htmlString.append(rowString)
-            
-            totalDebitAmount += dataBaseCapitalTransferJournalEntry.debit_amount
-            totalCreditAmount += dataBaseCapitalTransferJournalEntry.credit_amount
-            
-            if counter >= 29 {
-                let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
-                htmlString.append(tableFooter)
-            }
-            counter += 1
-            if counter >= 30 {
-                counter = 0
-                pageNumber += 1
+            // 指定された年月に含まれるか判定する
+            if isInYearMonth(yearMonth: yearMonth, date: dataBaseCapitalTransferJournalEntry.date) {
+                let fiscalYear = dataBaseCapitalTransferJournalEntry.fiscalYear
+                if counter == 0 {
+                    let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
+                    htmlString.append(tableHeader)
+                }
+                // 日付
+                guard let date = DateManager.shared.dateFormatter.date(from: dataBaseCapitalTransferJournalEntry.date) else {
+                    return nil
+                }
+                
+                var debitCategory = ""
+                if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
+                    debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
+                } else {
+                    debitCategory = Constant.capitalAccountName
+                }
+                var creditCategory = ""
+                if dataBaseCapitalTransferJournalEntry.credit_category == "損益" { // 損益勘定の場合
+                    creditCategory = dataBaseCapitalTransferJournalEntry.credit_category
+                } else {
+                    creditCategory = Constant.capitalAccountName
+                }
+                
+                let debitAmount = dataBaseCapitalTransferJournalEntry.debit_amount
+                let creditAmount = dataBaseCapitalTransferJournalEntry.credit_amount
+                _ = dataBaseCapitalTransferJournalEntry.smallWritting
+                var correspondingAccounts: String = "" // 当勘定の相手勘定
+                if debitCategory == account {
+                    correspondingAccounts = creditCategory
+                } else if creditCategory == account {
+                    correspondingAccounts = debitCategory
+                }
+                let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
+                _ = dataBaseCapitalTransferJournalEntry.balance_left
+                _ = dataBaseCapitalTransferJournalEntry.balance_right
+                // 借又貸
+                var balanceDebitOrCredit: String = ""
+                if dataBaseCapitalTransferJournalEntry.balance_left > dataBaseCapitalTransferJournalEntry.balance_right {
+                    balanceDebitOrCredit = "借"
+                } else if dataBaseCapitalTransferJournalEntry.balance_left < dataBaseCapitalTransferJournalEntry.balance_right {
+                    balanceDebitOrCredit = "貸"
+                } else {
+                    balanceDebitOrCredit = "-"
+                }
+                // 差引残高額
+                var balanceAmount: Int64 = 0
+                if dataBaseCapitalTransferJournalEntry.balance_left > dataBaseCapitalTransferJournalEntry.balance_right { // 借方と貸方を比較
+                    balanceAmount = dataBaseCapitalTransferJournalEntry.balance_left
+                } else if dataBaseCapitalTransferJournalEntry.balance_right > dataBaseCapitalTransferJournalEntry.balance_left {
+                    balanceAmount = dataBaseCapitalTransferJournalEntry.balance_right
+                } else {
+                    balanceAmount = 0
+                }
+                let rowString = hTMLhelper.getSingleRow(
+                    month: String(date.month),
+                    day: String(date.day),
+                    debitCategory: debitCategory,
+                    debitAmount: debitAmount,
+                    creditCategory: creditCategory,
+                    creditAmount: creditAmount,
+                    correspondingAccounts: correspondingAccounts,
+                    numberOfAccount: numberOfAccount,
+                    balanceAmount: balanceAmount,
+                    balanceDebitOrCredit: balanceDebitOrCredit
+                )
+                htmlString.append(rowString)
+                
+                totalDebitAmount += dataBaseCapitalTransferJournalEntry.debit_amount
+                totalCreditAmount += dataBaseCapitalTransferJournalEntry.credit_amount
+                
+                if counter >= 29 {
+                    let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
+                    htmlString.append(tableFooter)
+                }
+                counter += 1
+                if counter >= 30 {
+                    counter = 0
+                    pageNumber += 1
+                }
             }
         }
         // 損益振替仕訳
         if let dataBaseTransferEntry = generalLedgerAccountModel.getTransferEntryInAccount(account: account) {
-            
-            let fiscalYear = dataBaseTransferEntry.fiscalYear
-            if counter == 0 {
-                let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
-                htmlString.append(tableHeader)
-            }
-            // 日付
-            guard let date = DateManager.shared.dateFormatter.date(from: dataBaseTransferEntry.date) else {
-                return nil
-            }
-            
-            var debitCategory = ""
-            if dataBaseTransferEntry.debit_category == "資本金勘定" {
-                debitCategory = Constant.capitalAccountName
-            } else {
-                debitCategory = dataBaseTransferEntry.debit_category == "残高" ? "次期繰越" : dataBaseTransferEntry.debit_category
-            }
-            var creditCategory = ""
-            if dataBaseTransferEntry.credit_category == "資本金勘定" {
-                creditCategory = Constant.capitalAccountName
-            } else {
-                creditCategory = dataBaseTransferEntry.credit_category == "残高" ? "次期繰越" : dataBaseTransferEntry.credit_category
-            }
-            
-            let debitAmount = dataBaseTransferEntry.debit_amount
-            let creditAmount = dataBaseTransferEntry.credit_amount
-            _ = dataBaseTransferEntry.smallWritting
-            var correspondingAccounts: String = "" // 当勘定の相手勘定
-            if debitCategory == account {
-                correspondingAccounts = creditCategory
-            } else if creditCategory == account {
-                correspondingAccounts = debitCategory
-            }
-            let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
-            _ = dataBaseTransferEntry.balance_left
-            _ = dataBaseTransferEntry.balance_right
-            
-            let balanceAmount = Int64(0)
-            let balanceDebitOrCredit = "-"
-            
-            let rowString = hTMLhelper.getSingleRow(
-                month: String(date.month),
-                day: String(date.day),
-                debitCategory: debitCategory,
-                debitAmount: debitAmount,
-                creditCategory: creditCategory,
-                creditAmount: creditAmount,
-                correspondingAccounts: correspondingAccounts,
-                numberOfAccount: numberOfAccount,
-                balanceAmount: balanceAmount,
-                balanceDebitOrCredit: balanceDebitOrCredit
-            )
-            htmlString.append(rowString)
-            
-            totalDebitAmount += dataBaseTransferEntry.debit_amount
-            totalCreditAmount += dataBaseTransferEntry.credit_amount
-            
-            if counter >= 29 {
-                let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
-                htmlString.append(tableFooter)
-            }
-            counter += 1
-            if counter >= 30 {
-                counter = 0
-                pageNumber += 1
+            // 指定された年月に含まれるか判定する
+            if isInYearMonth(yearMonth: yearMonth, date: dataBaseTransferEntry.date) {
+                let fiscalYear = dataBaseTransferEntry.fiscalYear
+                if counter == 0 {
+                    let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
+                    htmlString.append(tableHeader)
+                }
+                // 日付
+                guard let date = DateManager.shared.dateFormatter.date(from: dataBaseTransferEntry.date) else {
+                    return nil
+                }
+                
+                var debitCategory = ""
+                if dataBaseTransferEntry.debit_category == "資本金勘定" {
+                    debitCategory = Constant.capitalAccountName
+                } else {
+                    debitCategory = dataBaseTransferEntry.debit_category == "残高" ? "次期繰越" : dataBaseTransferEntry.debit_category
+                }
+                var creditCategory = ""
+                if dataBaseTransferEntry.credit_category == "資本金勘定" {
+                    creditCategory = Constant.capitalAccountName
+                } else {
+                    creditCategory = dataBaseTransferEntry.credit_category == "残高" ? "次期繰越" : dataBaseTransferEntry.credit_category
+                }
+                
+                let debitAmount = dataBaseTransferEntry.debit_amount
+                let creditAmount = dataBaseTransferEntry.credit_amount
+                _ = dataBaseTransferEntry.smallWritting
+                var correspondingAccounts: String = "" // 当勘定の相手勘定
+                if debitCategory == account {
+                    correspondingAccounts = creditCategory
+                } else if creditCategory == account {
+                    correspondingAccounts = debitCategory
+                }
+                let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
+                _ = dataBaseTransferEntry.balance_left
+                _ = dataBaseTransferEntry.balance_right
+                
+                let balanceAmount = Int64(0)
+                let balanceDebitOrCredit = "-"
+                
+                let rowString = hTMLhelper.getSingleRow(
+                    month: String(date.month),
+                    day: String(date.day),
+                    debitCategory: debitCategory,
+                    debitAmount: debitAmount,
+                    creditCategory: creditCategory,
+                    creditAmount: creditAmount,
+                    correspondingAccounts: correspondingAccounts,
+                    numberOfAccount: numberOfAccount,
+                    balanceAmount: balanceAmount,
+                    balanceDebitOrCredit: balanceDebitOrCredit
+                )
+                htmlString.append(rowString)
+                
+                totalDebitAmount += dataBaseTransferEntry.debit_amount
+                totalCreditAmount += dataBaseTransferEntry.credit_amount
+                
+                if counter >= 29 {
+                    let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
+                    htmlString.append(tableFooter)
+                }
+                counter += 1
+                if counter >= 30 {
+                    counter = 0
+                    pageNumber += 1
+                }
             }
         }
         
@@ -947,7 +977,7 @@ class PDFMakerAccount {
             print("失敗した")
         }
         
-        let filePath = pDFsDirectory.appendingPathComponent("\(fiscalYear)-GeneralLedger-\(account)" + ".pdf")
+        let filePath = pDFsDirectory.appendingPathComponent("\(yearMonth?.replacingOccurrences(of: "/", with: "-") ?? "\(fiscalYear)")-GeneralLedger-\(account)" + ".pdf")
         do {
             try data.write(to: filePath)
             print(filePath)
