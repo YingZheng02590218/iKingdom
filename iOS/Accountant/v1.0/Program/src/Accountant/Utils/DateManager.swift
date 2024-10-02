@@ -264,8 +264,8 @@ class DateManager {
                     } else { // 次月の月初
                         let add = DateComponents(month: 0, day: 1) // 月末から1日進める
                         if let nextFirstDay = calendar.date(byAdding: add, to: lastDay) {
-                            // 今年度の決算日 > 次月の月初
-                            if fullTheDayOfReckoning > nextFirstDay {
+                            // 今年度の決算日 >= 次月の月初
+                            if fullTheDayOfReckoning >= nextFirstDay { // 今年度の決算日が 1/1 などの月初の場合は含める
                                 beginningOfMonthDates.append(nextFirstDay)
                                 // } else {
                                 //  // 翌年の期首

@@ -140,9 +140,6 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func setButtons() {
-        
-        pdfBarButtonItem.tintColor = .accentColor
-        csvBarButtonItem.tintColor = .accentColor
         // 仕訳画面表示ボタン
         addButton.isEnabled = true
         // 空白行対応
@@ -186,6 +183,9 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             // Fallback on earlier versions
         }
         navigationItem.rightBarButtonItems = [editButtonItem, pdfBarButtonItem, csvBarButtonItem]
+        editButtonItem.tintColor = .accentColor
+        pdfBarButtonItem.tintColor = .accentColor
+        csvBarButtonItem.tintColor = .accentColor
     }
     
     // ボタンのデザインを指定する
