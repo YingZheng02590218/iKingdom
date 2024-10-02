@@ -171,6 +171,32 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
         } else {
             // Fallback on earlier versions
         }
+        
+        // CSV 会計期間　メニュー
+        // 月別の月末日を取得 12ヶ月分
+        let actionCsv = UIAction(title: "\(lastDays[0].year)") { _ in
+            print("\(lastDays[0].year)", "clicked")
+            self.presenter.csvBarButtonItemTapped(yearMonth: nil)
+        }
+        var childrenCsv: [UIAction] = [actionCsv]
+        for i in 0..<lastDays.count {
+            let action = UIAction(title: "\(lastDays[i].year)" + "/" + String(format: "%02d", lastDays[i].month)) { _ in
+                print("\(lastDays[i].year)" + "/" + String(format: "%02d", lastDays[i].month), "clicked")
+                self.presenter.csvBarButtonItemTapped(yearMonth: "\(lastDays[i].year)" + "/" + "\(String(format: "%02d", lastDays[i].month))")
+            }
+            childrenCsv.append(action)
+        }
+        let menuCsv = UIMenu(title: "会計の期間", image: nil, identifier: nil, options: [], children: childrenCsv)
+        if #available(iOS 14.0, *) {
+            csvBarButtonItem = UIBarButtonItem(
+                title: "",
+                image: UIImage(named: "csv-csv_symbol"),
+                primaryAction: nil,
+                menu: menuCsv
+            )
+        } else {
+            // Fallback on earlier versions
+        }
         navigationItem.rightBarButtonItems = [pdfBarButtonItem, csvBarButtonItem]
         pdfBarButtonItem.tintColor = .accentColor
         csvBarButtonItem.tintColor = .accentColor
@@ -196,7 +222,7 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
     }
     
     @IBAction func csvBarButtonItemTapped(_ sender: Any) {
-        presenter.csvBarButtonItemTapped()
+        presenter.csvBarButtonItemTapped(yearMonth: nil)
     }
     
     // 編集機能　長押しした際に呼ばれるメソッド
@@ -412,6 +438,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     // セクションヘッダー
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: AccountTableViewHeaderView.self))
+        // MARK: 前月繰越
         // 貸借科目　のみに絞る
         if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
             if let headerView = view as? AccountTableViewHeaderView {
@@ -465,10 +492,10 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                    ) {
                     // 日付
                     // 月
-                    headerView.listDateMonthLabel.text = "\(nextFirstDays[index].month)"
+                    headerView.listDateMonthLabel.text = "\(nextFirstDays[index].month)" // MARK: 前月繰越 は前月繰越の金額を表示させて、日付を差し替えている
                     headerView.listDateMonthLabel.textAlignment = NSTextAlignment.right
                     // 日
-                    headerView.listDateDayLabel.text = "\(nextFirstDays[index].day)"
+                    headerView.listDateDayLabel.text = "\(nextFirstDays[index].day)" // MARK: 前月繰越 は前月繰越の金額を表示させて、日付を差し替えている
                     headerView.listDateDayLabel.textAlignment = NSTextAlignment.right
                     // 摘要
                     headerView.listSummaryLabel.text = "前月繰越"
@@ -536,6 +563,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     // セクションフッター
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: AccountTableViewHeaderFooterView.self))
+        // MARK: 次月繰越
         // 貸借科目　のみに絞る
         if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
             if let headerView = view as? AccountTableViewHeaderFooterView {

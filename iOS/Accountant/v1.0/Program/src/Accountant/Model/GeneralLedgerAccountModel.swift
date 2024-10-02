@@ -29,7 +29,7 @@ protocol GeneralLedgerAccountModelInput {
     func getAllAdjustingEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry>
     
     func initializePdfMaker(yearMonth: String?, account: String, completion: (URL?) -> Void)
-    func initializeCsvMaker(account: String, completion: (URL?) -> Void)
+    func initializeCsvMaker(yearMonth: String?, account: String, completion: (URL?) -> Void)
 
     func getJournalEntryInAccountInMonth(account: String, yearMonth: String) -> Results<DataBaseJournalEntry>
     func getAdjustingEntryInAccountInMonth(account: String, yearMonth: String) -> Results<DataBaseAdjustingEntry>
@@ -50,9 +50,9 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
     // CSV機能
     let csvFileMaker = CsvFileMakerAccount()
     // 初期化
-    func initializeCsvMaker(account: String, completion: (URL?) -> Void) {
+    func initializeCsvMaker(yearMonth: String? = nil, account: String, completion: (URL?) -> Void) {
         
-        csvFileMaker.initialize(account: account, completion: { filePath in
+        csvFileMaker.initialize(yearMonth: yearMonth, account: account, completion: { filePath in
             completion(filePath)
         })
     }

@@ -509,9 +509,6 @@ class PDFMakerAccount {
             // MARK: 次月繰越
             // 貸借科目　のみに絞る
             if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
-                // 月別の翌月の初日を取得 12ヶ月分
-                let nextFirstDays = DateManager.shared.getTheDayOfEndingOfMonth(isLastDay: false)
-                
                 switch x {
                 case 0:
                     // 通常仕訳 期首
