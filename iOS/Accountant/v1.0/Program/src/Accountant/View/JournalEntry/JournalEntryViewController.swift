@@ -3031,16 +3031,26 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             // 仕訳に固定する
             segmentedControl.selectedSegmentIndex = 0
             segmentedControl.isEnabled = false
-            // よく使う仕訳　エリア
-            tableView.isHidden = true
-            // よく使う仕訳　エリア
-            journalEntryTemplateView.isHidden = true
-            // 仕訳画面表示ボタン
-            addButton.isHidden = true
-            // 勘定科目エリア　余白
-            spaceView.isHidden = false
+            if let tableView = tableView {
+                // よく使う仕訳　エリア
+                tableView.isHidden = true
+            }
+            if let journalEntryTemplateView = journalEntryTemplateView {
+                // よく使う仕訳　エリア
+                journalEntryTemplateView.isHidden = true
+            }
+            if let addButton = addButton {
+                // 仕訳画面表示ボタン
+                addButton.isHidden = true
+            }
+            if let spaceView = spaceView {
+                // 勘定科目エリア　余白
+                spaceView.isHidden = false
+            }
             self.navigationItem.title = "仕訳"
-            labelTitle.text = ""
+            if let labelTitle = labelTitle {
+                labelTitle.text = ""
+            }
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
         } else if journalEntryType == .JournalEntry { // 仕訳 タブバーの仕訳タブからの遷移の場合
             // タブバーの仕訳タブからの遷移の場合 表示させる
@@ -3049,7 +3059,6 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             segmentedControl.isHidden = false
             // 仕訳に固定を解除する
             segmentedControl.isEnabled = true
-            segmentedControl.isHidden = false
             // アプリ起動時に、アプリがバックグラウンドにいるとnilでクラッシュしてしまう対策
             if let tableView = tableView {
                 // よく使う仕訳　エリア
