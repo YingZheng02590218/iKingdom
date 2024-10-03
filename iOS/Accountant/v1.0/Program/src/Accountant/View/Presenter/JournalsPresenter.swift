@@ -32,7 +32,7 @@ protocol JournalsPresenterInput {
     func refreshTable(isEditing: Bool)
     func cellLongPressed(indexPath: IndexPath)
     func pdfBarButtonItemTapped(yearMonth: String?)
-    func csvBarButtonItemTapped()
+    func csvBarButtonItemTapped(yearMonth: String?)
     func deleteJournalEntry(number: Int) -> Bool
     func deleteAdjustingJournalEntry(number: Int) -> Bool
     func updateFiscalYear(indexPaths: [IndexPath], fiscalYear: Int)
@@ -173,9 +173,9 @@ final class JournalsPresenter: JournalsPresenterInput {
     }
     
     // CSV機能
-    func csvBarButtonItemTapped() {
+    func csvBarButtonItemTapped(yearMonth: String? = nil) {
         // 初期化
-        model.initializeCsvMaker(completion: { csvPath in
+        model.initializeCsvMaker(yearMonth: yearMonth, completion: { csvPath in
             
             self.filePath = csvPath
             self.view.showPreview()
