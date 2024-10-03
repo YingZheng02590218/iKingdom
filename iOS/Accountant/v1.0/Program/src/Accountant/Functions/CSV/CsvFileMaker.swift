@@ -14,10 +14,12 @@ class CsvFileMaker {
     var csvPath: URL?
     
     var fiscalYear = 0
-    
-    func initialize(completion: (URL?) -> Void) {
+    var yearMonth: String? = nil
+
+    func initialize(yearMonth: String? = nil, completion: (URL?) -> Void) {
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        fiscalYear = dataBaseAccountingBooks.fiscalYear
+        self.fiscalYear = dataBaseAccountingBooks.fiscalYear
+        self.yearMonth = yearMonth
         // 初期化
         csvPath = nil
         guard let tempDirectory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else { return }
@@ -47,16 +49,28 @@ class CsvFileMaker {
             print(error)
         }
         
-        let url = readDB()
+        let url = readDB(yearMonth: yearMonth)
         completion(url)
     }
     
+    // 指定された年月に含まれるか判定する
+    func isInYearMonth(yearMonth: String?, date: String) -> Bool {
+        // 月別に絞り込む
+        if yearMonth == nil {
+            return true
+        }
+        if let yearMonth = yearMonth, date.contains(yearMonth) {
+            return true
+        }
+        return false
+    }
+    
     // csvファイルを生成
-    func readDB() -> URL? {
+    func readDB(yearMonth: String? = nil) -> URL? {
         
         let dataBaseManager = JournalsModel()
-        let dataBaseJournalEntries = dataBaseManager.getJournalEntriesInJournals()
-        let dataBaseAdjustingEntries = dataBaseManager.getJournalAdjustingEntry()
+        let dataBaseJournalEntries = dataBaseManager.getJournalEntriesInJournals(yearMonth: yearMonth)
+        let dataBaseAdjustingEntries = dataBaseManager.getJournalAdjustingEntry(yearMonth: yearMonth)
         
         var csv = ""
         
@@ -127,7 +141,7 @@ class CsvFileMaker {
             print("失敗した")
         }
         
-        let filePath = csvsDirectory.appendingPathComponent("\(fiscalYear)-Journals" + ".csv")
+        let filePath = csvsDirectory.appendingPathComponent("\(yearMonth?.replacingOccurrences(of: "/", with: "-") ?? "\(fiscalYear)")-Journals" + ".csv")
         // テンポラリディレクトリ/data.csv の URL （ファイルパス）取得
         if let strm = OutputStream(url: filePath, append: false) { // 新規書き込みでストリーム作成
             strm.open() // ストリームオープン（fopenみたいな）

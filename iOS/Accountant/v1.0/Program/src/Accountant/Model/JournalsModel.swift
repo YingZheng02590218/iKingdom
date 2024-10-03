@@ -42,7 +42,7 @@ protocol JournalsModelInput {
     )
     
     func initializePdfMaker(yearMonth: String?, completion: (URL?) -> Void)
-    func initializeCsvMaker(completion: (URL?) -> Void)
+    func initializeCsvMaker(yearMonth: String?, completion: (URL?) -> Void)
 }
 
 // 仕訳帳クラス
@@ -61,9 +61,9 @@ class JournalsModel: JournalsModelInput {
     // CSV機能
     let csvFileMaker = CsvFileMaker()
     // 初期化
-    func initializeCsvMaker(completion: (URL?) -> Void) {
+    func initializeCsvMaker(yearMonth: String? = nil, completion: (URL?) -> Void) {
         
-        csvFileMaker.initialize(completion: { filePath in
+        csvFileMaker.initialize(yearMonth: yearMonth, completion: { filePath in
             completion(filePath)
         })
     }
