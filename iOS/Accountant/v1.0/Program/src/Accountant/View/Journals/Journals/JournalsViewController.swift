@@ -140,9 +140,6 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func setButtons() {
-        
-        pdfBarButtonItem.tintColor = .accentColor
-        csvBarButtonItem.tintColor = .accentColor
         // 仕訳画面表示ボタン
         addButton.isEnabled = true
         // 空白行対応
@@ -185,7 +182,37 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         } else {
             // Fallback on earlier versions
         }
+        
+        // CSV 会計期間　メニュー
+        // 月別の月末日を取得 12ヶ月分
+        let actionCsv = UIAction(title: "\(lastDays[0].year)") { _ in
+            print("\(lastDays[0].year)", "clicked")
+            self.presenter.csvBarButtonItemTapped(yearMonth: nil)
+        }
+        var childrenCsv: [UIAction] = [actionCsv]
+        for i in 0..<lastDays.count {
+            let action = UIAction(title: "\(lastDays[i].year)" + "/" + String(format: "%02d", lastDays[i].month)) { _ in
+                print("\(lastDays[i].year)" + "/" + String(format: "%02d", lastDays[i].month), "clicked")
+                self.presenter.csvBarButtonItemTapped(yearMonth: "\(lastDays[i].year)" + "/" + "\(String(format: "%02d", lastDays[i].month))")
+            }
+            childrenCsv.append(action)
+        }
+        let menuCsv = UIMenu(title: "会計の期間", image: nil, identifier: nil, options: [], children: childrenCsv)
+        if #available(iOS 14.0, *) {
+            csvBarButtonItem = UIBarButtonItem(
+                title: "",
+                image: UIImage(named: "csv-csv_symbol"),
+                primaryAction: nil,
+                menu: menuCsv
+            )
+        } else {
+            // Fallback on earlier versions
+        }
+
         navigationItem.rightBarButtonItems = [editButtonItem, pdfBarButtonItem, csvBarButtonItem]
+        editButtonItem.tintColor = .accentColor
+        pdfBarButtonItem.tintColor = .accentColor
+        csvBarButtonItem.tintColor = .accentColor
     }
     
     // ボタンのデザインを指定する
@@ -476,7 +503,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func csvBarButtonItemTapped(_ sender: UIBarButtonItem) {
         
-        presenter.csvBarButtonItemTapped()
+        presenter.csvBarButtonItemTapped(yearMonth: nil)
     }
     
     func updateFiscalYear(fiscalYear: Int) {

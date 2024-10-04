@@ -23,7 +23,7 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
     @IBOutlet private var dateYearLabel: UILabel!
     @IBOutlet private var topView: UIView!
     @IBOutlet private var listHeadingLabel: UILabel!
-    @IBOutlet private var printBarButtonItem: UIBarButtonItem!
+    @IBOutlet private var pdfBarButtonItem: UIBarButtonItem!
     @IBOutlet private var csvBarButtonItem: UIBarButtonItem!
     /// 勘定　下部
     @IBOutlet private var tableView: UITableView! {
@@ -111,9 +111,6 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
     // ボタンのデザインを指定する
     private func createButtons() {
         
-        printBarButtonItem.tintColor = .accentColor
-        csvBarButtonItem.tintColor = .accentColor
-        
         if let backgroundView = backgroundView {
             backgroundView.neumorphicLayer?.cornerRadius = 15
             backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
@@ -148,6 +145,61 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
                 indicatorView.heightAnchor.constraint(equalToConstant: indicatorView.frame.height)
             ])
         }
+        // PDF 会計期間　メニュー
+        // 月別の月末日を取得 12ヶ月分
+        let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+        let action = UIAction(title: "\(lastDays[0].year)") { _ in
+            print("\(lastDays[0].year)", "clicked")
+            self.presenter.pdfBarButtonItemTapped(yearMonth: nil)
+        }
+        var children: [UIAction] = [action]
+        for i in 0..<lastDays.count {
+            let action = UIAction(title: "\(lastDays[i].year)" + "/" + String(format: "%02d", lastDays[i].month)) { _ in
+                print("\(lastDays[i].year)" + "/" + String(format: "%02d", lastDays[i].month), "clicked")
+                self.presenter.pdfBarButtonItemTapped(yearMonth: "\(lastDays[i].year)" + "/" + "\(String(format: "%02d", lastDays[i].month))")
+            }
+            children.append(action)
+        }
+        let menu = UIMenu(title: "会計の期間", image: nil, identifier: nil, options: [], children: children)
+        if #available(iOS 14.0, *) {
+            pdfBarButtonItem = UIBarButtonItem(
+                title: "",
+                image: UIImage(named: "picture_as_pdf-picture_as_pdf_symbol"),
+                primaryAction: nil,
+                menu: menu
+            )
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        // CSV 会計期間　メニュー
+        // 月別の月末日を取得 12ヶ月分
+        let actionCsv = UIAction(title: "\(lastDays[0].year)") { _ in
+            print("\(lastDays[0].year)", "clicked")
+            self.presenter.csvBarButtonItemTapped(yearMonth: nil)
+        }
+        var childrenCsv: [UIAction] = [actionCsv]
+        for i in 0..<lastDays.count {
+            let action = UIAction(title: "\(lastDays[i].year)" + "/" + String(format: "%02d", lastDays[i].month)) { _ in
+                print("\(lastDays[i].year)" + "/" + String(format: "%02d", lastDays[i].month), "clicked")
+                self.presenter.csvBarButtonItemTapped(yearMonth: "\(lastDays[i].year)" + "/" + "\(String(format: "%02d", lastDays[i].month))")
+            }
+            childrenCsv.append(action)
+        }
+        let menuCsv = UIMenu(title: "会計の期間", image: nil, identifier: nil, options: [], children: childrenCsv)
+        if #available(iOS 14.0, *) {
+            csvBarButtonItem = UIBarButtonItem(
+                title: "",
+                image: UIImage(named: "csv-csv_symbol"),
+                primaryAction: nil,
+                menu: menuCsv
+            )
+        } else {
+            // Fallback on earlier versions
+        }
+        navigationItem.rightBarButtonItems = [pdfBarButtonItem, csvBarButtonItem]
+        pdfBarButtonItem.tintColor = .accentColor
+        csvBarButtonItem.tintColor = .accentColor
     }
     
     private func setLongPressRecognizer() {
@@ -165,12 +217,12 @@ class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerD
     /**
      * 印刷ボタン押下時メソッド
      */
-    @IBAction func printButtonTapped(_ sender: Any) {
-        presenter.pdfBarButtonItemTapped()
+    @IBAction func pdfBarButtonItemTapped(_ sender: Any) {
+        presenter.pdfBarButtonItemTapped(yearMonth: nil)
     }
     
     @IBAction func csvBarButtonItemTapped(_ sender: Any) {
-        presenter.csvBarButtonItemTapped()
+        presenter.csvBarButtonItemTapped(yearMonth: nil)
     }
     
     // 編集機能　長押しした際に呼ばれるメソッド
@@ -280,47 +332,27 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     // セクションヘッダーの高さ
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case /*1, */2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13:
+        case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13:
+            // MARK: 前月繰越
             // 貸借科目　のみに絞る
             if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
                 switch section {
-                    // case 1: // 初月は前期繰越があるため、不要
+                case 1:
+                    // 初月は前期繰越があるため、不要
                     // 通常仕訳 期首
-                case 2:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 0) == 0 ? 0 : 20
-                case 3:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 1) == 0 ? 0 : 20
-                case 4:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 2) == 0 ? 0 : 20
-                case 5:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 3) == 0 ? 0 : 20
-                case 6:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 4) == 0 ? 0 : 20
-                case 7:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 5) == 0 ? 0 : 20
-                case 8:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 6) == 0 ? 0 : 20
-                case 9:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 7) == 0 ? 0 : 20
-                case 10:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 8) == 0 ? 0 : 20
-                case 11:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 9) == 0 ? 0 : 20
-                case 12:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 10) == 0 ? 0 : 20
+                    return 0
                 case 13:
                     // 月別の月末日を取得 12ヶ月分
                     let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
                     // 月別の月末を取得 13ヶ月分　が存在するか
                     if lastDays.count > 12 {
-                        return presenter.numberOfDatabaseJournalEntries(forSection: 11) == 0 ? 0 : 20
+                        return 20
                     } else {
                         return 0
                     }
-                    // 決算月は次期繰越があるため、不要
                     // 通常仕訳 期末
                 default:
-                    return 0
+                    return 20
                 }
             } else {
                 return 0
@@ -333,48 +365,30 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     // セクションフッターの高さ
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
-        case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12/*, 13*/:
+        case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13:
+            // MARK: 次月繰越
             // 貸借科目　のみに絞る
             if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
                 switch section {
-                case 1:
-                    // 通常仕訳 期首
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 0) == 0 ? 0 : 60
-                case 2:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 1) == 0 ? 0 : 60
-                case 3:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 2) == 0 ? 0 : 60
-                case 4:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 3) == 0 ? 0 : 60
-                case 5:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 4) == 0 ? 0 : 60
-                case 6:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 5) == 0 ? 0 : 60
-                case 7:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 6) == 0 ? 0 : 60
-                case 8:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 7) == 0 ? 0 : 60
-                case 9:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 8) == 0 ? 0 : 60
-                case 10:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 9) == 0 ? 0 : 60
-                case 11:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 10) == 0 ? 0 : 60
                 case 12:
                     // 月別の月末日を取得 12ヶ月分
                     let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
                     // 月別の月末を取得 13ヶ月分　が存在するか
                     if lastDays.count > 12 {
-                        return presenter.numberOfDatabaseJournalEntries(forSection: 11) == 0 ? 0 : 60
+                        return 60
                     } else {
+                        // 決算整理仕訳の下に次月繰越を表示させる。月次残高振替仕訳には決算整理仕訳も含まれるため。
+                        // 決算月は次期繰越があるため、不要
+                        // 通常仕訳 期末
                         return 0
                     }
-                    // case 13:
-                    // return presenter.numberOfDatabaseJournalEntries(forSection: 12) == 0 ? 0 : 60
+                case 13:
                     // 決算整理仕訳の下に次月繰越を表示させる。月次残高振替仕訳には決算整理仕訳も含まれるため。
+                    // 決算月は次期繰越があるため、不要
                     // 通常仕訳 期末
-                default:
                     return 0
+                default:
+                    return 60
                 }
             } else {
                 return 0
@@ -386,6 +400,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     // セクションヘッダー
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: AccountTableViewHeaderView.self))
+        // MARK: 前月繰越
         // 貸借科目　のみに絞る
         if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
             if let headerView = view as? AccountTableViewHeaderView {
@@ -439,10 +454,10 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                    ) {
                     // 日付
                     // 月
-                    headerView.listDateMonthLabel.text = "\(nextFirstDays[index].month)"
+                    headerView.listDateMonthLabel.text = "\(nextFirstDays[index].month)" // MARK: 前月繰越 は前月繰越の金額を表示させて、日付を差し替えている
                     headerView.listDateMonthLabel.textAlignment = NSTextAlignment.right
                     // 日
-                    headerView.listDateDayLabel.text = "\(nextFirstDays[index].day)"
+                    headerView.listDateDayLabel.text = "\(nextFirstDays[index].day)" // MARK: 前月繰越 は前月繰越の金額を表示させて、日付を差し替えている
                     headerView.listDateDayLabel.textAlignment = NSTextAlignment.right
                     // 摘要
                     headerView.listSummaryLabel.text = "前月繰越"
@@ -510,6 +525,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     // セクションフッター
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: AccountTableViewHeaderFooterView.self))
+        // MARK: 次月繰越
         // 貸借科目　のみに絞る
         if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
             if let headerView = view as? AccountTableViewHeaderFooterView {
@@ -1083,10 +1099,10 @@ extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutpu
             presenter.numberOfDatabaseJournalEntries +
             presenter.numberOfDataBaseAdjustingEntries +
             presenter.numberOfDataBaseCapitalTransferJournalEntry >= 1 {
-            printBarButtonItem.isEnabled = true
+            pdfBarButtonItem.isEnabled = true
             csvBarButtonItem.isEnabled = true
         } else {
-            printBarButtonItem.isEnabled = false
+            pdfBarButtonItem.isEnabled = false
             csvBarButtonItem.isEnabled = false
         }
         // 要素数が少ないUITableViewで残りの部分や余白を消す
@@ -1126,33 +1142,21 @@ extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutpu
            let navigationController = tabBarController.selectedViewController as? UINavigationController {
             // 貸借対照表画面
             if let presentingViewController = navigationController.topViewController as? BalanceSheetViewController {
-                // 画面を閉じる
-                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                    presentingViewController.viewWillAppear(true)
-                })
+                presentingViewController.viewWillAppear(true)
             }
             // 損益計算書画面
             if let presentingViewController = navigationController.topViewController as? ProfitAndLossStatementViewController {
-                // 画面を閉じる
-                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                    presentingViewController.viewWillAppear(true)
-                })
+                presentingViewController.viewWillAppear(true)
             }
             // 試算表画面
             if let presentingViewController = navigationController.topViewController as? TBViewController {
                 print(navigationController.topViewController)
                 print(navigationController.viewControllers)
-                // 画面を閉じる
-                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                    presentingViewController.viewWillAppear(true)
-                })
+                presentingViewController.viewWillAppear(true)
             }
             // 繰越試算表画面
             if let presentingViewController = navigationController.topViewController as? AfterClosingTrialBalanceViewController {
-                // 画面を閉じる
-                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                    presentingViewController.viewWillAppear(true)
-                })
+                presentingViewController.viewWillAppear(true)
             }
         }
     }

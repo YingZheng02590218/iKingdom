@@ -37,8 +37,8 @@ protocol GeneralLedgerAccountPresenterInput {
     
     func getNumberOfAccount(accountName: String) -> Int
     
-    func pdfBarButtonItemTapped()
-    func csvBarButtonItemTapped()
+    func pdfBarButtonItemTapped(yearMonth: String?)
+    func csvBarButtonItemTapped(yearMonth: String?)
     func cellLongPressed(indexPath: IndexPath)
 }
 
@@ -383,9 +383,9 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     }
     
     // 印刷機能
-    func pdfBarButtonItemTapped() {
+    func pdfBarButtonItemTapped(yearMonth: String? = nil) {
         // 初期化 PDFメーカー
-        model.initializePdfMaker(account: account, completion: { filePath in
+        model.initializePdfMaker(yearMonth: yearMonth, account: account, completion: { filePath in
             
             self.filePath = filePath
             self.view.showPreview()
@@ -393,9 +393,9 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     }
     
     // CSV機能
-    func csvBarButtonItemTapped() {
+    func csvBarButtonItemTapped(yearMonth: String? = nil) {
         // 初期化
-        model.initializeCsvMaker(account: account, completion: { csvPath in
+        model.initializeCsvMaker(yearMonth: yearMonth, account: account, completion: { csvPath in
             
             self.filePath = csvPath
             self.view.showPreview()
