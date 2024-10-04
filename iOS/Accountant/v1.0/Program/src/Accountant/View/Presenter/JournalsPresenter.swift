@@ -17,9 +17,11 @@ protocol JournalsPresenterInput {
     var theDayOfReckoning: String? { get }
     
     var numberOfobjects: Int { get }
+    func numberOfDatabaseJournalEntries(forSection: Int) -> Int
     var numberOfobjectsss: Int { get }
     
     func objects(forRow row: Int) -> DataBaseJournalEntry
+    func databaseJournalEntries(forSection: Int, forRow row: Int) -> DataBaseJournalEntry?
     func objectsss(forRow row: Int) -> DataBaseAdjustingEntry
     
     var filePath: URL? { get }
@@ -63,6 +65,20 @@ final class JournalsPresenter: JournalsPresenterInput {
     var theDayOfReckoning: String?
     // 通常仕訳　全
     private var objects: Results<DataBaseJournalEntry>
+    // 通常仕訳 勘定別に月別に取得
+    private var databaseJournalEntriesSection0: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection1: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection2: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection3: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection4: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection5: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection6: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection7: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection8: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection9: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection10: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection11: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection12: Results<DataBaseJournalEntry>?
     // 決算整理仕訳
     private var objectsss: Results<DataBaseAdjustingEntry>
     
@@ -78,6 +94,44 @@ final class JournalsPresenter: JournalsPresenterInput {
         
         // 通常仕訳　全
         objects = model.getJournalEntriesInJournals(yearMonth: nil)
+        // 月別の月末日を取得 12ヶ月分
+        let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+        for i in 0..<lastDays.count {
+            // 通常仕訳 月別に取得
+            let dataBaseJournalEntries = model.getJournalEntriesInJournals(
+                yearMonth: "\(lastDays[i].year)" + "/" + "\(String(format: "%02d", lastDays[i].month))"
+            )
+            switch i {
+            case 0:
+                databaseJournalEntriesSection0 = dataBaseJournalEntries
+            case 1:
+                databaseJournalEntriesSection1 = dataBaseJournalEntries
+            case 2:
+                databaseJournalEntriesSection2 = dataBaseJournalEntries
+            case 3:
+                databaseJournalEntriesSection3 = dataBaseJournalEntries
+            case 4:
+                databaseJournalEntriesSection4 = dataBaseJournalEntries
+            case 5:
+                databaseJournalEntriesSection5 = dataBaseJournalEntries
+            case 6:
+                databaseJournalEntriesSection6 = dataBaseJournalEntries
+            case 7:
+                databaseJournalEntriesSection7 = dataBaseJournalEntries
+            case 8:
+                databaseJournalEntriesSection8 = dataBaseJournalEntries
+            case 9:
+                databaseJournalEntriesSection9 = dataBaseJournalEntries
+            case 10:
+                databaseJournalEntriesSection10 = dataBaseJournalEntries
+            case 11:
+                databaseJournalEntriesSection11 = dataBaseJournalEntries
+            case 12:
+                databaseJournalEntriesSection12 = dataBaseJournalEntries
+            default:
+                break
+            }
+        }
         // 決算整理仕訳
         objectsss = model.getJournalAdjustingEntry(yearMonth: nil)
     }
@@ -97,6 +151,44 @@ final class JournalsPresenter: JournalsPresenterInput {
             // 会計年度を切り替えした場合、仕訳帳をリロードして選択された年度のデータを表示する
             // 通常仕訳　全
             self.objects = self.model.getJournalEntriesInJournals(yearMonth: nil)
+            // 月別の月末日を取得 12ヶ月分
+            let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+            for i in 0..<lastDays.count {
+                // 通常仕訳 月別に取得
+                let dataBaseJournalEntries = self.model.getJournalEntriesInJournals(
+                    yearMonth: "\(lastDays[i].year)" + "/" + "\(String(format: "%02d", lastDays[i].month))"
+                )
+                switch i {
+                case 0:
+                    self.databaseJournalEntriesSection0 = dataBaseJournalEntries
+                case 1:
+                    self.databaseJournalEntriesSection1 = dataBaseJournalEntries
+                case 2:
+                    self.databaseJournalEntriesSection2 = dataBaseJournalEntries
+                case 3:
+                    self.databaseJournalEntriesSection3 = dataBaseJournalEntries
+                case 4:
+                    self.databaseJournalEntriesSection4 = dataBaseJournalEntries
+                case 5:
+                    self.databaseJournalEntriesSection5 = dataBaseJournalEntries
+                case 6:
+                    self.databaseJournalEntriesSection6 = dataBaseJournalEntries
+                case 7:
+                    self.databaseJournalEntriesSection7 = dataBaseJournalEntries
+                case 8:
+                    self.databaseJournalEntriesSection8 = dataBaseJournalEntries
+                case 9:
+                    self.databaseJournalEntriesSection9 = dataBaseJournalEntries
+                case 10:
+                    self.databaseJournalEntriesSection10 = dataBaseJournalEntries
+                case 11:
+                    self.databaseJournalEntriesSection11 = dataBaseJournalEntries
+                case 12:
+                    self.databaseJournalEntriesSection12 = dataBaseJournalEntries
+                default:
+                    break
+                }
+            }
             // 決算整理仕訳
             self.objectsss = self.model.getJournalAdjustingEntry(yearMonth: nil)
         }
@@ -120,7 +212,74 @@ final class JournalsPresenter: JournalsPresenterInput {
     func objects(forRow row: Int) -> DataBaseJournalEntry {
         objects[row]
     }
-    
+  
+    // 通常仕訳　月次残高
+    func numberOfDatabaseJournalEntries(forSection: Int) -> Int {
+        switch forSection {
+        case 0:
+            return databaseJournalEntriesSection0?.count ?? 0
+        case 1:
+            return databaseJournalEntriesSection1?.count ?? 0
+        case 2:
+            return databaseJournalEntriesSection2?.count ?? 0
+        case 3:
+            return databaseJournalEntriesSection3?.count ?? 0
+        case 4:
+            return databaseJournalEntriesSection4?.count ?? 0
+        case 5:
+            return databaseJournalEntriesSection5?.count ?? 0
+        case 6:
+            return databaseJournalEntriesSection6?.count ?? 0
+        case 7:
+            return databaseJournalEntriesSection7?.count ?? 0
+        case 8:
+            return databaseJournalEntriesSection8?.count ?? 0
+        case 9:
+            return databaseJournalEntriesSection9?.count ?? 0
+        case 10:
+            return databaseJournalEntriesSection10?.count ?? 0
+        case 11:
+            return databaseJournalEntriesSection11?.count ?? 0
+        case 12:
+            return databaseJournalEntriesSection12?.count ?? 0
+        default:
+            return 0
+        }
+    }
+    // 通常仕訳　月次残高
+    func databaseJournalEntries(forSection: Int, forRow row: Int) -> DataBaseJournalEntry? {
+        switch forSection {
+        case 0:
+            return databaseJournalEntriesSection0?[row]
+        case 1:
+            return databaseJournalEntriesSection1?[row]
+        case 2:
+            return databaseJournalEntriesSection2?[row]
+        case 3:
+            return databaseJournalEntriesSection3?[row]
+        case 4:
+            return databaseJournalEntriesSection4?[row]
+        case 5:
+            return databaseJournalEntriesSection5?[row]
+        case 6:
+            return databaseJournalEntriesSection6?[row]
+        case 7:
+            return databaseJournalEntriesSection7?[row]
+        case 8:
+            return databaseJournalEntriesSection8?[row]
+        case 9:
+            return databaseJournalEntriesSection9?[row]
+        case 10:
+            return databaseJournalEntriesSection10?[row]
+        case 11:
+            return databaseJournalEntriesSection11?[row]
+        case 12:
+            return databaseJournalEntriesSection12?[row]
+        default:
+            return nil
+        }
+    }
+
     var numberOfobjectsss: Int {
         objectsss.count
     }
@@ -141,6 +300,44 @@ final class JournalsPresenter: JournalsPresenterInput {
                     DispatchQueue.main.async {
                         // 通常仕訳　全
                         self.objects = self.model.getJournalEntriesInJournals(yearMonth: nil)
+                        // 月別の月末日を取得 12ヶ月分
+                        let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+                        for i in 0..<lastDays.count {
+                            // 通常仕訳 月別に取得
+                            let dataBaseJournalEntries = self.model.getJournalEntriesInJournals(
+                                yearMonth: "\(lastDays[i].year)" + "/" + "\(String(format: "%02d", lastDays[i].month))"
+                            )
+                            switch i {
+                            case 0:
+                                self.databaseJournalEntriesSection0 = dataBaseJournalEntries
+                            case 1:
+                                self.databaseJournalEntriesSection1 = dataBaseJournalEntries
+                            case 2:
+                                self.databaseJournalEntriesSection2 = dataBaseJournalEntries
+                            case 3:
+                                self.databaseJournalEntriesSection3 = dataBaseJournalEntries
+                            case 4:
+                                self.databaseJournalEntriesSection4 = dataBaseJournalEntries
+                            case 5:
+                                self.databaseJournalEntriesSection5 = dataBaseJournalEntries
+                            case 6:
+                                self.databaseJournalEntriesSection6 = dataBaseJournalEntries
+                            case 7:
+                                self.databaseJournalEntriesSection7 = dataBaseJournalEntries
+                            case 8:
+                                self.databaseJournalEntriesSection8 = dataBaseJournalEntries
+                            case 9:
+                                self.databaseJournalEntriesSection9 = dataBaseJournalEntries
+                            case 10:
+                                self.databaseJournalEntriesSection10 = dataBaseJournalEntries
+                            case 11:
+                                self.databaseJournalEntriesSection11 = dataBaseJournalEntries
+                            case 12:
+                                self.databaseJournalEntriesSection12 = dataBaseJournalEntries
+                            default:
+                                break
+                            }
+                        }
                         // 決算整理仕訳
                         self.objectsss = self.model.getJournalAdjustingEntry(yearMonth: nil)
                         // 更新処理
@@ -186,9 +383,46 @@ final class JournalsPresenter: JournalsPresenterInput {
         DispatchQueue.main.async {
             // 通常仕訳　全
             self.objects = self.model.getJournalEntriesInJournals(yearMonth: nil)
+            // 月別の月末日を取得 12ヶ月分
+            let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+            for i in 0..<lastDays.count {
+                // 通常仕訳 月別に取得
+                let dataBaseJournalEntries = self.model.getJournalEntriesInJournals(
+                    yearMonth: "\(lastDays[i].year)" + "/" + "\(String(format: "%02d", lastDays[i].month))"
+                )
+                switch i {
+                case 0:
+                    self.databaseJournalEntriesSection0 = dataBaseJournalEntries
+                case 1:
+                    self.databaseJournalEntriesSection1 = dataBaseJournalEntries
+                case 2:
+                    self.databaseJournalEntriesSection2 = dataBaseJournalEntries
+                case 3:
+                    self.databaseJournalEntriesSection3 = dataBaseJournalEntries
+                case 4:
+                    self.databaseJournalEntriesSection4 = dataBaseJournalEntries
+                case 5:
+                    self.databaseJournalEntriesSection5 = dataBaseJournalEntries
+                case 6:
+                    self.databaseJournalEntriesSection6 = dataBaseJournalEntries
+                case 7:
+                    self.databaseJournalEntriesSection7 = dataBaseJournalEntries
+                case 8:
+                    self.databaseJournalEntriesSection8 = dataBaseJournalEntries
+                case 9:
+                    self.databaseJournalEntriesSection9 = dataBaseJournalEntries
+                case 10:
+                    self.databaseJournalEntriesSection10 = dataBaseJournalEntries
+                case 11:
+                    self.databaseJournalEntriesSection11 = dataBaseJournalEntries
+                case 12:
+                    self.databaseJournalEntriesSection12 = dataBaseJournalEntries
+                default:
+                    break
+                }
+            }
             // 決算整理仕訳
             self.objectsss = self.model.getJournalAdjustingEntry(yearMonth: nil)
-            
             // オートスクロール
             self.view.autoScroll(number: number, tappedIndexPathSection: tappedIndexPathSection)
         }
@@ -213,8 +447,10 @@ final class JournalsPresenter: JournalsPresenterInput {
         
         for indexPath in indexPaths {
             if indexPath.section == 0 {
-                // 仕訳の連番を保持
-                numbers.append(self.objects(forRow: indexPath.row).number)
+                if let object = self.databaseJournalEntries(forSection: indexPath.section, forRow: indexPath.row) {
+                    // 仕訳の連番を保持
+                    numbers.append(object.number)
+                }
             } else if indexPath.section == 1 {
                 // 決算整理仕訳の連番を保持
                 numbersAdjusting.append(self.objectsss(forRow: indexPath.row).number)
@@ -250,8 +486,10 @@ final class JournalsPresenter: JournalsPresenterInput {
         var numbersAdjusting: [Int] = []
         for indexPath in indexPaths {
             if indexPath.section == 0 {
-                // 仕訳の連番を保持
-                numbers.append(self.objects(forRow: indexPath.row).number)
+                if let object = self.databaseJournalEntries(forSection: indexPath.section, forRow: indexPath.row) {
+                    // 仕訳の連番を保持
+                    numbers.append(object.number)
+                }
             } else if indexPath.section == 1 {
                 // 決算整理仕訳の連番を保持
                 numbersAdjusting.append(self.objectsss(forRow: indexPath.row).number)
@@ -299,9 +537,46 @@ final class JournalsPresenter: JournalsPresenterInput {
             DispatchQueue.main.async {
                 // 通常仕訳　全
                 self.objects = self.model.getJournalEntriesInJournals(yearMonth: nil)
+                // 月別の月末日を取得 12ヶ月分
+                let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+                for i in 0..<lastDays.count {
+                    // 通常仕訳 月別に取得
+                    let dataBaseJournalEntries = self.model.getJournalEntriesInJournals(
+                        yearMonth: "\(lastDays[i].year)" + "/" + "\(String(format: "%02d", lastDays[i].month))"
+                    )
+                    switch i {
+                    case 0:
+                        self.databaseJournalEntriesSection0 = dataBaseJournalEntries
+                    case 1:
+                        self.databaseJournalEntriesSection1 = dataBaseJournalEntries
+                    case 2:
+                        self.databaseJournalEntriesSection2 = dataBaseJournalEntries
+                    case 3:
+                        self.databaseJournalEntriesSection3 = dataBaseJournalEntries
+                    case 4:
+                        self.databaseJournalEntriesSection4 = dataBaseJournalEntries
+                    case 5:
+                        self.databaseJournalEntriesSection5 = dataBaseJournalEntries
+                    case 6:
+                        self.databaseJournalEntriesSection6 = dataBaseJournalEntries
+                    case 7:
+                        self.databaseJournalEntriesSection7 = dataBaseJournalEntries
+                    case 8:
+                        self.databaseJournalEntriesSection8 = dataBaseJournalEntries
+                    case 9:
+                        self.databaseJournalEntriesSection9 = dataBaseJournalEntries
+                    case 10:
+                        self.databaseJournalEntriesSection10 = dataBaseJournalEntries
+                    case 11:
+                        self.databaseJournalEntriesSection11 = dataBaseJournalEntries
+                    case 12:
+                        self.databaseJournalEntriesSection12 = dataBaseJournalEntries
+                    default:
+                        break
+                    }
+                }
                 // 決算整理仕訳
                 self.objectsss = self.model.getJournalAdjustingEntry(yearMonth: nil)
-                
                 // view にリロードさせる
                 self.view.reloadData(primaryKeys: primaryKeys, primaryKeysAdjusting: primaryKeysAdjusting)
                 // インジケーターを終了
