@@ -3051,7 +3051,9 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             if let labelTitle = labelTitle {
                 labelTitle.text = ""
             }
-            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+            if let _ = datePicker {
+                createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+            }
         } else if journalEntryType == .JournalEntry { // 仕訳 タブバーの仕訳タブからの遷移の場合
             // タブバーの仕訳タブからの遷移の場合 表示させる
             compoundJournalEntrySegmentedControl.isHidden = false
