@@ -19,11 +19,13 @@ protocol JournalsPresenterInput {
     var numberOfobjects: Int { get }
     func numberOfDatabaseJournalEntries(forSection: Int) -> Int
     var numberOfobjectsss: Int { get }
-    
+    var numberOfobjectsOut: Int { get }
+
     func objects(forRow row: Int) -> DataBaseJournalEntry
     func databaseJournalEntries(forSection: Int, forRow row: Int) -> DataBaseJournalEntry?
     func objectsss(forRow row: Int) -> DataBaseAdjustingEntry
-    
+    func objectsOut(forRow row: Int) -> DataBaseJournalEntry?
+
     var filePath: URL? { get }
     
     func viewDidLoad()
@@ -32,7 +34,7 @@ protocol JournalsPresenterInput {
     func viewDidAppear()
     
     func refreshTable(isEditing: Bool)
-    func cellLongPressed(indexPath: IndexPath)
+    func cellLongPressed()
     func pdfBarButtonItemTapped(yearMonth: String?)
     func csvBarButtonItemTapped(yearMonth: String?)
     func deleteJournalEntry(number: Int) -> Bool
@@ -51,7 +53,7 @@ protocol JournalsPresenterOutput: AnyObject {
     func setupViewForViewWillAppear()
     func setupViewForViewWillDisappear()
     func setupViewForViewDidAppear()
-    func setupCellLongPressed(indexPath: IndexPath)
+    func setupCellLongPressed()
     func autoScroll(number: Int, tappedIndexPathSection: Int)
     func showPreview()
 }
@@ -84,7 +86,8 @@ final class JournalsPresenter: JournalsPresenterInput {
     
     // PDF,CSVファイルのパス
     var filePath: URL?
-    
+    let sectionOfJournalEntryOut = 14
+
     private weak var view: JournalsPresenterOutput!
     private var model: JournalsModelInput
     
@@ -216,32 +219,33 @@ final class JournalsPresenter: JournalsPresenterInput {
     // 通常仕訳　月次残高
     func numberOfDatabaseJournalEntries(forSection: Int) -> Int {
         switch forSection {
+            // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
         case 0:
-            return databaseJournalEntriesSection0?.count ?? 0
+            return databaseJournalEntriesSection0?.filter({ DateManager.shared.isInPeriod(date: $0.date) }).count ?? 0
         case 1:
-            return databaseJournalEntriesSection1?.count ?? 0
+            return databaseJournalEntriesSection1?.filter({ DateManager.shared.isInPeriod(date: $0.date) }).count ?? 0
         case 2:
-            return databaseJournalEntriesSection2?.count ?? 0
+            return databaseJournalEntriesSection2?.filter({ DateManager.shared.isInPeriod(date: $0.date) }).count ?? 0
         case 3:
-            return databaseJournalEntriesSection3?.count ?? 0
+            return databaseJournalEntriesSection3?.filter({ DateManager.shared.isInPeriod(date: $0.date) }).count ?? 0
         case 4:
-            return databaseJournalEntriesSection4?.count ?? 0
+            return databaseJournalEntriesSection4?.filter({ DateManager.shared.isInPeriod(date: $0.date) }).count ?? 0
         case 5:
-            return databaseJournalEntriesSection5?.count ?? 0
+            return databaseJournalEntriesSection5?.filter({ DateManager.shared.isInPeriod(date: $0.date) }).count ?? 0
         case 6:
-            return databaseJournalEntriesSection6?.count ?? 0
+            return databaseJournalEntriesSection6?.filter({ DateManager.shared.isInPeriod(date: $0.date) }).count ?? 0
         case 7:
-            return databaseJournalEntriesSection7?.count ?? 0
+            return databaseJournalEntriesSection7?.filter({ DateManager.shared.isInPeriod(date: $0.date) }).count ?? 0
         case 8:
-            return databaseJournalEntriesSection8?.count ?? 0
+            return databaseJournalEntriesSection8?.filter({ DateManager.shared.isInPeriod(date: $0.date) }).count ?? 0
         case 9:
-            return databaseJournalEntriesSection9?.count ?? 0
+            return databaseJournalEntriesSection9?.filter({ DateManager.shared.isInPeriod(date: $0.date) }).count ?? 0
         case 10:
-            return databaseJournalEntriesSection10?.count ?? 0
+            return databaseJournalEntriesSection10?.filter({ DateManager.shared.isInPeriod(date: $0.date) }).count ?? 0
         case 11:
-            return databaseJournalEntriesSection11?.count ?? 0
+            return databaseJournalEntriesSection11?.filter({ DateManager.shared.isInPeriod(date: $0.date) }).count ?? 0
         case 12:
-            return databaseJournalEntriesSection12?.count ?? 0
+            return databaseJournalEntriesSection12?.filter({ DateManager.shared.isInPeriod(date: $0.date) }).count ?? 0
         default:
             return 0
         }
@@ -249,32 +253,33 @@ final class JournalsPresenter: JournalsPresenterInput {
     // 通常仕訳　月次残高
     func databaseJournalEntries(forSection: Int, forRow row: Int) -> DataBaseJournalEntry? {
         switch forSection {
+            // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
         case 0:
-            return databaseJournalEntriesSection0?[row]
+            return databaseJournalEntriesSection0?.filter({ DateManager.shared.isInPeriod(date: $0.date) })[row]
         case 1:
-            return databaseJournalEntriesSection1?[row]
+            return databaseJournalEntriesSection1?.filter({ DateManager.shared.isInPeriod(date: $0.date) })[row]
         case 2:
-            return databaseJournalEntriesSection2?[row]
+            return databaseJournalEntriesSection2?.filter({ DateManager.shared.isInPeriod(date: $0.date) })[row]
         case 3:
-            return databaseJournalEntriesSection3?[row]
+            return databaseJournalEntriesSection3?.filter({ DateManager.shared.isInPeriod(date: $0.date) })[row]
         case 4:
-            return databaseJournalEntriesSection4?[row]
+            return databaseJournalEntriesSection4?.filter({ DateManager.shared.isInPeriod(date: $0.date) })[row]
         case 5:
-            return databaseJournalEntriesSection5?[row]
+            return databaseJournalEntriesSection5?.filter({ DateManager.shared.isInPeriod(date: $0.date) })[row]
         case 6:
-            return databaseJournalEntriesSection6?[row]
+            return databaseJournalEntriesSection6?.filter({ DateManager.shared.isInPeriod(date: $0.date) })[row]
         case 7:
-            return databaseJournalEntriesSection7?[row]
+            return databaseJournalEntriesSection7?.filter({ DateManager.shared.isInPeriod(date: $0.date) })[row]
         case 8:
-            return databaseJournalEntriesSection8?[row]
+            return databaseJournalEntriesSection8?.filter({ DateManager.shared.isInPeriod(date: $0.date) })[row]
         case 9:
-            return databaseJournalEntriesSection9?[row]
+            return databaseJournalEntriesSection9?.filter({ DateManager.shared.isInPeriod(date: $0.date) })[row]
         case 10:
-            return databaseJournalEntriesSection10?[row]
+            return databaseJournalEntriesSection10?.filter({ DateManager.shared.isInPeriod(date: $0.date) })[row]
         case 11:
-            return databaseJournalEntriesSection11?[row]
+            return databaseJournalEntriesSection11?.filter({ DateManager.shared.isInPeriod(date: $0.date) })[row]
         case 12:
-            return databaseJournalEntriesSection12?[row]
+            return databaseJournalEntriesSection12?.filter({ DateManager.shared.isInPeriod(date: $0.date) })[row]
         default:
             return nil
         }
@@ -286,6 +291,16 @@ final class JournalsPresenter: JournalsPresenterInput {
     
     func objectsss(forRow row: Int) -> DataBaseAdjustingEntry {
         objectsss[row]
+    }
+    // 会計期間外の仕訳
+    var numberOfobjectsOut: Int {
+        // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
+        objects.filter({ !DateManager.shared.isInPeriod(date: $0.date) }).count
+    }
+    // 会計期間外の仕訳
+    func objectsOut(forRow row: Int) -> DataBaseJournalEntry? {
+        // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
+        objects.filter({ !DateManager.shared.isInPeriod(date: $0.date) })[safe: row]
     }
     
     func refreshTable(isEditing: Bool) {
@@ -355,9 +370,9 @@ final class JournalsPresenter: JournalsPresenterInput {
         }
     }
     
-    func cellLongPressed(indexPath: IndexPath) {
+    func cellLongPressed() {
         
-        view.setupCellLongPressed(indexPath: indexPath)
+        view.setupCellLongPressed()
     }
     // 印刷機能
     func pdfBarButtonItemTapped(yearMonth: String? = nil) {
@@ -383,6 +398,8 @@ final class JournalsPresenter: JournalsPresenterInput {
         DispatchQueue.main.async {
             // 通常仕訳　全
             self.objects = self.model.getJournalEntriesInJournals(yearMonth: nil)
+            // 会計期間外の仕訳
+            var fixedTappedIndexPathSection: Int = tappedIndexPathSection
             // 月別の月末日を取得 12ヶ月分
             let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
             for i in 0..<lastDays.count {
@@ -393,38 +410,100 @@ final class JournalsPresenter: JournalsPresenterInput {
                 switch i {
                 case 0:
                     self.databaseJournalEntriesSection0 = dataBaseJournalEntries
+                    // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    fixedTappedIndexPathSection = dataBaseJournalEntries.filter({ DateManager.shared.isInPeriod(date: $0.date) })
+                        .filter({ number == $0.number })
+                        .isEmpty ? fixedTappedIndexPathSection : 0
                 case 1:
                     self.databaseJournalEntriesSection1 = dataBaseJournalEntries
+                    // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    fixedTappedIndexPathSection = dataBaseJournalEntries.filter({ DateManager.shared.isInPeriod(date: $0.date) })
+                        .filter({ number == $0.number })
+                        .isEmpty ? fixedTappedIndexPathSection : 1
                 case 2:
                     self.databaseJournalEntriesSection2 = dataBaseJournalEntries
+                    // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    fixedTappedIndexPathSection = dataBaseJournalEntries.filter({ DateManager.shared.isInPeriod(date: $0.date) })
+                        .filter({ number == $0.number })
+                        .isEmpty ? fixedTappedIndexPathSection : 2
                 case 3:
                     self.databaseJournalEntriesSection3 = dataBaseJournalEntries
+                    // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    fixedTappedIndexPathSection = dataBaseJournalEntries.filter({ DateManager.shared.isInPeriod(date: $0.date) })
+                        .filter({ number == $0.number })
+                        .isEmpty ? fixedTappedIndexPathSection : 3
                 case 4:
                     self.databaseJournalEntriesSection4 = dataBaseJournalEntries
+                    // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    fixedTappedIndexPathSection = dataBaseJournalEntries.filter({ DateManager.shared.isInPeriod(date: $0.date) })
+                        .filter({ number == $0.number })
+                        .isEmpty ? fixedTappedIndexPathSection : 4
                 case 5:
                     self.databaseJournalEntriesSection5 = dataBaseJournalEntries
+                    // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    fixedTappedIndexPathSection = dataBaseJournalEntries.filter({ DateManager.shared.isInPeriod(date: $0.date) })
+                        .filter({ number == $0.number })
+                        .isEmpty ? fixedTappedIndexPathSection : 5
                 case 6:
                     self.databaseJournalEntriesSection6 = dataBaseJournalEntries
+                    // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    fixedTappedIndexPathSection = dataBaseJournalEntries.filter({ DateManager.shared.isInPeriod(date: $0.date) })
+                        .filter({ number == $0.number })
+                        .isEmpty ? fixedTappedIndexPathSection : 6
                 case 7:
                     self.databaseJournalEntriesSection7 = dataBaseJournalEntries
+                    // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    fixedTappedIndexPathSection = dataBaseJournalEntries.filter({ DateManager.shared.isInPeriod(date: $0.date) })
+                        .filter({ number == $0.number })
+                        .isEmpty ? fixedTappedIndexPathSection : 7
                 case 8:
                     self.databaseJournalEntriesSection8 = dataBaseJournalEntries
+                    // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    fixedTappedIndexPathSection = dataBaseJournalEntries.filter({ DateManager.shared.isInPeriod(date: $0.date) })
+                        .filter({ number == $0.number })
+                        .isEmpty ? fixedTappedIndexPathSection : 8
                 case 9:
                     self.databaseJournalEntriesSection9 = dataBaseJournalEntries
+                    // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    fixedTappedIndexPathSection = dataBaseJournalEntries.filter({ DateManager.shared.isInPeriod(date: $0.date) })
+                        .filter({ number == $0.number })
+                        .isEmpty ? fixedTappedIndexPathSection : 9
                 case 10:
                     self.databaseJournalEntriesSection10 = dataBaseJournalEntries
+                    // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    fixedTappedIndexPathSection = dataBaseJournalEntries.filter({ DateManager.shared.isInPeriod(date: $0.date) })
+                        .filter({ number == $0.number })
+                        .isEmpty ? fixedTappedIndexPathSection : 10
                 case 11:
                     self.databaseJournalEntriesSection11 = dataBaseJournalEntries
+                    // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    fixedTappedIndexPathSection = dataBaseJournalEntries.filter({ DateManager.shared.isInPeriod(date: $0.date) })
+                        .filter({ number == $0.number })
+                        .isEmpty ? fixedTappedIndexPathSection : 11
                 case 12:
                     self.databaseJournalEntriesSection12 = dataBaseJournalEntries
+                    // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    fixedTappedIndexPathSection = dataBaseJournalEntries.filter({ DateManager.shared.isInPeriod(date: $0.date) })
+                        .filter({ number == $0.number })
+                        .isEmpty ? fixedTappedIndexPathSection : 12
                 default:
                     break
                 }
             }
             // 決算整理仕訳
             self.objectsss = self.model.getJournalAdjustingEntry(yearMonth: nil)
+            // 会計期間外の仕訳 から　通常仕訳　へ変わった場合に対応する。その逆もしかり。
+            if tappedIndexPathSection != 13 { // 決算整理仕訳　以外
+                // 会計期間外の仕訳　仕訳の年度が、帳簿の年度とあっているかを判定する
+                fixedTappedIndexPathSection = self.objects.filter({ !DateManager.shared.isInPeriod(date: $0.date) })
+                    .filter({ number == $0.number })
+                    .isEmpty ? fixedTappedIndexPathSection : self.sectionOfJournalEntryOut
+            } else {
+                // 決算整理仕訳
+                fixedTappedIndexPathSection = tappedIndexPathSection
+            }
             // オートスクロール
-            self.view.autoScroll(number: number, tappedIndexPathSection: tappedIndexPathSection)
+            self.view.autoScroll(number: number, tappedIndexPathSection: fixedTappedIndexPathSection)
         }
     }
     // 削除　仕訳
@@ -446,14 +525,19 @@ final class JournalsPresenter: JournalsPresenterInput {
         var numbersAdjusting: [Int] = []
         
         for indexPath in indexPaths {
-            if indexPath.section == 0 {
+            if indexPath.section != 13 && indexPath.section != sectionOfJournalEntryOut && indexPath.section != 15 {
                 if let object = self.databaseJournalEntries(forSection: indexPath.section, forRow: indexPath.row) {
                     // 仕訳の連番を保持
                     numbers.append(object.number)
                 }
-            } else if indexPath.section == 1 {
+            } else if indexPath.section == 13 {
                 // 決算整理仕訳の連番を保持
                 numbersAdjusting.append(self.objectsss(forRow: indexPath.row).number)
+            } else if indexPath.section == self.sectionOfJournalEntryOut {
+                if let object = self.objectsOut(forRow: indexPath.row) {
+                    // 会計期間外の仕訳の連番を保持
+                    numbers.append(object.number)
+                }
             } else {
                 // 空白行
             }
@@ -485,14 +569,19 @@ final class JournalsPresenter: JournalsPresenterInput {
         var numbers: [Int] = []
         var numbersAdjusting: [Int] = []
         for indexPath in indexPaths {
-            if indexPath.section == 0 {
+            if indexPath.section != 13 && indexPath.section != sectionOfJournalEntryOut && indexPath.section != 15 {
                 if let object = self.databaseJournalEntries(forSection: indexPath.section, forRow: indexPath.row) {
                     // 仕訳の連番を保持
                     numbers.append(object.number)
                 }
-            } else if indexPath.section == 1 {
+            } else if indexPath.section == 13 {
                 // 決算整理仕訳の連番を保持
                 numbersAdjusting.append(self.objectsss(forRow: indexPath.row).number)
+            } else if indexPath.section == self.sectionOfJournalEntryOut {
+                if let object = self.objectsOut(forRow: indexPath.row) {
+                    // 会計期間外の仕訳の連番を保持
+                    numbers.append(object.number)
+                }
             } else {
                 // 空白行
             }
