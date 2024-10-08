@@ -14,6 +14,16 @@ protocol TableViewCellDelegate {
 }
 // 勘定科目詳細セル　大区分　中区分 勘定科目名
 class SettingAccountDetailTableViewCell: UITableViewCell {
+    // フィードバック
+    private let feedbackGeneratorMedium: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     
     @IBOutlet var accountDetailBigTextField: AccountDetailPickerTextField!
     @IBOutlet var accountDetailAccountTextField: UITextField!
@@ -28,7 +38,9 @@ class SettingAccountDetailTableViewCell: UITableViewCell {
             accountDetailBigTextField.delegate = self
             accountDetailBigTextField.inputAssistantItem.leadingBarButtonGroups.removeAll()
             // TextFieldに入力された値に反応
-            accountDetailBigTextField.addTarget(self, action: #selector(textFieldEditingDidEnd), for: UIControl.Event.editingDidEnd)
+            // 入力開始
+            accountDetailBigTextField.addTarget(self, action: #selector(textFieldEditingDidBegin),for: UIControl.Event.editingDidBegin)
+            // 入力終了
             accountDetailBigTextField.addTarget(self, action: #selector(textFieldEditingDidEnd), for: UIControl.Event.editingDidEnd)
         }
         // 勘定科目名
@@ -82,11 +94,19 @@ class SettingAccountDetailTableViewCell: UITableViewCell {
     // Buttonを押下　選択した値を仕訳画面のTextFieldに表示する
     @objc
     func done() {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         self.endEditing(true)
     }
     
     @objc
     func cancel() {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // 勘定科目名
         if let accountDetailAccountTextField = accountDetailAccountTextField {
             accountDetailAccountTextField.text = ""

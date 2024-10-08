@@ -209,13 +209,7 @@ class CategoryListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // 編集モードの場合
-        if tableView.isEditing {
-            return 43.5
-        } else {
-            // 勘定科目の有効無効
-            return presenter.objects(forRow: indexPath.row, section: indexPath.section).switching ? 43.5 : 0
-        }
+        43.5
     }
     // セルを生成して返却するメソッド
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
