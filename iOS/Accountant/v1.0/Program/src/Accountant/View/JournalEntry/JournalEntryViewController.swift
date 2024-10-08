@@ -3022,6 +3022,55 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                 journalEntryType = .CompoundJournalEntry // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
             }
         }
+        // 仕訳画面の勘定科目を更新する
+        if Constant.needToReloadCategory {
+            // 取引要素　借方 貸方　クリア
+            debit = AccountTitleAmount()
+            credit = AccountTitleAmount()
+            // 仕訳タイプ判定
+            if journalEntryType == .CompoundJournalEntry { // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+                creditElements = []
+                debitElements = []
+            }
+            // 勘定科目
+            if let textFieldCategoryDebit = textFieldCategoryDebit {
+                textFieldCategoryDebit.updateUI()
+            }
+            if let textFieldCategoryCredit = textFieldCategoryCredit {
+                textFieldCategoryCredit.updateUI()
+            }
+            // 仕訳タイプ判定
+            if journalEntryType == .CompoundJournalEntry { // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
+                // 勘定科目
+                if let textFieldCategoryDebit1 = textFieldCategoryDebit1 {
+                    textFieldCategoryDebit1.updateUI()
+                }
+                if let textFieldCategoryCredit1 = textFieldCategoryCredit1 {
+                    textFieldCategoryCredit1.updateUI()
+                }
+                if let textFieldCategoryDebit2 = textFieldCategoryDebit2 {
+                    textFieldCategoryDebit2.updateUI()
+                }
+                if let textFieldCategoryCredit2 = textFieldCategoryCredit2 {
+                    textFieldCategoryCredit2.updateUI()
+                }
+                if let textFieldCategoryDebit3 = textFieldCategoryDebit3 {
+                    textFieldCategoryDebit3.updateUI()
+                }
+                if let textFieldCategoryCredit3 = textFieldCategoryCredit3 {
+                    textFieldCategoryCredit3.updateUI()
+                }
+                if let textFieldCategoryDebit4 = textFieldCategoryDebit4 {
+                    textFieldCategoryDebit4.updateUI()
+                }
+                if let textFieldCategoryCredit4 = textFieldCategoryCredit4 {
+                    textFieldCategoryCredit4.updateUI()
+                }
+            }
+            self.view.endEditing(true)
+            // 仕訳画面の勘定科目を更新する　true: リロードする
+            Constant.needToReloadCategory = false
+        }
         // 仕訳タイプ判定
         if journalEntryType == .CompoundJournalEntry { // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
             // タブバーの仕訳タブからの遷移の場合 表示させる
