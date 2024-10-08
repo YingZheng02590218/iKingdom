@@ -25,7 +25,7 @@ class DataBaseManagerSettingsPeriod {
     func addSettingsPeriod() {
         // (2)書き込みトランザクション内でデータを追加する
         // オブジェクトを作成
-        let dataBaseSettingsPeriod = DataBaseSettingsPeriod(theDayOfReckoning: "03/31") // 仕訳帳
+        let dataBaseSettingsPeriod = DataBaseSettingsPeriod(theDayOfReckoning: TheDayOfReckoning.soloProprietor.rawValue)
         do {
             try DataBaseManager.realm.write {
                 let number = dataBaseSettingsPeriod.save() // 自動採番
@@ -170,6 +170,12 @@ class DataBaseManagerSettingsPeriod {
                 theDayOfReckoning = String("\(dateChanged)/" + currentTheDayOfReckoning.suffix(2)) // 末尾2文字
             }
         }
+        // 更新　決算日
+        updateTheDayOfReckoning(theDayOfReckoning: theDayOfReckoning)
+    }
+    
+    // 更新　決算日
+    func updateTheDayOfReckoning(theDayOfReckoning: String) {
         do {
             // (2)書き込みトランザクション内でデータを更新する
             try DataBaseManager.realm.write {
