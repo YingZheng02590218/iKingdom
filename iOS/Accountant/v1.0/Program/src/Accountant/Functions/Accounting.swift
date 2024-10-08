@@ -280,3 +280,9 @@ public enum CapitalAccountType: String, CaseIterable, Hashable {
     // 個人事業主：元入金勘定
     case capital = "元入金"
 }
+
+// MARK: 決算日　デフォルト
+public enum TheDayOfReckoning: String, CaseIterable, Hashable {
+    case corporation = "03/31" // 法人
+    case soloProprietor = "12/31" // 個人事業主
+}
