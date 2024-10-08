@@ -71,11 +71,19 @@ class SplashModel: SplashModelInput {
                     return
                 }
                 // 端末のアプリバージョンと App Store のアプリバージョンを比較
-                print(appVersion, storeVersion, appVersion < storeVersion)
-                if appVersion < storeVersion {
+                // if appVersion < storeVersion { // NOTE: 文字列比較　< の場合、String型で比較しているので、5.10.0 < 5.9.0 がtrueになってしまう（falseが正しい）
+                guard let currentVersion = AppVersion(appVersion),
+                      let requiredVersion = AppVersion(storeVersion) else {
+                    completionHandler(false)
+                    return
+                }
+                print(appVersion, storeVersion, "文字列比較", appVersion < storeVersion, "数値比較", currentVersion < requiredVersion)
+                if currentVersion < requiredVersion {
+                    print("requiredVersionの方が大きい")
                     // appVersion と storeVersion が異なっている時に実行したい処理
                     completionHandler(true)
                 } else {
+                    print("currentVersionの方が大きい")
                     completionHandler(false)
                 }
             } catch let error {

@@ -41,6 +41,8 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     //    let edged = false
     
     fileprivate let refreshControl = UIRefreshControl()
+    // 会計期間外の仕訳
+    let sectionOfJournalEntryOut = 14
     // まとめて編集機能
     var indexPaths: [IndexPath] = []
     var dBJournalEntry: JournalEntryData?
@@ -424,18 +426,18 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                 
                 if let indexPath = indexPath {
                     switch indexPath.section {
-                    case 14:
+                    case 15:
                         // 空白行
                         print("空白行を長押し")
                     default:
                         // 通常仕訳
                         // 決算整理仕訳
                         // 長押しされた場合の処理
-                        print("長押しされたcellのindexPath:\(String(describing: indexPath.row))")
+                        print("長押しされたcellのindexPath:\(String(describing: indexPath))")
                         // ロングタップされたセルの位置をフィールドで保持する
                         self.tappedIndexPath = indexPath
                         tableView.deselectRow(at: indexPath, animated: true)
-                        presenter.cellLongPressed(indexPath: indexPath)
+                        presenter.cellLongPressed()
                     }
                 }
             }
@@ -454,7 +456,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                     // // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
                     // let objects = dataBaseManager.getJournalEntry(section: indexPath.section) // 何月のセクションに表示するセルかを判別するため引数で渡す
                     // print(objects)
-                    if indexPath.section != 13 && indexPath.section != 14 {
+                    if indexPath.section != 13 && indexPath.section != self.sectionOfJournalEntryOut && indexPath.section != 15 {
                         if let number = self.presenter.databaseJournalEntries(forSection: indexPath.section, forRow: indexPath.row)?.number {
                             // 仕訳データを削除
                             let result = self.presenter.deleteJournalEntry(number: number)
@@ -482,6 +484,19 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                                 AnalyticsParameterContentType: Constant.JOURNALS,
                                 AnalyticsParameterItemID: Constant.DELETEADJUSTINGJOURNALENTRY
                             ])
+                        }
+                    } else if indexPath.section == self.sectionOfJournalEntryOut {
+                        if let number = self.presenter.objectsOut(forRow: indexPath.row)?.number {
+                            // 仕訳データを削除
+                            let result = self.presenter.deleteJournalEntry(number: number)
+                            if result == true {
+                                self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
+                                // イベントログ
+                                Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                                    AnalyticsParameterContentType: Constant.JOURNALS,
+                                    AnalyticsParameterItemID: Constant.DELETEJOURNALENTRY
+                                ])
+                            }
                         }
                     }
                     // ボタンを更新
@@ -543,7 +558,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                 if let tappedIndexPath = tappedIndexPath { // nil:ロングタップではない
                     
                     controller.tappedIndexPath = tappedIndexPath // アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
-                    if tappedIndexPath.section != 13 && tappedIndexPath.section != 14 {
+                    if tappedIndexPath.section != 13 && tappedIndexPath.section != sectionOfJournalEntryOut && tappedIndexPath.section != 15 {
                         // 通常仕訳
                         controller.journalEntryType = .JournalEntriesFixing // 仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
                         controller.primaryKey = presenter.databaseJournalEntries(forSection: tappedIndexPath.section, forRow: tappedIndexPath.row)?.number ?? 0
@@ -551,6 +566,10 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                         // 決算整理仕訳
                         controller.journalEntryType = .AdjustingEntriesFixing // 決算整理仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
                         controller.primaryKey = presenter.objectsss(forRow: tappedIndexPath.row).number
+                    } else if tappedIndexPath.section == sectionOfJournalEntryOut {
+                        // 会計期間外の仕訳
+                        controller.journalEntryType = .JournalEntriesFixing // 仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
+                        controller.primaryKey = presenter.objectsOut(forRow: tappedIndexPath.row)?.number ?? 0
                     }
                     self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする
                 }
@@ -570,8 +589,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
     
     // セクションの数を設定する
     func numberOfSections(in tableView: UITableView) -> Int {
-        // 通常仕訳(13ヶ月分)　決算整理仕訳 空白行
-        return 15
+        // 通常仕訳(13ヶ月分)　決算整理仕訳 会計期間外の仕訳　空白行
+        return 16
     }
     
     // セクションヘッダーの高さ
@@ -605,7 +624,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         case 12:
             // 通常仕訳 期末
             return presenter.numberOfDatabaseJournalEntries(forSection: 12) == 0 ? 0 : 20
-        case 14:
+        case 15:
+            // 空白行
             return 0
         default:
             return 0
@@ -672,6 +692,9 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         case 13:
             // 決算整理仕訳
             return presenter.numberOfobjectsss
+        case sectionOfJournalEntryOut:
+            // 会計期間外の仕訳
+            return presenter.numberOfobjectsOut
         default:
             // 空白行
             return 5 // 空白行を表示するため+5行を追加
@@ -683,7 +706,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        if indexPath.section != 13 && indexPath.section != 14 {
+        if indexPath.section != 13 && indexPath.section != sectionOfJournalEntryOut && indexPath.section != 15 {
             // 通常仕訳
             print("通常仕訳", indexPath)
             if let databaseJournalEntry = presenter.databaseJournalEntries(forSection: indexPath.section, forRow: indexPath.row) {
@@ -800,6 +823,62 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.setTextColor(isInPeriod: DateManager.shared.isInPeriod(date: presenter.objectsss(forRow: indexPath.row).date))
             // セルの選択を許可
             cell.selectionStyle = .default
+
+        } else if indexPath.section == sectionOfJournalEntryOut {
+            // 会計期間外の仕訳
+            // 通常仕訳
+            print("会計期間外の仕訳 通常仕訳", indexPath)
+            if let databaseJournalEntry = presenter.objectsOut(forRow: indexPath.row) {
+                // ② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
+                /// 日付
+                let date = databaseJournalEntry.date
+#if DEBUG
+                cell.listDateSecondLabel.text = date
+                cell.listDateSecondLabel.isHidden = false
+#else
+                cell.listDateSecondLabel.isHidden = true
+#endif
+                if let date = DateManager.shared.dateFormatter.date(from: date) {
+                    // 先頭行は月を表示
+                    cell.listDateMonthLabel.text = "\(date.month)"
+                    // 日付の9文字目にある日の十の位を抽出
+                    cell.listDateLabel.text = "\(date.day)"
+                    cell.listDateLabel.textAlignment = NSTextAlignment.right
+                }
+                /// 借方勘定
+                cell.listSummaryDebitLabel.text = " (\(databaseJournalEntry.debit_category))"
+                cell.listSummaryDebitLabel.textAlignment = NSTextAlignment.left
+                /// 貸方勘定
+                cell.listSummaryCreditLabel.text = "(\(databaseJournalEntry.credit_category)) "
+                cell.listSummaryCreditLabel.textAlignment = NSTextAlignment.right
+                /// 小書き
+                cell.listSummaryLabel.text = "\(databaseJournalEntry.smallWritting) "
+                cell.listSummaryLabel.textAlignment = NSTextAlignment.left
+                /// 丁数　借方
+                if databaseJournalEntry.debit_category == "損益" { // 損益勘定の場合
+                    cell.listNumberLeftLabel.text = ""
+                } else {
+                    print(databaseJournalEntry.debit_category)
+                    let numberOfAccountLeft = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: "\(databaseJournalEntry.debit_category)")  // 丁数を取得
+                    cell.listNumberLeftLabel.text = numberOfAccountLeft.description                                // 丁数　借方
+                }
+                /// 丁数　貸方
+                if databaseJournalEntry.credit_category == "損益" { // 損益勘定の場合
+                    cell.listNumberRightLabel.text = ""
+                } else {
+                    print(databaseJournalEntry.credit_category)
+                    let numberOfAccountRight = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: "\(databaseJournalEntry.credit_category)")    // 丁数を取得
+                    cell.listNumberRightLabel.text = numberOfAccountRight.description                                   // 丁数　貸方
+                }
+                cell.listDebitLabel.text = StringUtility.shared.addComma(string: databaseJournalEntry.debit_amount.description) // 借方金額
+                cell.listCreditLabel.text = StringUtility.shared.addComma(string: databaseJournalEntry.credit_amount.description) // 貸方金額
+                
+                // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
+                cell.setTextColor(isInPeriod: DateManager.shared.isInPeriod(date: databaseJournalEntry.date))
+                // セルの選択を許可
+                cell.selectionStyle = .default
+            }
+
         } else {
             // 空白行
             print("空白行", indexPath)
@@ -831,7 +910,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         if !tableView.isEditing {
             if indexPath.section == tappedIndexPathSection {
                 
-                if tappedIndexPathSection != 13 && tappedIndexPathSection != 14 {
+                if tappedIndexPathSection != 13 && tappedIndexPathSection != sectionOfJournalEntryOut && tappedIndexPathSection != 15 {
                     // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
                     if numberOfEdittedJournalEntry == presenter.databaseJournalEntries(forSection: indexPath.section, forRow: indexPath.row)?.number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
                         cell.setHighlighted(true, animated: true)
@@ -843,11 +922,17 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                         cell.setHighlighted(true, animated: true)
                         indexPathForAutoScroll = indexPath
                     }
+                } else if tappedIndexPathSection == sectionOfJournalEntryOut {
+                    // 会計期間外の仕訳
+                    if numberOfEdittedJournalEntry == presenter.objectsOut(forRow: indexPath.row)?.number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
+                        cell.setHighlighted(true, animated: true)
+                        indexPathForAutoScroll = indexPath
+                    }
                 }
             }
         }
         // まとめて編集　編集した仕訳のセルをハイライトとする
-        if indexPath.section != 13 && indexPath.section != 14 {
+        if indexPath.section != 13 && indexPath.section != sectionOfJournalEntryOut && indexPath.section != 15 {
             if let primaryKeys = primaryKeys {
                 for i in 0..<primaryKeys.count where primaryKeys[i] == presenter.databaseJournalEntries(forSection: indexPath.section, forRow: indexPath.row)?.number {
                     cell.setHighlighted(true, animated: true)
@@ -859,8 +944,15 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.setHighlighted(true, animated: true)
                 }
             }
+        } else if indexPath.section == sectionOfJournalEntryOut {
+            // 会計期間外の仕訳
+            if let primaryKeys = primaryKeys {
+                for i in 0..<primaryKeys.count where primaryKeys[i] == presenter.objectsOut(forRow: indexPath.row)?.number {
+                    cell.setHighlighted(true, animated: true)
+                }
+            }
         }
-        if indexPath.section != 14 {
+        if indexPath.section != 15 {
             // マイクロインタラクション アニメーション　セル 編集中
             cell.animateViewWobble(isActive: self.isEditing) // NOTE: tableView.isEditing の場合左へスワイプした場合も編集中と判定される
         }
@@ -959,7 +1051,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         switch indexPath.section {
             // 選択不可にしたい場合は"nil"を返す
-        case 14:
+        case 15:
             // 空白行
             return nil
         default:
@@ -970,7 +1062,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         switch indexPath.section {
             // 通常仕訳 決算整理仕訳
-        case 14:
+        case 15:
             // 空白行
             let configuration = UISwipeActionsConfiguration(actions: [])
             configuration.performsFirstActionWithFullSwipe = false
@@ -989,7 +1081,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 print("cellのindexPath:\(String(describing: indexPath.row))")
                 // セルの位置をフィールドで保持する
                 self.tappedIndexPath = indexPath
-                self.presenter.cellLongPressed(indexPath: indexPath)
+                self.presenter.cellLongPressed()
                 completionHandler(true) // 処理成功時はtrue/失敗時はfalseを設定する
             }
             actionEdit.backgroundColor = .accentDark
@@ -1047,7 +1139,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             self.tableView.setEditing(editing, animated: animated)
             self.tableView.indexPathsForVisibleRows?.forEach { indexPath in
                 if let cell = self.tableView.cellForRow(at: indexPath) as? JournalsTableViewCell {
-                    if indexPath.section != 14 {
+                    if indexPath.section != 15 {
                         // マイクロインタラクション アニメーション　セル 編集中
                         cell.animateViewWobble(isActive: editing)
                     }
@@ -1059,7 +1151,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
     // 編集モード時の左端のチェックマーク　仕訳まとめて編集、年度変更
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         switch indexPath.section {
-        case 14:
+        case 15:
             // 空白行
             return false
         default:
@@ -1121,7 +1213,7 @@ extension JournalsViewController: JournalsPresenterOutput {
         self.refreshControl.endRefreshing()
     }
     
-    func setupCellLongPressed(indexPath: IndexPath) {
+    func setupCellLongPressed() {
         // 別の画面に遷移 仕訳画面
         performSegue(withIdentifier: "longTapped", sender: nil)
     }
