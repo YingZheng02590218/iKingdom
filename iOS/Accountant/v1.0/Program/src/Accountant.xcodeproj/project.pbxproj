@@ -152,6 +152,8 @@
 		F91878C82581462600D2E793 /* DataBaseManagerSettingsOperating.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91878C72581462600D2E793 /* DataBaseManagerSettingsOperating.swift */; };
 		F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */; };
 		F919603224AC53890084A18B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919603124AC53890084A18B /* File.swift */; };
+		F9197E012CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E002CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift */; };
+		F9197E022CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E002CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift */; };
 		F91C2B7E2BF212C200ABBFD6 /* LucaPacioliRough.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */; };
 		F91C2B7F2BF212C300ABBFD6 /* LucaPacioliRough.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */; };
 		F91C2B812BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B802BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy */; };
@@ -921,6 +923,7 @@
 		F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F919603124AC53890084A18B /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		F919603324AC679E0084A18B /* File2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File2.swift; sourceTree = "<group>"; };
+		F9197E002CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CsvFileMakerMonthlyTrendsBalanceSheet.swift; sourceTree = "<group>"; };
 		F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LucaPacioliRough.ttf; sourceTree = "<group>"; };
 		F91C2B802BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		F91F6E2C248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerAccountingBooksShelf.swift; sourceTree = "<group>"; };
@@ -1358,6 +1361,7 @@
 				F9002BFB2B5E6F930011FE9C /* CsvFileMaker.swift */,
 				F946BCEC2B624B5F00BCAAD6 /* CsvFileMakerAccount.swift */,
 				F946BCEF2B625D4400BCAAD6 /* CsvFileMakerPLAccount.swift */,
+				F9197E002CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift */,
 			);
 			path = CSV;
 			sourceTree = "<group>";
@@ -3008,6 +3012,7 @@
 				F982898A2973E8B900F8F1B8 /* OpeningBalanceModel.swift in Sources */,
 				F9DB32FC297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */,
 				F9B63F712C19A0B300380695 /* UserData.swift in Sources */,
+				F9197E012CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift in Sources */,
 				F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */,
 				F90742D62A0DC3B400480551 /* PaciolistWidget.intentdefinition in Sources */,
 				F9BDCBBA27A96A8E00BD8770 /* JournalsPresenter.swift in Sources */,
@@ -3250,6 +3255,7 @@
 				F9EC668F27B90BC60003FBB6 /* DataBaseSettingsOperating.swift in Sources */,
 				F982898B2973E8B900F8F1B8 /* OpeningBalanceModel.swift in Sources */,
 				F9B63F722C19A0B300380695 /* UserData.swift in Sources */,
+				F9197E022CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift in Sources */,
 				F9DB32FD297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */,
 				F9EC669027B90BC60003FBB6 /* DataBaseTaxonomy.swift in Sources */,
 				F9EC669127B90BC60003FBB6 /* JournalsPresenter.swift in Sources */,
