@@ -154,6 +154,8 @@
 		F919603224AC53890084A18B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919603124AC53890084A18B /* File.swift */; };
 		F9197E012CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E002CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift */; };
 		F9197E022CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E002CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift */; };
+		F9197E042CB77C2900A78D2A /* CsvFileMakerMonthlyProfitAndLossStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E032CB77C2900A78D2A /* CsvFileMakerMonthlyProfitAndLossStatement.swift */; };
+		F9197E052CB77C2900A78D2A /* CsvFileMakerMonthlyProfitAndLossStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E032CB77C2900A78D2A /* CsvFileMakerMonthlyProfitAndLossStatement.swift */; };
 		F91C2B7E2BF212C200ABBFD6 /* LucaPacioliRough.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */; };
 		F91C2B7F2BF212C300ABBFD6 /* LucaPacioliRough.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */; };
 		F91C2B812BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B802BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy */; };
@@ -924,6 +926,7 @@
 		F919603124AC53890084A18B /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		F919603324AC679E0084A18B /* File2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File2.swift; sourceTree = "<group>"; };
 		F9197E002CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CsvFileMakerMonthlyTrendsBalanceSheet.swift; sourceTree = "<group>"; };
+		F9197E032CB77C2900A78D2A /* CsvFileMakerMonthlyProfitAndLossStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CsvFileMakerMonthlyProfitAndLossStatement.swift; sourceTree = "<group>"; };
 		F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LucaPacioliRough.ttf; sourceTree = "<group>"; };
 		F91C2B802BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		F91F6E2C248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerAccountingBooksShelf.swift; sourceTree = "<group>"; };
@@ -1362,6 +1365,7 @@
 				F946BCEC2B624B5F00BCAAD6 /* CsvFileMakerAccount.swift */,
 				F946BCEF2B625D4400BCAAD6 /* CsvFileMakerPLAccount.swift */,
 				F9197E002CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift */,
+				F9197E032CB77C2900A78D2A /* CsvFileMakerMonthlyProfitAndLossStatement.swift */,
 			);
 			path = CSV;
 			sourceTree = "<group>";
@@ -3114,6 +3118,7 @@
 				F9CE81DE2B3FC710004D7CDE /* AnnotationViewControllerTB.swift in Sources */,
 				F963E2B929647AA0002DF49E /* DataBasePLAccount.swift in Sources */,
 				F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */,
+				F9197E042CB77C2900A78D2A /* CsvFileMakerMonthlyProfitAndLossStatement.swift in Sources */,
 				F9593DB42A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */,
 				F9941D6A26458259008B3970 /* TabBarController.swift in Sources */,
 				F9F934E72484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift in Sources */,
@@ -3357,6 +3362,7 @@
 				F9CE81DF2B3FC710004D7CDE /* AnnotationViewControllerTB.swift in Sources */,
 				F9EC66CD27B90BC60003FBB6 /* DataBaseSettingsPeriod.swift in Sources */,
 				F9EC66CE27B90BC60003FBB6 /* TabBarController.swift in Sources */,
+				F9197E052CB77C2900A78D2A /* CsvFileMakerMonthlyProfitAndLossStatement.swift in Sources */,
 				F9593DB52A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */,
 				F9EC66CF27B90BC60003FBB6 /* DataBaseManagerGeneralLedger.swift in Sources */,
 				F963E2B729647A01002DF49E /* DataBaseTransferEntry.swift in Sources */,

@@ -123,10 +123,18 @@
                             <constraint firstItem="53i-0g-ras" firstAttribute="top" secondItem="882-K0-aDv" secondAttribute="top" constant="7" id="fO1-U6-quu"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="HjS-0h-dse">
+                        <barButtonItem key="rightBarButtonItem" image="csv-csv_symbol" id="o7j-jr-OO8">
+                            <connections>
+                                <action selector="csvBarButtonItemTapped:" destination="7bV-QQ-oyh" id="7bH-lF-dYf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="backgroundView" destination="53i-0g-ras" id="ggZ-dV-oEe"/>
                         <outlet property="closingDateLabel" destination="Ul5-3n-npK" id="Iox-GP-M7J"/>
                         <outlet property="companyNameLabel" destination="I0e-qd-d3j" id="wiX-Vh-Vx7"/>
+                        <outlet property="csvBarButtonItem" destination="o7j-jr-OO8" id="Ax6-v4-MqN"/>
                         <outlet property="spreadsheetView" destination="8iR-E8-lOO" id="lmW-1P-ZVc"/>
                         <outlet property="titleLabel" destination="ac6-eX-ZQb" id="vNl-hk-PLV"/>
                     </connections>
@@ -137,6 +145,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="csv-csv_symbol" width="13" height="11"/>
         <namedColor name="BaseColor">
             <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
