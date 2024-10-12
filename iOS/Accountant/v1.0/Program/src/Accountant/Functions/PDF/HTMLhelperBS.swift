@@ -155,7 +155,7 @@ struct HTMLhelperBS {
             width: 210mm;
             height: 294mm;
             box-sizing: border-box;
-            padding: 0mm 10mm;
+            padding: 10mm 10mm;
             display: block;
     <!--         break-after: always; -->
         }
@@ -207,6 +207,10 @@ struct HTMLhelperBS {
       
     .borderBottom {
         border-bottom: 1px solid; }
+    .borderBottomLite {
+        border-bottom: 1px solid;
+        border-bottom-color: #c0c0c0; /* silver */
+    }
     
        .richediter th, td {
     <!--   border: 1px solid #05203a; -->
@@ -411,10 +415,10 @@ struct HTMLhelperBS {
     // レコードごとに1回コール 段落1 現金
     func getSingleRow(title: String, amount: String) -> String {
          """
-                <tr>
+            <tr class="borderBottomLite">
                 <th id="asset-1" class="left textIndent1">\(title)</th>
                 <td headers="assets asset-1">\(amount)</td>
-                </tr>
+            </tr>
     """
     }
     // レコードごとに1回コール 段落2　有形固定資産、無形固定資産、投資その他の資産に属する科目

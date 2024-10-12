@@ -208,7 +208,11 @@ struct HTMLhelperPL {
         border-top: 1px solid; }
     .borderBottom {
         border-bottom: 1px solid; }
-    
+    .borderBottomLite {
+        border-bottom: 1px solid;
+        border-bottom-color: #c0c0c0; /* silver */
+    }
+
        .richediter th, td {
     <!--   border: 1px solid #05203a; -->
       padding: 5px; }
@@ -348,10 +352,10 @@ struct HTMLhelperPL {
     // レコードごとに1回コール 段落1
     func getSingleRow(title: String, amount: String) -> String {
          """
-    <tr>
-                <th id="asset-1" class="left textIndent1">\(title)</th>
-                <td headers="assets asset-1">\(amount)</td>
-                </tr>
+        <tr class="borderBottomLite">
+            <th id="asset-1" class="left textIndent1">\(title)</th>
+            <td headers="assets asset-1">\(amount)</td>
+        </tr>
     """
     }
     
