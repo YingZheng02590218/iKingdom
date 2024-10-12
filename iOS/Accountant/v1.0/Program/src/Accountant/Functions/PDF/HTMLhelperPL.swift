@@ -154,7 +154,7 @@ struct HTMLhelperPL {
             width: 210mm;
             height: 294mm;
             box-sizing: border-box;
-            padding: 0mm 10mm;
+            padding: 10mm 10mm;
             display: block;
     <!--         break-after: always; -->
         }
@@ -272,7 +272,7 @@ struct HTMLhelperPL {
     }
     
     // ページごとに1回コール
-    func headerstring(company: String, fiscalYear: Int, theDayOfReckoning: String) -> String {
+    func headerstring(company: String, fiscalYear: Int, theDayOfReckoning: String, pageNumber: Int) -> String {
          """
         <section class="page">
             <div class="richediter public-notice l-container">
@@ -281,7 +281,7 @@ struct HTMLhelperPL {
                 <h2>損益計算書</h2>
                 <div class="flex">
                     <span class="halfWidth">\(company)</span>
-                    <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)</p></span>
+                    <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)<br><br>No.　　　\(pageNumber)</p></span>
                 </div>
     
                 <div>
