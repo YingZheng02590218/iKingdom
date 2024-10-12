@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 import UIKit
 
+// 月次推移表　損益計算書
 class CsvFileMakerMonthlyProfitAndLossStatement {
     
     var csvPath: URL?
@@ -32,8 +33,7 @@ class CsvFileMakerMonthlyProfitAndLossStatement {
     var objects7 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 10, rank1: 18)
     
     var objects8 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 11, rank1: nil)
-    // ヘッダーの行数
-    let headerRowCount = 2
+
     
     func initialize(completion: (URL?) -> Void) {
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)

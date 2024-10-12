@@ -20,6 +20,7 @@ class MonthlyProfitAndLossStatementViewController: UIViewController {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var spreadsheetView: SpreadsheetView!
     @IBOutlet private var backgroundView: EMTNeumorphicView!
+    @IBOutlet private var pdfBarButtonItem: UIBarButtonItem!
     @IBOutlet private var csvBarButtonItem: UIBarButtonItem!
     // インジゲーター
     var activityIndicatorView = UIActivityIndicatorView()
@@ -52,7 +53,13 @@ class MonthlyProfitAndLossStatementViewController: UIViewController {
     var objects8 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 11, rank1: nil)
     // ヘッダーの行数
     let headerRowCount = 2
-    
+    // PDF,CSVファイルのパス
+    var filePath: URL?
+    // PDF機能
+    let pDFMaker = PDFMakerMonthlyProfitAndLossStatement()
+    // CSV機能
+    let csvFileMaker = CsvFileMakerMonthlyProfitAndLossStatement()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "月次推移表"
@@ -165,6 +172,7 @@ class MonthlyProfitAndLossStatementViewController: UIViewController {
             }
         }
         
+        pdfBarButtonItem.tintColor = .accentColor
         csvBarButtonItem.tintColor = .accentColor
     }
     
@@ -227,6 +235,32 @@ class MonthlyProfitAndLossStatementViewController: UIViewController {
         return StringUtility.shared.setComma(amount: result)
     }
     
+    // MARK: - Action
+    
+    /**
+     * PDFボタン押下時メソッド
+     */
+    @IBAction func pdfBarButtonItemTapped(_ sender: Any) {
+        pdfBarButtonItemTapped(yearMonth: nil)
+    }
+    
+    // PDF機能
+    func pdfBarButtonItemTapped(yearMonth: String? = nil) {
+        // 初期化 PDFメーカー
+        initializePdfMaker(completion: { filePath in
+            
+            self.filePath = filePath
+            self.showPreview()
+        })
+    }
+    // 初期化 PDFメーカー
+    func initializePdfMaker(completion: (URL?) -> Void) {
+        
+        pDFMaker.initialize(completion: { filePath in
+            completion(filePath)
+        })
+    }
+    
     @IBAction func csvBarButtonItemTapped(_ sender: Any) {
         csvBarButtonItemTapped()
     }
@@ -240,10 +274,6 @@ class MonthlyProfitAndLossStatementViewController: UIViewController {
             self.showPreview()
         })
     }
-    // PDF,CSVファイルのパス
-    var filePath: URL?
-    // CSV機能
-    let csvFileMaker = CsvFileMakerMonthlyProfitAndLossStatement()
     // 初期化
     func initializeCsvMaker(completion: (URL?) -> Void) {
         
