@@ -1396,24 +1396,29 @@ class JournalEntryViewController: UIViewController {
     // よく使う仕訳　エリア カルーセルをリロードする
     func reloadCarousel() {
         DispatchQueue.main.async { [self] in
-            // データベース　よく使う仕訳
-            if let text = debit.title {
-                let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
-                    account: text
-                )
-                if objects.isEmpty {
-                    // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
-                    debit.title = nil
+            // 仕訳画面の勘定科目を更新する
+            if Constant.needToReloadCategory {
+                // データベース　よく使う仕訳
+                if let text = debit.title {
+                    let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+                        account: text
+                    )
+                    if objects.isEmpty {
+                        // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
+                        debit.title = nil
+                    }
                 }
-            }
-            if let text = credit.title {
-                let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
-                    account: text
-                )
-                if objects.isEmpty {
-                    // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
-                    credit.title = nil
+                if let text = credit.title {
+                    let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+                        account: text
+                    )
+                    if objects.isEmpty {
+                        // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
+                        credit.title = nil
+                    }
                 }
+                // 仕訳画面の勘定科目を更新する　true: リロードする
+                Constant.needToReloadCategory = false
             }
             if let tableView = tableView {
                 // よく使う仕訳　エリア
@@ -3068,8 +3073,6 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                 }
             }
             self.view.endEditing(true)
-            // 仕訳画面の勘定科目を更新する　true: リロードする
-            Constant.needToReloadCategory = false
         }
         // 仕訳タイプ判定
         if journalEntryType == .CompoundJournalEntry { // 仕訳 複合仕訳　タブバーの仕訳タブからの遷移の場合
