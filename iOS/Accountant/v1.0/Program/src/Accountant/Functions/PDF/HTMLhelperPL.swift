@@ -295,6 +295,7 @@ struct HTMLhelperPL {
     func footerstring() -> String {
          """
                 </div>
+                <p class="fontsize95 right">©複式簿記の会計帳簿 Paciolist</p>
             </div>
         </section>
         """
@@ -303,69 +304,63 @@ struct HTMLhelperPL {
     // テーブル　トップ
     func tableTopString() -> String {
          """
-    <table>
-                <tbody>
+        <table>
+            <tbody>
     """
     }
     // テーブル　エンド
     func tableEndString() -> String {
          """
-        </tbody>
-        <tfoot>
-            <tr>
-                <th id="asset-1" class="left">　</th>
-                <td colspan="1" class="fontsize80"><p class="right">©複式簿記の会計帳簿 Paciolist</p></td>
-            </tr>
-        </tfoot>
-    </table>
+            </tbody>
+        </table>
     """
     }
     
     // 中区分 合計 売上高、売上原価
     func middleRowEndIndent0space(title: String, amount: String) -> String {
          """
-                <tr>
+            <tr>
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1">\(amount)</td>
-                </tr>
+            </tr>
     """
     }
     // 中区分 段落0　販売費及び一般管理費
     func middleRowTop(title: String) -> String {
          """
-                <tr>
+            <tr>
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1"></td>
-                </tr>
+            </tr>
     """
     }
     // 中区分 合計 段落1
     func middleRowEnd(title: String, amount: String) -> String {
          """
-    <tr  class="accentColor20">
+            <tr  class="accentColor20">
                 <th id="asset-1" class="left textIndent1">\(title)</th>
                 <td headers="assets asset-1" class="borderBottom">\(amount)</td>
-                </tr>
+            </tr>
     """
     }
     
     // レコードごとに1回コール 段落1
     func getSingleRow(title: String, amount: String) -> String {
          """
-        <tr class="borderBottomLite">
-            <th id="asset-1" class="left textIndent1">\(title)</th>
-            <td headers="assets asset-1">\(amount)</td>
-        </tr>
+            <tr class="borderBottomLite">
+                <th id="asset-1" class="left textIndent1">\(title)</th>
+                <td headers="assets asset-1">\(amount)</td>
+            </tr>
     """
     }
     
     // レコードごとに1回コール 段落0 五つの利益
     func getSingleRowForBenefits(title: String, amount: String) -> String {
          """
-    <tr  class="accentColor30">
+            <tr  class="accentColor30">
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1" class="borderTop borderBottom">\(amount)</td>
-                </tr>
+            </tr>
     """
     }
 }

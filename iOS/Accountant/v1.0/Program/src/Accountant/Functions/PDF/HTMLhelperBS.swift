@@ -276,7 +276,7 @@ struct HTMLhelperBS {
     }
     
     // ページごとに1回コール
-    func headerstring(company: String, fiscalYear: Int, theDayOfReckoning: String) -> String {
+    func headerstring(company: String, fiscalYear: Int, theDayOfReckoning: String, pageNumber: Int) -> String {
          """
         <section class="page">
             <div class="richediter public-notice l-container">
@@ -285,7 +285,7 @@ struct HTMLhelperBS {
                 <h2>貸借対照表</h2>
                 <div class="flex">
                     <span class="halfWidth">\(company)</span>
-                    <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)</p></span>
+                    <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)<br><br>No.　　　\(pageNumber)</p></span>
                 </div>
 
                 <div class="flex line_single_black_all">
@@ -301,105 +301,105 @@ struct HTMLhelperBS {
         """
     }
     
-    // テーブル　トップ 資産の部
+    // テーブル　トップ
     func tableTopString() -> String {
          """
-        <table class="halfWidth marginBottomAuto">
-                <tbody>
-                <tr>
+        <table>
+            <tbody>
+    """
+    }
+    // テーブル　エンド
+    func tableEndString() -> String {
+         """
+            </tbody>
+        </table>
+    """
+    }
+
+    // テーブル　トップ 資産の部
+    func tableTopTitleString() -> String {
+         """
+            <tr>
                 <th class="accentColor10" scope="col" colspan="2" id="assets" style="width:50%"><strong>\(BalanceSheet.Block.assets.rawValue)</strong></th>
-                </tr>
+            </tr>
     """
     }
     // テーブル　トップ 負債の部、資本の部
-    func tableTopString(block: String) -> String {
+    func tableTopTitleString(block: String) -> String {
          """
-        <table style="width:100%">
-            <tbody>
-                <tr>
-                    <th class="accentColor10" scope="col" colspan="2" id="assets" style="width:50%"><strong>\(block)</strong></th>
-                </tr>
+            <tr>
+                <th class="accentColor10" scope="col" colspan="2" id="assets" style="width:50%"><strong>\(block)</strong></th>
+            </tr>
     """
     }
     // テーブル　エンド 資産の部 合計
-    func tableEndString(title: String, amount: String) -> String {
+    func tableEndTitleString(title: String, amount: String) -> String {
          """
-                <tr class="accentColor30 line_single_black_all">
-                    <th id="capital-4"><strong>\(title)</strong></th>
-                    <td headers="capital capital-4">\(amount)</td>
-                </tr>
-            </tbody>
-        </table>
-    
-    <div class="halfWidth">
+            <tr class="accentColor30 line_single_black_all left">
+                <th id="capital-4"><strong>\(title)</strong></th>
+                <td headers="capital capital-4">\(amount)</td>
+            </tr>
     """
     }
     // テーブル　エンド 負債の部 合計
-    func tableEndString(amount: String) -> String {
+    func tableEndTitleString(amount: String) -> String {
          """
-            <tr class="accentColor30 line_single_black_all">
+            <tr class="accentColor30 line_single_black_all left">
                 <th id="capital-4"><strong>\(BalanceSheet.Block.liabilities.getTotalAmount())</strong></th>
                 <td headers="capital capital-4">\(amount)</td>
             </tr>
-        </tbody>
-    </table>
     """
     }
     // テーブル　エンド 負債・純資産の部 合計
-    func tableEndString(capitalAmount: String, amount: String) -> String {
+    func tableEndTitleString(capitalAmount: String, amount: String) -> String {
          """
-            <tr class="accentColor30 line_single_black_all">
+            <tr class="accentColor30 line_single_black_all left">
                 <th id="capital-3">\(BalanceSheet.Block.netAssets.getTotalAmount())</th>
                 <td headers="capital capital-3">\(capitalAmount)</td>
             </tr>
-            <tr class="accentColor30 line_single_black_all">
+            <tr class="accentColor30 line_single_black_all left">
                 <th id="assets-capital"><strong>\(BalanceSheet.Block.liabilityAndEquity.getTotalAmount())</strong></th>
                 <td headers="assets assets-capital">\(amount)</td>
             </tr>
-        </tbody>
-    </table>
-    
-    </div>
-
     """
     }
 
     // 中区分 段落0　流動資産、固定資産、繰越資産、流動負債、固定負債、株主資本、その他の包括利益累計額、
     func middleRowTop(title: String) -> String {
          """
-                <tr>
+            <tr>
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1"></td>
-                </tr>
+            </tr>
     """
     }
     // 中区分 合計 段落1
     func middleRowEnd(title: String, amount: String) -> String {
          """
-                <tr class="accentColor20">
+            <tr class="accentColor20">
                 <th id="asset-1" class="left textIndent1">\(title)</th>
                 <td headers="assets asset-1" class="borderBottom">\(amount)</td>
-                </tr>
+            </tr>
     """
     }
     
     // 中区分 合計 段落0　新株予約権、TODO、非支配株主持分、TODO
     func middleRowEndIndent0space(title: String, amount: String) -> String {
          """
-                <tr class="accentColor20">
+            <tr class="accentColor20">
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1" class="borderBottom">\(amount)</td>
-                </tr>
+            </tr>
     """
     }
     
     // 小区分 有形固定資産、無形固定資産、投資その他資産
     func smallRowTop(title: String) -> String {
          """
-                <tr>
+            <tr>
                 <th id="asset-1" class="left textIndent1">\(title)</th>
                 <td headers="assets asset-1"></td>
-                </tr>
+            </tr>
     """
     }
 //    // 小区分 合計 不使用
@@ -424,10 +424,10 @@ struct HTMLhelperBS {
     // レコードごとに1回コール 段落2　有形固定資産、無形固定資産、投資その他の資産に属する科目
     func getSingleRowIndent2space(title: String, amount: String) -> String {
          """
-                <tr>
+            <tr>
                 <th id="asset-1" class="left textIndent2">\(title)</th>
                 <td headers="assets asset-1">\(amount)</td>
-                </tr>
+            </tr>
     """
     }
 

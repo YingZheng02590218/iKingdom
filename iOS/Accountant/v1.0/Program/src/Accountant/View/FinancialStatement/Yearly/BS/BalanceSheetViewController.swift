@@ -994,8 +994,8 @@ extension BalanceSheetViewController: BalacneSheetPresenterOutput {
 extension BalanceSheetViewController: QLPreviewControllerDataSource {
     
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
-        if let PDFpath = presenter.PDFpath {
-            return PDFpath.count
+        if let _ = presenter.PDFpath {
+            return 1
         } else {
             return 0
         }
@@ -1003,7 +1003,7 @@ extension BalanceSheetViewController: QLPreviewControllerDataSource {
     
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         
-        guard let pdfFilePath = presenter.PDFpath?[index] else {
+        guard let pdfFilePath = presenter.PDFpath else {
             return "" as! QLPreviewItem
         }
         return pdfFilePath as QLPreviewItem
