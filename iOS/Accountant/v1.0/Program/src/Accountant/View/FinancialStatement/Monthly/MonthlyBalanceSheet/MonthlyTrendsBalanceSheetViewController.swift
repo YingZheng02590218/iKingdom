@@ -7,6 +7,7 @@
 //
 
 import EMTNeumorphicView
+import QuickLook
 import SpreadsheetView
 import UIKit
 
@@ -19,6 +20,8 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var spreadsheetView: SpreadsheetView!
     @IBOutlet private var backgroundView: EMTNeumorphicView!
+    @IBOutlet private var pdfBarButtonItem: UIBarButtonItem!
+    @IBOutlet private var csvBarButtonItem: UIBarButtonItem!
     // インジゲーター
     var activityIndicatorView = UIActivityIndicatorView()
     let backView = UIView()
@@ -53,9 +56,14 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
     var objects11 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 11) // 評価・換算差額等
     var objects12 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 12) // 新株予約権
     var objects13 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 19) // 非支配株主持分
-    
     // ヘッダーの行数
     let headerRowCount = 2
+    // PDF,CSVファイルのパス
+    var filePath: URL?
+    // PDF機能
+    let pDFMaker = PDFMakerMonthlyTrendsBalanceSheet()
+    // CSV機能
+    let csvFileMaker = CsvFileMakerMonthlyTrendsBalanceSheet()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +78,7 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
         // spreadsheetView.gridStyle = .none
         spreadsheetView.allowsMultipleSelection = true
         spreadsheetView.indicatorStyle = .black
-
+        
         spreadsheetView.register(DateCell.self, forCellWithReuseIdentifier: String(describing: DateCell.self))
         spreadsheetView.register(TimeTitleCell.self, forCellWithReuseIdentifier: String(describing: TimeTitleCell.self))
         spreadsheetView.register(TimeCell.self, forCellWithReuseIdentifier: String(describing: TimeCell.self))
@@ -173,6 +181,9 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
                 backgroundView.layer.insertSublayer(gradientLayer, at: 0)
             }
         }
+        
+        pdfBarButtonItem.tintColor = .accentColor
+        csvBarButtonItem.tintColor = .accentColor
     }
     
     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
@@ -232,6 +243,53 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
         
         // カンマを追加して文字列に変換した値を返す
         return StringUtility.shared.setComma(amount: result)
+    }
+    
+    // MARK: - Action
+    
+    /**
+     * PDFボタン押下時メソッド
+     */
+    @IBAction func pdfBarButtonItemTapped(_ sender: Any) {
+        pdfBarButtonItemTapped(yearMonth: nil)
+    }
+    
+    // PDF機能
+    func pdfBarButtonItemTapped(yearMonth: String? = nil) {
+        // 初期化 PDFメーカー
+        initializePdfMaker(completion: { filePath in
+            
+            self.filePath = filePath
+            self.showPreview()
+        })
+    }
+    // 初期化 PDFメーカー
+    func initializePdfMaker(completion: (URL?) -> Void) {
+        
+        pDFMaker.initialize(completion: { filePath in
+            completion(filePath)
+        })
+    }
+    
+    @IBAction func csvBarButtonItemTapped(_ sender: Any) {
+        csvBarButtonItemTapped()
+    }
+    
+    // CSV機能
+    func csvBarButtonItemTapped() {
+        // 初期化
+        initializeCsvMaker(completion: { csvPath in
+            
+            self.filePath = csvPath
+            self.showPreview()
+        })
+    }
+    // 初期化
+    func initializeCsvMaker(completion: (URL?) -> Void) {
+        
+        csvFileMaker.initialize(completion: { filePath in
+            completion(filePath)
+        })
     }
     
     // アップグレード画面を表示
@@ -303,6 +361,36 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
             }
             self.backView.removeFromSuperview()
         }
+    }
+    // PDFのプレビューを表示させる
+    func showPreview() {
+        let previewController = QLPreviewController()
+        previewController.dataSource = self
+        present(previewController, animated: true, completion: nil)
+    }
+}
+
+/*
+ `QLPreviewController` にPDFデータを提供する
+ */
+
+extension MonthlyTrendsBalanceSheetViewController: QLPreviewControllerDataSource {
+    
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        
+        if let _ = filePath {
+            return 1
+        } else {
+            return 0
+        }
+    }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        
+        guard let filePath = filePath else {
+            return "" as! QLPreviewItem
+        }
+        return filePath as QLPreviewItem
     }
 }
 
@@ -713,7 +801,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 0, rank1: 0, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(
+                        rank0: 0,
+                        rank1: 0,
+                        left: dataBaseMonthlyTransferEntry.balance_left,
+                        right: dataBaseMonthlyTransferEntry.balance_right
+                    )
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -742,7 +835,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 0, rank1: 1, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(
+                        rank0: 0,
+                        rank1: 1,
+                        left: dataBaseMonthlyTransferEntry.balance_left,
+                        right: dataBaseMonthlyTransferEntry.balance_right
+                    )
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -771,7 +869,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 0, rank1: 2, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(
+                        rank0: 0,
+                        rank1: 2,
+                        left: dataBaseMonthlyTransferEntry.balance_left,
+                        right: dataBaseMonthlyTransferEntry.balance_right
+                    )
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -829,7 +932,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 1, rank1: 3, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(
+                        rank0: 1,
+                        rank1: 3,
+                        left: dataBaseMonthlyTransferEntry.balance_left,
+                        right: dataBaseMonthlyTransferEntry.balance_right
+                    )
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -858,7 +966,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 1, rank1: 4, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(
+                        rank0: 1,
+                        rank1: 4,
+                        left: dataBaseMonthlyTransferEntry.balance_left,
+                        right: dataBaseMonthlyTransferEntry.balance_right
+                    )
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -887,7 +1000,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 1, rank1: 5, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(
+                        rank0: 1,
+                        rank1: 5,
+                        left: dataBaseMonthlyTransferEntry.balance_left,
+                        right: dataBaseMonthlyTransferEntry.balance_right
+                    )
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -945,7 +1063,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 2, rank1: 6, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(
+                        rank0: 2,
+                        rank1: 6,
+                        left: dataBaseMonthlyTransferEntry.balance_left,
+                        right: dataBaseMonthlyTransferEntry.balance_right
+                    )
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -1031,7 +1154,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 3, rank1: 7, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(
+                        rank0: 3,
+                        rank1: 7,
+                        left: dataBaseMonthlyTransferEntry.balance_left,
+                        right: dataBaseMonthlyTransferEntry.balance_right
+                    )
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -1060,7 +1188,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 3, rank1: 8, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(
+                        rank0: 3,
+                        rank1: 8,
+                        left: dataBaseMonthlyTransferEntry.balance_left,
+                        right: dataBaseMonthlyTransferEntry.balance_right
+                    )
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -1118,7 +1251,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 4, rank1: 9, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(
+                        rank0: 4,
+                        rank1: 9,
+                        left: dataBaseMonthlyTransferEntry.balance_left,
+                        right: dataBaseMonthlyTransferEntry.balance_right
+                    )
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -1204,7 +1342,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 5, rank1: 10, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(
+                        rank0: 5,
+                        rank1: 10,
+                        left: dataBaseMonthlyTransferEntry.balance_left,
+                        right: dataBaseMonthlyTransferEntry.balance_right
+                    )
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -1233,7 +1376,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 5, rank1: 11, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(
+                        rank0: 5,
+                        rank1: 11,
+                        left: dataBaseMonthlyTransferEntry.balance_left,
+                        right: dataBaseMonthlyTransferEntry.balance_right
+                    )
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -1262,7 +1410,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 5, rank1: 12, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(
+                        rank0: 5,
+                        rank1: 12,
+                        left: dataBaseMonthlyTransferEntry.balance_left,
+                        right: dataBaseMonthlyTransferEntry.balance_right
+                    )
                 }
                 if !text.isEmpty {
                     cell.label.text = text
@@ -1291,7 +1444,12 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                     yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
                 ) {
                     // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                    text = getBalanceAmount(rank0: 5, rank1: 19, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                    text = getBalanceAmount(
+                        rank0: 5,
+                        rank1: 19,
+                        left: dataBaseMonthlyTransferEntry.balance_left,
+                        right: dataBaseMonthlyTransferEntry.balance_right
+                    )
                 }
                 if !text.isEmpty {
                     cell.label.text = text

@@ -12,14 +12,14 @@ import RealmSwift
 /// GUIアーキテクチャ　MVP
 protocol BalanceSheetModelInput {
     func initializeBS() -> BalanceSheetData
-    func initializePdfMaker(balanceSheetData: BalanceSheetData, completion: ([URL]?) -> Void)
+    func initializePdfMaker(balanceSheetData: BalanceSheetData, completion: (URL?) -> Void)
 }
 // 貸借対照表クラス　個人事業主
 class BalanceSheetModel: BalanceSheetModelInput {
     // 印刷機能
     let pDFMaker = PDFMakerBalanceSheet()
     // 初期化 PDFメーカー
-    func initializePdfMaker(balanceSheetData: BalanceSheetData, completion: ([URL]?) -> Void) {
+    func initializePdfMaker(balanceSheetData: BalanceSheetData, completion: (URL?) -> Void) {
         pDFMaker.initialize(balanceSheetData: balanceSheetData, completion: { PDFpath in
             completion(PDFpath)
         })

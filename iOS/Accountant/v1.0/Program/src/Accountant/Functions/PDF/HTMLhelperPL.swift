@@ -154,7 +154,7 @@ struct HTMLhelperPL {
             width: 210mm;
             height: 294mm;
             box-sizing: border-box;
-            padding: 0mm 10mm;
+            padding: 10mm 10mm;
             display: block;
     <!--         break-after: always; -->
         }
@@ -208,7 +208,11 @@ struct HTMLhelperPL {
         border-top: 1px solid; }
     .borderBottom {
         border-bottom: 1px solid; }
-    
+    .borderBottomLite {
+        border-bottom: 1px solid;
+        border-bottom-color: #c0c0c0; /* silver */
+    }
+
        .richediter th, td {
     <!--   border: 1px solid #05203a; -->
       padding: 5px; }
@@ -272,7 +276,7 @@ struct HTMLhelperPL {
     }
     
     // ページごとに1回コール
-    func headerstring(company: String, fiscalYear: Int, theDayOfReckoning: String) -> String {
+    func headerstring(company: String, fiscalYear: Int, theDayOfReckoning: String, pageNumber: Int) -> String {
          """
         <section class="page">
             <div class="richediter public-notice l-container">
@@ -281,7 +285,7 @@ struct HTMLhelperPL {
                 <h2>損益計算書</h2>
                 <div class="flex">
                     <span class="halfWidth">\(company)</span>
-                    <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)</p></span>
+                    <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)<br><br>No.　　　\(pageNumber)</p></span>
                 </div>
     
                 <div>
@@ -291,6 +295,7 @@ struct HTMLhelperPL {
     func footerstring() -> String {
          """
                 </div>
+                <p class="fontsize95 right">©複式簿記の会計帳簿 Paciolist</p>
             </div>
         </section>
         """
@@ -299,69 +304,63 @@ struct HTMLhelperPL {
     // テーブル　トップ
     func tableTopString() -> String {
          """
-    <table>
-                <tbody>
+        <table>
+            <tbody>
     """
     }
     // テーブル　エンド
     func tableEndString() -> String {
          """
-        </tbody>
-        <tfoot>
-            <tr>
-                <th id="asset-1" class="left">　</th>
-                <td colspan="1" class="fontsize80"><p class="right">©複式簿記の会計帳簿 Paciolist</p></td>
-            </tr>
-        </tfoot>
-    </table>
+            </tbody>
+        </table>
     """
     }
     
     // 中区分 合計 売上高、売上原価
     func middleRowEndIndent0space(title: String, amount: String) -> String {
          """
-                <tr>
+            <tr>
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1">\(amount)</td>
-                </tr>
+            </tr>
     """
     }
     // 中区分 段落0　販売費及び一般管理費
     func middleRowTop(title: String) -> String {
          """
-                <tr>
+            <tr>
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1"></td>
-                </tr>
+            </tr>
     """
     }
     // 中区分 合計 段落1
     func middleRowEnd(title: String, amount: String) -> String {
          """
-    <tr  class="accentColor20">
+            <tr  class="accentColor20">
                 <th id="asset-1" class="left textIndent1">\(title)</th>
                 <td headers="assets asset-1" class="borderBottom">\(amount)</td>
-                </tr>
+            </tr>
     """
     }
     
     // レコードごとに1回コール 段落1
     func getSingleRow(title: String, amount: String) -> String {
          """
-    <tr>
+            <tr class="borderBottomLite">
                 <th id="asset-1" class="left textIndent1">\(title)</th>
                 <td headers="assets asset-1">\(amount)</td>
-                </tr>
+            </tr>
     """
     }
     
     // レコードごとに1回コール 段落0 五つの利益
     func getSingleRowForBenefits(title: String, amount: String) -> String {
          """
-    <tr  class="accentColor30">
+            <tr  class="accentColor30">
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1" class="borderTop borderBottom">\(amount)</td>
-                </tr>
+            </tr>
     """
     }
 }

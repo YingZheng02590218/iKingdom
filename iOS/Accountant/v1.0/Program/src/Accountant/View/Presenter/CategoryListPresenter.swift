@@ -478,6 +478,8 @@ final class CategoryListPresenter: CategoryListPresenterInput {
         model.updateSettingsCategorySwitching(tag: tag, isOn: isOn)
         // 仕訳画面の勘定科目を更新する　true: リロードする
         Constant.needToReloadCategory = true
+        // スイッチの状態を更新するため
+        view.reloadData()
     }
     
     // 採番　設定勘定科目 並び替えの順序のためのシリアルナンバーを更新する

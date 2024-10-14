@@ -152,6 +152,18 @@
 		F91878C82581462600D2E793 /* DataBaseManagerSettingsOperating.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91878C72581462600D2E793 /* DataBaseManagerSettingsOperating.swift */; };
 		F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */; };
 		F919603224AC53890084A18B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919603124AC53890084A18B /* File.swift */; };
+		F9197E012CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E002CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift */; };
+		F9197E022CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E002CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift */; };
+		F9197E042CB77C2900A78D2A /* CsvFileMakerMonthlyTrendsProfitAndLossStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E032CB77C2900A78D2A /* CsvFileMakerMonthlyTrendsProfitAndLossStatement.swift */; };
+		F9197E052CB77C2900A78D2A /* CsvFileMakerMonthlyTrendsProfitAndLossStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E032CB77C2900A78D2A /* CsvFileMakerMonthlyTrendsProfitAndLossStatement.swift */; };
+		F9197E072CB80D4400A78D2A /* PDFMakerMonthlyTrendsProfitAndLossStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E062CB80D4400A78D2A /* PDFMakerMonthlyTrendsProfitAndLossStatement.swift */; };
+		F9197E082CB80D4400A78D2A /* PDFMakerMonthlyTrendsProfitAndLossStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E062CB80D4400A78D2A /* PDFMakerMonthlyTrendsProfitAndLossStatement.swift */; };
+		F9197E0A2CB9474500A78D2A /* HTMLhelperMonthlyPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E092CB9474500A78D2A /* HTMLhelperMonthlyPL.swift */; };
+		F9197E0B2CB9474500A78D2A /* HTMLhelperMonthlyPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E092CB9474500A78D2A /* HTMLhelperMonthlyPL.swift */; };
+		F9197E0D2CBD406200A78D2A /* PDFMakerMonthlyTrendsBalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E0C2CBD406200A78D2A /* PDFMakerMonthlyTrendsBalanceSheet.swift */; };
+		F9197E0E2CBD406200A78D2A /* PDFMakerMonthlyTrendsBalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E0C2CBD406200A78D2A /* PDFMakerMonthlyTrendsBalanceSheet.swift */; };
+		F9197E102CBD412100A78D2A /* HTMLhelperMonthlyBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E0F2CBD412100A78D2A /* HTMLhelperMonthlyBS.swift */; };
+		F9197E112CBD412100A78D2A /* HTMLhelperMonthlyBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9197E0F2CBD412100A78D2A /* HTMLhelperMonthlyBS.swift */; };
 		F91C2B7E2BF212C200ABBFD6 /* LucaPacioliRough.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */; };
 		F91C2B7F2BF212C300ABBFD6 /* LucaPacioliRough.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */; };
 		F91C2B812BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = F91C2B802BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy */; };
@@ -921,6 +933,12 @@
 		F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F919603124AC53890084A18B /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		F919603324AC679E0084A18B /* File2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File2.swift; sourceTree = "<group>"; };
+		F9197E002CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CsvFileMakerMonthlyTrendsBalanceSheet.swift; sourceTree = "<group>"; };
+		F9197E032CB77C2900A78D2A /* CsvFileMakerMonthlyTrendsProfitAndLossStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CsvFileMakerMonthlyTrendsProfitAndLossStatement.swift; sourceTree = "<group>"; };
+		F9197E062CB80D4400A78D2A /* PDFMakerMonthlyTrendsProfitAndLossStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerMonthlyTrendsProfitAndLossStatement.swift; sourceTree = "<group>"; };
+		F9197E092CB9474500A78D2A /* HTMLhelperMonthlyPL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLhelperMonthlyPL.swift; sourceTree = "<group>"; };
+		F9197E0C2CBD406200A78D2A /* PDFMakerMonthlyTrendsBalanceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerMonthlyTrendsBalanceSheet.swift; sourceTree = "<group>"; };
+		F9197E0F2CBD412100A78D2A /* HTMLhelperMonthlyBS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLhelperMonthlyBS.swift; sourceTree = "<group>"; };
 		F91C2B7D2BF212BF00ABBFD6 /* LucaPacioliRough.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LucaPacioliRough.ttf; sourceTree = "<group>"; };
 		F91C2B802BF22A9000ABBFD6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		F91F6E2C248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerAccountingBooksShelf.swift; sourceTree = "<group>"; };
@@ -1358,6 +1376,8 @@
 				F9002BFB2B5E6F930011FE9C /* CsvFileMaker.swift */,
 				F946BCEC2B624B5F00BCAAD6 /* CsvFileMakerAccount.swift */,
 				F946BCEF2B625D4400BCAAD6 /* CsvFileMakerPLAccount.swift */,
+				F9197E002CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift */,
+				F9197E032CB77C2900A78D2A /* CsvFileMakerMonthlyTrendsProfitAndLossStatement.swift */,
 			);
 			path = CSV;
 			sourceTree = "<group>";
@@ -1734,11 +1754,15 @@
 				F9F3A01827BB991C001E873F /* HTMLhelperAccount.swift */,
 				F9AD64DF2912AA1300B9F50B /* HTMLhelperBS.swift */,
 				F9AC5524292CCC16003966E4 /* HTMLhelperPL.swift */,
+				F9197E092CB9474500A78D2A /* HTMLhelperMonthlyPL.swift */,
+				F9197E0F2CBD412100A78D2A /* HTMLhelperMonthlyBS.swift */,
 				F9CD589B266B980A00F27E80 /* PDFMaker.swift */,
 				F9F3A01B27BB9F9D001E873F /* PDFMakerAccount.swift */,
 				F963E2CA296829A6002DF49E /* PDFMakerPLAccount.swift */,
-				F9D15FC1296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift */,
 				F963E2A92962BB47002DF49E /* PDFMakerBalanceSheet.swift */,
+				F9D15FC1296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift */,
+				F9197E0C2CBD406200A78D2A /* PDFMakerMonthlyTrendsBalanceSheet.swift */,
+				F9197E062CB80D4400A78D2A /* PDFMakerMonthlyTrendsProfitAndLossStatement.swift */,
 			);
 			path = PDF;
 			sourceTree = "<group>";
@@ -3008,6 +3032,7 @@
 				F982898A2973E8B900F8F1B8 /* OpeningBalanceModel.swift in Sources */,
 				F9DB32FC297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */,
 				F9B63F712C19A0B300380695 /* UserData.swift in Sources */,
+				F9197E012CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift in Sources */,
 				F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */,
 				F90742D62A0DC3B400480551 /* PaciolistWidget.intentdefinition in Sources */,
 				F9BDCBBA27A96A8E00BD8770 /* JournalsPresenter.swift in Sources */,
@@ -3080,6 +3105,7 @@
 				F9F6A7122BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift in Sources */,
 				F9BDCBB627A9602D00BD8770 /* JournalsViewController.swift in Sources */,
 				F906C4EE263B1B65006C6233 /* ListCollectionViewCell.swift in Sources */,
+				F9197E102CBD412100A78D2A /* HTMLhelperMonthlyBS.swift in Sources */,
 				F91878C82581462600D2E793 /* DataBaseManagerSettingsOperating.swift in Sources */,
 				F9BEED102566FB3900678391 /* AnnotationViewControllerSettingPeriod.swift in Sources */,
 				F9BEED0E2566F56400678391 /* AnnotationViewControllerJournals.swift in Sources */,
@@ -3109,9 +3135,11 @@
 				F9CE81DE2B3FC710004D7CDE /* AnnotationViewControllerTB.swift in Sources */,
 				F963E2B929647AA0002DF49E /* DataBasePLAccount.swift in Sources */,
 				F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */,
+				F9197E042CB77C2900A78D2A /* CsvFileMakerMonthlyTrendsProfitAndLossStatement.swift in Sources */,
 				F9593DB42A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */,
 				F9941D6A26458259008B3970 /* TabBarController.swift in Sources */,
 				F9F934E72484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift in Sources */,
+				F9197E0D2CBD406200A78D2A /* PDFMakerMonthlyTrendsBalanceSheet.swift in Sources */,
 				F963E2B629647A01002DF49E /* DataBaseTransferEntry.swift in Sources */,
 				F9F934F82485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift in Sources */,
 				F9B78D33293628550051C027 /* UIView+extension.swift in Sources */,
@@ -3133,7 +3161,9 @@
 				F93D78992A1222E600C75BA9 /* SplashPresenter.swift in Sources */,
 				F9711329249D12A1006258F7 /* TBTableViewCell.swift in Sources */,
 				F98289932974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift in Sources */,
+				F9197E0A2CB9474500A78D2A /* HTMLhelperMonthlyPL.swift in Sources */,
 				F9AD64E32912B66B00B9F50B /* StringUtility.swift in Sources */,
+				F9197E072CB80D4400A78D2A /* PDFMakerMonthlyTrendsProfitAndLossStatement.swift in Sources */,
 				F9D15FC2296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift in Sources */,
 				F9593DB72A62B61C00A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.swift in Sources */,
 				F99B65BD24B781E3006BD3DD /* WSViewController.swift in Sources */,
@@ -3250,6 +3280,7 @@
 				F9EC668F27B90BC60003FBB6 /* DataBaseSettingsOperating.swift in Sources */,
 				F982898B2973E8B900F8F1B8 /* OpeningBalanceModel.swift in Sources */,
 				F9B63F722C19A0B300380695 /* UserData.swift in Sources */,
+				F9197E022CB68C7900A78D2A /* CsvFileMakerMonthlyTrendsBalanceSheet.swift in Sources */,
 				F9DB32FD297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */,
 				F9EC669027B90BC60003FBB6 /* DataBaseTaxonomy.swift in Sources */,
 				F9EC669127B90BC60003FBB6 /* JournalsPresenter.swift in Sources */,
@@ -3322,6 +3353,7 @@
 				F9F6A7132BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift in Sources */,
 				F9EC66BE27B90BC60003FBB6 /* JournalsViewController.swift in Sources */,
 				F9EC66BF27B90BC60003FBB6 /* ListCollectionViewCell.swift in Sources */,
+				F9197E112CBD412100A78D2A /* HTMLhelperMonthlyBS.swift in Sources */,
 				F9EC66C027B90BC60003FBB6 /* DataBaseManagerSettingsOperating.swift in Sources */,
 				F9EC66C127B90BC60003FBB6 /* AnnotationViewControllerSettingPeriod.swift in Sources */,
 				F9EC66C227B90BC60003FBB6 /* AnnotationViewControllerJournals.swift in Sources */,
@@ -3351,9 +3383,11 @@
 				F9CE81DF2B3FC710004D7CDE /* AnnotationViewControllerTB.swift in Sources */,
 				F9EC66CD27B90BC60003FBB6 /* DataBaseSettingsPeriod.swift in Sources */,
 				F9EC66CE27B90BC60003FBB6 /* TabBarController.swift in Sources */,
+				F9197E052CB77C2900A78D2A /* CsvFileMakerMonthlyTrendsProfitAndLossStatement.swift in Sources */,
 				F9593DB52A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */,
 				F9EC66CF27B90BC60003FBB6 /* DataBaseManagerGeneralLedger.swift in Sources */,
 				F963E2B729647A01002DF49E /* DataBaseTransferEntry.swift in Sources */,
+				F9197E0E2CBD406200A78D2A /* PDFMakerMonthlyTrendsBalanceSheet.swift in Sources */,
 				F9EC66D027B90BC60003FBB6 /* DataBaseAccountingBooks.swift in Sources */,
 				F9B78D34293628550051C027 /* UIView+extension.swift in Sources */,
 				F9AD64E72912C56400B9F50B /* UIViewController+extension.swift in Sources */,
@@ -3375,7 +3409,9 @@
 				F93D789A2A1222E600C75BA9 /* SplashPresenter.swift in Sources */,
 				F98289942974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift in Sources */,
 				F9AD64E42912B66B00B9F50B /* StringUtility.swift in Sources */,
+				F9197E0B2CB9474500A78D2A /* HTMLhelperMonthlyPL.swift in Sources */,
 				F9D15FC3296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift in Sources */,
+				F9197E082CB80D4400A78D2A /* PDFMakerMonthlyTrendsProfitAndLossStatement.swift in Sources */,
 				F9EC66DD27B90BC60003FBB6 /* WSViewController.swift in Sources */,
 				F9593DB82A62B61C00A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.swift in Sources */,
 				F9EC66DE27B90BC60003FBB6 /* File.swift in Sources */,

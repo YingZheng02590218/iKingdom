@@ -259,22 +259,32 @@ class CategoryListTableViewController: UITableViewController {
                 account: presenter.objects(
                     forRow: indexPath.row,
                     section: indexPath.section
-                ).category as String
+                ).category
             ) // 通常仕訳　勘定別 全年度にしてはいけない
             let objectsss = DataBaseManagerAdjustingEntry.shared.getAllAdjustingEntryInAccountAll(
                 account: presenter.objects(
                     forRow: indexPath.row,
                     section: indexPath.section
-                ).category as String
+                ).category
             ) // 決算整理仕訳　勘定別　損益勘定以外 全年度にしてはいけない
-            
+            let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+                account: presenter.objects(
+                    forRow: indexPath.row,
+                    section: indexPath.section
+                ).category
+            )
             // 仕訳データが存在する場合、トグルスイッチはOFFにできないように、無効化する
-            if objectss.isEmpty && objectsss.isEmpty {
+            if objectss.isEmpty && objectsss.isEmpty && objects.isEmpty {
                 // UIButtonを有効化
                 cell.toggleButton.isEnabled = true
             } else {
-                // UIButtonを無効化
-                cell.toggleButton.isEnabled = false
+                if presenter.objects(forRow: indexPath.row, section: indexPath.section).switching {
+                    // UIButtonを無効化
+                    cell.toggleButton.isEnabled = false
+                } else {
+                    // UIButtonを有効化
+                    cell.toggleButton.isEnabled = true
+                }
             }
             // UIButtonを表示
             cell.toggleButton.isHidden = false
