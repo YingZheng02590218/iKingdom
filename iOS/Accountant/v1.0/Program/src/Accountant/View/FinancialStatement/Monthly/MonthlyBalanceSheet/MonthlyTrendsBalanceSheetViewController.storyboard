@@ -124,17 +124,25 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5Pn-uN-6IG">
-                        <barButtonItem key="rightBarButtonItem" image="csv-csv_symbol" id="Q9S-ZO-WVK">
-                            <connections>
-                                <action selector="csvBarButtonItemTapped:" destination="Y6W-OH-hqX" id="tmQ-vB-cOc"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="picture_as_pdf-picture_as_pdf_symbol" id="k4U-VU-goi">
+                                <connections>
+                                    <action selector="pdfBarButtonItemTapped:" destination="Y6W-OH-hqX" id="7Dj-nU-CI5"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="csv-csv_symbol" id="Q9S-ZO-WVK">
+                                <connections>
+                                    <action selector="csvBarButtonItemTapped:" destination="Y6W-OH-hqX" id="tmQ-vB-cOc"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="backgroundView" destination="YfF-SA-zx5" id="JlI-JD-efa"/>
                         <outlet property="closingDateLabel" destination="cEC-ET-cBd" id="qE2-lv-zbQ"/>
                         <outlet property="companyNameLabel" destination="6yf-Od-qif" id="XNQ-Fs-kXf"/>
                         <outlet property="csvBarButtonItem" destination="Q9S-ZO-WVK" id="lpU-0e-KpH"/>
+                        <outlet property="pdfBarButtonItem" destination="k4U-VU-goi" id="QZ3-09-vq6"/>
                         <outlet property="spreadsheetView" destination="9lr-JN-EYT" id="eE3-Eh-x2h"/>
                         <outlet property="titleLabel" destination="wdM-Az-5tq" id="zED-xq-Kgh"/>
                     </connections>
@@ -146,6 +154,7 @@
     </scenes>
     <resources>
         <image name="csv-csv_symbol" width="13" height="11"/>
+        <image name="picture_as_pdf-picture_as_pdf_symbol" width="13" height="13"/>
         <namedColor name="BaseColor">
             <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

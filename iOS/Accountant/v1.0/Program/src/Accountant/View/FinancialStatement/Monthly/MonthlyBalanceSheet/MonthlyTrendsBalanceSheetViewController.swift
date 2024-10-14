@@ -20,6 +20,7 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var spreadsheetView: SpreadsheetView!
     @IBOutlet private var backgroundView: EMTNeumorphicView!
+    @IBOutlet private var pdfBarButtonItem: UIBarButtonItem!
     @IBOutlet private var csvBarButtonItem: UIBarButtonItem!
     // インジゲーター
     var activityIndicatorView = UIActivityIndicatorView()
@@ -55,9 +56,14 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
     var objects11 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 11) // 評価・換算差額等
     var objects12 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 12) // 新株予約権
     var objects13 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 19) // 非支配株主持分
-    
     // ヘッダーの行数
     let headerRowCount = 2
+    // PDF,CSVファイルのパス
+    var filePath: URL?
+    // PDF機能
+    let pDFMaker = PDFMakerMonthlyTrendsBalanceSheet()
+    // CSV機能
+    let csvFileMaker = CsvFileMakerMonthlyTrendsBalanceSheet()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,6 +182,7 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
             }
         }
         
+        pdfBarButtonItem.tintColor = .accentColor
         csvBarButtonItem.tintColor = .accentColor
     }
     
@@ -238,6 +245,32 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
         return StringUtility.shared.setComma(amount: result)
     }
     
+    // MARK: - Action
+    
+    /**
+     * PDFボタン押下時メソッド
+     */
+    @IBAction func pdfBarButtonItemTapped(_ sender: Any) {
+        pdfBarButtonItemTapped(yearMonth: nil)
+    }
+    
+    // PDF機能
+    func pdfBarButtonItemTapped(yearMonth: String? = nil) {
+        // 初期化 PDFメーカー
+        initializePdfMaker(completion: { filePath in
+            
+            self.filePath = filePath
+            self.showPreview()
+        })
+    }
+    // 初期化 PDFメーカー
+    func initializePdfMaker(completion: (URL?) -> Void) {
+        
+        pDFMaker.initialize(completion: { filePath in
+            completion(filePath)
+        })
+    }
+    
     @IBAction func csvBarButtonItemTapped(_ sender: Any) {
         csvBarButtonItemTapped()
     }
@@ -251,10 +284,6 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
             self.showPreview()
         })
     }
-    // PDF,CSVファイルのパス
-    var filePath: URL?
-    // CSV機能
-    let csvFileMaker = CsvFileMakerMonthlyTrendsBalanceSheet()
     // 初期化
     func initializeCsvMaker(completion: (URL?) -> Void) {
         

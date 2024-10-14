@@ -56,9 +56,9 @@ class MonthlyProfitAndLossStatementViewController: UIViewController {
     // PDF,CSVファイルのパス
     var filePath: URL?
     // PDF機能
-    let pDFMaker = PDFMakerMonthlyProfitAndLossStatement()
+    let pDFMaker = PDFMakerMonthlyTrendsProfitAndLossStatement()
     // CSV機能
-    let csvFileMaker = CsvFileMakerMonthlyProfitAndLossStatement()
+    let csvFileMaker = CsvFileMakerMonthlyTrendsProfitAndLossStatement()
 
     override func viewDidLoad() {
         super.viewDidLoad()

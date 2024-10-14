@@ -1,5 +1,5 @@
 //
-//  PDFMakerMonthlyProfitAndLossStatement.swift
+//  PDFMakerMonthlyTrendsProfitAndLossStatement.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2024/10/10.
@@ -11,7 +11,7 @@ import RealmSwift
 import UIKit
 
 // 月次推移表　損益計算書
-class PDFMakerMonthlyProfitAndLossStatement {
+class PDFMakerMonthlyTrendsProfitAndLossStatement {
     
     var PDFpath: URL?
     
@@ -1002,7 +1002,7 @@ class PDFMakerMonthlyProfitAndLossStatement {
         }
         
         // "receipt-" + UUID().uuidString
-        let filePath = pDFsDirectory.appendingPathComponent("\(fiscalYear)-ProfitAndLossStatement" + ".pdf")
+        let filePath = pDFsDirectory.appendingPathComponent("\(fiscalYear)-MonthlyTrendsProfitAndLossStatement" + ".pdf")
         do {
             try data.write(to: filePath)
             print(filePath)

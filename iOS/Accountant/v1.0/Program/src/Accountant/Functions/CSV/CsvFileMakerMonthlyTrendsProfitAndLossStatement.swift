@@ -1,5 +1,5 @@
 //
-//  CsvFileMakerMonthlyProfitAndLossStatement.swift
+//  CsvFileMakerMonthlyTrendsProfitAndLossStatement.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2024/10/10.
@@ -11,7 +11,7 @@ import RealmSwift
 import UIKit
 
 // 月次推移表　損益計算書
-class CsvFileMakerMonthlyProfitAndLossStatement {
+class CsvFileMakerMonthlyTrendsProfitAndLossStatement {
     
     var csvPath: URL?
     var fiscalYear = 0
