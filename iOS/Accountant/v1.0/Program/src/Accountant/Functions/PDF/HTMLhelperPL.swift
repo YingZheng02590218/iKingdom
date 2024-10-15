@@ -152,9 +152,9 @@ struct HTMLhelperPL {
                     }
         .page{
             width: 210mm;
-            height: 294mm;
+            height: auto;
             box-sizing: border-box;
-            padding: 10mm 10mm;
+            padding: 0mm 10mm;
             display: block;
     <!--         break-after: always; -->
         }
@@ -237,7 +237,10 @@ struct HTMLhelperPL {
       <!--   テーブルレコードの色 -->
       background-color: #e5f0fa;
       }
-    
+      tfoot td, tfoot th {
+          border: 0px solid #05203a;
+      }
+
     <!--   body {
         font-size: 13px;
     } -->
@@ -295,7 +298,6 @@ struct HTMLhelperPL {
     func footerstring() -> String {
          """
                 </div>
-                <p class="fontsize95 right">©複式簿記の会計帳簿 Paciolist</p>
             </div>
         </section>
         """
@@ -312,6 +314,12 @@ struct HTMLhelperPL {
     func tableEndString() -> String {
          """
             </tbody>
+            <tfoot>
+                <tr>
+                    <th id="asset-1" class="left"></th>
+                    <td colspan="1" class="fontsize80"><p class="right">©複式簿記の会計帳簿 Paciolist</p></td>
+                </tr>
+            </tfoot>
         </table>
     """
     }

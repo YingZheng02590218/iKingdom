@@ -153,9 +153,9 @@ struct HTMLhelperBS {
                     }
         .page{
             width: 210mm;
-            height: 294mm;
+            height: auto;
             box-sizing: border-box;
-            padding: 10mm 10mm;
+            padding: 0mm 10mm;
             display: block;
     <!--         break-after: always; -->
         }
@@ -220,7 +220,6 @@ struct HTMLhelperBS {
       margin: auto; }
       
     table {
-        border: 1px solid #05203a;
         border-collapse: collapse;
         border-spacing: 0; }
       
@@ -237,7 +236,10 @@ struct HTMLhelperBS {
       <!--   テーブルレコードの色 -->
       background-color: #e5f0fa;
       }
-      
+      tfoot td, tfoot th {
+          border: 0px solid #05203a;
+      }
+
     <!--   body {
         font-size: 13px;
     } -->
@@ -288,14 +290,13 @@ struct HTMLhelperBS {
                     <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)<br><br>No.　　　\(pageNumber)</p></span>
                 </div>
 
-                <div class="flex line_single_black_all">
+                <div>
     """
     }
     // ページごとに1回コール
     func footerstring() -> String {
          """
                 </div>
-                <p class="fontsize95 right">©複式簿記の会計帳簿 Paciolist</p>
             </div>
         </section>
         """
@@ -312,6 +313,12 @@ struct HTMLhelperBS {
     func tableEndString() -> String {
          """
             </tbody>
+            <tfoot>
+                <tr>
+                    <th id="asset-1" class="left"></th>
+                    <td colspan="1" class="fontsize80"><p class="right">©複式簿記の会計帳簿 Paciolist</p></td>
+                </tr>
+            </tfoot>
         </table>
     """
     }
@@ -335,7 +342,7 @@ struct HTMLhelperBS {
     // テーブル　エンド 資産の部 合計
     func tableEndTitleString(title: String, amount: String) -> String {
          """
-            <tr class="accentColor30 line_single_black_all left">
+            <tr class="accentColor30 left">
                 <th id="capital-4"><strong>\(title)</strong></th>
                 <td headers="capital capital-4">\(amount)</td>
             </tr>
@@ -344,7 +351,7 @@ struct HTMLhelperBS {
     // テーブル　エンド 負債の部 合計
     func tableEndTitleString(amount: String) -> String {
          """
-            <tr class="accentColor30 line_single_black_all left">
+            <tr class="accentColor30 left">
                 <th id="capital-4"><strong>\(BalanceSheet.Block.liabilities.getTotalAmount())</strong></th>
                 <td headers="capital capital-4">\(amount)</td>
             </tr>
@@ -353,11 +360,11 @@ struct HTMLhelperBS {
     // テーブル　エンド 負債・純資産の部 合計
     func tableEndTitleString(capitalAmount: String, amount: String) -> String {
          """
-            <tr class="accentColor30 line_single_black_all left">
+            <tr class="accentColor30 left">
                 <th id="capital-3">\(BalanceSheet.Block.netAssets.getTotalAmount())</th>
                 <td headers="capital capital-3">\(capitalAmount)</td>
             </tr>
-            <tr class="accentColor30 line_single_black_all left">
+            <tr class="accentColor30 left">
                 <th id="assets-capital"><strong>\(BalanceSheet.Block.liabilityAndEquity.getTotalAmount())</strong></th>
                 <td headers="assets assets-capital">\(amount)</td>
             </tr>

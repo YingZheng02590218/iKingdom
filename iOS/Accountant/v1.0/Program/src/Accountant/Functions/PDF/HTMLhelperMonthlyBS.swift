@@ -156,9 +156,9 @@ struct HTMLhelperMonthlyBS {
                     }
         .page{
             width: 297mm;
-            height: 207mm;
+            height: auto;
             box-sizing: border-box;
-            padding: 10mm 10mm;
+            padding: 0mm 10mm;
             display: block;
     <!--         break-after: always; -->
         }
