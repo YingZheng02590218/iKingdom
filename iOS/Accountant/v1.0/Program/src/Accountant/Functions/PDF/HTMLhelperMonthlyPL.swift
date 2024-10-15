@@ -146,19 +146,16 @@ struct HTMLhelperMonthlyPL {
                     width: 100%;
                 }
                     thead {
-    <!--                     height: 5.0583657588%;/*　13mm　*/ -->
                     }
                     tbody {
                     }
                     tfoot {
-                        height: 5mm;
-    <!--                     height: 10.5058365758%;/*　1.9455252918% 5mm　*/ -->
                     }
         .page{
             width: 297mm;
             height: auto;
             box-sizing: border-box;
-            padding: 0mm 10mm;
+            padding: 10mm 10mm;
             display: block;
     <!--         break-after: always; -->
         }
@@ -218,7 +215,7 @@ struct HTMLhelperMonthlyPL {
       padding: 5px; }
     
       .l-container {
-      margin: auto; }
+      margin: 0 auto; }
     
     table {
         border-collapse: collapse;
@@ -287,20 +284,17 @@ struct HTMLhelperMonthlyPL {
         <section class="page">
             <div class="richediter public-notice l-container">
     
-                <p class="text-right">\(DateManager.shared.getDate())</p>
                 <h2>損益計算書</h2>
+                <div><p class="text-right">\(DateManager.shared.getDate())</p></div>
                 <div class="flex">
                     <span class="halfWidth">\(company)</span>
                     <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)<br><br>No.　　　\(pageNumber)</p></span>
                 </div>
-    
-                <div>
     """
     }
     // ページごとに1回コール
     func footerstring() -> String {
          """
-                </div>
             </div>
         </section>
         """

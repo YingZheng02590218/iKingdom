@@ -17,6 +17,8 @@ class PDFMakerBalanceSheet {
     let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // 調整した　A4 210×297mm
     let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
 
+    let rowCountLimit = 50
+
     func initialize(balanceSheetData: BalanceSheetData, completion: (URL?) -> Void) {
         // 初期化
         PDFpath = nil
@@ -85,7 +87,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(tableTopString)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -98,7 +100,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(tableTopString)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -120,7 +122,7 @@ class PDFMakerBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 50 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -143,7 +145,7 @@ class PDFMakerBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 50 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -166,7 +168,7 @@ class PDFMakerBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 50 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -180,7 +182,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(middleRowEnd)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -193,7 +195,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(tableTopString)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -206,7 +208,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(tableTopString)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -228,7 +230,7 @@ class PDFMakerBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 50 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -242,7 +244,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(tableTopString)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -264,7 +266,7 @@ class PDFMakerBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 50 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -278,7 +280,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(tableTopString)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -300,7 +302,7 @@ class PDFMakerBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 50 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -314,7 +316,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(middleRowEnd)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -328,7 +330,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(tableTopString)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -350,7 +352,7 @@ class PDFMakerBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 50 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -364,7 +366,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(middleRowEnd)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -378,7 +380,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(tableEndString)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -393,7 +395,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(tableTopString)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -407,7 +409,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(tableTopString)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -429,7 +431,7 @@ class PDFMakerBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 50 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -452,7 +454,7 @@ class PDFMakerBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 50 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -466,7 +468,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(middleRowEnd)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -480,7 +482,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(tableTopString)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -502,7 +504,7 @@ class PDFMakerBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 50 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -516,7 +518,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(middleRowEnd)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -529,7 +531,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(tableEndString)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -544,7 +546,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(tableTopString)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -567,7 +569,7 @@ class PDFMakerBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 50 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -591,7 +593,7 @@ class PDFMakerBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 50 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -615,7 +617,7 @@ class PDFMakerBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 50 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -639,7 +641,7 @@ class PDFMakerBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 50 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -653,7 +655,7 @@ class PDFMakerBalanceSheet {
         htmlString.append(tableEndString)
         // PDFページ　追加
         counter += 1
-        if counter >= 50 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
