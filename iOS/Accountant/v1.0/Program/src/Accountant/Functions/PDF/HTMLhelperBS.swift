@@ -136,26 +136,21 @@ struct HTMLhelperBS {
             }
                 h2 {
                     width: 50%;
-    <!--                 height: 8.560311284%;/*   22mm　*/ -->
                 }
                 table {
                     width: 100%;
-    <!--                 height: 91.439688716%;/*   235mm　*/ -->
                 }
                     thead {
-    <!--                     height: 5.0583657588%;/*　13mm　*/ -->
                     }
                     tbody {
-    <!--                     height: 84.4357976654%;/*　217mm　*/ -->
                     }
                     tfoot {
-    <!--                     height: 10.5058365758%;/*　1.9455252918% 5mm　*/ -->
                     }
         .page{
             width: 210mm;
             height: auto;
             box-sizing: border-box;
-            padding: 0mm 10mm;
+            padding: 10mm 10mm;
             display: block;
     <!--         break-after: always; -->
         }
@@ -217,7 +212,7 @@ struct HTMLhelperBS {
       padding: 5px; }
       
       .l-container {
-      margin: auto; }
+      margin: 0 auto; }
       
     table {
         border-collapse: collapse;
@@ -283,20 +278,17 @@ struct HTMLhelperBS {
         <section class="page">
             <div class="richediter public-notice l-container">
 
-                <p class="text-right">\(DateManager.shared.getDate())</p>
                 <h2>貸借対照表</h2>
+                <div><p class="text-right">\(DateManager.shared.getDate())</p></div>
                 <div class="flex">
                     <span class="halfWidth">\(company)</span>
                     <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)<br><br>No.　　　\(pageNumber)</p></span>
                 </div>
-
-                <div>
     """
     }
     // ページごとに1回コール
     func footerstring() -> String {
          """
-                </div>
             </div>
         </section>
         """

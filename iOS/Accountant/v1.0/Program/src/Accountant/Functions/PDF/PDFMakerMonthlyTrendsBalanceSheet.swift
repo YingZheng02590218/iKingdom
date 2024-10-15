@@ -45,6 +45,8 @@ class PDFMakerMonthlyTrendsBalanceSheet {
     var objects12 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 12) // 新株予約権
     var objects13 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 19) // 非支配株主持分
     
+    let rowCountLimit = 30
+    
     func initialize(completion: (URL?) -> Void) {
         // 初期化
         PDFpath = nil
@@ -145,7 +147,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 30 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -185,7 +187,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 30 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -225,7 +227,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 30 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -255,7 +257,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
         htmlString.append(middleRowEnd)
         // PDFページ　追加
         counter += 1
-        if counter >= 30 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -293,7 +295,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 30 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -332,7 +334,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 30 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -371,7 +373,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 30 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -401,7 +403,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
         htmlString.append(middleRowEnd)
         // PDFページ　追加
         counter += 1
-        if counter >= 30 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -440,7 +442,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 30 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -470,7 +472,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
         htmlString.append(middleRowEnd)
         // PDFページ　追加
         counter += 1
-        if counter >= 30 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -500,7 +502,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
         htmlString.append(tableEndString)
         // PDFページ　追加
         counter += 1
-        if counter >= 30 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -554,7 +556,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 30 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -593,7 +595,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 30 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -623,7 +625,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
         htmlString.append(middleRowEnd)
         // PDFページ　追加
         counter += 1
-        if counter >= 30 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -662,7 +664,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 30 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -692,7 +694,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
         htmlString.append(middleRowEnd)
         // PDFページ　追加
         counter += 1
-        if counter >= 30 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -722,7 +724,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
         htmlString.append(tableEndString)
         // PDFページ　追加
         counter += 1
-        if counter >= 30 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -761,7 +763,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 30 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -801,7 +803,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 30 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -841,7 +843,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 30 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -881,7 +883,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
             htmlString.append(rowString)
             // PDFページ　追加
             counter += 1
-            if counter >= 30 {
+            if counter >= rowCountLimit {
                 counter = 0
                 pageNumber += 1
                 // PDFページ　ボトム
@@ -911,7 +913,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
         htmlString.append(middleRowEnd)
         // PDFページ　追加
         counter += 1
-        if counter >= 30 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
@@ -941,7 +943,7 @@ class PDFMakerMonthlyTrendsBalanceSheet {
         htmlString.append(tableEndString)
         // PDFページ　追加
         counter += 1
-        if counter >= 30 {
+        if counter >= rowCountLimit {
             counter = 0
             pageNumber += 1
             // PDFページ　ボトム
