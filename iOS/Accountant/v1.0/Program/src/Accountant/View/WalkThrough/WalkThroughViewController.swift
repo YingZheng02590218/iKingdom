@@ -183,6 +183,9 @@ extension WalkThroughViewController: EAIntroDelegate {
                         let firstLunchKey = "corporation_switch"
                         userDefaults.set(true, forKey: firstLunchKey)
                         userDefaults.synchronize()
+                        // データベース
+                        // 更新　決算日
+                        DataBaseManagerSettingsPeriod.shared.updateTheDayOfReckoning(theDayOfReckoning: TheDayOfReckoning.corporation.rawValue)
                     }
                 )
             )
@@ -198,6 +201,9 @@ extension WalkThroughViewController: EAIntroDelegate {
                         let firstLunchKey = "corporation_switch"
                         userDefaults.set(false, forKey: firstLunchKey)
                         userDefaults.synchronize()
+                        // データベース
+                        // 更新　決算日
+                        DataBaseManagerSettingsPeriod.shared.updateTheDayOfReckoning(theDayOfReckoning: TheDayOfReckoning.soloProprietor.rawValue)
                     }
                 )
             )

@@ -73,6 +73,8 @@ enum Constant {
     
     // 月次推移表を更新する　true: リロードする
     static var needToReload = false
+    // 仕訳画面の勘定科目を更新する　true: リロードする
+    static var needToReloadCategory = false
     
     // MARK: レビュー促進ダイアログ
     

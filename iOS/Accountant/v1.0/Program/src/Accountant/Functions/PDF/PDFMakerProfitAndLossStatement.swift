@@ -11,17 +11,15 @@ import UIKit
 
 class PDFMakerProfitAndLossStatement {
     
-    var PDFpath: [URL]?
+    var PDFpath: URL?
     
     let hTMLhelper = HTMLhelperPL()
     let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // 調整した　A4 210×297mm 595.2755905512, 841.8897637795
-    var fiscalYear = 0
+    let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
     
-    func initialize(profitAndLossStatementData: ProfitAndLossStatementData, completion: ([URL]?) -> Void) {
-        
-        fiscalYear = profitAndLossStatementData.fiscalYear
+    func initialize(profitAndLossStatementData: ProfitAndLossStatementData, completion: (URL?) -> Void) {
         // 初期化
-        PDFpath = []
+        PDFpath = nil
         guard let tempDirectory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else { return }
         let pDFsDirectory = tempDirectory.appendingPathComponent("PDFs", isDirectory: true)
         do {
@@ -53,28 +51,50 @@ class PDFMakerProfitAndLossStatement {
         completion(url)
     }
     
-    func createHTML(profitAndLossStatementData: ProfitAndLossStatementData) -> [URL]? {
+    func createHTML(profitAndLossStatementData: ProfitAndLossStatementData) -> URL? {
         // HTML
         var htmlString = ""
+        // ページ数
+        var pageNumber = 1
+        // 行数　1ページあたり
+        var counter = 0
         
         // PDFごとに1回コール
         let headerHTMLstring = hTMLhelper.headerHTMLstring()
         htmlString.append(headerHTMLstring)
-        // ページごとに1回コール
-        let headerstring = hTMLhelper.headerstring(
-            company: profitAndLossStatementData.company,
-            fiscalYear: profitAndLossStatementData.fiscalYear,
-            theDayOfReckoning: profitAndLossStatementData.theDayOfReckoning
-        )
-        htmlString.append(headerstring)
+        // PDFページ　トップ
+        incrementPage()
+        // PDFページ　トップ
+        func incrementPage() {
+            // ページごとに1回コール
+            let headerstring = hTMLhelper.headerstring(
+                company: profitAndLossStatementData.company,
+                fiscalYear: profitAndLossStatementData.fiscalYear,
+                theDayOfReckoning: profitAndLossStatementData.theDayOfReckoning,
+                pageNumber: pageNumber
+            )
+            htmlString.append(headerstring)
+            
+            // テーブル　トップ
+            var tableTopString = hTMLhelper.tableTopString()
+            htmlString.append(tableTopString)
+        }
         
-        // テーブル　トップ
-        var tableTopString = hTMLhelper.tableTopString()
-        htmlString.append(tableTopString)
+        var tableTopString = ""
         
         // 売上高
         tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.sales.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // tableMiddle 行数分繰り返す
         for item in profitAndLossStatementData.objects0 {
             let rowString = hTMLhelper.getSingleRow(
@@ -87,14 +107,44 @@ class PDFMakerProfitAndLossStatement {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // 売上高 合計
         var middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.sales.getTotalAmount(), amount: profitAndLossStatementData.netSales)
         htmlString.append(middleRowEnd)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         
         // 売上原価
         tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.costOfGoodsSold.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // tableMiddle 行数分繰り返す
         for item in profitAndLossStatementData.objects1 {
             let rowString = hTMLhelper.getSingleRow(
@@ -107,6 +157,16 @@ class PDFMakerProfitAndLossStatement {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // tableMiddle 行数分繰り返す
         for item in profitAndLossStatementData.objects2 {
@@ -120,18 +180,58 @@ class PDFMakerProfitAndLossStatement {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // 売上原価 合計
         middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.costOfGoodsSold.getTotalAmount(), amount: profitAndLossStatementData.costOfGoodsSold)
         htmlString.append(middleRowEnd)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         
         // 売上総利益
         var rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.grossProfitOrLoss.rawValue, amount: profitAndLossStatementData.grossProfitOrLoss)
         htmlString.append(rowStringForBenefits)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         
         // 販売費及び一般管理費
         tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.sellingGeneralAndAdministrativeExpenses.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // tableMiddle 行数分繰り返す
         for item in profitAndLossStatementData.objects3 {
             let rowString = hTMLhelper.getSingleRow(
@@ -144,10 +244,30 @@ class PDFMakerProfitAndLossStatement {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // 販売費及び一般管理費 合計
         middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.sellingGeneralAndAdministrativeExpenses.getTotalAmount(), amount: profitAndLossStatementData.sellingGeneralAndAdministrativeExpenses)
         htmlString.append(middleRowEnd)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         
         // 営業利益
         rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(
@@ -155,10 +275,30 @@ class PDFMakerProfitAndLossStatement {
             amount: profitAndLossStatementData.otherCapitalSurplusesTotal
         )
         htmlString.append(rowStringForBenefits)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         
         // 営業外収益
         tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.nonOperatingIncome.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // tableMiddle 行数分繰り返す
         for item in profitAndLossStatementData.objects4 {
             let rowString = hTMLhelper.getSingleRow(
@@ -171,14 +311,44 @@ class PDFMakerProfitAndLossStatement {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // 営業外収益 合計
         middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.nonOperatingIncome.getTotalAmount(), amount: profitAndLossStatementData.nonOperatingIncome)
         htmlString.append(middleRowEnd)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         
         // 営業外費用
         tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.nonOperatingExpenses.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // tableMiddle 行数分繰り返す
         for item in profitAndLossStatementData.objects5 {
             let rowString = hTMLhelper.getSingleRow(
@@ -191,18 +361,58 @@ class PDFMakerProfitAndLossStatement {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // 営業外費用 合計
         middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.nonOperatingExpenses.getTotalAmount(), amount: profitAndLossStatementData.nonOperatingExpenses)
         htmlString.append(middleRowEnd)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         
         // 経常利益
         rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.ordinaryIncomeOrLoss.rawValue, amount: profitAndLossStatementData.ordinaryIncomeOrLoss)
         htmlString.append(rowStringForBenefits)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         
         // 特別利益
         tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.extraordinaryProfits.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // tableMiddle 行数分繰り返す
         for item in profitAndLossStatementData.objects6 {
             let rowString = hTMLhelper.getSingleRow(
@@ -215,14 +425,44 @@ class PDFMakerProfitAndLossStatement {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // 特別利益 合計
         middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.extraordinaryProfits.getTotalAmount(), amount: profitAndLossStatementData.extraordinaryIncome)
         htmlString.append(middleRowEnd)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         
         // 特別損失
         tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.extraordinaryLoss.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // tableMiddle 行数分繰り返す
         for item in profitAndLossStatementData.objects7 {
             let rowString = hTMLhelper.getSingleRow(
@@ -235,18 +475,58 @@ class PDFMakerProfitAndLossStatement {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // 特別損失 合計
         middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.extraordinaryLoss.getTotalAmount(), amount: profitAndLossStatementData.extraordinaryLosses)
         htmlString.append(middleRowEnd)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         
         // 税引前当期純利益
         rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.incomeOrLossBeforeIncomeTaxes.rawValue, amount: profitAndLossStatementData.incomeOrLossBeforeIncomeTaxes)
         htmlString.append(rowStringForBenefits)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         
         // 法人税等
         tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.incomeTaxes.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // tableMiddle 行数分繰り返す
         for item in profitAndLossStatementData.objects8 {
             let rowString = hTMLhelper.getSingleRow(
@@ -259,22 +539,57 @@ class PDFMakerProfitAndLossStatement {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // 法人税等 合計
         middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.incomeTaxes.getTotalAmount(), amount: profitAndLossStatementData.incomeTaxes)
         htmlString.append(middleRowEnd)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         
         // 当期純利益
         rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.netIncomeOrLoss.rawValue, amount: profitAndLossStatementData.netIncomeOrLoss)
         htmlString.append(rowStringForBenefits)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         
-        // テーブル　エンド
-        let tableEndString = hTMLhelper.tableEndString()
-        htmlString.append(tableEndString)
-        
-        // ページごとに1回コール
-        let footerstring = hTMLhelper.footerstring()
-        htmlString.append(footerstring)
+        // PDFページ　ボトム
+        func incrementPageBottom() {
+            // テーブル　エンド
+            let tableEndString = hTMLhelper.tableEndString()
+            htmlString.append(tableEndString)
+            
+            // ページごとに1回コール
+            let footerstring = hTMLhelper.footerstring()
+            htmlString.append(footerstring)
+        }
+        // PDFページ　ボトム
+        incrementPageBottom()
         // PDFごとに1回コール
         let footerHTMLstring = hTMLhelper.footerHTMLstring()
         htmlString.append(footerHTMLstring)
@@ -285,7 +600,7 @@ class PDFMakerProfitAndLossStatement {
         // PDFデータを一時ディレクトリに保存する
         if let fileName = saveToTempDirectory(data: pdfData) {
             // PDFファイルを表示する
-            self.PDFpath?.append(fileName)
+            PDFpath = fileName
             
             return self.PDFpath
         } else {

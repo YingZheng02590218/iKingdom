@@ -19,5 +19,5 @@ class DataBaseSettingsPeriod: RObject {
         self.theDayOfReckoning = theDayOfReckoning
     }
 
-    @objc dynamic var theDayOfReckoning: String = "03/31" // a settlement day / the day of reckoning
+    @objc dynamic var theDayOfReckoning: String = TheDayOfReckoning.soloProprietor.rawValue // a settlement day / the day of reckoning
 }

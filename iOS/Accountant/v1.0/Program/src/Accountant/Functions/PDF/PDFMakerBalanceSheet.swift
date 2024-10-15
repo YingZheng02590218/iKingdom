@@ -11,17 +11,15 @@ import UIKit
 
 class PDFMakerBalanceSheet {
 
-    var PDFpath: [URL]?
+    var PDFpath: URL?
 
     let hTMLhelper = HTMLhelperBS()
     let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // 調整した　A4 210×297mm
-    var fiscalYear = 0
+    let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
 
-    func initialize(balanceSheetData: BalanceSheetData, completion: ([URL]?) -> Void) {
-        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        fiscalYear = dataBaseAccountingBooks.fiscalYear
+    func initialize(balanceSheetData: BalanceSheetData, completion: (URL?) -> Void) {
         // 初期化
-        PDFpath = []
+        PDFpath = nil
         guard let tempDirectory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else { return }
         let pDFsDirectory = tempDirectory.appendingPathComponent("PDFs", isDirectory: true)
         do {
@@ -53,24 +51,61 @@ class PDFMakerBalanceSheet {
         completion(url)
     }
 
-    func createHTML(balanceSheetData: BalanceSheetData) -> [URL]? {
+    func createHTML(balanceSheetData: BalanceSheetData) -> URL? {
         // HTML
         var htmlString = ""
+        // ページ数
+        var pageNumber = 1
+        // 行数　1ページあたり
+        var counter = 0
 
         // PDFごとに1回コール
         let headerHTMLstring = hTMLhelper.headerHTMLstring()
         htmlString.append(headerHTMLstring)
-        // ページごとに1回コール
-        let headerstring = hTMLhelper.headerstring(company: balanceSheetData.company, fiscalYear: balanceSheetData.fiscalYear, theDayOfReckoning: balanceSheetData.theDayOfReckoning)
-        htmlString.append(headerstring)
-
+        // PDFページ　トップ
+        incrementPage()
+        // PDFページ　トップ
+        func incrementPage() {
+            // ページごとに1回コール
+            let headerstring = hTMLhelper.headerstring(
+                company: balanceSheetData.company,
+                fiscalYear: balanceSheetData.fiscalYear,
+                theDayOfReckoning: balanceSheetData.theDayOfReckoning,
+                pageNumber: pageNumber
+            )
+            htmlString.append(headerstring)
+            
+            // テーブル　トップ
+            var tableTopString = hTMLhelper.tableTopString()
+            htmlString.append(tableTopString)
+        }
+        
         // テーブル　トップ 資産の部
-        var tableTopString = hTMLhelper.tableTopString()
+        var tableTopString = hTMLhelper.tableTopTitleString()
         htmlString.append(tableTopString)
-
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // 流動資産
         tableTopString = hTMLhelper.middleRowTop(title: BalanceSheet.Assets.currentAssets.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // tableMiddle 行数分繰り返す
         for item in balanceSheetData.objects0 {
             let rowString = hTMLhelper.getSingleRow(
@@ -83,6 +118,16 @@ class PDFMakerBalanceSheet {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // tableMiddle 行数分繰り返す
         for item in balanceSheetData.objects1 {
@@ -96,6 +141,16 @@ class PDFMakerBalanceSheet {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // tableMiddle 行数分繰り返す
         for item in balanceSheetData.objects2 {
@@ -109,17 +164,56 @@ class PDFMakerBalanceSheet {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // 流動資産 合計
         var middleRowEnd = hTMLhelper.middleRowEnd(title: BalanceSheet.Assets.currentAssets.getTotalAmount(), amount: balanceSheetData.currentAssetsTotal)
         htmlString.append(middleRowEnd)
-
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // 固定資産
         tableTopString = hTMLhelper.middleRowTop(title: BalanceSheet.Assets.nonCurrentAssets.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // 有形固定資産
         tableTopString = hTMLhelper.smallRowTop(title: BalanceSheet.NonCurrentAssets.tangibleFixedAssets.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // tableMiddle 行数分繰り返す
         for item in balanceSheetData.objects3 {
             let rowString = hTMLhelper.getSingleRow(
@@ -132,10 +226,30 @@ class PDFMakerBalanceSheet {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // 無形固定資産
         tableTopString = hTMLhelper.smallRowTop(title: BalanceSheet.NonCurrentAssets.intangibleAssets.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // tableMiddle 行数分繰り返す
         for item in balanceSheetData.objects4 {
             let rowString = hTMLhelper.getSingleRow(
@@ -148,10 +262,30 @@ class PDFMakerBalanceSheet {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // 投資その他の資産
         tableTopString = hTMLhelper.smallRowTop(title: BalanceSheet.NonCurrentAssets.investments.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // tableMiddle 行数分繰り返す
         for item in balanceSheetData.objects5 {
             let rowString = hTMLhelper.getSingleRow(
@@ -164,14 +298,44 @@ class PDFMakerBalanceSheet {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // 固定資産 合計
         middleRowEnd = hTMLhelper.middleRowEnd(title: BalanceSheet.Assets.nonCurrentAssets.getTotalAmount(), amount: balanceSheetData.fixedAssetsTotal)
         htmlString.append(middleRowEnd)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
 
         // 繰延資産
         tableTopString = hTMLhelper.middleRowTop(title: BalanceSheet.Assets.deferredAssets.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // tableMiddle 行数分繰り返す
         for item in balanceSheetData.objects6 {
             let rowString = hTMLhelper.getSingleRow(
@@ -184,23 +348,73 @@ class PDFMakerBalanceSheet {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // 繰延資産 合計
         middleRowEnd = hTMLhelper.middleRowEnd(title: BalanceSheet.Assets.deferredAssets.getTotalAmount(), amount: balanceSheetData.deferredAssetsTotal)
         htmlString.append(middleRowEnd)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
 
         // テーブル　エンド 資産の部 合計
-        var tableEndString = hTMLhelper.tableEndString(title: BalanceSheet.Block.assets.getTotalAmount(), amount: balanceSheetData.assetTotal)
+        var tableEndString = hTMLhelper.tableEndTitleString(title: BalanceSheet.Block.assets.getTotalAmount(), amount: balanceSheetData.assetTotal)
         htmlString.append(tableEndString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
 
 
         // テーブル　トップ 負債の部
-        tableTopString = hTMLhelper.tableTopString(block: BalanceSheet.Block.liabilities.rawValue)
+        tableTopString = hTMLhelper.tableTopTitleString(block: BalanceSheet.Block.liabilities.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
 
         // 流動負債
         tableTopString = hTMLhelper.middleRowTop(title: BalanceSheet.Liabilities.currentLiabilities.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // tableMiddle 行数分繰り返す
         for item in balanceSheetData.objects7 {
             let rowString = hTMLhelper.getSingleRow(
@@ -213,6 +427,16 @@ class PDFMakerBalanceSheet {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // tableMiddle 行数分繰り返す
         for item in balanceSheetData.objects8 {
@@ -226,14 +450,44 @@ class PDFMakerBalanceSheet {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // 合計
         middleRowEnd = hTMLhelper.middleRowEnd(title: BalanceSheet.Liabilities.currentLiabilities.getTotalAmount(), amount: balanceSheetData.currentLiabilitiesTotal)
         htmlString.append(middleRowEnd)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
 
         // 固定負債
         tableTopString = hTMLhelper.middleRowTop(title: BalanceSheet.Liabilities.fixedLiabilities.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // tableMiddle 行数分繰り返す
         for item in balanceSheetData.objects9 {
             let rowString = hTMLhelper.getSingleRow(
@@ -246,18 +500,58 @@ class PDFMakerBalanceSheet {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // 合計
         middleRowEnd = hTMLhelper.middleRowEnd(title: BalanceSheet.Liabilities.fixedLiabilities.getTotalAmount(), amount: balanceSheetData.fixedLiabilitiesTotal)
         htmlString.append(middleRowEnd)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
         // テーブル　エンド 負債の部 合計
-        tableEndString = hTMLhelper.tableEndString(amount: balanceSheetData.liabilityTotal)
+        tableEndString = hTMLhelper.tableEndTitleString(amount: balanceSheetData.liabilityTotal)
         htmlString.append(tableEndString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
 
 
         // テーブル　トップ 資本の部
-        tableTopString = hTMLhelper.tableTopString(block: BalanceSheet.Block.netAssets.rawValue)
+        tableTopString = hTMLhelper.tableTopTitleString(block: BalanceSheet.Block.netAssets.rawValue)
         htmlString.append(tableTopString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
 
         // tableMiddle 行数分繰り返す
         for item in balanceSheetData.objects10 {
@@ -271,6 +565,16 @@ class PDFMakerBalanceSheet {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
 
         // tableMiddle 行数分繰り返す
@@ -285,6 +589,16 @@ class PDFMakerBalanceSheet {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
 
         // tableMiddle 行数分繰り返す
@@ -299,6 +613,16 @@ class PDFMakerBalanceSheet {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
 
         // tableMiddle 行数分繰り返す
@@ -313,15 +637,43 @@ class PDFMakerBalanceSheet {
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
+            // PDFページ　追加
+            counter += 1
+            if counter >= 50 {
+                counter = 0
+                pageNumber += 1
+                // PDFページ　ボトム
+                incrementPageBottom()
+                // PDFページ　トップ
+                incrementPage()
+            }
         }
         // テーブル　エンド 負債・資本の部 合計
-        tableEndString = hTMLhelper.tableEndString(capitalAmount: balanceSheetData.equityTotal, amount: balanceSheetData.liabilityAndEquityTotal)
+        tableEndString = hTMLhelper.tableEndTitleString(capitalAmount: balanceSheetData.equityTotal, amount: balanceSheetData.liabilityAndEquityTotal)
         htmlString.append(tableEndString)
+        // PDFページ　追加
+        counter += 1
+        if counter >= 50 {
+            counter = 0
+            pageNumber += 1
+            // PDFページ　ボトム
+            incrementPageBottom()
+            // PDFページ　トップ
+            incrementPage()
+        }
 
-
-        // ページごとに1回コール
-        let footerstring = hTMLhelper.footerstring()
-        htmlString.append(footerstring)
+        // PDFページ　ボトム
+        func incrementPageBottom() {
+            // テーブル　エンド
+            let tableEndString = hTMLhelper.tableEndString()
+            htmlString.append(tableEndString)
+            
+            // ページごとに1回コール
+            let footerstring = hTMLhelper.footerstring()
+            htmlString.append(footerstring)
+        }
+        // PDFページ　ボトム
+        incrementPageBottom()
         // PDFごとに1回コール
         let footerHTMLstring = hTMLhelper.footerHTMLstring()
         htmlString.append(footerHTMLstring)
@@ -332,7 +684,7 @@ class PDFMakerBalanceSheet {
         // PDFデータを一時ディレクトリに保存する
         if let fileName = saveToTempDirectory(data: pdfData) {
             // PDFファイルを表示する
-            self.PDFpath?.append(fileName)
+            PDFpath = fileName
 
             return self.PDFpath
         } else {

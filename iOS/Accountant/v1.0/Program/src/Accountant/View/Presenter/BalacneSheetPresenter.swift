@@ -12,7 +12,7 @@ import RealmSwift
 /// GUIアーキテクチャ　MVP
 protocol BalacneSheetPresenterInput {
     
-    var PDFpath: [URL]? { get }
+    var PDFpath: URL? { get }
     
     func company() -> String
     func fiscalYear() -> Int
@@ -51,7 +51,7 @@ final class BalacneSheetPresenter: BalacneSheetPresenterInput {
     // 貸借対照表のデータ
     var balanceSheetData: BalanceSheetData
     // PDFのパス
-    var PDFpath: [URL]?
+    var PDFpath: URL?
     
     private weak var view: BalacneSheetPresenterOutput!
     private var model: BalanceSheetModelInput

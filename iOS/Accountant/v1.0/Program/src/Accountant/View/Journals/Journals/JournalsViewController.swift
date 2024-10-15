@@ -327,11 +327,9 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         // 選択されたセル
         if let indexPathsForSelectedRows = self.tableView.indexPathsForSelectedRows {
             let sortedIndexPaths = indexPathsForSelectedRows.sorted { $0.row > $1.row }
-            for indexPath in sortedIndexPaths {
-                // 選択されたセルに表示していたデータ(仕訳オブジェクトのindexPath)を配列にまとめる
-                self.indexPaths.append(indexPath) // アンラップする
-            }
-            
+            // 選択されたセルに表示していたデータ(仕訳オブジェクトのindexPath)を配列にまとめる
+            self.indexPaths = sortedIndexPaths
+
             // ①UIAlertControllerクラスのインスタンスを生成する
             // titleにタイトル, messegeにメッセージ, prefereedStyleにスタイルを指定する
             // preferredStyleにUIAlertControllerStyle.actionSheetを指定してアクションシートを表示する

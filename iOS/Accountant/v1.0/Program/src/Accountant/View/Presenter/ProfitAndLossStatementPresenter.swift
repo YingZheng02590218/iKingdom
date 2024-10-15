@@ -12,7 +12,7 @@ import RealmSwift
 /// GUIアーキテクチャ　MVP
 protocol ProfitAndLossStatementPresenterInput {
     
-    var PDFpath: [URL]? { get }
+    var PDFpath: URL? { get }
     
     func company() -> String
     func fiscalYear() -> Int
@@ -52,7 +52,7 @@ final class ProfitAndLossStatementPresenter: ProfitAndLossStatementPresenterInpu
     // 損益計算書のデータ
     var profitAndLossStatementData: ProfitAndLossStatementData
     // PDFのパス
-    var PDFpath: [URL]?
+    var PDFpath: URL?
     
     private weak var view: ProfitAndLossStatementPresenterOutput!
     private var model: ProfitAndLossStatementModelInput
@@ -322,7 +322,7 @@ final class ProfitAndLossStatementPresenter: ProfitAndLossStatementPresenterInpu
         // 更新処理
         view.reloadData()
     }
-    // 印刷機能
+    // PDF機能
     func pdfBarButtonItemTapped() {
         // 初期化 PDFメーカー
         model.initializePdfMaker(profitAndLossStatementData: profitAndLossStatementData, completion: { PDFpath in

@@ -28,6 +28,16 @@ class StringUtility {
             return addComma(string: amount.description)
         }
     }
+    // 三角形を追加
+    func setMinusMark(amount: Int64) -> String {
+        // 三角形はマイナスの意味
+        if amount < 0 { // 0の場合は、空白を表示する
+            let amauntFix = amount * -1
+            return "△ \(amauntFix.description)"
+        } else {
+            return amount.description
+        }
+    }
     // コンマを追加 0の場合は、空白を表示する
     func setCommaForTB(amount: Int64) -> String {
         if addComma(string: amount.description) == "0" { // 0の場合は、空白を表示する

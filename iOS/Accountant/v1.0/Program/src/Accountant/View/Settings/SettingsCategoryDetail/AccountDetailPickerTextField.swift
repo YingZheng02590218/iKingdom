@@ -10,6 +10,18 @@ import UIKit
 
 // ドラムロール　勘定科目区分選択　勘定科目詳細画面　新規追加
 class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource {
+    // フィードバック
+    private let feedbackGeneratorMedium: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
+
+    let pickerView = UIPickerView()
 
     // 選択された項目
     var selectedRank0 = "" // 大区分　row
@@ -77,16 +89,26 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
         // ピッカー　ドラムロールの項目を初期化
         setSettingsCategory()
         
-        let picker = UIPickerView()
-        picker.delegate = self
-        picker.dataSource = self
-        picker.showsSelectionIndicator = true
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        pickerView.showsSelectionIndicator = true
         // PickerView のサイズと位置 金額のTextfieldのキーボードの高さに合わせる
-        picker.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 350)
-//        picker.transform = CGAffineTransform(scaleX: 0.5, y: 0.5);
+        let bounds = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds
+        pickerView.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: bounds?.width ?? 320,
+            height: (bounds?.height ?? 320) / 3
+        )
         
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
-        //　toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3) // RGBで指定する alpha 0透明　1不透明
+        let toolbar = UIToolbar(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: bounds?.width ?? 320,
+                height: 44
+            )
+        )
         toolbar.isTranslucent = true
         toolbar.barStyle = .default
         let doneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
@@ -96,11 +118,11 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
         // previous, next, paste ボタンを消す
         self.inputAssistantItem.leadingBarButtonGroups.removeAll()
 
-        self.inputView = picker
+        self.inputView = pickerView
         self.inputAccessoryView = toolbar
         
         // 借方勘定科目を選択した後に、貸方勘定科目を選択する際に初期値が前回のものが表示されるので、リロードする
-        picker.reloadAllComponents()
+        pickerView.reloadAllComponents()
     }
     // 設定画面の勘定科目設定で有効を選択した勘定を、勘定科目画面のドラムロールに表示するために、DBから文言を読み込む
     func setSettingsCategory() {
@@ -420,11 +442,19 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
     // Buttonを押下　選択した値を仕訳画面のTextFieldに表示する
     @objc 
     func done() {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         self.endEditing(true)
     }
     
     @objc 
     func cancel() {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         accountDetailBig = ""
         accountDetail = ""
         self.selectedRank0 = ""
