@@ -284,8 +284,8 @@ struct HTMLhelperMonthlyBS {
         <section class="page">
             <div class="richediter public-notice l-container">
     
+                <p class="text-right">\(DateManager.shared.getDate())</p>
                 <h2>貸借対照表</h2>
-                <div><p class="text-right">\(DateManager.shared.getDate())</p></div>
                 <div class="flex">
                     <span class="halfWidth">\(company)</span>
                     <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)<br><br>No.　　　\(pageNumber)</p></span>
