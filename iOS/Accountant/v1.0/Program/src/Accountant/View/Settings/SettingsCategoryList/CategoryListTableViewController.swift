@@ -215,9 +215,14 @@ class CategoryListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // ① UI部品を指定　TableViewCellCategory
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category", for: indexPath) as? CategoryListTableViewCell else { return UITableViewCell() }
+        // 勘定科目の有効無効
+        if presenter.objects(forRow: indexPath.row, section: indexPath.section).switching {
+            cell.textLabel?.textColor = .textColor
+        } else {
+            cell.textLabel?.textColor = .mainColor
+        }
         // 勘定科目の名称をセルに表示する 丁数(元丁) 勘定名
         cell.textLabel?.text = " \(presenter.objects(forRow: indexPath.row, section: indexPath.section).number). \(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)"
-        cell.textLabel?.textColor = .textColor
         //        cell.label_category.text = " \(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)"
         // 勘定科目の連番
         cell.tag = presenter.objects(forRow: indexPath.row, section: indexPath.section).number
